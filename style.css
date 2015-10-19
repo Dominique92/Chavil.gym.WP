@@ -1,0 +1,386 @@
+/*
+ Theme Name:   Twenty Fifteen Gym
+ Theme URI:    https://github.com/Dominique92/Chavil.gym
+ Description:  Chaville Gym colors
+ Author:       Dominique Cavailhez
+ Author URI:   http://chaville.gym.free.fr
+ Template:     twentyfifteen
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         green, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  twenty-fifteen-gym
+*/
+
+@import url("../twentyfifteen/style.css");
+
+/* Banière écran large */
+#baniere {
+	float: right;
+	width: 100%;
+	background-image: url(banniere.jpg);
+	display: table;
+}
+#baniere img {
+	margin: 5px;
+}
+#baniere a {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+	font-size: 20px;
+	color: white;
+}
+#baniere b {
+	font-size: 28px;
+}
+@media screen and (max-width: 59.6875em) {
+	#baniere {
+		display: none;
+	}
+}
+
+/* Banière écran étroit */
+.site-header {
+	background-color: #329932;
+	padding: 0;
+}
+.site-header * {
+	color: white;
+}
+.site-header button {
+	background-color: white;
+	margin-right: 5px;
+}
+.site-header button:hover {
+	background-color: #CCC;
+}
+.site-branding {
+	text-align: center;
+}
+.site-branding p {
+	display: inline;
+	line-height: 55px;
+}
+@media screen and (min-width: 59.6875em) {
+	.site-header {
+		display: none;
+	}
+}
+@media screen and (max-width: 450px) {
+	.site-description {
+		display: none !important;
+	}
+}
+
+/* Séparation verticale menu gauche / contenu */
+body {
+	background-color: #CCE5CC;
+}
+body:before {
+	background-color: transparent;
+	width: 0;
+}
+.site {
+	max-width: initial;
+}
+.site-main,
+.site-footer,
+.secondary {
+	padding: 0;
+	margin: 0;
+}
+@media screen and (min-width: 59.6875em) {
+	.sidebar {
+		width: 20%;
+	}
+	.site-content,
+	.site-footer {
+		margin-left: 20%;
+		width: 80%;
+	}
+	.secondary {
+		padding: 5%;
+		margin-top: 79px;
+	}
+}
+
+/* Menu gauche | en haut (responsive) */
+.widget {
+	padding: 0;
+	margin: 0 0 10px 0;
+	border: 2px solid #329932;
+	background-color: #E4F1BF;
+	font-family: arial;
+}
+.widget-area {
+	margin: 0;
+}
+.widget-title {
+	background-color: #329932;
+	padding: 5px;
+	margin: 0 !important;
+	color: white;
+	font-size: 16px;
+	text-transform: none;
+}
+.widget ul {
+	padding: 5px;
+	list-style: none;
+	margin: 0;
+}
+.widget_collapscat,
+.widget input,
+.widget li a {
+	color: #842900 !important;
+	font-weight: bold;
+}
+.widget li a:first-child {
+	color: black !important;
+	font-weight: normal;
+}
+.widget li.collapsing.categories.self a {
+	font-weight: normal !important;
+}
+@media screen and (max-width: 59.6875em) {
+	.categories > li {
+		line-height: 30px;
+		border-bottom: 1px solid black;
+	}
+	.widget {
+		border: 0;
+	}
+	.widget-title {
+		display: none;
+	}
+	.widget_gym_gestion li {
+		line-height: 30px;
+	}
+}
+
+/* Coeur de page */
+.hentry {
+	margin: 0;
+	padding: 5px 0;
+	font-size: 80%;
+}
+.page-header + .hentry,
+.hentry + .hentry {
+	margin-top: 10px;
+}
+.hentry p {
+	margin-bottom: 0.3em;
+}
+.hentry li {
+	margin-left: 20px;
+}
+.entry-title {
+	margin-bottom: 10px;
+	font-size: 24px;
+	color: grey;
+}
+.entry-content,
+.entry-summary {
+	padding: 0 10px;
+	color: black;
+}
+.entry-content a {
+	border: 0;
+}
+.entry-footer {
+	padding: 0;
+	background-color: white;
+}
+.posted-on,
+.byline,
+.cat-links,
+.comments-link,
+.navigation,
+.comments-area {
+	display: none;
+}
+.edit-link {
+	background-color: yellow;
+}
+
+/* Carte */
+.flxmap-container {
+	max-width: 100%;
+}
+@media screen and (max-width: 450px) {
+	.flxmap-container {
+		max-height: 300px;
+	}
+}
+
+/* Images à droite */
+.droite {
+	float: right;
+	background-color: white;
+}
+@media screen and (max-width: 59.6875em) {
+	.droite {
+		display: none;
+	}
+}
+.droite img,
+.droite video {
+	max-width: 300px;
+	margin: 5px;
+	display: block;
+}
+
+/* Pied */
+.site-footer {
+	background-color: transparent;
+}
+.site-footer p {
+	margin-bottom: 0;
+}
+.site-info {
+	padding: 10px;
+	font-size: 10px;
+	font-style : italic;
+}
+.site-info  a {
+	text-decoration: underline;
+}
+
+/* Style articles importés du site V2 */
+.carre_vert_titre {
+	font-family: arial;
+	font-size: 20px;
+	color: #f7fff7;
+	background-color: #329932;
+	font-weight: bold;
+	padding: 3px;
+	text-indent: 5px;
+	margin-top: 20px !important;
+}
+.carre_vert_texte {
+	font-size: 12px;
+	color: #329932;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background-color: #f7fff7;
+	text-indent: 10px;
+}
+
+/* HORAIRES */
+#horaires {
+	margin-top: 20px;
+	font-size: 14px;
+}
+#horaires > div:first-line {
+	font: 20px Times New Roman;
+}
+#horaires table {
+	width: inherit;
+	border-style: solid;
+	border-width: 4px;
+	border-collapse: collapse;
+}
+#horaires td {
+	border:1px dashed black;
+	padding: 7px;
+}
+#horaires a {
+	color: inherit;
+	font-size: 14px;
+	font-weight: bold;
+}
+.hc2 { /* Masque la date de début si petit écran */
+	display: none;
+}
+
+#lundi {
+	margin-left: 5%;
+	color: #697c46;
+}
+#lundi table {
+	border-color:        #99a682;
+	border-right-color:  #3f4c28;
+	border-bottom-color: #3f4c28;
+	background-color:    #daedb7;
+}
+
+#mardi {
+	margin-left: 10%;
+	color: #803d70;
+}
+#mardi table {
+	border-color:        #a87c9e;
+	border-right-color:  #4e2244;
+	border-bottom-color: #4e2244;
+	background-color:    #f1aee1;
+}
+
+#mercredi {
+	margin-left: 15%;
+	color: #525d7c;
+}
+#mercredi table {
+	border-color:        #8a92a6;
+	border-right-color:  #30384c;
+	border-bottom-color: #30384c;
+	background-color:    #c3ceed;
+}
+
+#jeudi {
+	margin-left: 20%;
+	color: #508e4d;
+}
+#jeudi table {
+	border-color:        #89b287;
+	border-right-color:  #2f582d;
+	border-bottom-color: #2f582d;
+	background-color:    #c1ffbe;
+}
+
+#vendredi {
+	margin-left: 25%;
+	color: #7e5856;
+}
+#vendredi table {
+	border-color:        #a88e8d;
+	border-right-color:  #4e3433;
+	border-bottom-color: #4e3433;
+	background-color:    #efc9c7;
+}
+
+#samedi {
+	margin-left: 30%;
+	color: #6c3f81;
+}
+#samedi table {
+	border-color:        #9b7ea9;
+	border-right-color:  #41244f;
+	border-bottom-color: #41244f;
+	background-color:    #ddb0f2;
+}
+
+#dimanche {
+	margin-left: 35%;
+	color: #468165;
+}
+#dimanche table {
+	border-color:        #82a997;
+	border-right-color:  #284f3d;
+	border-bottom-color: #284f3d;
+	background-color:    #b7f2d6;
+}
+@media screen and (max-width: 59.6875em) {
+	#lundi,
+	#mardi,
+	#mercredi,
+	#jeudi,
+	#vendredi,
+	#samedi,
+	#dimanche {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	#horaires table {
+		width: 100%;
+	}
+}

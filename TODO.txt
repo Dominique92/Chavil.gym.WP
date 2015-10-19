@@ -1,0 +1,71 @@
+BEST TO DO
+==========
+IE 7: table des horaires va jusqu'à droite
+Sitemap google
+Dessin de l'icone mobile dans l'écran d'accueil Samsung
+Voir randos dont le diaporama ne fonctionne plus
+Remplacer les vert_titre, ... (Page concepts)
+Videos sur SAFARI
+Pouvoir trier les lignes du menu manuellement
+Pouvoir émettre une remarque
+Permaliens avec le nom
+Changer le logo de connexion W
+
+INSTALLATION
+============
+Créer base de donnée vide
+Télécharger https://fr.wordpress.org/
+Copier en espace apache
+Copier wp-config.php et FICHIERS/...
+Copier wp-content/themes/twentyfifteen-gym/...
+Lancer
+
+Articles -> Bonjour tout le monde ! -> Mettre à la Corbeille
+Extensions -> Cocher Akismet & Hello Dolly -> Actions groupées -> Supprimer -> Appliquer
+Extensions -> Ajouter -> Rechercher -> CKEditor for WordPress -> Download -> Activer l'extension
+	WP Flexible Map
+	WP BBCode
+	Collapsing Categories
+	WP Super Cache
+Pages -> Page d’exemple -> Titre: Actualité -> Texte: <<CI DESSOUS>> -> Mettre à jour
+
+[droite]<img src="wp-content/uploads/anim_ffepgv-0-2-13-1.gif" />[/droite]
+<p>2 stages sont organisés:</p><ul><li>dimanche <strong>18 Octobre</strong> au gymnase Léo Lagrange de 10H00 à 12H30</li></ul><p><span style="white-space: pre;">		</span><strong id="yui_3_16_0_1_1444295159455_5752" style="font-family: Calibri, sans-serif; font-size: 16px;">stage de Step, zumba, cardio-boxing, renforcement musculaire</strong></p><p><strong style="font-family: Calibri, sans-serif; font-size: 16px;"><span style="white-space: pre;">		</span>tarif <font color="#ff0000">&nbsp;14 Euros</font></strong></p><p><span style="white-space: pre;">		</span>Pour s'inscrire, s'adresser directement auprès de l'animatrice, Sandrine</p><ul><li>vendredi <strong>23 Octobre</strong>&nbsp;</li></ul><p><span style="white-space: pre;">		</span>Pour plus d'informations, s'adresser directement auprès de l'animateur, Arnaud</p>
+[accueil]NE PAS DEPLACER CE TAG[/accueil][init]
+
+Réglages -> Lecture
+	-> La page d’accueil affiche -> Une page statique -> Page d’accueil : Actualité
+	-> Les pages du site doivent afficher au plus: 100
+	-> Enregistrer
+Réglages -> Medias -> Organiser mes fichiers envoyés dans des dossiers mensuels et annuels: NON -> Enregistrer
+Réglages -> Permaliens -> Valeur par défaut -> Enregistrer
+Apparence -> Thèmes -> Twenty Fifteen Gym -> Activer
+Apparence -> Personaliser -> Identité du site
+	Titre du site = Chavil'GYM
+	Slogan = « BOUGER POUR LA FORME ET LE PLAISIR »
+	-> Enregistrer & publier
+Médias -> Ajouter -> Faire glisser les fichiers de /FICHIERS (sauf fitball-17-11-24-.BIG.gif)
+Sous FTP, transférer fitball-17-11-24-.BIG.gif -> fitball-17-11-24-.gif
+Aller sur le site (pour initialiser les posts)
+Actualité -> Modifier -> enlever [init] -> Mettre à jour
+Apparence -> Widgets
+	-> Supprimer tout sauf Rechercher
+	-> Menu de gestion GYM -> Glisser le widget en bas de la barre latérale principale
+	-> Collapsing Categories -> Glisser le widget en haut de la barre latérale principale
+		Title: Rubriques
+		Show post Count: NON
+		Sort Categories by: category slug
+		Sort Posts by: post id
+		Clicking on category name: Expands to show sub-categories and/or Posts
+		Auto-expand: 20les-cours,30les-salles
+		Exclude: 10accueil,60cache
+		-> Enregistrer
+Accueil -> Shift click sur Contacts, Inscriptions, Concepts -> Modifier -> Catégories -> Actualité -> Mettre à jour
+Utilisateurs -> Ajouter -> Identifiant = Prénom = Mot de passe = "Genevieve / Corinne" -> E-mail: toto@toto.com -> Confirmer -> Rôle: Administrateur -> Ajouter
+
+FREE.FR PHP 5.6
+===============
+http://er.v.free.fr/index.php/free-va-passer-de-ph5-1-a-php5-6-confirmer/
+/sessions
+/tmp
+.htaccess: PHP56 1

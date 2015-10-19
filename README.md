@@ -1,2 +1,3 @@
-# Chavil.gym
-Theme WordPress sur base twentyfifteen pour la Gym Volontaire de Chaville.
+# Chavil.gym.15
+Theme WordPress sur base twentyfifteen pour afficher les cours de la Gym Volontaire de Chaville
+EN COURS DE DEVELOPPEMENT
