@@ -55,7 +55,6 @@ add_shortcode ('droite', 'gym_affiche_images_droite');
 function gym_affiche_images_droite ($atts = array(), $content = NULL) {
 	$img = array ();
 	preg_match_all ('/(src|mp4)="([^"]+)\.([[:alnum:]]+)"/', urldecode ($content), $match);
-/*DCMM*/echo"<pre style='background-color:white;color:black;font-size:14px;'> = ".var_export($match,true).'</pre>';
 	foreach ($match[3] AS $k=>$v)
 		switch ($v) {
 			case 'jpg':
