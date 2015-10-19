@@ -1,15 +1,18 @@
+BUGS
+====
+
 BEST TO DO
 ==========
-IE 7: table des horaires va jusqu'à droite
-Sitemap google
-Dessin de l'icone mobile dans l'écran d'accueil Samsung
 Voir randos dont le diaporama ne fonctionne plus
-Remplacer les vert_titre, ... (Page concepts)
-Videos sur SAFARI
+Sitemap google
 Pouvoir trier les lignes du menu manuellement
+Videos sur SAFARI
 Pouvoir émettre une remarque
+Remplacer les vert_titre, ... (Page concepts)
+IE 7: table des horaires va jusqu'à droite
 Permaliens avec le nom
 Changer le logo de connexion W
+Dessin de l'icone mobile dans l'écran d'accueil Samsung
 
 INSTALLATION
 ============

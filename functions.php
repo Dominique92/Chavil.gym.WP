@@ -54,7 +54,8 @@ function gym_affiche_horaires () {
 add_shortcode ('droite', 'gym_affiche_images_droite');
 function gym_affiche_images_droite ($atts = array(), $content = NULL) {
 	$img = array ();
-	preg_match_all ('/([[:alnum:]]+)="([^"]+)\.([[:alnum:]]+)"/', urldecode ($content), $match);
+	preg_match_all ('/(src|mp4)="([^"]+)\.([[:alnum:]]+)"/', urldecode ($content), $match);
+/*DCMM*/echo"<pre style='background-color:white;color:black;font-size:14px;'> = ".var_export($match,true).'</pre>';
 	foreach ($match[3] AS $k=>$v)
 		switch ($v) {
 			case 'jpg':
@@ -62,9 +63,9 @@ function gym_affiche_images_droite ($atts = array(), $content = NULL) {
 			case 'gif':
 				$img [] = '<img src="'.$match[2][$k].'.'.$match[3][$k].'" />';
 				break;
-			case 'avi':
-				$img [] = '<embed src="'.$match[2][$k].'.'.$match[3][$k].'"></embed>';
-				break;
+//			case 'avi':
+//				$img [] = '<embed src="'.$match[2][$k].'.'.$match[3][$k].'"></embed>';
+//				break;
 			case 'mp4':
 				$img [] =
 					'<video autoplay="true" loop="true"'.($iteration++ ? ' muted="true"' : '').'>'.
