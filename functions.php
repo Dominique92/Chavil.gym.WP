@@ -812,7 +812,7 @@ function gym_cree_posts ($textes, $ecrase = true) {
 		}
 }
 
-add_shortcode ('init', 'gym_init');
+//add_shortcode ('init', 'gym_init');
 function gym_init () {
 	global $gym_init_posts, $drupal_node;
 	gym_cree_posts ($gym_init_posts);
