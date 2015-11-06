@@ -29,7 +29,7 @@ Extensions -> Ajouter -> Rechercher -> CKEditor for WordPress -> Download -> Act
 	WP Flexible Map
 	WP BBCode
 	Collapsing Categories
-	WP Super Cache
+	WP Super Cache : NON !!
 Pages -> Page d’exemple -> Titre: Actualité -> Texte: <<CI DESSOUS>> -> Mettre à jour
 
 [droite]<img src="wp-content/uploads/anim_ffepgv-0-2-13-1.gif" />[/droite]
@@ -49,10 +49,12 @@ Apparence -> Personaliser -> Identité du site
 	-> Enregistrer & publier
 Médias -> Ajouter -> Faire glisser les fichiers de /FICHIERS (sauf fitball-17-11-24-.BIG.gif)
 Sous FTP, transférer fitball-17-11-24-.BIG.gif -> fitball-17-11-24-.gif
+functions.php (à la fin): Décommenter add_shortcode ('init', 'gym_init');
 Aller sur le site (pour initialiser les posts)
-Actualité -> Modifier -> enlever [init] -> Mettre à jour
+Actualité -> Modifier -> enlever [init] -> Mettre à jour / recommenter functions.php
 Apparence -> Widgets
 	-> Supprimer tout sauf Rechercher
+	-> Lien "accueil" dans le menu -> Glisser le widget en haut de la barre latérale principale
 	-> Menu de gestion GYM -> Glisser le widget en bas de la barre latérale principale
 	-> Collapsing Categories -> Glisser le widget en haut de la barre latérale principale
 		Title: Rubriques
@@ -60,11 +62,65 @@ Apparence -> Widgets
 		Sort Categories by: category slug
 		Sort Posts by: post id
 		Clicking on category name: Expands to show sub-categories and/or Posts
+		-> Enregistrer
 		Auto-expand: 20les-cours,30les-salles
 		Exclude: 10accueil,60cache
 		-> Enregistrer
-Accueil -> Shift click sur Contacts, Inscriptions, Concepts -> Modifier -> Catégories -> Actualité -> Mettre à jour
+Accueil -> Shift click sur Contacts, Inscriptions, Concepts -> Modifier -> Catégories -> Informations pratiques -> Mettre à jour
 Utilisateurs -> Ajouter -> Identifiant = Prénom = Mot de passe = "Genevieve / Corinne" -> E-mail: toto@toto.com -> Confirmer -> Rôle: Administrateur -> Ajouter
+
+WOOCOMMERCE
+===========
+Installer WooCommerce - excelling eCommerce
++ WooCommerce Bulk Discount
+3,4% + 0,25€
+En français: https://github.com/woothemes/woocommerce-language-packs/raw/v2.3.5/packages/fr_FR.zip ...tu le décompresses et ensuite tu mets les 4 fichiers dans le répertoire wp-content/languages/plugins
+Run the setup wizard (violet)
+PayPal Email Address: protec@cavailhez.fr
+Cours
+Une heure / semaine 132 €
+Deux heures / semaine 180 €
+Passeport illimité PASS 205 €
+Choisir une option (Type de cours, Horaire, salle, animateur) puis ajouter au panier
+Recommencer pour plusieurs cours
+http://www.matthieu-jalbert.fr/produit-variable-woocommerce/
+Avancé -> Ordre du menu -> 1
+Données produit: Produit variable
+Attributs -> Ajouter
+Nom: Cours
+Cocher: Utilisé pour les variations
+Valeurs:
+Yoga Lundi 09:00 - 10:00 Gymnase Halimi Rose|Gym équilibre Lundi 14:30 - 15:30 Atrium / Maurice Béjart Marie-Thérèse|Multi-gym moyenne Lundi 18:30 - 19:30 Paul Bert Claire|Multi-gym moyenne Lundi 19:30 - 20:30 Paul Bert Claire|Gym cardio Lundi 20:40 - 21:40 Atrium Salle Tchaïkovski Nathalie|Pilates, renforcement musculaire profond Mardi 09:30 - 10:30 Atrium / Maurice Béjart Nathalie|Gym modérée Mardi 11:00 - 12:00 Atrium / Maurice Béjart Florina|Gym Zen Mardi 12:15 - 13:15 Atrium / Maurice Béjart Rose|Gym tonique Mardi 18:30 - 19:30 Ferdinand Buisson Nathalie|Pilates, renforcement musculaire, stretching Mardi 20:00 - 21:00 Gymnase Halimi Nathalie|Yoga Mercredi 08:45 - 09:45 Gymnase Halimi Armelle|Yoga Mercredi 10:00 - 11:00 Gymnase Halimi Armelle|Multi-gym Mercredi 18:30 - 19:30 Paul Bert Marie-Thérèse|Multi-gym Mercredi 19:30 - 20:30 Paul Bert Marie-Thérèse|Gym cardio Mercredi 20:45 - 21:45 Paul Bert Émilie|Gym nordique Jeudi 09:30 - 10:30 Atrium / Maurice Béjart Florina|Gym modérée Jeudi 10:45 - 11:45 Atrium / Maurice Béjart Émilie|Multi-gym Jeudi 18:30 - 19:30 Ferdinand Buisson Marie-Thérèse|Gym bien- être, Qi-gong Vendredi 09:15 - 10:15 Atrium Salle Tchaïkovski Arnaud|Multi-gym Vendredi 10:30 - 11:30 Atrium Salle Tchaïkovski Émilie|Acti’March Vendredi 19:00 - 20:00 Jean Jaurès / Piste d’Athlétisme Rose|Gym tonique Samedi 09:00 - 10:00 Léo Lagrange Sandrine|Gym tonique Samedi 10:00 - 11:00 Léo Lagrange Sandrine
+Save Attributes
+Variations -> Create variations from attributes -> Aller -> OK -> OK
+Cliquer sur toutes les variations et mettre le prix à 132
+Produits -> Ajouter produit / Acti’March seul / 100 -> Publier
+Produits -> Catégorie -> Inscriptions -> inscriptions -> Ajouter
+Produits -> porduits -> modifier les 3 -> Cocher Admissions -> Mettre à jour
+Avancé -> Ordre du menu -> 2
+Produits -> Ajouter produit / Assurance complémentaire / 11 -> Publier
+Avancé -> Ordre du menu -> 3
+Woocommerce -> Paramétres
+-> Commande -> Activer les commandes invités -> Désactiver -> Enregistrer
+-> Commande -> Codes Promo -> Désactiver -> Enregistrer
+-> général -> Nombre de décimales: 0 -> Enregistrer
+-> Bulk Discount -> Décocher: Treat product variations separately -> Enregistrer
+-> Produits -> Produits -> Cours -> Modifier
+Bulk Discount -> Add discount line -> 
+2	31,82
+3	48,23
+4	61,17
+5	68,94
+6	74,12
+-> Enregistrer
+Apparence -> Widjet -> Panier Woocommerce -> Activer: Masquer si le panier est vide
+
+WP USER META
+============
+User Meta Display : NON
+User Meta Manager : NON
+Cimy User Extra Fields 
+User Meta
 
 FREE.FR PHP 5.6
 ===============

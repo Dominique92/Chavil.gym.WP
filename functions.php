@@ -80,6 +80,24 @@ function gym_affiche_images_droite ($atts = array(), $content = NULL) {
 }
 
 /**
+ * Lien "accueil" dans le menu.
+ */
+add_action ('widgets_init', create_function ('', 'return register_widget("gym_accueil");'));
+class gym_accueil extends WP_Widget {
+    function gym_accueil () {
+        parent::WP_Widget (false, $name = 'Lien "accueil" dans le menu');	
+    }
+ 
+	public function widget ($args, $instance) {
+		echo $args['before_widget']
+				.'<a href="." title="Retourner au début du site.">'
+					.$args['before_title'] .'Accueil' .$args['after_title']
+				.'</a>'
+			.$args['after_widget'];
+    }
+}
+
+/**
  * Menu de gestion (Connexion, ...).
  */
 add_action ('widgets_init', create_function ('', 'return register_widget("gym_gestion");'));
@@ -89,18 +107,18 @@ class gym_gestion extends WP_Widget {
     }
  
 	public function widget ($args, $instance) {
-		echo $args['before_widget'];
-		echo $args['before_title'] . 'Gestion' . $args['after_title'];
+		echo $args['before_widget']
+			.$args['before_title'] . 'Gestion' . $args['after_title'];
 		echo '<ul>';
 			echo '<li>'; wp_loginout(); echo '</li>';
 			echo wp_register();
 			if (is_user_logged_in ('users_can_register')) {
 				$r = $GLOBALS['wpdb']->get_results ('SELECT ID FROM wp_posts WHERE post_status LIKE "publish" AND post_title = "Mode d\'emploi"', OBJECT);
-				echo '<li><a target="mode_emploi" href="?p='.$r[0]->ID.'">Mode d\'emploi</a></li>';
-				echo '<li><a target="gym_v2" href="http://chaville.gym.free.fr/v2">Prècèdent site</a></li>';
+				echo '<li><a target="mode_emploi" href="?p='.$r[0]->ID.'">Mode d\'emploi</a></li>'
+					.'<li><a target="gym_v2" href="http://chaville.gym.free.fr/v2">Prècèdent site</a></li>';
 			}
-		echo '</ul>';
-		echo $args['after_widget'];
+		echo '</ul>'
+			.$args['after_widget'];
     }
 }
 
@@ -816,4 +834,105 @@ function gym_cree_posts ($textes, $ecrase = true) {
 function gym_init () {
 	global $gym_init_posts, $drupal_node;
 	gym_cree_posts ($gym_init_posts);
+}
+
+///////////////////////////////////////////////////////////
+function fb_add_custom_user_profile_fields( $user ) {
+?>
+	<h3><?php _e('Extra Profile Information', 'your_textdomain'); ?></h3>
+	
+	<table class="form-table">
+		<tr>
+			<th>
+				<label for="address"><?php _e('Address', 'your_textdomain'); ?>
+			</label></th>
+			<td>
+				<input type="text" name="address" id="address" value="<?php echo esc_attr( get_the_author_meta( 'address', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description"><?php _e('Please enter your address.', 'your_textdomain'); ?></span>
+			</td>
+		</tr>
+	</table>
+<?php }
+
+function fb_save_custom_user_profile_fields( $user_id ) {
+	
+	if ( !current_user_can( 'edit_user', $user_id ) )
+		return FALSE;
+	
+	update_usermeta( $user_id, 'address', $_POST['address'] );
+}
+
+add_action( 'show_user_profile', 'fb_add_custom_user_profile_fields' );
+add_action( 'edit_user_profile', 'fb_add_custom_user_profile_fields' );
+
+add_action( 'personal_options_update', 'fb_save_custom_user_profile_fields' );
+add_action( 'edit_user_profile_update', 'fb_save_custom_user_profile_fields' );
+/*
+add_action( 'show_user_profile', 'add_extra_social_links' );
+add_action( 'edit_user_profile', 'add_extra_social_links' );
+
+function add_extra_social_links( $user )
+{
+    ?>
+        <h3>New User Profile Links</h3>
+
+        <table class="form-table">
+            <tr>
+                <th><label for="facebook_profile">Facebook Profile</label></th>
+                <td><input type="text" name="facebook_profile" value="<?php echo esc_attr(get_the_author_meta( 'facebook_profile', $user->ID )); ?>" class="regular-text" /></td>
+            </tr>
+
+            <tr>
+                <th><label for="twitter_profile">Twitter Profile</label></th>
+                <td><input type="text" name="twitter_profile" value="<?php echo esc_attr(get_the_author_meta( 'twitter_profile', $user->ID )); ?>" class="regular-text" /></td>
+            </tr>
+
+            <tr>
+                <th><label for="google_profile">Google+ Profile</label></th>
+                <td><input type="text" name="google_profile" value="<?php echo esc_attr(get_the_author_meta( 'google_profile', $user->ID )); ?>" class="regular-text" /></td>
+            </tr>
+        </table>
+    <?php
+}
+add_action( 'personal_options_update', 'save_extra_social_links' );
+add_action( 'edit_user_profile_update', 'save_extra_social_links' );
+
+function save_extra_social_links( $user_id )
+{
+    update_user_meta( $user_id,'facebook_profile', sanitize_text_field( $_POST['facebook_profile'] ) );
+    update_user_meta( $user_id,'twitter_profile', sanitize_text_field( $_POST['twitter_profile'] ) );
+    update_user_meta( $user_id,'google_profile', sanitize_text_field( $_POST['google_profile'] ) );
+}
+*/
+///////////////////////////////////////////////////////////
+
+add_shortcode ('cmd', 'gym_cmd');
+function gym_cmd () {
+	$results = $GLOBALS['wpdb']->get_results (
+		"SELECT *,
+			wp_woocommerce_order_itemmeta.meta_key AS item_key,
+			wp_woocommerce_order_itemmeta.meta_value AS item_value,
+			wp_postmeta.meta_key AS post_key,
+			wp_postmeta.meta_value AS post_value
+		FROM wp_woocommerce_order_itemmeta
+		JOIN wp_woocommerce_order_items USING (order_item_id)
+		JOIN wp_postmeta ON wp_woocommerce_order_items.order_id = wp_postmeta.post_id",
+		OBJECT
+	);
+	foreach ($results AS $r) {
+		$cmd [$r->order_id] [$r->item_key] = $r->item_value;
+		$cmd [$r->order_id] [$r->post_key] = $r->post_value;
+//*DCMM*/echo"<pre style='background-color:white;color:black;font-size:14px;'> = ".var_export($r,true).'</pre>';
+/*
+		if ($r->item_key == '_qty')
+			$cmd [$r->order_id] [$r->order_item_name] += $r->item_value;
+		if ($r->item_key == 'cours')
+			$cmd [$r->order_id] [$r->meta_value]++;
+		$cmd [$r->order_id] [$r->order_item_id] [$r->meta_key] = $r->meta_value;
+		$cmd [$r->order_id] [$r->order_item_id] ['order_item_name'] = $r->order_item_name;
+		$cmd [$r->order_id] [$r->order_item_id] ['order_item_type'] = $r->order_item_type;
+		$cmd [$r->order_id] [$r->order_item_id] ['order_id'] = $r->order_id;
+*/
+	}
+/*DCMM*/echo"<pre style='background-color:white;color:black;font-size:14px;'> = ".var_export($cmd,true).'</pre>';
 }
