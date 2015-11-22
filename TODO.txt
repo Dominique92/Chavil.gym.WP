@@ -16,11 +16,16 @@ Dessin de l'icone mobile dans l'écran d'accueil Samsung
 
 INSTALLATION
 ============
+
+					http://stackoverflow.com/questions/22396721/how-to-send-email-from-localhost-wamp-server-to-send-email-gmail-hotmail-or-so-f
+					https://www.hmailserver.com/
+					140754
+
 Créer base de donnée vide
 Télécharger https://fr.wordpress.org/
 Copier en espace apache
 Copier wp-config.php et FICHIERS/...
-Copier wp-content/themes/twentyfifteen-gym/...
+Checkout https://github.com/Dominique92/Chavil.gym.git/trunk dans wp-content/themes/twentyfifteen-gym/...
 Lancer
 
 Articles -> Bonjour tout le monde ! -> Mettre à la Corbeille
@@ -30,6 +35,7 @@ Extensions -> Ajouter -> Rechercher -> CKEditor for WordPress -> Download -> Act
 	WP BBCode
 	Collapsing Categories
 	WP Super Cache : NON !!
+	UpdraftPlus Backup and Restoration
 Pages -> Page d’exemple -> Titre: Actualité -> Texte: <<CI DESSOUS>> -> Mettre à jour
 
 [droite]<img src="wp-content/uploads/anim_ffepgv-0-2-13-1.gif" />[/droite]
@@ -40,7 +46,7 @@ Réglages -> Lecture
 	-> La page d’accueil affiche -> Une page statique -> Page d’accueil : Actualité
 	-> Les pages du site doivent afficher au plus: 100
 	-> Enregistrer
-Réglages -> Medias -> Organiser mes fichiers envoyés dans des dossiers mensuels et annuels: NON -> Enregistrer
+Réglages -> Medias -> Organiser mes fichiers envoyés dans des dossiers mensuels et annuels: Décocher -> Enregistrer
 Réglages -> Permaliens -> Valeur par défaut -> Enregistrer
 Apparence -> Thèmes -> Twenty Fifteen Gym -> Activer
 Apparence -> Personaliser -> Identité du site
@@ -69,12 +75,15 @@ Apparence -> Widgets
 Accueil -> Shift click sur Contacts, Inscriptions, Concepts -> Modifier -> Catégories -> Informations pratiques -> Mettre à jour
 Utilisateurs -> Ajouter -> Identifiant = Prénom = Mot de passe = "Genevieve / Corinne" -> E-mail: toto@toto.com -> Confirmer -> Rôle: Administrateur -> Ajouter
 
+Payement
+https://systempay.cyberpluspaiement.com/html/contributions.html
+
 WOOCOMMERCE
 ===========
 Installer WooCommerce - excelling eCommerce
 + WooCommerce Bulk Discount
 3,4% + 0,25€
-En français: https://github.com/woothemes/woocommerce-language-packs/raw/v2.3.5/packages/fr_FR.zip ...tu le décompresses et ensuite tu mets les 4 fichiers dans le répertoire wp-content/languages/plugins
+En français: NON: Il l'upgradera tout seul : https://github.com/woothemes/woocommerce-language-packs/raw/v2.3.5/packages/fr_FR.zip ...tu le décompresses et ensuite tu mets les 4 fichiers dans le répertoire wp-content/languages/plugins
 Run the setup wizard (violet)
 PayPal Email Address: protec@cavailhez.fr
 Cours
@@ -92,17 +101,17 @@ Cocher: Utilisé pour les variations
 Valeurs:
 Yoga Lundi 09:00 - 10:00 Gymnase Halimi Rose|Gym équilibre Lundi 14:30 - 15:30 Atrium / Maurice Béjart Marie-Thérèse|Multi-gym moyenne Lundi 18:30 - 19:30 Paul Bert Claire|Multi-gym moyenne Lundi 19:30 - 20:30 Paul Bert Claire|Gym cardio Lundi 20:40 - 21:40 Atrium Salle Tchaïkovski Nathalie|Pilates, renforcement musculaire profond Mardi 09:30 - 10:30 Atrium / Maurice Béjart Nathalie|Gym modérée Mardi 11:00 - 12:00 Atrium / Maurice Béjart Florina|Gym Zen Mardi 12:15 - 13:15 Atrium / Maurice Béjart Rose|Gym tonique Mardi 18:30 - 19:30 Ferdinand Buisson Nathalie|Pilates, renforcement musculaire, stretching Mardi 20:00 - 21:00 Gymnase Halimi Nathalie|Yoga Mercredi 08:45 - 09:45 Gymnase Halimi Armelle|Yoga Mercredi 10:00 - 11:00 Gymnase Halimi Armelle|Multi-gym Mercredi 18:30 - 19:30 Paul Bert Marie-Thérèse|Multi-gym Mercredi 19:30 - 20:30 Paul Bert Marie-Thérèse|Gym cardio Mercredi 20:45 - 21:45 Paul Bert Émilie|Gym nordique Jeudi 09:30 - 10:30 Atrium / Maurice Béjart Florina|Gym modérée Jeudi 10:45 - 11:45 Atrium / Maurice Béjart Émilie|Multi-gym Jeudi 18:30 - 19:30 Ferdinand Buisson Marie-Thérèse|Gym bien- être, Qi-gong Vendredi 09:15 - 10:15 Atrium Salle Tchaïkovski Arnaud|Multi-gym Vendredi 10:30 - 11:30 Atrium Salle Tchaïkovski Émilie|Acti’March Vendredi 19:00 - 20:00 Jean Jaurès / Piste d’Athlétisme Rose|Gym tonique Samedi 09:00 - 10:00 Léo Lagrange Sandrine|Gym tonique Samedi 10:00 - 11:00 Léo Lagrange Sandrine
 Save Attributes
-Variations -> Create variations from attributes -> Aller -> OK -> OK
+Variations -> Creer les variations pour tous les attributs -> Aller -> OK -> OK
 Cliquer sur toutes les variations et mettre le prix à 132
 Produits -> Ajouter produit / Acti’March seul / 100 -> Publier
-Produits -> Catégorie -> Inscriptions -> inscriptions -> Ajouter
-Produits -> porduits -> modifier les 3 -> Cocher Admissions -> Mettre à jour
 Avancé -> Ordre du menu -> 2
 Produits -> Ajouter produit / Assurance complémentaire / 11 -> Publier
 Avancé -> Ordre du menu -> 3
+Produits -> Catégorie -> Inscriptions / inscriptions -> Ajouter
+Produits -> produits -> modifier les 3 -> Cocher Inscriptions -> Mettre à jour
 Woocommerce -> Paramétres
+-> Commande -> Activer l'utilisation de codes promo -> Désactiver -> Enregistrer
 -> Commande -> Activer les commandes invités -> Désactiver -> Enregistrer
--> Commande -> Codes Promo -> Désactiver -> Enregistrer
 -> général -> Nombre de décimales: 0 -> Enregistrer
 -> Bulk Discount -> Décocher: Treat product variations separately -> Enregistrer
 -> Produits -> Produits -> Cours -> Modifier
@@ -112,8 +121,8 @@ Bulk Discount -> Add discount line ->
 4	61,17
 5	68,94
 6	74,12
--> Enregistrer
-Apparence -> Widjet -> Panier Woocommerce -> Activer: Masquer si le panier est vide
+-> Mettre à jour
+Apparence -> Widjet -> Panier Woocommerce -> Mettre au dessus de Collapsing Categories -> Activer: Masquer si le panier est vide -> Enregistrer
 
 WP USER META
 ============

@@ -242,7 +242,8 @@ body:before {
 .woocommerce .related .add_to_cart_button,
 .woocommerce-ordering,
 .woocommerce-result-count,
-.woocommerce-tabs {
+.woocommerce-tabs .wc-tabs,
+.woocommerce-tabs .wc-tab h2 {
 	display: none !important;
 }
 .woocommerce .summary {
