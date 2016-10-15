@@ -16,7 +16,7 @@ function gym_affiche_categorie_accueil () {
  * Utilise les données entre les bbcode [horaires][/horaires] dans la fiche Horaires
  */
 add_shortcode ('horaires', 'gym_affiche_horaires');
-function gym_affiche_horaires () {
+function gym_affiche_horaires ($atts = NULL) {
 	$titre = get_the_title (); // Titre de la page (pour les filtres)
 	$results = $GLOBALS['wpdb']->get_results ('SELECT ID, post_title, post_content FROM wp_posts WHERE post_status = "publish"', OBJECT);
 	foreach ($results AS $p) {
@@ -25,11 +25,16 @@ function gym_affiche_horaires () {
 		preg_match_all('/\[(.*)\]/', $c, $h);
 		foreach ($h[1] AS $hv) {
 			$hvs = explode ('|', $hv);
-			if (stripos ('|'.cnv($hv).'|horaires|', '|'.cnv($titre).'|')
+			if (stripos ('|'.cnv($hv).'|', '|'.cnv($titre).'|')
 				&& count ($hvs) > 1)
 				$gym_cours [array_shift ($hvs)] [] = $hvs;
+			elseif (count ($hvs) > 1)
+				$gym_cours2 [array_shift ($hvs)] [] = $hvs;
 		}
 	}
+	if (!$gym_cours && $atts)
+		$gym_cours = $gym_cours2;
+
 	$r = "<div id=\"horaires\"><b>Séances</b>";
 	if (isset ($gym_cours))
 		foreach ($gym_cours AS $j => $c) {
@@ -87,7 +92,7 @@ class gym_gestion extends WP_Widget {
     function gym_gestion () {
         parent::WP_Widget (false, $name = 'Menu de gestion GYM');	
     }
- 
+
 	public function widget ($args, $instance) {
 		echo $args['before_widget'];
 		echo $args['before_title'] . 'Gestion' . $args['after_title'];
@@ -131,6 +136,10 @@ function login_logout_redirect() {
 	return '.';
 }
 
+/**
+ * Fonction outil locale.
+ * Purge une chaine.
+ */
 function cnv ($c) {
 	$c = html_entity_decode ($c);
 	$c = strtolower ($c);
