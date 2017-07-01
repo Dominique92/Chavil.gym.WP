@@ -42,7 +42,7 @@ function gym_affiche_horaires ($atts = NULL) {
 				foreach ($c AS $cv) {
 					$r .= "<tr>";
 						foreach ($cv AS $cvk => $cvv)
-							if (trim ($cvv) != $titre)
+							if (trim (strip_tags ($cvv)) != $titre)
 								$r .= ($n = @$gym_posts [cnv ($cvv)])
 									? "<td class=\"hc$cvk\"><a href=\"?p=$n\">$cvv</a></td>"
 									: "<td class=\"hc$cvk\">$cvv</td>";
@@ -141,6 +141,7 @@ function login_logout_redirect() {
  * Purge une chaine.
  */
 function cnv ($c) {
+	$c = strip_tags ($c);
 	$c = html_entity_decode ($c);
 	$c = strtolower ($c);
 	$c = preg_replace ('/[^a-z\|]/', '', $c);
