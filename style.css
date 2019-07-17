@@ -1,15 +1,15 @@
 /*
- Theme Name:   Twenty Fifteen Gym
- Theme URI:    https://github.com/Dominique92/Chavil.gym
- Description:  Chaville Gym colors
- Author:       Dominique Cavailhez
- Author URI:   http://chaville.gym.free.fr
- Template:     twentyfifteen
- Version:      1.0.0
- License:      GNU General Public License v2 or later
- License URI:  http://www.gnu.org/licenses/gpl-2.0.html
- Tags:         green, two-columns, right-sidebar, responsive-layout, accessibility-ready
- Text Domain:  twenty-fifteen-gym
+ Theme Name: Twenty Fifteen Gym
+ Theme URI: https://github.com/Dominique92/Chavil.gym
+ Description: Chaville Gym colors
+ Author:  Dominique Cavailhez
+ Author URI: http://chaville.gym.free.fr
+ Template: twentyfifteen
+ Version: 1.0.0
+ License: GNU General Public License v2 or later
+ License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:    green, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain: twenty-fifteen-gym
 */
 
 @import url("../twentyfifteen/style.css");
@@ -25,9 +25,9 @@
 	margin: 5px;
 }
 #baniere a {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
 	font-size: 20px;
 	color: white;
 }
@@ -123,9 +123,6 @@ body:before {
 	color: white;
 	font-size: 16px;
 	text-transform: none;
-}
-.widget-title a {
-	color: white;
 }
 .widget ul {
 	padding: 5px;
@@ -232,53 +229,20 @@ body:before {
 	margin: 5px;
 	display: block;
 }
+.type-page .droite {
+	margin-top: -44px;
+}
 
-/* WooCommerce */
-.woocommerce .mini_cart_item img,
-.woocommerce .images,
-.woocommerce .wp-post-image,
-.woocommerce .reset_variations,
-.woocommerce .sku_wrapper,
-.woocommerce .related .add_to_cart_button,
-.woocommerce-ordering,
-.woocommerce-result-count,
-.woocommerce-tabs .wc-tabs,
-.woocommerce-tabs .wc-tab h2 {
-	display: none !important;
+button#place_order {
+	color: #a46497;
+	line-height: 0; 
 }
-.woocommerce .summary {
-	float: none !important;
-}
-.woocommerce .t15wc {
-	margin: 0 !important;
-	padding: 10px !important;
-}
-.woocommerce .products li {
-	border: 1px solid black;
-	padding: 5px !important;
-}
-.woocommerce a.button {
-	padding: 5px;
-}
-.woocommerce #content div.product div.summary {
-	width: initial !important;
-}
-.woocommerce div.product form.cart .variations select {
-	width: initial;
-	font-size: 80%;
-}
-.woocommerce table.variations {
-	table-layout: auto !important;
-}
-.woocommerce .product-thumbnail,
-.woocommerce .product-remove {
-	width: 40px;
-}
-.woocommerce .widget_shopping_cart_content .buttons {
-	margin-left: 3px;
-}
-.woocommerce .widget_shopping_cart_content .buttons a {
-	border: 1px solid grey;
+button#place_order::after 
+{
+	color: white;
+	content: "RESERVER"; 
+	display: block; 
+	line-height: initial;
 }
 
 /* Pied */
@@ -349,10 +313,10 @@ body:before {
 	color: #697c46;
 }
 #lundi table {
-	border-color:        #99a682;
-	border-right-color:  #3f4c28;
+	border-color:#99a682;
+	border-right-color: #3f4c28;
 	border-bottom-color: #3f4c28;
-	background-color:    #daedb7;
+	background-color:#daedb7;
 }
 
 #mardi {
@@ -360,10 +324,10 @@ body:before {
 	color: #803d70;
 }
 #mardi table {
-	border-color:        #a87c9e;
-	border-right-color:  #4e2244;
+	border-color:#a87c9e;
+	border-right-color: #4e2244;
 	border-bottom-color: #4e2244;
-	background-color:    #f1aee1;
+	background-color:#f1aee1;
 }
 
 #mercredi {
@@ -371,10 +335,10 @@ body:before {
 	color: #525d7c;
 }
 #mercredi table {
-	border-color:        #8a92a6;
-	border-right-color:  #30384c;
+	border-color:#8a92a6;
+	border-right-color: #30384c;
 	border-bottom-color: #30384c;
-	background-color:    #c3ceed;
+	background-color:#c3ceed;
 }
 
 #jeudi {
@@ -382,10 +346,10 @@ body:before {
 	color: #508e4d;
 }
 #jeudi table {
-	border-color:        #89b287;
-	border-right-color:  #2f582d;
+	border-color:#89b287;
+	border-right-color: #2f582d;
 	border-bottom-color: #2f582d;
-	background-color:    #c1ffbe;
+	background-color:#c1ffbe;
 }
 
 #vendredi {
@@ -393,10 +357,10 @@ body:before {
 	color: #7e5856;
 }
 #vendredi table {
-	border-color:        #a88e8d;
-	border-right-color:  #4e3433;
+	border-color:#a88e8d;
+	border-right-color: #4e3433;
 	border-bottom-color: #4e3433;
-	background-color:    #efc9c7;
+	background-color:#efc9c7;
 }
 
 #samedi {
@@ -404,10 +368,10 @@ body:before {
 	color: #6c3f81;
 }
 #samedi table {
-	border-color:        #9b7ea9;
-	border-right-color:  #41244f;
+	border-color:#9b7ea9;
+	border-right-color: #41244f;
 	border-bottom-color: #41244f;
-	background-color:    #ddb0f2;
+	background-color:#ddb0f2;
 }
 
 #dimanche {
@@ -415,10 +379,10 @@ body:before {
 	color: #468165;
 }
 #dimanche table {
-	border-color:        #82a997;
-	border-right-color:  #284f3d;
+	border-color:#82a997;
+	border-right-color: #284f3d;
 	border-bottom-color: #284f3d;
-	background-color:    #b7f2d6;
+	background-color:#b7f2d6;
 }
 @media screen and (max-width: 59.6875em) {
 	#lundi,

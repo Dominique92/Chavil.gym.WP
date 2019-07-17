@@ -141,6 +141,12 @@ function login_logout_redirect() {
  * Purge une chaine.
  */
 function cnv ($c) {
+	// Purge NEW & CERT
+	$ce = explode ('|', $c);
+	foreach ($ce AS $k=>$v)
+		$ce[$k] = explode (' <', $v) [0];
+	$c = implode ('|', $ce);
+	
 	$c = str_replace (' - ', ' ', $c);
 	$c = strip_tags ($c);
 	$c = html_entity_decode ($c);
