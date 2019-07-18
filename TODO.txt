@@ -1,30 +1,18 @@
-DONE
-====
-Horaires / menu : purge NEW & CERT
-
-BUGS
-====
-
 BEST TO DO
 ==========
-Feuille style editeur bloc Guttenberg
 Voir randos dont le diaporama ne fonctionne plus
 Sitemap google
 Pouvoir trier les lignes du menu manuellement
 Videos sur SAFARI
 Pouvoir émettre une remarque
-Remplacer les vert_titre, ... (Page concepts)
 Permaliens avec le nom
 Changer le logo de connexion W
 Dessin de l'icone mobile dans l'écran d'accueil Samsung
+http://stackoverflow.com/questions/22396721/how-to-send-email-from-localhost-wamp-server-to-send-email-gmail-hotmail-or-so-f
+https://www.hmailserver.com/
 
 INSTALLATION
 ============
-
-					http://stackoverflow.com/questions/22396721/how-to-send-email-from-localhost-wamp-server-to-send-email-gmail-hotmail-or-so-f
-					https://www.hmailserver.com/
-					140754
-
 Créer base de donnée vide
 Télécharger https://fr.wordpress.org/
 Copier en espace apache

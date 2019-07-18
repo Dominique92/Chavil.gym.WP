@@ -8,7 +8,7 @@
  Version: 1.0.0
  License: GNU General Public License v2 or later
  License URI: http://www.gnu.org/licenses/gpl-2.0.html
- Tags:    green, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Tags: green, two-columns, right-sidebar, responsive-layout, accessibility-ready
  Text Domain: twenty-fifteen-gym
 */
 
@@ -158,39 +158,84 @@ body:before {
 	}
 }
 
-/* Coeur de page */
+/* Mise en page de l'article/page */
 .hentry {
 	margin: 0;
 	padding: 5px 0;
 	font-size: 80%;
 }
-.page-header + .hentry,
-.hentry + .hentry {
-	margin-top: 10px;
-}
+.hentry h2,
+.hentry h3,
+.hentry h4,
 .hentry p {
-	margin-bottom: 0.3em;
+	margin: 0.1em 5px 0 5px !important;
 }
 .hentry li {
-	margin-left: 20px;
+	margin-left: 27px !important;
+	list-style-type: circle;
 }
 .entry-title {
 	margin-bottom: 10px;
-	font-size: 24px;
 	color: grey;
 }
-.entry-content,
-.entry-summary {
+.entry-content {
 	padding: 0 10px;
-	color: black;
-}
-.entry-content a {
-	border: 0;
 }
 .entry-footer {
 	padding: 0;
 	background-color: white;
 }
+
+/* Style articles importés du site V2 */
+.hentry h2,
+.carre_vert_titre {
+	margin-top: 20px !important;
+	padding: 3px;
+	text-indent: 5px;
+	background-color: #329932;
+	color: #f7fff7;
+	font-family: arial;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+.hentry h3 {
+	margin-top: 20px !important;
+	text-indent: 13px;
+	font-family: arial;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+.hentry h4 {
+	margin-top: 15px !important;
+	text-indent: 13px;
+	font-family: arial;
+	font-size: 1em;
+	text-decoration: underline; 
+}
+.carre_vert_texte {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background-color: #f7fff7;
+	text-indent: 10px;
+	color: #329932;
+	font-size: 12px;
+}
+.hentry li {
+	color: #329932;
+	font-size: 1em;
+}
+.hentry a {
+	color: #329932;
+	border: 0; 
+}
+.hentry a:hover {
+	background-color: #329932;
+	color: white;
+}
+.wp-block-verse {
+	background-color: #ffeee0;
+}
+
 .posted-on,
 .byline,
 .cat-links,
@@ -201,16 +246,6 @@ body:before {
 }
 .edit-link {
 	background-color: yellow;
-}
-
-/* Carte */
-.flxmap-container {
-	max-width: 100%;
-}
-@media screen and (max-width: 450px) {
-	.flxmap-container {
-		max-height: 300px;
-	}
 }
 
 /* Images à droite */
@@ -259,26 +294,6 @@ button#place_order::after
 }
 .site-info  a {
 	text-decoration: underline;
-}
-
-/* Style articles importés du site V2 */
-.carre_vert_titre {
-	font-family: arial;
-	font-size: 20px;
-	color: #f7fff7;
-	background-color: #329932;
-	font-weight: bold;
-	padding: 3px;
-	text-indent: 5px;
-	margin-top: 20px !important;
-}
-.carre_vert_texte {
-	font-size: 12px;
-	color: #329932;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	background-color: #f7fff7;
-	text-indent: 10px;
 }
 
 /* HORAIRES */
