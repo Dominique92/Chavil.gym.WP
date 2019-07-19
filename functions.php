@@ -21,8 +21,9 @@ function gym_affiche_horaires ($atts = NULL) {
 	$results = $GLOBALS['wpdb']->get_results ('SELECT ID, post_title, post_content FROM wp_posts WHERE post_status = "publish"', OBJECT);
 	foreach ($results AS $p) {
 		$gym_posts [cnv ($p->post_title)] = $p->ID; // Mémorise l'id de chaque post en fonction de son titre
-		$c = str_replace (array("<tr>\r\n\t\t\t<td>\r\n\t\t\t\t","\r\n\t\t\t</td>\r\n\t\t\t<td>\r\n\t\t\t\t","\r\n\t\t\t</td>\r\n\t\t</tr>"), array('[','|',']'), $p->post_content);
-		preg_match_all('/\[(.*)\]/', $c, $h);
+		$c = str_replace (array("\t","\r","\n"), '', $p->post_content);
+		$c = str_replace (array("<tr><td>","</td><td>","</td></tr>"), array('[','|',']'), $c);
+		preg_match_all('/\[([^\]]+)/', $c, $h);
 		foreach ($h[1] AS $hv) {
 			$hvs = explode ('|', $hv);
 			if (stripos ('|'.cnv($hv).'|', '|'.cnv($titre).'|')

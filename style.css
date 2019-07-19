@@ -225,12 +225,14 @@ body:before {
 	font-size: 1em;
 }
 .hentry a {
-	color: #329932;
 	border: 0; 
+	font-weight: bold;
+	color: inherit;
+	text-decoration: underline; 
 }
 .hentry a:hover {
 	background-color: #329932;
-	color: white;
+	color: white !important;
 }
 .wp-block-verse {
 	background-color: #ffeee0;
