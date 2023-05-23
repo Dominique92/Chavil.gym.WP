@@ -1,418 +1,250 @@
 /*
- Theme Name: Twenty Fifteen Gym
- Theme URI: https://github.com/Dominique92/Chavil.gym
- Description: Chaville Gym colors
- Author:  Dominique Cavailhez
- Author URI: http://chaville.gym.free.fr
- Template: twentyfifteen
- Version: 1.0.0
- License: GNU General Public License v2 or later
- License URI: http://www.gnu.org/licenses/gpl-2.0.html
- Tags: green, two-columns, right-sidebar, responsive-layout, accessibility-ready
- Text Domain: twenty-fifteen-gym
-*/
+    Theme Name: gym
+    Template: twentytwentythree
+    */
 
-@import url("../twentyfifteen/style.css");
-
-/* Banière écran large */
-#baniere {
-	float: right;
-	width: 100%;
-	background-image: url(banniere.jpg);
-	display: table;
+/* Cadrage du contenu de la page */
+.wp-site-blocks,
+.has-global-padding,
+.wp-block-template-part div {
+  padding: 0 !important;
 }
-#baniere img {
-	margin: 5px;
+.is-layout-constrained
+  > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+  max-width: initial !important;
 }
-#baniere a {
-	display: table-cell;
-	text-align: center;
-	vertical-align: middle;
-	font-size: 20px;
-	color: white;
+.wp-block-group {
+  margin: 0px calc(max(1%, 10% - 50px)) !important;
 }
-#baniere b {
-	font-size: 28px;
+/* Titre de l'accueil de la première page */
+.home .wp-site-blocks h1.wp-block-post-title {
+  display: none;
 }
-@media screen and (max-width: 59.6875em) {
-	#baniere {
-		display: none;
-	}
+.wp-site-blocks h1.wp-block-post-title {
+  font-size: 32px;
 }
-
-/* Banière écran étroit */
-.site-header {
-	background-color: #329932;
-	padding: 0;
+/* Titres à l'intérieur de la page */
+.wp-site-blocks h2.wp-block-heading, /* Prod */
+    h2.block-editor-rich-text__editable /* Edit */ {
+  padding: 0.2em;
+  border-radius: 10px;
+  background: #08babe;
+  color: white;
+  font-size: 18px;
 }
-.site-header * {
-	color: white;
+.wp-block-post-content p {
+  text-align: justify;
 }
-.site-header button {
-	background-color: white;
-	margin-right: 5px;
+/* Images */
+.wp-block-image.alignleft {
+  margin: 1em 1em 1em 0 !important;
 }
-.site-header button:hover {
-	background-color: #CCC;
+.wp-block-image.alignright {
+  margin: 1em 0 1em 1em !important;
 }
-.site-branding {
-	text-align: center;
+.wp-block-image img {
+  border-radius: 1em;
+  max-width: 33vh;
 }
-.site-branding p {
-	display: inline;
-	line-height: 55px;
-}
-@media screen and (min-width: 59.6875em) {
-	.site-header {
-		display: none;
-	}
-}
-@media screen and (max-width: 450px) {
-	.site-description {
-		display: none !important;
-	}
+@media screen and (max-width: 600px) {
+  .wp-block-image img {
+    display: none;
+  }
 }
 
-/* Séparation verticale menu gauche / contenu */
-body {
-	background-color: #CCE5CC;
+/* Banniere */
+.banniere {
+  height: 56px;
+  text-align: center;
+  background: #5826f4;
 }
-body:before {
-	background-color: transparent;
-	width: 0;
+.banniere h1 {
+  margin: 0;
+  padding-top: 7px;
+  font-family: arial, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
 }
-.site {
-	max-width: initial;
+.banniere img {
+  float: left;
+  height: 56px;
 }
-.site-main,
-.site-footer,
-.secondary {
-	padding: 0;
-	margin: 0;
+.banniere a {
+  text-decoration: none;
 }
-@media screen and (min-width: 59.6875em) {
-	.sidebar {
-		width: 20%;
-	}
-	.site-content,
-	.site-footer {
-		margin-left: 20%;
-		width: 80%;
-	}
-	.secondary {
-		padding: 5%;
-		margin-top: 79px;
-	}
+@media (max-width: 600px) {
+  .banniere img {
+    display: none;
+  }
 }
-
-/* Menu gauche | en haut (responsive) */
-.widget {
-	padding: 0;
-	margin: 0 0 10px 0;
-	border: 2px solid #329932;
-	background-color: #E4F1BF;
-	font-family: arial;
-}
-.widget-area {
-	margin: 0;
-}
-.widget-title {
-	background-color: #329932;
-	padding: 5px;
-	margin: 0 !important;
-	color: white;
-	font-size: 16px;
-	text-transform: none;
-}
-.widget ul {
-	padding: 5px;
-	list-style: none;
-	margin: 0;
-}
-.widget_collapscat,
-.widget input,
-.widget li a {
-	color: #842900 !important;
-	font-weight: bold;
-}
-.widget li a:first-child {
-	color: black !important;
-	font-weight: normal;
-}
-.widget li.collapsing.categories.self a {
-	font-weight: normal !important;
-}
-@media screen and (max-width: 59.6875em) {
-	.categories > li {
-		line-height: 30px;
-		border-bottom: 1px solid black;
-	}
-	.widget {
-		border: 0;
-	}
-	.widget-title {
-		display: none;
-	}
-	.widget_gym_gestion li {
-		line-height: 30px;
-	}
+@media (max-width: 400px) {
+  .banniere h1 span {
+    display: none;
+  }
 }
 
-/* Mise en page de l'article/page */
-.hentry {
-	margin: 0;
-	padding: 5px 0;
-	font-size: 80%;
+/* Menu */
+ul.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-left: 0;
 }
-.hentry h2,
-.hentry h3,
-.hentry h4,
-.hentry p {
-	margin: 0.1em 5px 0 5px !important;
+ul.menu > li > a {
+  font-weight: bold;
 }
-.hentry li {
-	margin-left: 27px !important;
-	list-style-type: circle;
+ul.menu a {
+  color: white;
 }
-.entry-title {
-	margin-bottom: 10px;
-	color: grey;
+ul.menu li {
+  list-style: none;
 }
-.entry-content {
-	padding: 0 10px;
+ul.menu > li:nth-of-type(1) {
+  background: hsl(0, 50%, 40%);
 }
-.entry-footer {
-	padding: 0;
-	background-color: white;
+ul.menu > li:nth-of-type(2) {
+  background: hsl(90, 50%, 40%);
 }
-
-/* Style articles importés du site V2 */
-.hentry h2,
-.carre_vert_titre {
-	margin-top: 20px !important;
-	padding: 3px;
-	text-indent: 5px;
-	background-color: #329932;
-	color: #f7fff7;
-	font-family: arial;
-	font-size: 1.4em;
-	font-weight: bold;
+ul.menu > li:nth-of-type(3) {
+  background: hsl(180, 50%, 40%);
 }
-.hentry h3 {
-	margin-top: 20px !important;
-	text-indent: 13px;
-	font-family: arial;
-	font-size: 1.2em;
-	font-weight: bold;
+ul.menu > li:nth-of-type(4) {
+  background: hsl(270, 50%, 40%);
 }
-.hentry h4 {
-	margin-top: 15px !important;
-	text-indent: 13px;
-	font-family: arial;
-	font-size: 1em;
-	text-decoration: underline; 
+ul.menu > li {
+  border-radius: 0.5em;
+  padding: 0 0.3em;
 }
-.carre_vert_texte {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	background-color: #f7fff7;
-	text-indent: 10px;
-	color: #329932;
-	font-size: 12px;
+ul.menu li ul {
+  position: absolute; /* Get out of flow */
+  margin-left: -0.3em;
+  border-radius: 0.5em;
+  padding-left: 0;
+  background: inherit;
 }
-.hentry li {
-	color: #329932;
-	font-size: 1em;
+ul.menu li:not(.open):not(:hover) ul {
+  display: none;
 }
-.hentry a {
-	border: 0; 
-	font-weight: bold;
-	color: inherit;
-	text-decoration: underline; 
+ul.menu li:last-of-type ul {
+  right: 0;
 }
-.hentry a:hover {
-	background-color: #329932;
-	color: white !important;
-}
-.wp-block-verse {
-	background-color: #ffeee0;
+ul.menu li ul li {
+  padding: 0 0.3em;
 }
 
-.posted-on,
-.byline,
-.cat-links,
-.comments-link,
-.navigation,
-.comments-area {
-	display: none;
+/* Horaires */
+.horaires table {
+  clear: both;
+  margin-left: calc(max(0px, 10% - 60px));
+  border: 4px solid hsl(103, 20%, 60%);
+  border-collapse: collapse;
+  background: hsl(103, 50%, 85%);
+  *:first-letter {
+    text-transform: uppercase;
+  }
 }
-.edit-link {
-	background-color: yellow;
+.horaires table:nth-of-type(2) {
+  margin-left: calc(max(0px, (10% - 60px) * 2));
+  border-color: hsl(206, 20%, 60%);
+  background: hsl(206, 50%, 85%);
 }
-
-/* Images à droite */
-.droite {
-	float: right;
-	background-color: white;
+.horaires table:nth-of-type(3) {
+  margin-left: calc(max(0px, (10% - 60px) * 3));
+  border-color: hsl(309, 20%, 60%);
+  background: hsl(309, 50%, 85%);
 }
-@media screen and (max-width: 59.6875em) {
-	.droite {
-		display: none;
-	}
+.horaires table:nth-of-type(4) {
+  margin-left: calc(max(0px, (10% - 60px) * 4));
+  border-color: hsl(412, 20%, 60%);
+  background: hsl(412, 50%, 85%);
 }
-.droite img,
-.droite video {
-	max-width: 300px;
-	margin: 5px;
-	display: block;
+.horaires table:nth-of-type(5) {
+  margin-left: calc(max(0px, (10% - 60px) * 5));
+  border-color: hsl(55, 20%, 60%);
+  background: hsl(515, 50%, 85%);
 }
-.type-page .droite {
-	margin-top: -44px;
+.horaires table:nth-of-type(6) {
+  margin-left: calc(max(0px, (10% - 60px) * 6));
+  border-color: hsl(618, 20%, 60%);
+  background: hsl(618, 50%, 85%);
 }
-
-button#place_order {
-	color: #a46497;
-	line-height: 0; 
+.horaires table:nth-of-type(7) {
+  margin-left: calc(max(0px, (10% - 60px) * 7));
+  border-color: hsl(721, 20%, 60%);
+  background: hsl(721, 50%, 85%);
 }
-button#place_order::after 
-{
-	color: white;
-	content: "RESERVER"; 
-	display: block; 
-	line-height: initial;
+.horaires caption {
+  margin-top: 0.7em;
+  text-align: left;
+  font-size: 120%;
+  font-weight: bold;
+  text-transform: capitalize;
 }
-
-/* Pied */
-.site-footer {
-	background-color: transparent;
+.horaires td {
+  border: 1px dashed;
+  padding: 0.2em;
+  text-align: left;
 }
-.site-footer p {
-	margin-bottom: 0;
-}
-.site-info {
-	padding: 10px;
-	font-size: 10px;
-	font-style : italic;
-}
-.site-info  a {
-	text-decoration: underline;
+/* Efface les tableaux de saisie d'horaires */
+.wp-block-group .wp-block-table {
+  display: none;
 }
 
-/* HORAIRES */
-#horaires {
-	margin-top: 20px;
-	font-size: 14px;
+/* Calendrier */
+table.calendrier {
+  margin: 1em auto;
+  border: 2px solid grey !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  font-family: arial, sans-serif;
 }
-#horaires > div:first-line {
-	font: 20px Times New Roman;
+.calendrier tr:first-child td {
+  text-align: center;
+  font-weight: bold;
 }
-#horaires table {
-	width: inherit;
-	border-style: solid;
-	border-width: 4px;
-	border-collapse: collapse;
+.calendrier td {
+  border: 1px solid grey;
 }
-#horaires td {
-	border:1px dashed black;
-	padding: 7px;
+.calendrier td:not(:first-child) {
+  padding: 0.25em;
+  width: 1.5em;
+  text-align: center;
+  color: #999;
 }
-#horaires a {
-	color: inherit;
-	font-size: 14px;
-	font-weight: bold;
+.calendrier tr:not(:first-child) td {
+  text-transform: capitalize;
 }
-.hc2 { /* Masque la date de début si petit écran */
-	display: none;
-}
-
-#lundi {
-	margin-left: 5%;
-	color: #697c46;
-}
-#lundi table {
-	border-color:#99a682;
-	border-right-color: #3f4c28;
-	border-bottom-color: #3f4c28;
-	background-color:#daedb7;
+.calendrier .date_active {
+  background: #08babe;
+  color: white !important;
+  font-weight: bold;
 }
 
-#mardi {
-	margin-left: 10%;
-	color: #803d70;
+/* Misc */
+.leaflet-map {
+  clear: both;
+  max-width: 100% !important;
 }
-#mardi table {
-	border-color:#a87c9e;
-	border-right-color: #4e2244;
-	border-bottom-color: #4e2244;
-	background-color:#f1aee1;
+.copyright {
+  text-align: center;
 }
-
-#mercredi {
-	margin-left: 15%;
-	color: #525d7c;
+.crayon {
+  float: right;
+  padding: 0;
+  text-decoration: none;
 }
-#mercredi table {
-	border-color:#8a92a6;
-	border-right-color: #30384c;
-	border-bottom-color: #30384c;
-	background-color:#c3ceed;
+header .crayon {
+  margin-top: -1em;
 }
 
-#jeudi {
-	margin-left: 20%;
-	color: #508e4d;
+/* Admin : Visualisation des blocks */
+.edit-post-visual-editor__post-title-wrapper h1,
+.wp-block-post-content.block-editor-block-list__layout > * {
+  border: 3px solid white;
+  opacity: 1 !important;
 }
-#jeudi table {
-	border-color:#89b287;
-	border-right-color: #2f582d;
-	border-bottom-color: #2f582d;
-	background-color:#c1ffbe;
-}
-
-#vendredi {
-	margin-left: 25%;
-	color: #7e5856;
-}
-#vendredi table {
-	border-color:#a88e8d;
-	border-right-color: #4e3433;
-	border-bottom-color: #4e3433;
-	background-color:#efc9c7;
-}
-
-#samedi {
-	margin-left: 30%;
-	color: #6c3f81;
-}
-#samedi table {
-	border-color:#9b7ea9;
-	border-right-color: #41244f;
-	border-bottom-color: #41244f;
-	background-color:#ddb0f2;
-}
-
-#dimanche {
-	margin-left: 35%;
-	color: #468165;
-}
-#dimanche table {
-	border-color:#82a997;
-	border-right-color: #284f3d;
-	border-bottom-color: #284f3d;
-	background-color:#b7f2d6;
-}
-@media screen and (max-width: 59.6875em) {
-	#lundi,
-	#mardi,
-	#mercredi,
-	#jeudi,
-	#vendredi,
-	#samedi,
-	#dimanche {
-		margin-left: 0;
-		margin-right: 0;
-	}
-	#horaires table {
-		width: 100%;
-	}
+.edit-post-visual-editor__post-title-wrapper h1:hover,
+.wp-block-post-content.block-editor-block-list__layout > *:hover {
+  border-color: grey;
 }

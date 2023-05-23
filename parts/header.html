@@ -1,0 +1,25 @@
+<!-- LOGO FÉDÉ -->
+<div class="banniere">
+  <a class="logo" title="Sport Santé" href="https://www.sport-sante.fr/" target="_BLANK">
+    <img src="[get_info stylesheet_directory]/images/logo.png" />
+  </a>
+
+  <a title="Retour à l'accueil" href="[get_info url]">
+    <h1>Chavil' Gym<span> Volontaire</span></h1>
+  </a>
+</div>
+
+[menu]
+[edit_page]
+
+<script>
+// Inhibe le lien quand on touche pour ouvrir le sous-menu (mais pas quand on clique)
+function clickMenu(evt, el) {
+	const parentClass = el.parentElement.classList.contains('open');
+
+	el.parentElement.classList.add('open');
+
+	if (evt.pointerType == 'touch' && !parentClass)
+		return false;
+}
+</script>
