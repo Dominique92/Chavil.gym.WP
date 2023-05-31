@@ -1,7 +1,10 @@
 /*
-    Theme Name: gym
-    Template: twentytwentythree
-    */
+Theme Name: gym
+Template: twentytwentythree
+Theme URI: https://github.com/Dominique92/Chavil.gym.WP
+Author: Dominique Cavailhez
+Description: Theme WordPress sur base twentytwentythree pour la Gym Volontaire de Chaville.
+*/
 
 /* Cadrage du contenu de la page */
 .wp-site-blocks,
@@ -16,11 +19,9 @@
 .wp-block-group {
   margin: 0px calc(max(1%, 10% - 50px)) !important;
 }
-/* Titre de l'accueil de la première page */
-.home .wp-site-blocks h1.wp-block-post-title {
-  display: none;
-}
+/* Titre de la page */
 .wp-site-blocks h1.wp-block-post-title {
+  margin: 0 !important;
   font-size: 32px;
 }
 /* Titres à l'intérieur de la page */
@@ -34,6 +35,9 @@
 }
 .wp-block-post-content p {
   text-align: justify;
+}
+body .is-layout-constrained > * + * {
+  margin-block-start: 0.8rem !important;
 }
 /* Images */
 .wp-block-image.alignleft {
@@ -73,6 +77,15 @@
 .banniere a {
   text-decoration: none;
 }
+.customer_account {
+  float: right;
+  margin: 20px 5px;
+  color: white;
+}
+.customer_account span,
+.customer_account_0 {
+  display: none;
+}
 @media (max-width: 600px) {
   .banniere img {
     display: none;
@@ -100,16 +113,16 @@ ul.menu a {
 ul.menu li {
   list-style: none;
 }
-ul.menu > li:nth-of-type(1) {
+ul.menu > li:nth-child(1) {
   background: hsl(0, 50%, 40%);
 }
-ul.menu > li:nth-of-type(2) {
+ul.menu > li:nth-child(2) {
   background: hsl(90, 50%, 40%);
 }
-ul.menu > li:nth-of-type(3) {
+ul.menu > li:nth-child(3) {
   background: hsl(180, 50%, 40%);
 }
-ul.menu > li:nth-of-type(4) {
+ul.menu > li:nth-child(4) {
   background: hsl(270, 50%, 40%);
 }
 ul.menu > li {
@@ -144,32 +157,32 @@ ul.menu li ul li {
     text-transform: uppercase;
   }
 }
-.horaires table:nth-of-type(2) {
+.horaires table:nth-child(2) {
   margin-left: calc(max(0px, (10% - 60px) * 2));
   border-color: hsl(206, 20%, 60%);
   background: hsl(206, 50%, 85%);
 }
-.horaires table:nth-of-type(3) {
+.horaires table:nth-child(3) {
   margin-left: calc(max(0px, (10% - 60px) * 3));
   border-color: hsl(309, 20%, 60%);
   background: hsl(309, 50%, 85%);
 }
-.horaires table:nth-of-type(4) {
+.horaires table:nth-child(4) {
   margin-left: calc(max(0px, (10% - 60px) * 4));
   border-color: hsl(412, 20%, 60%);
   background: hsl(412, 50%, 85%);
 }
-.horaires table:nth-of-type(5) {
+.horaires table:nth-child(5) {
   margin-left: calc(max(0px, (10% - 60px) * 5));
   border-color: hsl(55, 20%, 60%);
   background: hsl(515, 50%, 85%);
 }
-.horaires table:nth-of-type(6) {
+.horaires table:nth-child(6) {
   margin-left: calc(max(0px, (10% - 60px) * 6));
   border-color: hsl(618, 20%, 60%);
   background: hsl(618, 50%, 85%);
 }
-.horaires table:nth-of-type(7) {
+.horaires table:nth-child(7) {
   margin-left: calc(max(0px, (10% - 60px) * 7));
   border-color: hsl(721, 20%, 60%);
   background: hsl(721, 50%, 85%);
@@ -236,6 +249,27 @@ table.calendrier {
 }
 header .crayon {
   margin-top: -1em;
+}
+/* WooCommerce */
+.woocommerce img,
+.woocommerce .woocommerce-form-coupon-toggle,
+.woocommerce .woocommerce-billing-fields h3,
+/*.woocommerce .wc-forward, TODO */
+.woocommerce .coupon,
+.wc-block-mini-cart__amount {
+  display: none !important;
+}
+.woocommerce h1,
+.woocommerce h2 {
+  font-size: 1.2rem !important;
+}
+.wc-block-mini-cart__quantity-badge {
+  cursor: pointer !important;
+  color: white;
+}
+.wc-block-mini-cart {
+  float: right;
+  margin-top: 7px;
 }
 
 /* Admin : Visualisation des blocks */

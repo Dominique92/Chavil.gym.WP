@@ -10,6 +10,7 @@ $nom_mois = explode(
         " juillet aout septembre octobre novembre décembre" .
         " janvier fevrier mars avril mai juin"
 );
+$boutique = true;
 
 // Load correctly syles.css files
 add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
@@ -33,7 +34,11 @@ function admin_head_function()
 add_shortcode("get_info", "get_info_function");
 function get_info_function($args)
 {
-    return get_bloginfo($args[0]);
+    if ($args[0] == "current_user_id") {
+        return get_current_user_id(); //TODO use is_user_logged_in()
+    } else {
+        return get_bloginfo($args[0]);
+    }
 }
 
 // Lien d'édition de la page
@@ -41,26 +46,31 @@ add_shortcode("edit_page", "edit_page_function");
 function edit_page_function()
 {
     global $post;
-    return "<a class=\"crayon\" title=\"Modification de la page\" href=\"" .
-        get_bloginfo("url") .
-        "/wp-admin/post.php?&action=edit&post={$post->ID}\">&#9998;</a>";
+
+    if ($post) {
+        return "<a class=\"crayon\" title=\"Modification de la page\" href=\"" .
+            get_bloginfo("url") .
+            "/wp-admin/post.php?&action=edit&post={$post->ID}\">&#9998;</a>";
+    }
 }
 
 // Menu haut de page
 add_shortcode("menu", "menu_function");
 function menu_function($args)
 {
-    global $wpdb, $post;
+    global $wpdb, $table_prefix, $post;
 
     $pages = $wpdb->get_results("
 SELECT child.post_title, child.post_name, child.post_parent,
   parent.post_title AS parent_title, parent.post_name AS parent_name
-FROM wpgym_posts AS parent
-JOIN wpgym_posts AS child ON parent.ID = child.post_parent
-WHERE parent.post_status = 'publish' AND child.post_status = 'publish'
+FROM {$table_prefix}posts AS parent
+JOIN {$table_prefix}posts AS child ON parent.ID = child.post_parent
+WHERE parent.post_type = 'page'
+  AND parent.post_status = 'publish' AND child.post_status = 'publish'
 ORDER BY parent.menu_order, parent.post_title, child.menu_order, child.post_title
 ");
 
+    $sous_menu = "";
     $menu[] = '<ul class="menu">';
     $liste[] = '<ul class="sous_pages">';
     foreach ($pages as $p) {
@@ -78,7 +88,7 @@ ORDER BY parent.menu_order, parent.post_title, child.menu_order, child.post_titl
         $menu[] = "\t\t\t<li><a href='/$p->post_name/' title='Voir la page'>$p->post_title</a></li>";
 
         // Affichage de sous-catégories
-        if ($sous_menu == $post->ID) {
+        if ($post && $sous_menu == $post->ID) {
             $liste[] =
                 "<li><a href=\"" .
                 get_bloginfo("url") .
@@ -93,15 +103,24 @@ ORDER BY parent.menu_order, parent.post_title, child.menu_order, child.post_titl
 
 // Horaires
 add_shortcode("horaires", "horaires_function");
-function horaires_function()
+function horaires_function($arg = "")
 {
-    global $wpdb, $nom_jour;
-
+    global $wpdb, $table_prefix, $nom_jour, $boutique;
     preg_match('|/[^/]+/$|', $_SERVER["REQUEST_URI"], $page_url);
 
+    // Listage des produits
+    $liste_produits = $wpdb->get_results("
+SELECT ID, posts.post_title
+FROM {$table_prefix}wc_product_meta_lookup AS products
+JOIN {$table_prefix}posts AS posts ON products.product_id = posts.ID
+");
+    foreach ($liste_produits as $p) {
+        $produits[$p->post_title] = $p;
+    }
+
     $pages_publiees = $wpdb->get_results("
-SELECT post_title, post_name, post_content, ID
-FROM wpgym_posts
+SELECT ID, post_title, post_name, post_content
+FROM {$table_prefix}posts
 WHERE post_status = 'publish'
 ");
 
@@ -114,44 +133,73 @@ WHERE post_status = 'publish'
         preg_match_all("|<tr>.*</tr>|U", $p->post_content, $lignes);
         foreach ($lignes[0] as $l) {
             preg_match_all("|<td>(.*)</td>|U", $l, $colonnes);
-            $date = explode(" ", $colonnes[1][1], 2);
-            $no_jour = array_search(strtolower(trim($date[0])), $nom_jour);
-            $edit = wp_get_current_user()->allcaps["edit_others_pages"]
-                ? "<a class=\"crayon\" title=\"Modification de la séance\" href=\"" .
-                    get_bloginfo("url") .
-                    "/wp-admin/post.php?&action=edit&post={$p->ID}\">&#9998;</a>"
-                : "";
+            if (count($colonnes[1]) == 4) {
+                $date = explode(" ", $colonnes[1][1], 2);
+                $no_jour = array_search(strtolower(trim($date[0])), $nom_jour);
 
-            $ligne_horaire = [
-                '<a title="Voir l\'activité" href="' .
-                get_bloginfo("url") .
-                "/{$p->post_name}/\">{$colonnes[1][0]}</a>$edit",
-
-                $date[1],
-
-                '<a title="Voir le lieu" href="' .
-                get_bloginfo("url") .
-                "/{$post_names[$colonnes[1][2]]}/\">{$colonnes[1][2]}</a>",
-
-                '<a title="Voir l\'animateur-ice" href="' .
-                get_bloginfo("url") .
-                "/{$post_names[$colonnes[1][3]]}/\">{$colonnes[1][3]}</a>",
-            ];
-
-            if (
-                $no_jour &&
-                str_contains(
-                    implode("/horaires/", $ligne_horaire),
-                    $page_url[0]
+                $edit = isset(
+                    wp_get_current_user()->allcaps["edit_others_pages"]
                 )
-            ) {
-                $horaires[$no_jour][$date[1]][] = $ligne_horaire;
+                    ? "<a class=\"crayon\" title=\"Modification de la séance\" href=\"" .
+                        get_bloginfo("url") .
+                        "/wp-admin/post.php?&action=edit&post={$p->ID}\">&#9998;</a>"
+                    : "";
+
+                // Lien vers la page de commande
+                $product_name = str_replace(
+                    "<br>",
+                    " ",
+                    implode(", ", $colonnes[1])
+                );
+                $panier =
+                    $boutique && isset($produits[$product_name])
+                        ? ' <a href="' .
+                            get_bloginfo("url") .
+                            "?add-to-cart=" .
+                            $produits[$product_name]->ID .
+                            '" title="S\'inscrire"">&#128722;</a> '
+                        : "";
+
+                $lieu = isset($post_names[$colonnes[1][2]])
+                    ? '<a title="Voir le lieu" href="' .
+                        get_bloginfo("url") .
+                        "/{$post_names[$colonnes[1][2]]}/\">{$colonnes[1][2]}</a>"
+                    : $colonnes[1][2];
+
+                $anim = isset($post_names[$colonnes[1][3]])
+                    ? '<a title="Voir l\'animateur-ice" href="' .
+                        get_bloginfo("url") .
+                        "/{$post_names[$colonnes[1][3]]}/\">{$colonnes[1][3]}</a>"
+                    : $colonnes[1][3];
+
+                $ligne_horaire = [
+                    '<a title="Voir l\'activité" href="' .
+                    get_bloginfo("url") .
+                    "/{$p->post_name}/\">{$colonnes[1][0]}</a>$edit",
+
+                    $date[1] . $panier,
+                    $lieu,
+                    $anim,
+                    $product_name,
+                ];
+
+                if (
+                    $no_jour &&
+                    $page_url &&
+                    str_contains(
+                        implode("/horaires/" . $arg, $ligne_horaire),
+                        $page_url[0]
+                    )
+                ) {
+                    $horaires[$no_jour][$date[1]][] = $ligne_horaire;
+                }
             }
         }
     }
 
-    if (count($horaires)) {
-        $cal[] = "\n<div class=\"horaires\">";
+    if (isset($horaires)) {
+        $cal = ["\n<div class=\"horaires\">"];
+        $pnames = [];
 
         ksort($horaires);
         foreach ($horaires as $no_jour => $jour) {
@@ -159,6 +207,8 @@ WHERE post_status = 'publish'
             ksort($jour);
             foreach ($jour as $heure) {
                 foreach ($heure as $ligne) {
+                    $pnames[] = $ligne[4];
+                    unset($ligne[4]);
                     $rj[] =
                         "\t\t<tr>\n\t\t\t<td>" .
                         implode("</td>\n\t\t\t<td>", $ligne) .
@@ -169,7 +219,7 @@ WHERE post_status = 'publish'
             $cal[] = implode(PHP_EOL, $rj);
         }
         $cal[] = "</div>";
-        return implode(PHP_EOL, $cal);
+        return $args ? $pnames : implode(PHP_EOL, $cal);
     }
 }
 
@@ -179,6 +229,11 @@ function calendrier_function()
 {
     global $post, $annee, $nom_jour, $nom_mois;
     date_default_timezone_set("Europe/Paris");
+    $calendrier = [];
+
+    if (!$post) {
+        return;
+    }
 
     // Remplir des cases actives
     preg_match_all("|<tr>.*</tr>|U", $post->post_content, $lignes);
@@ -241,5 +296,122 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set)
     if (isset($calendrier[$noj]) || $set) {
         $calendrier[$noj][$nom][$dt[3]] .= $set;
     }
+}
+
+add_shortcode("csv", "csv_function");
+function csv_function($args)
+{
+    global $wpdb, $table_prefix;
+
+    // Access verification
+    if (
+        !array_intersect(
+            ["administrator", "shop_manager"],
+            wp_get_current_user()->roles
+        )
+    ) {
+        return 'Vous devez être connecté comme gestionnaire de commandes pour accéder à cette page.<br/><a href="' .
+            get_bloginfo("url") .
+            "/wp-login.php?redirect_to=" .
+            get_bloginfo("url") .
+            '/csv">Connexion</a>';
+    } elseif (!$_SERVER["QUERY_STRING"]) {
+        return '<a href="' .
+            get_bloginfo("url") .
+            '/csv?csv">Télécharger le fichier inscriptions.csv</a>';
+    }
+
+    // Informations adhérent
+    $customer_data = [
+        "Titre" => "_billing_wooccm15",
+        "Nom" => "_billing_last_name",
+        "Prénom" => "_billing_first_name",
+        "Date de naisance" => "_billing_wooccm11",
+        "Adresse" => "_billing_address_1",
+        "Code postal" => "_billing_postcode",
+        "Ville" => "_billing_city",
+        "Mail" => "_billing_email",
+        "Téléphone" => "_billing_phone",
+        "Prévenir" => "_billing_wooccm13",
+        "Prévenir (tel)" => "_billing_wooccm14",
+        "Demande attestation" => "_billing_wooccm17",
+        "Droit à l'image" => "_billing_wooccm16",
+        //"Certificat médical" => "_billing_wooccm12",
+        "Montant commande" => "_order_total",
+        "N° commande" => "order_id",
+    ];
+    $customer_keys = array_flip(array_values($customer_data));
+    $inscriptions = [array_keys($customer_data)];
+
+    $sql = "
+SELECT *
+FROM {$table_prefix}wc_order_product_lookup AS o
+LEFT JOIN {$table_prefix}postmeta AS m ON m.post_id = o.order_id
+";
+    $commandes = $wpdb->get_results($sql);
+    foreach ($commandes as $c) {
+        $inscriptions[$c->order_id][$customer_keys["order_id"]] = $c->order_id;
+        if (array_key_exists($c->meta_key, $customer_keys)) {
+            $inscriptions[$c->order_id][$customer_keys[$c->meta_key]] =
+                $c->meta_value;
+        }
+    }
+
+    // Inscriptions aux cours
+    $nom_cours = horaires_function("csv/");
+    foreach ($nom_cours as $c) {
+        $inscriptions[0][] = $c;
+    }
+
+    $sql = "
+SELECT *
+FROM {$table_prefix}wc_order_product_lookup AS o
+LEFT JOIN {$table_prefix}postmeta AS m ON o.product_id = m.post_id
+LEFT JOIN {$table_prefix}woocommerce_order_items USING (order_item_id)
+WHERE meta_key = '_wp_old_slug'
+";
+    $commandes = $wpdb->get_results($sql);
+    foreach ($commandes as $c) {
+        $inscriptions[$c->order_id][$customer_keys["order_id"]] = $c->order_id;
+        $indice_cours = array_search($c->order_item_name, $inscriptions[0]);
+        $inscriptions[$c->order_id][$indice_cours] = 1;
+    }
+
+    // Complétude et tri des lignes
+    foreach ($inscriptions as $k => $v) {
+        for ($i = 0; $i < count($inscriptions[0]); $i++) {
+            if (!isset($inscriptions[$k][$i])) {
+                $inscriptions[$k][$i] = $i < count($customer_data) ? "" : 0;
+            }
+        }
+        ksort($inscriptions[$k]);
+    }
+    ksort($inscriptions);
+
+    //*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'> = ".var_export($inscriptions,true).'</pre>'.PHP_EOL;exit();
+
+    // Ecriture du fichier
+    header("Content-Description: File Transfer");
+    header("Content-Type: application/octet-stream");
+    header(
+        "Content-Disposition: attachment; filename=inscriptions 2023-2024.csv"
+    );
+    header("Content-Transfer-Encoding: binary");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    header("Pragma: public");
+    echo "\xEF\xBB\xBF"; // UTF-8 BOM
+
+    ob_start();
+    $out = fopen("php://output", "w");
+    foreach ($inscriptions as $i) {
+        fputcsv($out, $i, ";");
+    }
+    fclose($out);
+    echo ob_get_clean();
+
+    exit();
+
+    return get_current_user_id();
 }
 ?>

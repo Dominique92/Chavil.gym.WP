@@ -3,6 +3,12 @@
   <a class="logo" title="Sport Santé" href="https://www.sport-sante.fr/" target="_BLANK">
     <img src="[get_info stylesheet_directory]/images/logo.png" />
   </a>
+  
+  <!-- wp:woocommerce/mini-cart /-->
+
+  <span class='customer_account customer_account_[get_info current_user_id]'>
+    <!-- wp:woocommerce/customer-account /-->
+  </span>
 
   <a title="Retour à l'accueil" href="[get_info url]">
     <h1>Chavil' Gym<span> Volontaire</span></h1>
@@ -13,13 +19,18 @@
 [edit_page]
 
 <script>
-// Inhibe le lien quand on touche pour ouvrir le sous-menu (mais pas quand on clique)
-function clickMenu(evt, el) {
-	const parentClass = el.parentElement.classList.contains('open');
+  // Inhibe le lien quand on touche pour ouvrir le sous-menu (mais pas quand on clique)
+  function clickMenu(evt, el) {
+    const parentClass = el.parentElement.classList.contains('open');
 
-	el.parentElement.classList.add('open');
+    el.parentElement.classList.add('open');
 
-	if (evt.pointerType == 'touch' && !parentClass)
-		return false;
-}
+    if (evt.pointerType == 'touch' && !parentClass)
+      return false;
+  }
+
+  const miniPanier = document.getElementsByClassName('wc-block-mini-cart__badge');
+
+  if (miniPanier.length && miniPanier[0]['textContent'] == '0')
+    miniPanier[0].parentNode.parentNode.style.display = 'none';
 </script>
