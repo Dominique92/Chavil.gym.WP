@@ -19,8 +19,6 @@ function wp_enqueue_scripts_function()
     wp_register_style("style", get_stylesheet_uri());
     wp_enqueue_style("style");
 }
-
-// Réglage de l'opacité de l'éditeur
 add_action("admin_head", "admin_head_function");
 function admin_head_function()
 {
@@ -28,6 +26,17 @@ function admin_head_function()
         "admin_css",
         get_stylesheet_directory_uri() . "/style.css"
     );
+}
+
+// Désactiver les emails de mise à jour WordPress
+add_filter("auto_theme_update_send_email", "__return_false");
+add_filter("auto_core_update_send_email", "send_email_function");
+function send_email_function($send, $type)
+{
+    if (!empty($type) && $type == "success") {
+        return false;
+    }
+    return true;
 }
 
 // Use global urls in block templates (as defined in wp-includes/general-template.php)
