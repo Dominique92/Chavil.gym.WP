@@ -42,10 +42,12 @@ Toutes extensions : activer, activer les mises à jour
 
 TODO / BUGS
 ===========
-Ne vois plus le chargement du certificat médical
+Style print (titres)
 Refermer le sous-menu si on tape ailleurs
+Editeur : Surligner le bloc sélectionné
 Editeur : Style blocs liste en mode tablette ou mobile
-Lien direct commande : réaffiche l'accueil immédiatement si erreur
+Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
+Boutique : N'activer que pour les personnes trial
 
 TAGS DANS LES PAGES
 ===================
