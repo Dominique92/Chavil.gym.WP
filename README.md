@@ -1,6 +1,6 @@
 # Chavil.gym.WP
-EN COURS DE DEVELOPPEMENT
-Theme WordPress sur base twentytwentythree pour afficher les cours de la Gym Volontaire de Chaville
+Theme WordPress sur base twentytwentythree pour afficher les cours de https://chaville.gym.c92.fr/
+
 
 INSTALL
 =======

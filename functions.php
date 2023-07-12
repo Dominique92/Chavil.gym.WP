@@ -10,7 +10,6 @@ $nom_mois = explode(
         " juillet aout septembre octobre novembre décembre" .
         " janvier fevrier mars avril mai juin"
 );
-$boutique = true;
 
 // Load correctly syles.css files
 add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
@@ -182,13 +181,12 @@ WHERE post_status = 'publish'
                     : $colonnes[1][3];
 
                 $ligne_horaire = [
-                    '<a title="Voir l\'activité" href="' .
+                     $date[1] . $panier,
+                   '<a title="Voir l\'activité" href="' .
                     get_bloginfo("url") .
                     "/{$p->post_name}/\">{$colonnes[1][0]}</a>$edit",
-
-                    $date[1] . $panier,
-                    $lieu,
                     $anim,
+                    $lieu,
                     $product_name,
                 ];
 
