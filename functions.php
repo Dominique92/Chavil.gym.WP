@@ -311,7 +311,7 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set)
 
 add_shortcode("csv", "csv_function");
 function csv_function($args)
-{
+{return;
     global $wpdb, $table_prefix;
 
     // Access verification
