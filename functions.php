@@ -16,7 +16,7 @@ add_filter('auto_plugin_update_send_email', '__return_false'); // Disable plugin
 add_filter('auto_theme_update_send_email', '__return_false'); // Disable theme update emails
 
 // Load correctly syles.css files
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
+add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function", "", "1.5");
 function wp_enqueue_scripts_function()
 {
     wp_register_style("style", get_stylesheet_uri());
@@ -117,7 +117,7 @@ ORDER BY parent.menu_order, parent.post_title, child.menu_order, child.post_titl
 add_shortcode("horaires", "horaires_function");
 function horaires_function($arg = "")
 {
-    global $wpdb, $table_prefix, $nom_jour, $boutique;
+    global $wpdb, $table_prefix, $nom_jour;
     preg_match('|/[^/]+/$|', $_SERVER["REQUEST_URI"], $page_url);
 
     // Listage des produits
@@ -164,7 +164,7 @@ WHERE post_status = 'publish'
                     implode(", ", $colonnes[1])
                 );
                 $panier =
-                    $boutique && isset($produits[$product_name])
+                    wp_get_current_user()->ID && isset($produits[$product_name])
                         ? ' <a href="' .
                             get_bloginfo("url") .
                             "?add-to-cart=" .
@@ -309,9 +309,10 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set)
     }
 }
 
+/*//todo delete ,,
 add_shortcode("csv", "csv_function");
 function csv_function($args)
-{return;
+{
     global $wpdb, $table_prefix;
 
     // Access verification
@@ -399,8 +400,6 @@ WHERE meta_key = '_wp_old_slug'
     }
     ksort($inscriptions);
 
-    //*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'> = ".var_export($inscriptions,true).'</pre>'.PHP_EOL;exit();
-
     // Ecriture du fichier
     header("Content-Description: File Transfer");
     header("Content-Type: application/octet-stream");
@@ -425,4 +424,5 @@ WHERE meta_key = '_wp_old_slug'
 
     return get_current_user_id();
 }
+*/
 ?>
