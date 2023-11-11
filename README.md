@@ -2,8 +2,31 @@
 Theme WordPress sur base twentytwentythree pour afficher les cours de https://chaville.gym.c92.fr/
 
 
+BUGS
+====
+```
+On ne voit pas le panier même s'il est plein
+Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
+```
+
+TODO
+====
+```
+Don > 39€
+```
+
+BEST
+====
+```
+Ne pas afficher le panier dans les horaries si le cours est déjà dans le panierStyle print (titres)
+Refermer le sous-menu si on tape ailleurs
+Editeur : Surligner le bloc sélectionné
+Editeur : Style blocs liste en mode tablette ou mobile
+```
+
 INSTALL
 =======
+```
 Sous domaine - SSL Let's Encrypt
 WP : install
 Copier ces fichiers dans /wp-content/themes/gym
@@ -39,22 +62,19 @@ Installer "WP Dark Mode"
   Settings -> Cocher tout
 
 Toutes extensions : activer, activer les mises à jour
-
-TODO / BUGS
-===========
-Style print (titres)
-Refermer le sous-menu si on tape ailleurs
-Editeur : Surligner le bloc sélectionné
-Editeur : Style blocs liste en mode tablette ou mobile
-Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
-Boutique : N'activer que pour les personnes trial
+```
 
 TAGS DANS LES PAGES
 ===================
+```
 <meta http-equiv="refresh" content="0;https">
 [leaflet-map lng="2.19712" lat="48.81788"][leaflet-marker]
+```
 
 MISE EN SERVICE
 ===============
+```
 Changer url
-SQL : wpgym_ -> wp_   2023.gym -> chaville.gym
+SQL : chaville.gym -> test.gym
+SQL : chaville.gym@g.m -> chavil.gym@g.m
+```
