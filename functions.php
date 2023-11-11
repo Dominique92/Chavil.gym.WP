@@ -117,7 +117,7 @@ ORDER BY parent.menu_order, parent.post_title, child.menu_order, child.post_titl
 add_shortcode("horaires", "horaires_function");
 function horaires_function($arg = "")
 {
-    global $wpdb, $table_prefix, $nom_jour;
+    global $wpdb, $table_prefix, $nom_jour, $boutique;
     preg_match('|/[^/]+/$|', $_SERVER["REQUEST_URI"], $page_url);
 
     // Listage des produits
@@ -163,14 +163,19 @@ WHERE post_status = 'publish'
                     " ",
                     implode(", ", $colonnes[1])
                 );
-                $panier =
-                    wp_get_current_user()->ID && isset($produits[$product_name])
-                        ? ' <a href="' .
-                            get_bloginfo("url") .
-                            "?add-to-cart=" .
-                            $produits[$product_name]->ID .
-                            '" title="S\'inscrire"">&#128722;</a> '
-                        : "";
+
+                $panier = ($boutique || wp_get_current_user()->ID) && isset($produits[$product_name]) ?
+					' <a href="' .
+						get_bloginfo("url") .
+						"?add-to-cart=" .
+						$produits[$product_name]->ID .
+						'" title="S\'inscrire"">&#128722;</a> ' :
+					(wp_get_current_user()->ID ?
+					' <span style="cursor:copy" onclick="' .
+						'navigator.clipboard.writeText(\''.$product_name.'\');' .
+						'alert(\''.$product_name.'\n copié dans le presse papier\');' .
+					'">&#128279;</a> ' :
+					'');
 
                 $lieu = isset($post_names[$colonnes[1][2]])
                     ? '<a title="Voir le lieu" href="' .
