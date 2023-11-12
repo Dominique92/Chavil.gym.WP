@@ -5,6 +5,7 @@ Theme WordPress sur base twentytwentythree pour afficher les cours de https://ch
 BUGS
 ====
 ```
+taille des photos sur une grande page
 On ne voit pas le panier même s'il est plein
 Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 ```

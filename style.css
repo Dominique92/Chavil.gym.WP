@@ -273,13 +273,12 @@ header .crayon {
   margin-top: 7px;
 }
 
-#billing_wooccm18-description,
 #billing_wooccm12_field,
-#billing_wooccm12_field {
+.woocommerce-billing-fields__field-wrapper .description {
   display: initial !important;
 }
-.woocommerce-billing-fields__field-wrapper .optional,
-.woocommerce-billing-fields__field-wrapper .required {
+.woocommerce-billing-fields__field-wrapper .required,
+.woocommerce-billing-fields__field-wrapper .optional {
   display: none !important;
 }
 .wooccm-file-button {
