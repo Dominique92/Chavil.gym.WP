@@ -273,7 +273,20 @@ header .crayon {
   margin-top: 7px;
 }
 
-/* Admin : Visualisation des blocks */
+#billing_wooccm18-description,
+#billing_wooccm12_field,
+#billing_wooccm12_field {
+  display: initial !important;
+}
+.woocommerce-billing-fields__field-wrapper .optional,
+.woocommerce-billing-fields__field-wrapper .required {
+  display: none !important;
+}
+.wooccm-file-button {
+  line-height: 30px !important;
+}
+
+/* Admin : Visualisation des blocs */
 .edit-post-visual-editor__post-title-wrapper h1,
 .wp-block-post-content.block-editor-block-list__layout > * {
   border: 3px solid white;

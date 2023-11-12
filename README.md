@@ -18,6 +18,9 @@ Don > 39€
 BEST
 ====
 ```
+Réduction proportionnelle au nombre d'articles
+Saisir les horaires à partir des produits de la boutique
+Trier l'ordre des articles dans la page boutique
 Ne pas afficher le panier dans les horaries si le cours est déjà dans le panierStyle print (titres)
 Refermer le sous-menu si on tape ailleurs
 Editeur : Surligner le bloc sélectionné
@@ -75,6 +78,9 @@ MISE EN SERVICE
 ===============
 ```
 Changer url
-SQL : chaville.gym -> test.gym
-SQL : chaville.gym@g.m -> chavil.gym@g.m
+SQL : chaville.gym.c92.fr -> test.gym.c92.fr
+SQL : chaville.gym@c92.fr -> chavil.gym@c92.fr
+robots.txt
+User-agent: *
+Disallow: /
 ```
