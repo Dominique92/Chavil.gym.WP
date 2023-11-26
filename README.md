@@ -5,6 +5,7 @@ Theme WordPress sur base twentytwentythree pour afficher les cours de https://ch
 BUGS
 ====
 ```
+zIndex menu / commandes...
 taille des photos sur une grande page
 On ne voit pas le panier même s'il est plein
 Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
@@ -71,7 +72,7 @@ Toutes extensions : activer, activer les mises à jour
 TAGS DANS LES PAGES
 ===================
 ```
-<meta http-equiv="refresh" content="0;https">
+<meta http-equiv="refresh" content="0;https://chaville.gym.c92.fr/wp-content/uploads/2023/05/Fiche-inscription_2023_2024.pdf">
 [leaflet-map lng="2.19712" lat="48.81788"][leaflet-marker]
 ```
 
