@@ -31,6 +31,11 @@ function admin_head_function()
     );
 }
 
+add_action( 'wp_enqueue_scripts', 'my_custom_scripts' );
+function my_custom_scripts() {
+    wp_enqueue_script('custom-js', get_stylesheet_directory_uri().'/parts/scripts.js');
+}
+
 // Désactiver les emails de mise à jour WordPress
 add_filter("auto_theme_update_send_email", "__return_false");
 add_filter("auto_core_update_send_email", "send_email_function");
@@ -167,7 +172,7 @@ WHERE post_status = 'publish'
                 $panier = ($boutique || wp_get_current_user()->ID) && isset($produits[$product_name]) ?
 					' <a href="' .
 						get_bloginfo("url") .
-						"?add-to-cart=" .
+						"/panier?add-to-cart=" .
 						$produits[$product_name]->ID .
 						'" title="S\'inscrire"">&#128722;</a> ' :
 					(wp_get_current_user()->ID ?
@@ -235,7 +240,7 @@ WHERE post_status = 'publish'
             $cal[] = implode(PHP_EOL, $rj);
         }
         $cal[] = "</div>";
-        return $args ? $pnames : implode(PHP_EOL, $cal);
+        return $arg ? $pnames : implode(PHP_EOL, $cal);
     }
 }
 
