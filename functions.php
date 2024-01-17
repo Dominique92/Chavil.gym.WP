@@ -435,4 +435,38 @@ WHERE meta_key = '_wp_old_slug'
     return get_current_user_id();
 }
 */
+
+// Calcul des forfaits
+add_action("woocommerce_before_calculate_totals", "wbct_function", 20, 1);
+function wbct_function($cart)
+{
+    // Calcul du total des cours
+    $total_cours = $nb_cours = 0;
+    foreach ($cart->get_cart() as $item) {
+           // Exclus "dons"
+        if ($item["data"]->get_price() > 1) {
+            $total_cours += $item["data"]->get_price();
+            $nb_cours++;
+        }
+    }
+
+    // Liste des coupons
+    $args = [
+        "post_type" => "shop_coupon",
+        "post_status" => "publish",
+    ];
+    foreach (get_posts($args) as $post) {
+        $coupon = new WC_Coupon($post->post_title);
+        $min = $coupon->get_meta("_wjecf_min_matching_product_qty") ?: 0;
+        $max = $coupon->get_meta("_wjecf_max_matching_product_qty") ?: 1000;
+
+        if ($min <= $nb_cours && $nb_cours <= $max) {
+            $cart->add_fee(
+                $post->post_title,
+                $coupon->get_amount() - $total_cours
+            );
+        }
+    }
+}
+
 ?>
