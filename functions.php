@@ -45,53 +45,13 @@ function get_info_function($args) {
 	}
 }
 
-// Lien d'édition de la page
-add_shortcode("edit_page", "edit_page_function");
-function edit_page_function() {
-	global $post;
-	
-	if ($post) {
-		return "<a class=\"crayon\" title=\"Modification de la page\" href=\"" . get_bloginfo("url") . "/wp-admin/post.php?&action=edit&post={$post->ID}\">&#9998;</a>";
-	}
-}
-
 // Menu haut de page
 add_shortcode("menu", "menu_function");
 function menu_function($args) {
-	global $wpdb, $table_prefix, $post;
-	
-	$pages = $wpdb->get_results("
-SELECT child.post_title, child.post_name, child.post_parent,
-  parent.post_title AS parent_title, parent.post_name AS parent_name
-FROM {$table_prefix}posts AS parent
-JOIN {$table_prefix}posts AS child ON parent.ID = child.post_parent
-WHERE parent.post_type = 'page'
-  AND parent.post_status = 'publish' AND child.post_status = 'publish'
-ORDER BY parent.menu_order, parent.post_title, child.menu_order, child.post_title
-");
-	$sous_menu = "";
-	$menu[] = '<ul class="menu">';
-	$liste[] = '<ul class="sous_pages">';
-	foreach ($pages as $p) {
-		// Au changement de sous-menu
-		if ($sous_menu != $p->post_parent) {
-			if ($sous_menu) {
-				$menu[] = "\t\t</ul>\n\t</li>";
-			}
-			$menu[] = "\t<li>\n\t\t<a onclick=\"return clickMenu(event,this)\" href='/$p->parent_name/'>$p->parent_title</a>\n\t\t<ul>";
-			$sous_menu = $p->post_parent;
-		}
-		// Pour toutes les lignes
-		$menu[] = "\t\t\t<li><a href='/$p->post_name/' title='Voir la page'>$p->post_title</a></li>";
-		// Affichage de sous-catégories
-		if ($post && $sous_menu == $post->ID) {
-			$liste[] = "<li><a href=\"" . get_bloginfo("url") . "/$p->post_name/\">$p->post_title</a></li>";
-		}
-	}
-	$menu[] = "\t\t</ul>\n\t</li>\n</ul>";
-	$liste[] = "</ul>";
-
-	return implode(PHP_EOL, $args ? $liste : $menu);
+	return wp_nav_menu([
+		"menu_class" => @$args["class"],
+		"echo" => false,
+	]);
 }
 
 // Horaires
@@ -101,7 +61,7 @@ function horaires_function() {
 
 	$products = wc_get_products([
 		"status" => "publish",
-		'limit' => - 1,
+		"limit" => - 1,
 	]);
 	$horaires = [];
 	foreach ($products as $p) {

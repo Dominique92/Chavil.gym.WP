@@ -30,6 +30,71 @@ Editeur : Surligner le bloc sélectionné
 Editeur : Style blocs liste en mode tablette ou mobile
 ```
 
+INSTALL CPanel O2switch
+=======
+```
+Créer sous domaine
+Installer Let's Encrypt™ SSL
+CPanel -> WordPress
+Supprimer toutes extension
+Extensions -> add -> WooCommerce
+Voir toutes les pages
+Reparenter les pages sous mon_compte ou brouillon
+Copier les fichiers .../gym/... dans /wp-content/themes/gym
+Activer theme gym
+Importer pages gym
+Importer produits
+Réglages -> Lecture -> La page d’accueil affiche -> Une page statique
+
+***
+
+Copier /fichiers dans /fichiers
+Installer "Favicon by RealFaviconGenerator"
+  Apparence -> Favicon
+  Sélectionner dans la bibliothèque de médias
+  images/favicon.jpg
+  Generate your favicon
+Installer "Block Editor Colors"
+  Extensions -> Block Editor Colors -> Settings
+  Ajouter Yellow #fff00
+Installer "Leaflet Map"
+  Leaflet Map -> Réglages -> reprendre les valeurs
+Installer "Contact Form by WPForms – Drag & Drop Form Builder for WordPress" Par WPForms (pour le formulaire de contact)
+  ????? VERIFIER SI A FAIRE Extensions -> Contact Form 7 -> Réglages
+
+Entrer les pages
+
+Installer "WooCommerce"
+  Créer catégories
+  Créer produits
+    Produit simple / Virtuel
+    155
+    Inventaire : Vendre individuellement
+	Cocher catégorie
+NO: Installer "Woocommerce checkout manager (WooCommerce Commander directeur par QuadLayers)
+Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLayers
+  Extensions -> WooCommerce Commander directeur -> Paramètres (Réglages)
+  Général -> Commandes -> Facturation : ajouter des champs
+  Définir date naissance et certificat médical (obligatoires)
+  Désactiver Entreprise & Région
+Installer "WooCommerce Extended Coupon Features FREE" Par Soft79
+  Marketing -> Codes promo
+    Retirer le menu de code promo hérité
+    Restrictions d'usage -> min / max / Utilisation individuelle
+    Divers -> Coupon automatique / Appliquer silencieusement
+
+??? Installer "Multiples Roles"
+	Installer "WP Dark Mode"
+	  Settings -> Cocher tout
+	Installer "Site Kit by Google"
+	Installer "Anti-Spam by CleanTalk"
+	  (Spam protection, AntiSpam, FireWall by CleanTalk)
+	  Clé d'accès
+	Installer "LiteSpeed Cache"
+
+Toutes extensions : activer, activer les mises à jour
+```
+
 INSTALL
 =======
 ```

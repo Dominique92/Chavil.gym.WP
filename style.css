@@ -97,53 +97,57 @@ body .is-layout-constrained > * + * {
   }
 }
 
-/* Menu */
-ul.menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding-left: 0;
+/* Menu navigation */
+.wp-block-navigation {
+  width: 100%;
+  margin: 10px 0;
 }
-ul.menu > li > a {
+.wp-block-navigation .wp-block-page-list {
+  margin: 0 2%;
+  justify-content: space-around !important;
   font-weight: bold;
+  font-size: 18px;
+  color: white !important;
 }
-ul.menu a {
-  color: white;
-}
-ul.menu li {
-  list-style: none;
-}
-ul.menu > li:nth-child(1) {
+.wp-block-navigation .wp-block-page-list > li:nth-child(1) {
   background: hsl(0, 50%, 40%);
 }
-ul.menu > li:nth-child(2) {
-  background: hsl(90, 50%, 40%);
+.wp-block-navigation .wp-block-page-list > li:nth-child(2) {
+  background: hsl(72, 50%, 40%);
 }
-ul.menu > li:nth-child(3) {
-  background: hsl(180, 50%, 40%);
+.wp-block-navigation .wp-block-page-list > li:nth-child(3) {
+  background: hsl(144, 50%, 40%);
 }
-ul.menu > li:nth-child(4) {
-  background: hsl(270, 50%, 40%);
+.wp-block-navigation .wp-block-page-list > li:nth-child(4) {
+  background: hsl(216, 50%, 40%);
 }
-ul.menu > li {
-  border-radius: 0.5em;
-  padding: 0 0.3em;
+.wp-block-navigation .wp-block-page-list > li:nth-child(5) {
+  background: hsl(288, 50%, 40%);
 }
-ul.menu li ul {
-  position: absolute; /* Get out of flow */
-  margin-left: -0.3em;
-  border-radius: 0.5em;
-  padding-left: 0;
-  background: inherit;
+.wp-block-navigation .wp-block-page-list > li,
+.wp-block-navigation .wp-block-page-list li ul {
+  padding: 0 0.3em !important;
+  border-radius: 0.5em !important;
 }
-ul.menu li:not(.open):not(:hover) ul {
-  display: none;
+.wp-block-navigation .wp-block-page-list li ul,
+.wp-block-navigation .wp-block-page-list li li {
+  background: inherit !important;
 }
-ul.menu li:last-of-type ul {
-  right: 0;
+.wp-block-navigation .wp-block-page-list li li a {
+  padding: 2px;
+  font-size: 18px;
+  font-weight: normal;
+  color: white !important;
 }
-ul.menu li ul li {
-  padding: 0 0.3em;
+
+/* Sous-menus */
+.menu-equipe > ul > li > a,
+.menu-activite > ul > li > a,
+.menu-lieux > ul > li > a,
+.menu-activite > ul > li:not(:nth-child(2)),
+.menu-equipe > ul > li:not(:nth-child(3)),
+.menu-lieux > ul > li:not(:nth-child(4)) {
+	display: none;
 }
 
 /* Horaires */
