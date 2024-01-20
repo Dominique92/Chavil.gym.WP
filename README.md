@@ -5,6 +5,8 @@ Theme WordPress sur base twentytwentythree pour afficher les cours de https://ch
 BUGS
 ====
 ```
+gym 2024 formulaire contact
+gym 2024 js bouton reste ouvert / ne marche pas sur mobile
 zIndex menu / commandes...
 taille des photos sur une grande page
 On ne voit pas le panier même s'il est plein
@@ -14,7 +16,6 @@ Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 TODO
 ====
 ```
-Don > 39€
 ```
 
 BEST
@@ -32,27 +33,42 @@ Editeur : Style blocs liste en mode tablette ou mobile
 INSTALL
 =======
 ```
-Sous domaine - SSL Let's Encrypt
-WP : install
-Copier ces fichiers dans /wp-content/themes/gym
-Supprimer toutes extension et thème autre que 23
-Installer "Anti-Spam by CleanTalk"
-  (Spam protection, AntiSpam, FireWall by CleanTalk)
-  Clé d'accès
-Installer "Block Editor Colors", ajouter le jaune #fff00
-Installer "Contact Form 7" (pour le formulaire de contact)
-  Extensions -> Contact Form 7 -> Réglages
+O2switch
+Créer base MySQL
+Ajouter un utilisateur à la base de données : tous privilèges
+Créer sous domaine
+Installer Let's Encrypt™ SSL
+Download WP -> upload
+Install
+Copier les fichiers dans /wp-content/themes/gym
+Copier /fichiers dans /fichiers
+Activer theme gym
+Supprimer toutes extension
 Installer "Favicon by RealFaviconGenerator"
-  Apparence -> Favicon (images/favicon.jpg)
+  Apparence -> Favicon
+  Sélectionner dans la bibliothèque de médias
+  images/favicon.jpg
+  Generate your favicon
+Installer "Block Editor Colors"
+  Extensions -> Block Editor Colors -> Settings
+  Ajouter Yellow #fff00
 Installer "Leaflet Map"
-Installer "LiteSpeed Cache"
-Installer "Site Kit by Google"
+  Leaflet Map -> Réglages -> reprendre les valeurs
+Installer "Contact Form by WPForms – Drag & Drop Form Builder for WordPress" Par WPForms (pour le formulaire de contact)
+  ????? VERIFIER SI A FAIRE Extensions -> Contact Form 7 -> Réglages
+
+Entrer les pages
+réglages -> Lecture -> La page d’accueil affiche -> Une page statique
+
 Installer "WooCommerce"
+  Créer catégories
   Créer produits
     Produit simple / Virtuel
-    150
+    155
     Inventaire : Vendre individuellement
-Installer "Woocommerce checkout manager (WooCommerce Commander directeur par QuadLayers)
+	Cocher catégorie
+NO: Installer "Woocommerce checkout manager (WooCommerce Commander directeur par QuadLayers)
+Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLayers
   Extensions -> WooCommerce Commander directeur -> Paramètres (Réglages)
   Général -> Commandes -> Facturation : ajouter des champs
   Définir date naissance et certificat médical (obligatoires)
@@ -62,9 +78,15 @@ Installer "WooCommerce Extended Coupon Features FREE" Par Soft79
     Retirer le menu de code promo hérité
     Restrictions d'usage -> min / max / Utilisation individuelle
     Divers -> Coupon automatique / Appliquer silencieusement
+
 ??? Installer "Multiples Roles"
-Installer "WP Dark Mode"
-  Settings -> Cocher tout
+	Installer "WP Dark Mode"
+	  Settings -> Cocher tout
+	Installer "Site Kit by Google"
+	Installer "Anti-Spam by CleanTalk"
+	  (Spam protection, AntiSpam, FireWall by CleanTalk)
+	  Clé d'accès
+	Installer "LiteSpeed Cache"
 
 Toutes extensions : activer, activer les mises à jour
 ```

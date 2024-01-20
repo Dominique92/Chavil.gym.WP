@@ -106,17 +106,21 @@ function horaires_function() {
 	$horaires = [];
 	foreach ($products as $p) {
 		$id = $p->get_id();
-		$title_expl = explode("*", $p->get_title());
-		if (count($title_expl) == 5 && strstr($p->get_title() . 'Horaires', $wp_query->queried_object->post_title)) {
-			$titles = [];
-			foreach ($title_expl as $v) {
-				$titles[] = ucfirst(trim($v));
-			}
-			$no_day = array_search(strtolower($titles[1]), $nom_jour);
+
+		$cours = explode("*", $p->get_title());
+		foreach ($cours as $k => $v) {
+			$cours[$k] = ucfirst(trim($v));
+		}
+		if (count($cours) == 5 &&
+			strstr(
+				str_replace("’", "'", wc_get_product_category_list($id)) . '>Horaires<',
+				'>' . $wp_query->queried_object->post_title . '<'
+			)) {
+			$no_day = array_search(strtolower($cours[1]), $nom_jour);
 			preg_match('/\/([^\/]*)\/\"/', wc_get_product_category_list($id), $category);
-			$titles[] = $category[1];
-			$titles[] = $id;
-			$horaires[$no_day][$titles[2]] = $titles;
+			$cours[] = $category[1];
+			$cours[] = $id;
+			$horaires[$no_day][$cours[2].$id] = $cours;
 		}
 	}
 

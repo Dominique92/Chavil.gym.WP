@@ -252,10 +252,11 @@ header .crayon {
 }
 
 /* WooCommerce */
+/*
 .woocommerce img,
 .woocommerce .woocommerce-form-coupon-toggle,
 .woocommerce .woocommerce-billing-fields h3,
-/*.woocommerce .wc-forward, TODO */
+/ *.woocommerce .wc-forward, TODO * /
 .woocommerce .coupon,
 .wc-block-mini-cart__amount {
   display: none !important;
@@ -284,6 +285,7 @@ header .crayon {
 .wooccm-file-button {
   line-height: 30px !important;
 }
+*/
 
 /* Admin : Visualisation des blocs */
 .edit-post-visual-editor__post-title-wrapper h1,

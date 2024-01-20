@@ -1,3 +1,4 @@
+/*
 const miniPanier = document.getElementsByClassName('wc-block-mini-cart__badge');
 
 if (miniPanier.length && miniPanier[0]['textContent'] == '0')
@@ -12,3 +13,4 @@ function clickMenu(evt, el) {
   if (evt.pointerType == 'touch' && !parentClass)
     return false;
 }
+*/
