@@ -5,7 +5,6 @@ Theme WordPress sur base twentytwentythree pour afficher les cours de https://ch
 BUGS
 ====
 ```
-Pas d'horaires dans lieux / Equipe
 On ne voit pas le panier même s'il est plein
 Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 ```
@@ -13,7 +12,7 @@ Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 TODO
 ====
 ```
-Refaire style menu < 600 px
+Refaire style sous menu < 600 px
 ```
 
 BEST
@@ -89,6 +88,7 @@ Installer "WooCommerce Extended Coupon Features FREE" Par Soft79
 	  Clé d'accès
 	Installer "LiteSpeed Cache"
 
+Créer comptes
 Toutes extensions : activer, activer les mises à jour
 ```
 

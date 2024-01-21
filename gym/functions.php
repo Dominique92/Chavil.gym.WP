@@ -39,8 +39,7 @@ add_shortcode("get_info", "get_info_function");
 function get_info_function($args) {
 	if ($args[0] == "current_user_id") {
 		return get_current_user_id(); //TODO use is_user_logged_in()
-		
-	} else {
+   	} else {
 		return get_bloginfo($args[0]);
 	}
 }
@@ -60,7 +59,9 @@ function horaires_function() {
 	global $nom_jour, $wp_query, $post;
 
 	// Seulement pour les pages
-	if (!isset ($wp_query->queried_object->post_title)) return;
+	if (!isset ($wp_query->queried_object->post_title)) {
+		return;
+	}
 
 	$products = wc_get_products([
 		"status" => "publish",
@@ -74,13 +75,15 @@ function horaires_function() {
 		foreach ($cours as $k => $v) {
 			$cours[$k] = ucfirst(trim($v));
 		}
+
 		if (count($cours) == 5 &&
 			strstr(
-				str_replace("’", "'", wc_get_product_category_list($id)) . '>Horaires<',
-				'>' . $wp_query->queried_object->post_title . '<'
+				" * " . str_replace (["<", "’", ">"], [" * ", "'", " * "], wc_get_product_category_list($id)) .
+				" * " . wc_get_product($id)->get_data()["name"] . " * Horaires * ",
+				"* " . $wp_query->queried_object->post_title . " *"
 			)) {
 			$no_day = array_search(strtolower($cours[1]), $nom_jour);
-			preg_match('/\/([^\/]*)\/\"/', wc_get_product_category_list($id), $category);
+			preg_match("/\/([^\/]*)\/\"/", wc_get_product_category_list($id), $category);
 			$cours[] = $category[1];
 			$cours[] = $id;
 			$horaires[$no_day][$cours[2].$id] = $cours;
@@ -94,8 +97,8 @@ function horaires_function() {
 		ksort($jour);
 		foreach ($jour as $heure) {
 			// Ligne sécable si trop longue et comporte des ()
-			if (strlen($heure[0]) > 30) $heure[0] = implode('<br/>(', explode('(', $heure[0]));
-			$panier = '<a href="' . get_bloginfo("url") . "/panier?add-to-cart=" . $heure[6] . '" title="S\'inscrire"">&#128722;</a>';
+			if (strlen($heure[0]) > 30) $heure[0] = implode("<br/>(", explode("(", $heure[0]));
+			$panier = "<a href=\"" . get_bloginfo("url") . "/panier?add-to-cart=" . $heure[6] . '" title="S\'inscrire"">&#128722;</a>';
 			$edit = isset(wp_get_current_user()->allcaps["edit_others_pages"]) ?
 				"<a class=\"crayon\" title=\"Modification de la séance\" href=\"" . get_bloginfo("url") . "/wp-admin/post.php?&action=edit&post={$heure[6]}\">&#9998;</a>" :
 				"";
@@ -269,8 +272,8 @@ function csv_function($args) {
 
 	foreach (wc_get_orders([]) as $order) {
 		$o = $order->get_data();
-		
-		$order_list[]=[
+
+    		$order_list[]=[
 			$o['id'],
 			$o['billing']['first_name'].' '.	$o['billing']['last_name'],
 			//round($o['discount_total'],2),
@@ -279,20 +282,18 @@ function csv_function($args) {
 			round($o['total']*(1-0.15)-0.25,2),
 		];
 	}
-	
-	// Ecriture du fichier
+
+  	// Ecriture du fichier
 	header("Content-Description: File Transfer");
 	header("Content-Type: application/octet-stream");
-	header(
-		"Content-Disposition: attachment; filename=commandes 2024-2025.csv"
-	);
+	header("Content-Disposition: attachment; filename=commandes 2024-2025.csv");
 	header("Content-Transfer-Encoding: binary");
 	header("Expires: 0");
 	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 	header("Pragma: public");
 	echo "\xEF\xBB\xBF"; // UTF-8 BOM
-	
-	ob_start();
+
+  	ob_start();
 	$out = fopen("php://output", "w");
 	foreach ($order_list as $i) {
 		fputcsv($out, $i, ";");
