@@ -5,10 +5,7 @@ Theme WordPress sur base twentytwentythree pour afficher les cours de https://ch
 BUGS
 ====
 ```
-gym 2024 formulaire contact
-gym 2024 js bouton reste ouvert / ne marche pas sur mobile
-zIndex menu / commandes...
-taille des photos sur une grande page
+Pas d'horaires dans lieux / Equipe
 On ne voit pas le panier même s'il est plein
 Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 ```
@@ -16,18 +13,83 @@ Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 TODO
 ====
 ```
+Refaire style menu < 600 px
 ```
 
 BEST
 ====
 ```
-Réduction proportionnelle au nombre d'articles
-Saisir les horaires à partir des produits de la boutique
+Taille des photos sur une grande page
 Trier l'ordre des articles dans la page boutique
 Ne pas afficher le panier dans les horaries si le cours est déjà dans le panierStyle print (titres)
 Refermer le sous-menu si on tape ailleurs
-Editeur : Surligner le bloc sélectionné
-Editeur : Style blocs liste en mode tablette ou mobile
+?? Editeur : Style blocs liste en mode tablette ou mobile
+```
+
+INSTALL CPanel O2switch new.gym.c92.fr
+=======
+```
+Créer sous domaine
+Installer Let's Encrypt™ SSL
+CPanel -> WordPress
+Supprimer toutes extension
+Extensions -> add -> WooCommerce
+  pays : france
+Apparence -> Thème -> Twenty-Three
+ATTENTION : Voir toutes les pages de la boutique pour les créer avec le bon style
+/.htaccess
+Header set Cache-Control "max-age=0, private, no-cache, no-store, must-revalidate"
+/config.php debug = true
+Copier /fichiers dans /fichiers
+Copier les fichiers .../gym/... dans /wp-content/themes/gym
+Activer theme gym
+Importer pages gym
+Importer produits
+Ou
+    Produit simple / Virtuel
+    155
+    Inventaire : Vendre individuellement
+	Cocher catégorie / créer
+Reparenter les pages sous mon_compte ou brouillon
+Réglages -> Lecture -> La page d’accueil affiche -> Une page statique -> Accueil
+Installer "Favicon by RealFaviconGenerator"
+  Apparence -> Favicon
+  Sélectionner dans la bibliothèque de médias
+  Sélectionner des fichiers (sur le PC)
+  images/icon.jpg
+  Sélectionner
+  Generate your favicon
+  Generate your favicon and html code
+Installer "Block Editor Colors"
+  Extensions -> Block Editor Colors -> Settings
+  Ajouter Yellow #fff00
+Installer "Leaflet Map"
+  Leaflet Map -> Réglages -> 48,798 2,187 17 300 400
+
+
+Installer "Contact Form by WPForms – Drag & Drop Form Builder for WordPress" Par WPForms (pour le formulaire de contact)
+  ????? VERIFIER SI A FAIRE Extensions -> Contact Form 7 -> Réglages
+Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLayers
+  Extensions -> WooCommerce Commander directeur -> Paramètres (Réglages)
+  Général -> Commandes -> Facturation : ajouter des champs
+  Définir date naissance et certificat médical (obligatoires)
+  Désactiver Entreprise & Région
+Installer "WooCommerce Extended Coupon Features FREE" Par Soft79
+  Marketing -> Codes promo
+    Retirer le menu de code promo hérité
+    Restrictions d'usage -> min / max / Utilisation individuelle
+    Divers -> Coupon automatique / Appliquer silencieusement
+
+??? Installer "Multiples Roles"
+	Installer "WP Dark Mode"
+	  Settings -> Cocher tout
+	Installer "Site Kit by Google"
+	Installer "Anti-Spam by CleanTalk"
+	  (Spam protection, AntiSpam, FireWall by CleanTalk)
+	  Clé d'accès
+	Installer "LiteSpeed Cache"
+
+Toutes extensions : activer, activer les mises à jour
 ```
 
 INSTALL CPanel O2switch

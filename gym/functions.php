@@ -45,7 +45,7 @@ function get_info_function($args) {
 	}
 }
 
-// Menu haut de page
+// Sous menu dans la page
 add_shortcode("menu", "menu_function");
 function menu_function($args) {
 	return wp_nav_menu([
@@ -57,7 +57,10 @@ function menu_function($args) {
 // Horaires
 add_shortcode("horaires", "horaires_function");
 function horaires_function() {
-	global $nom_jour, $wp_query;
+	global $nom_jour, $wp_query, $post;
+
+	// Seulement pour les pages
+	if (!isset ($wp_query->queried_object->post_title)) return;
 
 	$products = wc_get_products([
 		"status" => "publish",
@@ -140,7 +143,9 @@ add_shortcode("calendrier", "calendrier_function");
 function calendrier_function() {
 	global $post, $annee, $nom_jour, $nom_mois;
 
-	if (!$post) {
+	// Seulement pour les pages
+	if (!isset ($wp_query->queried_object->post_title) ||
+		!$post) {
 		return;
 	}
 
@@ -208,7 +213,7 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
 	$noj = $dt[1];
 	$nom = $dt[2] + ($dt[0] - $annee) * 12;
 	if (isset($calendrier[$noj]) || $set) {
-		$calendrier[$noj][$nom][$dt[3]].= $set;
+		$calendrier[$noj][$nom][$dt[3]] .= $set;
 	}
 }
 
