@@ -5,7 +5,6 @@ Theme WordPress sur base twentytwentythree pour afficher les cours de https://ch
 BUGS
 ====
 ```
-Validation ! Undefined offset: -1 in /home3/cado1118/public_html/gymnew/wp-includes/post-template.php on line 330
 On ne voit pas le panier même s'il est plein
 Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 ```
@@ -25,6 +24,7 @@ Trier l'ordre des articles dans la page boutique
 Ne pas afficher le panier dans les horaries si le cours est déjà dans le panier
 Style print (titres)
 Editeur : Style blocs entouré en mode tablette ou mobile
+??? debug ? Validation ! Undefined offset: -1 in /home3/cado1118/public_html/gymnew/wp-includes/post-template.php on line 330
 ```
 
 INSTALL CPanel O2switch new.gym.c92.fr
@@ -33,6 +33,8 @@ INSTALL CPanel O2switch new.gym.c92.fr
 Créer sous domaine
 Installer Let's Encrypt™ SSL
 CPanel -> WordPress
+  https://
+  xxx.c92.fr
 Supprimer toutes extension
 Extensions -> add -> WooCommerce
   pays : france
