@@ -1,6 +1,7 @@
 BUGS
 ====
 ```
+zIndex menu
 On ne voit pas le panier même s'il est plein
 Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 ```
@@ -8,7 +9,6 @@ Boutique : Lien direct commande : réaffiche l'accueil immédiatement si erreur
 TODO
 ====
 ```
-Sortir les shortcodes de footer / mettre categorie en argument
 ```
 
 BEST
@@ -50,6 +50,7 @@ Importer pages gym
 	==> BUG : les images testent à l'origine !
 Réglages -> Lecture -> La page d’accueil affiche -> Une page statique -> Accueil
 Produits - Importer -> fichier.csv -> lancer l'importation
+  Modifier tous -> Inventaire : Vendre individuellement
 Ou
   Produit simple / Virtuel
   155
@@ -69,12 +70,20 @@ Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLaye
   Définir date naissance et certificat médical (obligatoires)
   Désactiver Entreprise & Région
   ????? VERIFIER SI A FAIRE Extensions -> Contact Form 7 -> Réglages
+Installer "PDF Invoices & Packing Slips for WooCommerce" Par WP Overnight
+  Extensions -> WooCommerce Commander directeur -> Réglages
+  Sélectionnez un modèle -> Attestation
+Installer "Payment Plugins for Stripe WooCommerce"
+  Connecter compte Stripe
+  Configurer moyen de paiement Stripe
 Installer "Contact Form by WPForms – Drag & Drop Form Builder for WordPress" Par WPForms (pour le formulaire de contact)
   Page "Nous écrire" : insérer bloc form
   Générer formulaire simple
   Enregistrer
   Sortir
   Mettre à jour
+Installer "Leaflet Map" Par bozdoz
+  Leaflet Map -> Réglages -> 48,798 2,187 17 300 400
 
 
 Installer "Favicon by RealFaviconGenerator"
@@ -88,8 +97,6 @@ Installer "Favicon by RealFaviconGenerator"
 Installer "Block Editor Colors"
   Extensions -> Block Editor Colors -> Settings
   Ajouter Yellow #fff00
-Installer "Leaflet Map"
-  Leaflet Map -> Réglages -> 48,798 2,187 17 300 400
 
 
 ??? Installer "Multiples Roles"

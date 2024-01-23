@@ -56,7 +56,7 @@ function menu_function($args) {
 // Horaires
 add_shortcode("horaires", "horaires_function");
 function horaires_function() {
-	global $nom_jour, $wp_query, $post;
+	global $nom_jour, $wp_query;
 
 	// Seulement pour les pages
 	if (!isset ($wp_query->queried_object->post_title)) {
@@ -144,11 +144,10 @@ function lien_page($titre, $slug = "") {
 // Calendrier
 add_shortcode("calendrier", "calendrier_function");
 function calendrier_function() {
-	global $post, $annee, $nom_jour, $nom_mois;
+	global $annee, $nom_jour, $nom_mois, $wp_query;
 
 	// Seulement pour les pages
-	if (!isset ($wp_query->queried_object->post_title) ||
-		!$post) {
+	if (!isset ($wp_query->queried_object->post_title)) {
 		return;
 	}
 
@@ -156,7 +155,7 @@ function calendrier_function() {
 	$calendrier = [];
 
 	// Remplir des cases actives
-	preg_match_all("|<tr>.*</tr>|U", $post->post_content, $lignes);
+	preg_match_all("|<tr>.*</tr>|U", $wp_query->queried_object->post_content, $lignes);
 	foreach ($lignes[0] as $l) {
 		preg_match_all("|<td>(.*)</td>|U", $l, $colonnes);
 		if (count($colonnes) == 2 && is_numeric($colonnes[1][0])) {
@@ -172,7 +171,7 @@ function calendrier_function() {
 		}
 	}
 
-	// Remplir les autres cases
+	// Déclarer les autres cases (uniquement si jour déjà existant)
 	for ($j = 1;$j < 310;$j++) {
 		remplir_calendrier($calendrier, $annee, 9, $j, "");
 	}
@@ -183,7 +182,7 @@ function calendrier_function() {
 	foreach ($calendrier as $k => $v) {
 		$edit = wp_get_current_user()->allcaps["edit_others_pages"] ?
 			"<a class=\"crayon\" title=\"Modification du calendrier\" href=\"" . get_bloginfo("url") . 
-			"/wp-admin/post.php?&action=edit&post={$post->ID}\">&#9998;</a>" :
+			"/wp-admin/post.php?&action=edit&post={$wp_query->queried_object->ID}\">&#9998;</a>" :
 			"";
 		$cal[] = "<table class=\"calendrier\">";
 		$cal[] = "<tr><td colspan=\"6\">Les {$nom_jour[$k]}s $edit</td></tr>";
@@ -213,10 +212,14 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
 	$dateTime = new DateTime();
 	$dateTime->setDate($an, $mois, $jour);
 	$dt = explode(" ", $dateTime->format("Y N n j"));
-	$noj = $dt[1];
-	$nom = $dt[2] + ($dt[0] - $annee) * 12;
-	if (isset($calendrier[$noj]) || $set) {
-		$calendrier[$noj][$nom][$dt[3]] .= $set;
+	$no_jour = $dt[1];
+	$no_mois = $dt[2] + ($dt[0] - $annee) * 12;
+
+	if (!isset($calendrier[$no_jour]) && $set) { // On crée le jour si on y a une date
+		$calendrier[$no_jour] = [];
+	}
+	if (isset($calendrier[$no_jour])) { // On popule si le jour est crée
+		@$calendrier[$no_jour][$no_mois][$dt[3]] .= $set;
 	}
 }
 
