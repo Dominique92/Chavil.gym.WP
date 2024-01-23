@@ -1,138 +1,77 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+<style>
+.logo {
+  float: left;
+  margin : 1cm;
+  width: 15%;
+}
+.entete {
+  margin: 1cm;
+  text-align: right;
+}
+.entete p {
+  margin-top: 5px;
+  font-size: 14px;
+}
+.titre {
+  clear: both;
+  margin-top: 3cm;
+  text-align: center;
+}
+.corps {
+  margin: 1cm 2cm 2cm 4cm;
+  text-indent: 1cm;
+  font-size: 16px;
+  line-height: 1.3em;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.date {
+  margin: 0 2cm;
+  text-align: right;
+  font-size: 14px;
+}
+.signatures {
+  text-align: right;
+  padding: 1cm 2cm;
+  display: flex;
+  justify-content: space-around;
+}
+.signatures img {
+  width: 6cm;
+}
+</style>
 
-<?php do_action( 'wpo_wcpdf_before_document', $this->get_type(), $this->order ); ?>
+<img class="logo" src="<?=get_theme_file_uri()?>/woocommerce/pdf/Attestation/logo_club.jpg" />
 
-<table class="head container">
-	<tr>
-		<td class="header">
-		<?php
-		if ( $this->has_header_logo() ) {
-			do_action( 'wpo_wcpdf_before_shop_logo', $this->get_type(), $this->order );
-			$this->header_logo();
-			do_action( 'wpo_wcpdf_after_shop_logo', $this->get_type(), $this->order );
-		} else {
-			$this->title();
-		}
-		?>
-		</td>
-		<td class="shop-info">
-			<?php do_action( 'wpo_wcpdf_before_shop_name', $this->get_type(), $this->order ); ?>
-			<div class="shop-name"><h3><?php $this->shop_name(); ?></h3></div>
-			<?php do_action( 'wpo_wcpdf_after_shop_name', $this->get_type(), $this->order ); ?>
-			<?php do_action( 'wpo_wcpdf_before_shop_address', $this->get_type(), $this->order ); ?>
-			<div class="shop-address"><?php $this->shop_address(); ?></div>
-			<?php do_action( 'wpo_wcpdf_after_shop_address', $this->get_type(), $this->order ); ?>
-		</td>
-	</tr>
-</table>
-
-<?php do_action( 'wpo_wcpdf_before_document_label', $this->get_type(), $this->order ); ?>
-
-<h1 class="document-type-label">
-	<?php if ( $this->has_header_logo() ) $this->title(); ?>
-</h1>
-
-<?php do_action( 'wpo_wcpdf_after_document_label', $this->get_type(), $this->order ); ?>
-
-<table class="order-data-addresses">
-	<tr>
-		<td class="address shipping-address">
-			<!-- <h3><?php _e( 'Shipping Address:', 'woocommerce-pdf-invoices-packing-slips' ); ?></h3> -->
-			<?php do_action( 'wpo_wcpdf_before_shipping_address', $this->get_type(), $this->order ); ?>
-			<?php $this->shipping_address(); ?>
-			<?php do_action( 'wpo_wcpdf_after_shipping_address', $this->get_type(), $this->order ); ?>
-			<?php if ( isset( $this->settings['display_email'] ) ) : ?>
-				<div class="billing-email"><?php $this->billing_email(); ?></div>
-			<?php endif; ?>
-			<?php if ( isset( $this->settings['display_phone'] ) ) : ?>
-				<div class="shipping-phone"><?php $this->shipping_phone( ! $this->show_billing_address() ); ?></div>
-			<?php endif; ?>
-		</td>
-		<td class="address billing-address">
-			<?php if ( $this->show_billing_address() ) : ?>
-				<h3><?php _e( 'Billing Address:', 'woocommerce-pdf-invoices-packing-slips' ); ?></h3>
-				<?php do_action( 'wpo_wcpdf_before_billing_address', $this->get_type(), $this->order ); ?>
-				<?php $this->billing_address(); ?>
-				<?php do_action( 'wpo_wcpdf_after_billing_address', $this->get_type(), $this->order ); ?>
-				<?php if ( isset( $this->settings['display_phone'] ) && ! empty( $this->get_billing_phone() ) ) : ?>
-					<div class="billing-phone"><?php $this->billing_phone(); ?></div>
-				<?php endif; ?>
-			<?php endif; ?>
-		</td>
-		<td class="order-data">
-			<table>
-				<?php do_action( 'wpo_wcpdf_before_order_data', $this->get_type(), $this->order ); ?>
-				<tr class="order-number">
-					<th><?php _e( 'Order Number:', 'woocommerce-pdf-invoices-packing-slips' ); ?></th>
-					<td><?php $this->order_number(); ?></td>
-				</tr>
-				<tr class="order-date">
-					<th><?php _e( 'Order Date:', 'woocommerce-pdf-invoices-packing-slips' ); ?></th>
-					<td><?php $this->order_date(); ?></td>
-				</tr>
-				<?php if ( $this->get_shipping_method() ) : ?>
-				<tr class="shipping-method">
-					<th><?php _e( 'Shipping Method:', 'woocommerce-pdf-invoices-packing-slips' ); ?></th>
-					<td><?php $this->shipping_method(); ?></td>
-				</tr>
-				<?php endif; ?>
-				<?php do_action( 'wpo_wcpdf_after_order_data', $this->get_type(), $this->order ); ?>
-			</table>			
-		</td>
-	</tr>
-</table>
-
-<?php do_action( 'wpo_wcpdf_before_order_details', $this->get_type(), $this->order ); ?>
-
-<table class="order-details">
-	<thead>
-		<tr>
-			<th class="product"><?php _e( 'Product', 'woocommerce-pdf-invoices-packing-slips' ); ?></th>
-			<th class="quantity"><?php _e( 'Quantity', 'woocommerce-pdf-invoices-packing-slips' ); ?></th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php foreach ( $this->get_order_items() as $item_id => $item ) : ?>
-			<tr class="<?php echo apply_filters( 'wpo_wcpdf_item_row_class', 'item-'.$item_id, esc_attr( $this->get_type() ), $this->order, $item_id ); ?>">
-				<td class="product">
-					<?php $description_label = __( 'Description', 'woocommerce-pdf-invoices-packing-slips' ); // registering alternate label translation ?>
-					<span class="item-name"><?php echo $item['name']; ?></span>
-					<?php do_action( 'wpo_wcpdf_before_item_meta', $this->get_type(), $item, $this->order  ); ?>
-					<span class="item-meta"><?php echo $item['meta']; ?></span>
-					<dl class="meta">
-						<?php $description_label = __( 'SKU', 'woocommerce-pdf-invoices-packing-slips' ); // registering alternate label translation ?>
-						<?php if ( ! empty( $item['sku'] ) ) : ?><dt class="sku"><?php _e( 'SKU:', 'woocommerce-pdf-invoices-packing-slips' ); ?></dt><dd class="sku"><?php echo esc_attr( $item['sku'] ); ?></dd><?php endif; ?>
-						<?php if ( ! empty( $item['weight'] ) ) : ?><dt class="weight"><?php _e( 'Weight:', 'woocommerce-pdf-invoices-packing-slips' ); ?></dt><dd class="weight"><?php echo esc_attr( $item['weight'] ); ?><?php echo esc_attr( get_option( 'woocommerce_weight_unit' ) ); ?></dd><?php endif; ?>
-					</dl>
-					<?php do_action( 'wpo_wcpdf_after_item_meta', $this->get_type(), $item, $this->order  ); ?>
-				</td>
-				<td class="quantity"><?php echo $item['quantity']; ?></td>
-			</tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
-
-<div class="bottom-spacer"></div>
-
-<?php do_action( 'wpo_wcpdf_after_order_details', $this->get_type(), $this->order ); ?>
-
-<?php do_action( 'wpo_wcpdf_before_customer_notes', $this->get_type(), $this->order ); ?>
-
-<div class="customer-notes">
-	<?php if ( $this->get_shipping_notes() ) : ?>
-		<h3><?php _e( 'Customer Notes', 'woocommerce-pdf-invoices-packing-slips' ); ?></h3>
-		<?php $this->shipping_notes(); ?>
-	<?php endif; ?>
+<div class="entete">
+<p>CHAVIL’ GYMNASTIQUE VOLONTAIRE</p>
+<p>2 rue Jean-Jaurès, 92370 Chaville</p>
+<p>Association loi 1901, JO n° 1691 du 2 juin 2001</p>
+<p>Siret 43 888 2003 000 17</p>
+<p>https://chaville.gym.c92.fr/</p>
 </div>
 
-<?php do_action( 'wpo_wcpdf_after_customer_notes', $this->get_type(), $this->order ); ?>
+<h1 class="titre">ATTESTATION D’ADHESION</h1>
 
-<?php if ( $this->get_footer() ) : ?>
-	<div id="footer">
-		<!-- hook available: wpo_wcpdf_before_footer -->
-		<?php $this->footer(); ?>
-		<!-- hook available: wpo_wcpdf_after_footer -->
-	</div><!-- #letter-footer -->
-<?php endif; ?>
+<?php
+$shipping = $this->order->data['shipping'];
+?>
+<div class="corps">
+<p>Je, soussignée Françoise THELOT, secrétaire de Chavil' Gymnastique Volontaire, certifie que
+ <?=$this->order->data['shipping']['first_name']?>
+ <?=$this->order->data['shipping']['last_name']?>, résidant
+ <?=$this->order->data['shipping']['address_1']?>
+ <?=$this->order->data['shipping']['address_2']?>
+ <?=$this->order->data['shipping']['postcode']?>
+ <?=$this->order->data['shipping']['city']?>,
+a versé la somme de
+<?=$this->get_woocommerce_totals()['order_total']['value']?>
+ pour l’adhésion à la saison sportive 2024-2025.</p>
+</div>
 
-<?php do_action( 'wpo_wcpdf_after_document', $this->get_type(), $this->order ); ?>
+<p class="date">Chaville, le <?=$this->date($this->get_type())?></p>
+
+<div class="signatures">
+<img class="signature" src="<?=get_theme_file_uri()?>/woocommerce/pdf/Attestation/signature.jpg" />
+<img class="tampon" src="<?=get_theme_file_uri()?>/woocommerce/pdf/Attestation/tampon.jpg" />
+</div>
