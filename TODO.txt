@@ -64,12 +64,6 @@ Installer "WooCommerce Extended Coupon Features FREE" Par Soft79
     Remise panier fixe
     Valeur : 215 / 270
     Publier
-Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLayers
-  Extensions -> WooCommerce Commander directeur -> Paramètres (Réglages)
-  Général -> Commandes -> Facturation : ajouter des champs
-  Définir date naissance et certificat médical (obligatoires)
-  Désactiver Entreprise & Région
-  ????? VERIFIER SI A FAIRE Extensions -> Contact Form 7 -> Réglages
 Installer "PDF Invoices & Packing Slips for WooCommerce" Par WP Overnight
   Extensions -> WooCommerce Commander directeur -> Réglages
   Sélectionnez un modèle -> Attestation
@@ -84,8 +78,6 @@ Installer "Contact Form by WPForms – Drag & Drop Form Builder for WordPress" P
   Mettre à jour
 Installer "Leaflet Map" Par bozdoz
   Leaflet Map -> Réglages -> 48,798 2,187 17 300 400
-
-
 Installer "Favicon by RealFaviconGenerator"
   Apparence -> Favicon
   Sélectionner dans la bibliothèque de médias
@@ -98,6 +90,14 @@ Installer "Block Editor Colors"
   Extensions -> Block Editor Colors -> Settings
   Ajouter Yellow #fff00
 
+
+
+Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLayers
+  Extensions -> WooCommerce Commander directeur -> Paramètres (Réglages)
+  Général -> Commandes -> Facturation : ajouter des champs
+  Définir date naissance et certificat médical (obligatoires)
+  Désactiver Entreprise & Région
+  ????? VERIFIER SI A FAIRE Extensions -> Contact Form 7 -> Réglages
 
 ??? Installer "Multiples Roles"
     Installer "WP Dark Mode"
