@@ -57,12 +57,21 @@ body .is-layout-constrained > * + * {
 }
 
 /* Banniere */
-.banniere {
+div:has(.wp-block-site-title) {
+  width: 100%;
+  margin: 0 !important;
+}
+.wp-block-site-title {
+  text-align: center;
+}
+.banniere,
+.wp-block-site-title {
   height: 56px;
   text-align: center;
   background: #5826f4;
 }
-.banniere h1 {
+.banniere h1,
+.wp-block-site-title a {
   margin: 0;
   padding-top: 7px;
   font-family: arial, sans-serif;
@@ -111,8 +120,14 @@ body .is-layout-constrained > * + * {
 }
 .wp-block-navigation .wp-block-page-list > li,
 .wp-block-navigation .wp-block-page-list ul {
+  left: 0;
+  right: initial;
   padding: 0 0.3em !important;
   border-radius: 0.5em !important;
+}
+/* Masquage pages inutiles */
+.wp-block-navigation .wp-block-page-list li:first-child ul {
+  display: none !important;
 }
 .wp-block-navigation .wp-block-page-list li:last-child ul {
   left: initial;
@@ -281,7 +296,8 @@ header .crayon {
 }
 
 /* WooCommerce */
-.woocommerce .coupon {
+.woocommerce .coupon,
+.wp-block-woocommerce-cart-order-summary-coupon-form-block {
   display: none !important;
 }
 /*

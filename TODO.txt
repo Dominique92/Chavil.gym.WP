@@ -1,9 +1,11 @@
 BUGS
 ====
 ```
-On ne voit pas le contenu de la page panier même s'il est plein
+On ne voit ps les champs supplémentaires de la commande
+Plus de surlignage jaune
+Bandeau dans panier
 Les images des pages restent à l'origine
-Compte : Le titre du menu est trompeur
+Compte : Le titre du menu est trompeur / stratégie panier / compte
 ```
 
 TODO
@@ -88,9 +90,6 @@ Installer "Favicon by RealFaviconGenerator"
   Sélectionner
   Generate your favicon
   Generate your favicon and html code
-Installer "Block Editor Colors"
-  Extensions -> Block Editor Colors -> Settings
-  Ajouter Yellow #fff00
 Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLayers
   Extensions -> WooCommerce Commander directeur -> Paramètres (Réglages) -> Commandes -> Facturation :
     Désactiver Entreprise & Région
@@ -103,16 +102,15 @@ Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLaye
           A défaut de pouvoir répondre non à toutes les questions précédentes, vous devez fournir un CERTIFICAT MÉDICAL. ///file/// Cliquez ici pour charger votre certificat médical rempli et signé
       Je demande une attestation pour remboursement (ex par C.E…) : checkbox
       J’accepte que mon image soit publiée pour la promotion de l'activité de Chavil’Gym : checkbox
-
-    Installer "WP Dark Mode"
-      Settings -> Cocher tout
-    Installer "Site Kit by Google"
-    Installer "Anti-Spam by CleanTalk"
-      (Spam protection, AntiSpam, FireWall by CleanTalk)
-      Clé d'accès
-    Installer "LiteSpeed Cache"
-
 Créer comptes
+
+Installer "WP Dark Mode"
+  Settings -> Cocher tout
+Installer "Site Kit by Google"
+  Installer "Anti-Spam by CleanTalk" (Spam protection, AntiSpam, FireWall by CleanTalk)
+  Clé d'accès
+Installer "LiteSpeed Cache"
+
 Toutes extensions : activer, activer les mises à jour
 Debug & .htaccess : retour à l'initial
 ```
