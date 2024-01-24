@@ -110,11 +110,15 @@ body .is-layout-constrained > * + * {
   color: white !important;
 }
 .wp-block-navigation .wp-block-page-list > li,
-.wp-block-navigation .wp-block-page-list li ul {
+.wp-block-navigation .wp-block-page-list ul {
   padding: 0 0.3em !important;
   border-radius: 0.5em !important;
 }
-.wp-block-navigation .wp-block-page-list li ul,
+.wp-block-navigation .wp-block-page-list li:last-child ul {
+  left: initial;
+  right: 0;
+}
+.wp-block-navigation .wp-block-page-list ul,
 .wp-block-navigation .wp-block-page-list li li {
   background: inherit !important;
 }
