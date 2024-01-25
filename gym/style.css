@@ -118,20 +118,21 @@ div:has(.wp-block-site-title) {
   font-size: 18px;
   color: white !important;
 }
+.wp-block-navigation .wp-block-page-list li:first-child {
+/* Masquage sous-menu inutile
+  display: none !important; */
+}
 .wp-block-navigation .wp-block-page-list > li,
 .wp-block-navigation .wp-block-page-list ul {
-  left: 0;
-  right: initial;
   padding: 0 0.3em !important;
   border-radius: 0.5em !important;
-}
-/* Masquage pages inutiles */
-.wp-block-navigation .wp-block-page-list li:first-child ul {
-  display: none !important;
+  /* Pour pages woocommerce */
+  left: 0 !important;
+  right: initial !important;
 }
 .wp-block-navigation .wp-block-page-list li:last-child ul {
-  left: initial;
-  right: 0;
+  left: initial !important;
+  right: 0 !important;
 }
 .wp-block-navigation .wp-block-page-list ul,
 .wp-block-navigation .wp-block-page-list li li {
@@ -297,6 +298,8 @@ header .crayon {
 
 /* WooCommerce */
 .woocommerce .coupon,
+div:has(>.wc-block-components-totals-coupon),
+.woocommerce-form-coupon-toggle,
 .wp-block-woocommerce-cart-order-summary-coupon-form-block {
   display: none !important;
 }

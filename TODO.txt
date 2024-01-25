@@ -1,11 +1,10 @@
 BUGS
 ====
 ```
-On ne voit ps les champs supplémentaires de la commande
 Plus de surlignage jaune
-Bandeau dans panier
 Les images des pages restent à l'origine
 Compte : Le titre du menu est trompeur / stratégie panier / compte
+Champs bizares dans la page "facturation"
 ```
 
 TODO
@@ -60,14 +59,13 @@ Ou
   155
   Inventaire : Vendre individuellement
   Cocher catégorie / créer
-Installer "WooCommerce Extended Coupon Features FREE" Par Soft79
-  Marketing -> Codes promo / Importer
-  Ou
-    Retirer le menu de code promo hérité
-    Forfait 2 cours / Forfait PASS ...
-    Remise panier fixe
-    Valeur : 215 / 270
-    Publier
+Marketing -> Codes promo / Importer
+Ou
+  Retirer le menu de code promo hérité
+  Forfait 2 cours / Forfait PASS ...
+  Remise panier fixe
+  Valeur : 215 / 270
+  Publier
 Installer "PDF Invoices & Packing Slips for WooCommerce" Par WP Overnight
   Extensions -> WooCommerce Commander directeur -> Réglages
   Sélectionnez un modèle -> Attestation
@@ -102,6 +100,8 @@ Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLaye
           A défaut de pouvoir répondre non à toutes les questions précédentes, vous devez fournir un CERTIFICAT MÉDICAL. ///file/// Cliquez ici pour charger votre certificat médical rempli et signé
       Je demande une attestation pour remboursement (ex par C.E…) : checkbox
       J’accepte que mon image soit publiée pour la promotion de l'activité de Chavil’Gym : checkbox
+Page commander -> Modifier
+  Remplacer par code court [woocommerce_checkout]
 Créer comptes
 
 Installer "WP Dark Mode"
