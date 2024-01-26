@@ -92,6 +92,11 @@ div:has(.wp-block-site-title) {
   margin: 18px 9px;
   color: white;
 }
+@media (min-width: 800px) {
+  .customer_account {
+    margin: 12px 9px;
+  }
+}
 @media (max-width: 600px) {
   .banniere img {
     display: none;
@@ -115,9 +120,8 @@ div:has(.wp-block-site-title) {
   font-size: 18px;
   color: white !important;
 }
-.wp-block-page-list ul li button,
-.wp-block-page-list ul ul li {
-  /* Masquage sous-sous-menu inutile */
+ul.wp-block-page-list > li:not(:has(button)) {
+  /* Ne pas afficher les pages seules dans le menu */
   display: none !important;
 }
 .wp-block-page-list > li,
@@ -147,6 +151,12 @@ div:has(.wp-block-site-title) {
 }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list li {
   color: white !important;
+}
+.wp-block-page-list > li,
+.wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-page-list
+  > li {
+  background: grey !important;
 }
 .wp-block-page-list > li:nth-child(1),
 .wp-block-navigation__responsive-container.is-menu-open
@@ -294,10 +304,15 @@ div:has(> .wc-block-components-totals-coupon),
 .woocommerce-form-coupon-toggle,
 .wp-block-woocommerce-cart-order-summary-coupon-form-block,
 .woocommerce-billing-fields h3,
-h3#order_review_heading {
+.wc-block-mini-cart__empty-cart-wrapper div,
+h3#order_review_heading,
+.wpo_wcpdf-actions li:last-child {
   display: none !important;
 }
 @media screen and (max-width: 800px) {
+  .wc-block-mini-cart[data-cart-items-count="0"] {
+    display: none !important;
+  }
   div:has(.wc-block-mini-cart[data-cart-items-count="0"])
     .wp-block-woocommerce-customer-account
     .label,

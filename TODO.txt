@@ -3,21 +3,17 @@ BUGS
 ```
 Plus de surlignage jaune
 Les images des pages restent à l'origine
-Compte : Le titre du menu est trompeur / stratégie panier / compte
-Champs bizares dans la page "facturation"
+Champs erreur bizares dans la page "facturation"
 ```
 
 TODO
 ====
 ```
-Reprendre filtres gym/css woocommerce
 ```
 
 BEST
 ====
 ```
-Rediriger en dehors de la boutique
-Taille des photos sur une grande page
 Ne pas afficher le panier dans les horaries si le cours est déjà dans le panier
 Style print (titres)
 Editeur : Style blocs entouré en mode tablette ou mobile
