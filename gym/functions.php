@@ -255,17 +255,18 @@ add_shortcode("csv", "csv_function");
 function csv_function($args) {
 	global $wpdb, $table_prefix;
 
-	// Access verification
-	if (!array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles)) {
+	// Verification de droits d'accès
+	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
 		return 'Vous devez être connecté comme gestionnaire de commandes pour accéder à cette page.<br/><a href="' . get_bloginfo("url") . "/wp-login.php?redirect_to=" . get_bloginfo("url") . '/csv">Connexion</a>';
 	} elseif (!$_SERVER["QUERY_STRING"]) {
-		return '<a href="' . get_bloginfo("url") . '/csv?csv">Télécharger le fichier inscriptions.csv</a>';
+		return '<a href="' . get_bloginfo("url") . '/comptabilite?csv">Télécharger le fichier inscriptions.csv</a>';
 	}
 
 	setlocale( LC_NUMERIC, 'fr_FR' );
 
-	$order_list=[[
+	$order_list = [[
 		'N° de commande',
+		'Date',
 		'Adhérent',
 		//'Réduction',
 		'Total',
@@ -276,13 +277,14 @@ function csv_function($args) {
 	foreach (wc_get_orders([]) as $order) {
 		$o = $order->get_data();
 
-    		$order_list[]=[
+		$order_list[] = [
 			$o['id'],
+			$o['date_created']->date_i18n(),
 			$o['billing']['first_name'].' '.	$o['billing']['last_name'],
 			//round($o['discount_total'],2),
-			round($o['total'],2),
-			round($o['total']*0.015+0.25,2),
-			round($o['total']*(1-0.15)-0.25,2),
+			wc_format_decimal($o['total']),
+			wc_format_decimal($o['total']*0.015+0.25),
+			wc_format_decimal($o['total']*(1-0.15)-0.25),
 		];
 	}
 

@@ -1,19 +1,23 @@
 BUGS
 ====
 ```
-Plus de surlignage jaune
-Les images des pages restent à l'origine
-Champs erreur bizares dans la page "facturation"
+Le chargement de certif médical n'apparait pas au chargement de la page
 ```
 
 TODO
 ====
 ```
+Tester intégration avec un autre style (Storefront)
+Extention GYM ?
+Les images des pages restent à l'origine
 ```
 
 BEST
 ====
 ```
+Pas de logo compte sur les pages panier
+Plus de surlignage jaune
+Le bandeau affiche le nom du client quand connecté
 Ne pas afficher le panier dans les horaries si le cours est déjà dans le panier
 Style print (titres)
 Editeur : Style blocs entouré en mode tablette ou mobile
@@ -47,6 +51,7 @@ Copier les fichiers .../gym/... dans /wp-content/themes/gym
 Activer theme gym
 Importer pages gym
     ==> BUG : les images restent à l'origine !
+Réglages -> Général -> Adresse e-mail d’administration = celle voulue
 Réglages -> Lecture -> La page d’accueil affiche -> Une page statique -> Accueil
 Produits - Importer -> fichier.csv -> lancer l'importation
   Modifier tous -> Inventaire : Vendre individuellement
@@ -62,6 +67,17 @@ Ou
   Remise panier fixe
   Valeur : 215 / 270
   Publier
+WooCommerce -> E-mails -> Changer Nom d’expéditeur & Adresse de l’expéditeur
+WooCommerce -> Réglages -> E-mails -> Commande terminée -> Gérer
+  Contenu additionnel = Votre attestation est incluse dans cotre facture (Document joint)
+WooCommerce -> Comptes
+  Décocher : Autoriser les clients à passer commande sans compte
+  Cocher :
+    Se connecter Autoriser les clients à se connecter à un compte existant pendant le processus de paiement
+    Autoriser les clients à créer un compte au cours de la validation de commande
+    Autoriser les clients à créer un compte sur la page « Mon compte »
+    Lors de la création d’un compte, générer automatiquement un identifiant...
+    Lors de la création d’un compte, envoyer au nouvel utilisateur un lien pour définir son mot de passe
 Installer "PDF Invoices & Packing Slips for WooCommerce" Par WP Overnight
   Extensions -> WooCommerce Commander directeur -> Réglages
   Sélectionnez un modèle -> Attestation
@@ -69,6 +85,7 @@ Installer "Payment Plugins for Stripe WooCommerce"
   Connecter compte Stripe
   Configurer moyen de paiement Stripe
 Installer "Contact Form by WPForms – Drag & Drop Form Builder for WordPress" Par WPForms (pour le formulaire de contact)
+WooCommerce -> Commandes -> Général -> Facturatioon
   Page "Nous écrire" : insérer bloc form
   Générer formulaire simple
   Enregistrer
