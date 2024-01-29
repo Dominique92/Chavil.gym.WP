@@ -280,12 +280,24 @@ table.calendrier {
 
 /* WooCommerce */
 .wc-block-mini-cart__empty-cart-wrapper div,
+.woocommerce-billing-fields label span,
 .woocommerce-billing-fields h3,
 h3#order_review_heading,
-.woocommerce-form-coupon-toggle {
+.woocommerce-form-coupon-toggle,
+.woocommerce-additional-fields,
+.woocommerce-terms-and-conditions-wrapper {
   display: none !important;
 }
-
+#order_review {
+  margin: 50px !important;
+}
+#order_review::before {
+  font-weight: bold;
+  content: "RECAPITULATIF";
+}
+#order_review table {
+  margin: 0;
+}
 /* Admin : Visualisation des blocs */
 .edit-post-visual-editor__post-title-wrapper h1,
 .wp-block-post-content.block-editor-block-list__layout > * {
