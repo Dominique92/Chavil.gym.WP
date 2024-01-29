@@ -1,7 +1,7 @@
 BUGS
 ====
 ```
-Le chargement de certif médical n'apparait pas au chargement de la page
+Lien "don" dans le panier
 ```
 
 TODO
@@ -16,6 +16,7 @@ BEST
 ====
 ```
 Pas de logo compte sur les pages panier
+Le chargement conditionnel de certif médical n'apparait pas au chargement de la page
 Plus de surlignage jaune
 Le bandeau affiche le nom du client quand connecté
 Ne pas afficher le panier dans les horaries si le cours est déjà dans le panier
@@ -36,23 +37,28 @@ CPanel -> WordPress
   Admin
   mdp...
   Options Avancées -> Nom de la base de données / Préfixe
+
 Supprimer toutes extension
 Extensions -> add -> WooCommerce
   pays : France
 Apparence -> Thème -> Twenty-Three
-Reparenter les pages sous mon_compte ou brouillon
 ATTENTION : Voir toutes les pages de la boutique pour les créer avec le bon style
+
 /.htaccess -> Header set Cache-Control "max-age=0, private, no-cache, no-store, must-revalidate"
 /config.php
   define( 'WP_DEBUG', true );
   define( 'WP_DEBUG_DISPLAY', false);
+
 Copier /fichiers dans /fichiers
 Copier les fichiers .../gym/... dans /wp-content/themes/gym
+
 Activer theme gym
 Importer pages gym
     ==> BUG : les images restent à l'origine !
+
 Réglages -> Général -> Adresse e-mail d’administration = celle voulue
 Réglages -> Lecture -> La page d’accueil affiche -> Une page statique -> Accueil
+
 Produits - Importer -> fichier.csv -> lancer l'importation
   Modifier tous -> Inventaire : Vendre individuellement
 Ou
@@ -67,6 +73,7 @@ Ou
   Remise panier fixe
   Valeur : 215 / 270
   Publier
+
 WooCommerce -> E-mails -> Changer Nom d’expéditeur & Adresse de l’expéditeur
 WooCommerce -> Réglages -> E-mails -> Commande terminée -> Gérer
   Contenu additionnel = Votre attestation est incluse dans cotre facture (Document joint)
@@ -78,21 +85,26 @@ WooCommerce -> Comptes
     Autoriser les clients à créer un compte sur la page « Mon compte »
     Lors de la création d’un compte, générer automatiquement un identifiant...
     Lors de la création d’un compte, envoyer au nouvel utilisateur un lien pour définir son mot de passe
+
 Installer "PDF Invoices & Packing Slips for WooCommerce" Par WP Overnight
   Extensions -> WooCommerce Commander directeur -> Réglages
   Sélectionnez un modèle -> Attestation
+
 Installer "Payment Plugins for Stripe WooCommerce"
   Connecter compte Stripe
   Configurer moyen de paiement Stripe
+
 Installer "Contact Form by WPForms – Drag & Drop Form Builder for WordPress" Par WPForms (pour le formulaire de contact)
-WooCommerce -> Commandes -> Général -> Facturatioon
+WooCommerce -> Commande -> Général -> Facturation
   Page "Nous écrire" : insérer bloc form
   Générer formulaire simple
   Enregistrer
   Sortir
   Mettre à jour
+
 Installer "Leaflet Map" Par bozdoz
   Leaflet Map -> Réglages -> 48,798 2,187 17 300 400
+
 Installer "Favicon by RealFaviconGenerator"
   Apparence -> Favicon
   Sélectionner dans la bibliothèque de médias
@@ -101,6 +113,7 @@ Installer "Favicon by RealFaviconGenerator"
   Sélectionner
   Generate your favicon
   Generate your favicon and html code
+
 Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLayers
   Extensions -> WooCommerce Commander directeur -> Paramètres (Réglages) -> Commandes -> Facturation :
     Désactiver Entreprise & Région
@@ -117,6 +130,7 @@ Page commander -> Modifier
   Remplacer par code court [woocommerce_checkout]
 Créer comptes
 
+TBD
 Installer "WP Dark Mode"
   Settings -> Cocher tout
 Installer "Site Kit by Google"
@@ -142,7 +156,11 @@ MISE EN SERVICE
 ```
 Changer url
 SQL : chaville.gym.c92.fr -> test.gym.c92.fr
-SQL : chaville.gym@c92.fr -> chavil.gym@c92.fr
+SQL : woocommerce@2024.gym.c92.fr -> chavil.gym@c92.fr
+SQL : admin@2024.gym.c92.fr -> chavil.gym@c92.fr
+Config.php
+  /public_html/gym2024/wp-content/plugins/wp-super-cache/ -> /public_html/t/gymchatest/wp-content/plugins/wp-super-cache/
+  BDD, users, ...
 robots.txt
 User-agent: *
 Disallow: /

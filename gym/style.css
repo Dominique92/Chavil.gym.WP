@@ -1,57 +1,44 @@
 /*
 Theme Name: gym
-Template: twentytwentythree
+Template: Storefront
 Theme URI: https://github.com/Dominique92/Chavil.gym.WP
 Author: Dominique Cavailhez
-Description: Theme WordPress sur base twentytwentythree pour la Gym Volontaire de Chaville.
+Description: Theme WordPress sur base Storefront
+pour la Gym Volontaire de Chaville.
 */
 
-/* Cadrage du contenu de la page */
-.wp-site-blocks,
-.has-global-padding,
-.wp-block-template-part div {
-  padding: 0 !important;
-}
-.is-layout-constrained
-  > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
-  max-width: initial !important;
-}
+/* Cadrage de la page et des titres */
 .wp-block-group {
   margin: 0px calc(max(1%, 10% - 50px)) !important;
 }
-/* Titre de la page */
 .wp-site-blocks h1.wp-block-post-title {
   margin: 0 !important;
-  font-size: 32px;
 }
+
 /* Titres à l'intérieur de la page */
-.wp-site-blocks h2.wp-block-heading, /* Prod */
+h2.wp-block-heading, /* Prod */
     h2.block-editor-rich-text__editable /* Edit */ {
   padding: 0.2em;
   border-radius: 10px;
   background: #08babe;
   color: white;
-  font-size: 18px;
+  font-size: 22px;
 }
+
+/* Texte */
 .wp-block-post-content p {
   text-align: justify;
+  text-indent: 20px;
+  font-size: 18px;
 }
-body .is-layout-constrained > * + * {
-  margin-block-start: 0.8rem !important;
-}
+
 /* Images */
-.wp-block-image.alignleft {
-  margin: 1em 1em 1em 0 !important;
-}
-.wp-block-image.alignright {
-  margin: 1em 0 1em 1em !important;
-}
 .wp-block-image img {
   border-radius: 1em;
   width: 33vw;
   max-width: 33vh;
 }
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .wp-block-image img {
     display: none;
   }
@@ -87,23 +74,32 @@ div:has(.wp-block-site-title) {
 .banniere a {
   text-decoration: none;
 }
-.customer_account {
+.wc-block-mini-cart,
+span:has(.wp-block-woocommerce-customer-account) {
   float: right;
-  margin: 18px 9px;
+}
+.wc-block-mini-cart {
+  margin-top: 6px;
   color: white;
 }
-@media (min-width: 800px) {
-  .customer_account {
-    margin: 12px 9px;
+.customer_account {
+  float: right;
+  margin-top: 10px;
+  color: white;
+}
+@media (max-width: 650px) {
+  .wc-block-mini-cart[data-cart-items-count="0"],
+  .wp-block-woocommerce-customer-account .label {
+    display: none !important;
   }
 }
-@media (max-width: 600px) {
-  .banniere img {
+@media (max-width: 540px) {
+  .banniere h1 span {
     display: none;
   }
 }
-@media (max-width: 400px) {
-  .banniere h1 span {
+@media (max-width: 350px) {
+  .banniere img {
     display: none;
   }
 }
@@ -117,7 +113,7 @@ div:has(.wp-block-site-title) {
   margin: 0 2%;
   justify-content: space-around !important;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
   color: white !important;
 }
 ul.wp-block-page-list > li:not(:has(button)) {
@@ -126,13 +122,10 @@ ul.wp-block-page-list > li:not(:has(button)) {
 }
 .wp-block-page-list > li,
 .wp-block-page-list ul {
-  padding: 0 0.3em !important;
-  border-radius: 0.5em !important;
-  /* Pour pages woocommerce */
-  left: 0 !important;
-  right: initial !important;
+  padding: 0.2em 0.3em !important;
+  border-radius: 0.5em;
 }
-.wp-block-page-list li:last-child ul {
+.wp-block-page-list li:nth-child(4) ul {
   left: initial !important;
   right: 0 !important;
 }
@@ -142,7 +135,6 @@ ul.wp-block-page-list > li:not(:has(button)) {
 }
 .wp-block-page-list li li a {
   padding: 2px;
-  font-size: 18px;
   font-weight: normal;
   color: white !important;
 }
@@ -183,7 +175,7 @@ ul.wp-block-page-list > li:not(:has(button)) {
   background: hsl(270, 50%, 40%) !important;
 }
 
-/* Sous-menus */
+/* Sous-menus dans la page */
 .menu-equipe > ul > li > a,
 .menu-activite > ul > li > a,
 .menu-lieux > ul > li > a,
@@ -282,43 +274,16 @@ table.calendrier {
 }
 
 /* Misc */
-.leaflet-map {
-  clear: both;
-  max-width: 100% !important;
-}
 .copyright {
   text-align: center;
 }
 
 /* WooCommerce */
-.wc-block-mini-cart,
-span:has(.wp-block-woocommerce-customer-account) {
-  float: right;
-}
-.wc-block-mini-cart {
-  color: white;
-}
-.woocommerce-shop .wp-block-query,
-.woocommerce .coupon,
-div:has(> .wc-block-components-totals-coupon),
-.woocommerce-form-coupon-toggle,
-.wp-block-woocommerce-cart-order-summary-coupon-form-block,
-.woocommerce-billing-fields h3,
 .wc-block-mini-cart__empty-cart-wrapper div,
+.woocommerce-billing-fields h3,
 h3#order_review_heading,
-.wpo_wcpdf-actions li:last-child {
+.woocommerce-form-coupon-toggle {
   display: none !important;
-}
-@media screen and (max-width: 800px) {
-  .wc-block-mini-cart[data-cart-items-count="0"] {
-    display: none !important;
-  }
-  div:has(.wc-block-mini-cart[data-cart-items-count="0"])
-    .wp-block-woocommerce-customer-account
-    .label,
-  .wp-block-woocommerce-customer-account .label {
-    display: none !important;
-  }
 }
 
 /* Admin : Visualisation des blocs */
