@@ -28,6 +28,10 @@
 .corps p {
   margin: 0.2em;
 }
+.corps div {
+  margin: 1em 1cm;
+  text-indent: 0;
+}
 .pour {
   float: left;
   margin-left: 4cm;
@@ -74,17 +78,8 @@
 	<p>L'association Chavil’ Gymnastique Volontaire
 	certifie avoir fait une adhésion avec licence
 	pour la pratique de la gymnastique volontaire à :</p>
-	<p>Madame / Monsieur : 
-	<?=$this->order->data['shipping']['first_name']?>
-	<?=$this->order->data['shipping']['last_name']?></p>
-	<p>Adresse : 
-	<?=$this->order->data['shipping']['address_1']?>
-	<?=$this->order->data['shipping']['address_2']?></p>
-	<p>Ville :
-	<?=$this->order->data['shipping']['postcode']?>
-	<?=$this->order->data['shipping']['city']?></p>
-	<p>Pour un montant de :
-	<?=$this->get_woocommerce_totals()['order_total']['value']?></p>
+	<div><?=$this->billing_address()?></div>
+	<p>Pour un montant de : <?=$this->get_woocommerce_totals()['order_total']['value']?></p>
 	<p>Pour l’adhésion à la saison sportive : 2024-2025</p>
 </div>
 
@@ -95,7 +90,7 @@
 	<img class="tampon" src="<?=site_url()?>/fichiers/tampon.jpg" />
 </div>
 
-<br syle="page-break-after: always" />
+<p style="page-break-after: always;">&nbsp;</p>
 
 <!-- ******************************** TRUE INVOICE ******************************** -->
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
