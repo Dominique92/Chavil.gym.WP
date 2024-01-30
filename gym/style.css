@@ -283,6 +283,7 @@ table.calendrier {
 .woocommerce-billing-fields label span,
 .woocommerce-billing-fields h3,
 h3#order_review_heading,
+div:has(> .wc-block-components-totals-coupon),
 .woocommerce-form-coupon-toggle,
 .woocommerce-additional-fields,
 .woocommerce-terms-and-conditions-wrapper {
