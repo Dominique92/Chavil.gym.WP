@@ -1,18 +1,14 @@
 BUGS
 ====
-```
-Reprendre le sytle avec storefont
+Rediriger les pages produit vers les activités
+Menu spécifique pour moderateurs (admin, boutique, stripe, ...)
 Les images des pages restent à l'origine
-```
 
 TODO
 ====
-```
-```
 
 BEST
 ====
-```
 menu : revoir les condition de décalage vers la gauche de la dernière (4em) colonne à droite
 Le chargement conditionnel de certif médical n'apparait pas au chargement de la page
 Plus de surlignage jaune
@@ -21,12 +17,10 @@ Ne pas afficher le panier dans les horaries si le cours est déjà dans le panie
 Style print (titres)
 Editeur : Style blocs entouré en mode tablette ou mobile
 zIndex menu : Pb de canvas avec la carte
-```
 
 INSTALL CPanel O2switch new.gym.c92.fr
 INSTALL CPanel O2switch test.gym.c92.fr
 =======
-```
 Créer sous domaine
 Installer Let's Encrypt™ SSL
 CPanel -> WordPress
@@ -139,19 +133,15 @@ NON Installer "LiteSpeed Cache"
 
 Toutes extensions : activer, activer les mises à jour
 Debug & .htaccess : retour à l'initial
-```
 
 
 TAGS DANS LES PAGES
 ===================
-```
 <meta http-equiv="refresh" content="0;https://chaville.gym.c92.fr/wp-content/uploads/2023/05/Fiche-inscription_2023_2024.pdf">
 [leaflet-map lng="2.19712" lat="48.81788"][leaflet-marker]
-```
 
 MISE EN SERVICE
 ===============
-```
 Changer url
 SQL : admin@2024.gym.c92.fr -> chavil.gym@c92.fr
 SQL : 2024.gym.c92.fr -> test.gym.c92.fr
@@ -161,4 +151,3 @@ Config.php
 robots.txt
 User-agent: *
 Disallow: /
-```

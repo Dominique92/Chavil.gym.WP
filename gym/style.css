@@ -3,62 +3,30 @@ Theme Name: gym
 Template: storefront
 Theme URI: https://github.com/Dominique92/Chavil.gym.WP
 Author: Dominique Cavailhez
-Description: Theme WordPress sur base Storefront pour la Gym Volontaire de Chaville.
+Description: Theme WordPress pour la Gym Volontaire de Chaville
+Version: 1.0.2
 */
 
 /* Cadrage de la page et des titres */
 .wp-block-group {
   margin: 0px calc(max(1%, 10% - 50px)) !important;
+  padding: 0;
 }
-.wp-site-blocks h1.wp-block-post-title {
-  margin: 0 !important;
-}
-
-/* Titres à l'intérieur de la page */
-h2.wp-block-heading, /* Prod */
-    h2.block-editor-rich-text__editable /* Edit */ {
-  padding: 0.2em;
-  border-radius: 10px;
-  background: #08babe;
-  color: white;
-  font-size: 22px;
-}
-
-/* Texte */
-.wp-block-post-content p {
-  text-align: justify;
-  text-indent: 20px;
-  font-size: 18px;
-}
-
-/* Images */
-.wp-block-image img {
-  border-radius: 1em;
-  width: 33vw;
-  max-width: 33vh;
-}
-@media (max-width: 600px) {
-  .wp-block-image img {
-    display: none;
-  }
+.copyright {
+  text-align: center;
 }
 
 /* Banniere */
-div:has(.wp-block-site-title) {
-  width: 100%;
-  margin: 0 !important;
-}
-.wp-block-site-title {
-  text-align: center;
-}
-.banniere,
-.wp-block-site-title {
+.banniere {
   height: 56px;
   text-align: center;
   background: #5826f4;
 }
-.banniere h1,
-.wp-block-site-title a {
+.banniere img {
+  float: left;
+  height: 56px !important;
+}
+.banniere h1 {
   margin: 0;
   padding-top: 7px;
   font-family: arial, sans-serif;
@@ -66,35 +34,26 @@ div:has(.wp-block-site-title) {
   font-weight: bold;
   color: white;
 }
-.banniere img {
-  float: left;
-  height: 56px !important;
-}
 .banniere a {
   text-decoration: none;
 }
-.wc-block-mini-cart,
-span:has(.wp-block-woocommerce-customer-account) {
-  float: right;
-}
 .wc-block-mini-cart {
+  float: right;
   margin-top: 6px;
   color: white;
+}
+span:has(.wp-block-woocommerce-customer-account) {
+  float: right;
 }
 .customer_account {
   float: right;
   margin-top: 10px;
   color: white;
 }
-@media (max-width: 650px) {
+@media (max-width: 600px) {
   .wc-block-mini-cart[data-cart-items-count="0"],
   .wp-block-woocommerce-customer-account .label {
     display: none !important;
-  }
-}
-@media (max-width: 540px) {
-  .banniere h1 span {
-    display: none;
   }
 }
 @media (max-width: 350px) {
@@ -182,6 +141,34 @@ ul.wp-block-page-list > li:not(:has(button)) {
 .menu-equipe > ul > li:not(:nth-child(4)),
 .menu-lieux > ul > li:not(:nth-child(5)) {
   display: none;
+}
+
+/* Titres à l'intérieur de la page */
+h2.wp-block-heading, /* Prod */
+    h2.block-editor-rich-text__editable /* Edit */ {
+  margin: 0.5em;
+  padding: 0.1em;
+  border-radius: 10px;
+  background: #08babe;
+  color: white;
+}
+
+/* Texte */
+.wp-block-post-content p {
+  text-align: justify;
+  text-indent: 20px;
+}
+
+/* Images */
+.wp-block-image img {
+  border-radius: 1em;
+  width: 33vw;
+  max-width: 33vh;
+}
+@media (max-width: 600px) {
+  .wp-block-image img {
+    display: none;
+  }
 }
 
 /* Horaires */
@@ -272,11 +259,6 @@ table.calendrier {
   font-weight: bold;
 }
 
-/* Misc */
-.copyright {
-  text-align: center;
-}
-
 /* WooCommerce */
 .wc-block-mini-cart__empty-cart-wrapper div,
 .woocommerce-billing-fields label span,
@@ -298,6 +280,10 @@ div:has(> .wc-block-components-totals-coupon),
 #order_review table {
   margin: 0;
 }
+.woocommerce-billing-fields .description {
+  display: initial !important;
+}
+
 /* Admin : Visualisation des blocs */
 .edit-post-visual-editor__post-title-wrapper h1,
 .wp-block-post-content.block-editor-block-list__layout > * {
