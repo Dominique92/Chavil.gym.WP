@@ -1,8 +1,7 @@
 BUGS
 ====
-Rediriger les pages produit vers les activités
+Rediriger la page boutique vers horaire
 Menu spécifique pour moderateurs (admin, boutique, stripe, ...)
-Les images des pages restent à l'origine
 
 TODO
 ====
@@ -144,6 +143,7 @@ MISE EN SERVICE
 ===============
 Changer url
 SQL : admin@2024.gym.c92.fr -> chavil.gym@c92.fr
+SQL : woocommerce@2024.gym.c92.fr -> chavil.gym@c92.fr
 SQL : 2024.gym.c92.fr -> test.gym.c92.fr
 Config.php
   /public_html/gym2024/wp-content/plugins/wp-super-cache/ -> /public_html/t/gymchatest/wp-content/plugins/wp-super-cache/

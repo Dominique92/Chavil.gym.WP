@@ -223,6 +223,24 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
 	}
 }
 
+// Redirection d'une page produit
+add_filter('template_include', 'template_include_function');
+function template_include_function($template) {
+	global $post;
+	
+	$query = get_queried_object();
+	$cat = get_the_terms($post->ID, 'product_cat');
+
+	return $template;
+	
+	if (isset($query->post_type) &&
+		$query->post_type == 'product' &&
+		$cat)
+		header('Location: '.get_site_url().'/'.$cat[0]->slug);
+
+	return $template;
+}
+
 // Calcul des forfaits
 add_action("woocommerce_before_calculate_totals", "wbct_function", 20, 1);
 function wbct_function($cart) {
