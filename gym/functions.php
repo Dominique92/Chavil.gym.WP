@@ -227,11 +227,9 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
 add_filter('template_include', 'template_include_function');
 function template_include_function($template) {
 	global $post;
-	
+
 	$query = get_queried_object();
 	$cat = get_the_terms($post->ID, 'product_cat');
-
-	return $template;
 	
 	if (isset($query->post_type) &&
 		$query->post_type == 'product' &&
