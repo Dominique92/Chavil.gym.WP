@@ -1,17 +1,14 @@
 BUGS
 ====
-Rediriger la page boutique vers horaire
-Menu spécifique pour moderateurs (admin, boutique, stripe, ...)
 
 TODO
 ====
 
 BEST
 ====
-menu : revoir les condition de décalage vers la gauche de la dernière (4em) colonne à droite
-Le chargement conditionnel de certif médical n'apparait pas au chargement de la page
-Plus de surlignage jaune
-Le bandeau affiche le nom du client quand connecté
+Menu : Revoir les condition de décalage vers la gauche de la dernière (4em) colonne à droite
+Le bandeau affiche le nom de l'adhérent quand connecté
+Rediriger la page boutique vers horaire
 Ne pas afficher le panier dans les horaries si le cours est déjà dans le panier
 Style print (titres)
 Editeur : Style blocs entouré en mode tablette ou mobile

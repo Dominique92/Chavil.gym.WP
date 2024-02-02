@@ -153,8 +153,8 @@ h2.wp-block-heading, /* Prod */
   color: white;
 }
 
-/* Texte */
-.wp-block-post-content p {
+/* Texte page */
+.wp-block-post-content wp {
   text-align: justify;
   text-indent: 20px;
 }
@@ -293,4 +293,11 @@ div:has(> .wc-block-components-totals-coupon),
 .edit-post-visual-editor__post-title-wrapper h1:hover,
 .wp-block-post-content.block-editor-block-list__layout > *:hover {
   border-color: grey;
+}
+.doc-admin li {
+  margin: 3px 0;
+}
+/* Correction bug sur mot de passe */
+.woocommerce-page form .show-password-input {
+  top: 0.2em !important;
 }

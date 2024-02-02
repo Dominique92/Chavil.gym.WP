@@ -180,7 +180,7 @@ function calendrier_function() {
 	$cal = [];
 	ksort($calendrier);
 	foreach ($calendrier as $k => $v) {
-		$edit = wp_get_current_user()->allcaps["edit_others_pages"] ?
+		$edit = isset(wp_get_current_user()->allcaps["edit_others_pages"]) ?
 			"<a class=\"crayon\" title=\"Modification du calendrier\" href=\"" . get_bloginfo("url") . 
 			"/wp-admin/post.php?&action=edit&post={$wp_query->queried_object->ID}\">&#9998;</a>" :
 			"";
@@ -228,13 +228,15 @@ add_filter('template_include', 'template_include_function');
 function template_include_function($template) {
 	global $post;
 
-	$query = get_queried_object();
-	$cat = get_the_terms($post->ID, 'product_cat');
-	
-	if (isset($query->post_type) &&
-		$query->post_type == 'product' &&
-		$cat)
-		header('Location: '.get_site_url().'/'.$cat[0]->slug);
+	if ($post) {
+		$query = get_queried_object();
+		$cat = get_the_terms($post->ID, 'product_cat');
+
+		if (isset($query->post_type) &&
+			$query->post_type == 'product' &&
+			$cat)
+			header('Location: '.get_site_url().'/'.$cat[0]->slug);
+	}
 
 	return $template;
 }
@@ -267,62 +269,82 @@ function wbct_function($cart) {
 	}
 }
 
-add_shortcode("csv", "csv_function");
-function csv_function($args) {
-	global $wpdb, $table_prefix;
-
+add_shortcode("admin", "admin_function");
+function admin_function() {
 	// Verification de droits d'accès
 	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
-		return 'Vous devez être connecté comme gestionnaire de commandes pour accéder à cette page.<br/><a href="' . get_bloginfo("url") . "/wp-login.php?redirect_to=" . get_bloginfo("url") . '/csv">Connexion</a>';
-	} elseif (!$_SERVER["QUERY_STRING"]) {
-		return '<a href="' . get_bloginfo("url") . '/comptabilite?csv">Télécharger le fichier inscriptions.csv</a>';
+		return;
 	}
 
-	setlocale( LC_NUMERIC, 'fr_FR' );
-
-	$order_list = [[
-		'N° de commande',
-		'Date',
-		'Adhérent',
-		//'Réduction',
-		'Total',
-		'Commission',
-		'Solde',
-	]];
-
-	foreach (wc_get_orders([]) as $order) {
-		$o = $order->get_data();
-
-		$order_list[] = [
-			$o['id'],
-			$o['date_created']->date_i18n(),
-			$o['billing']['first_name'].' '.	$o['billing']['last_name'],
-			//round($o['discount_total'],2),
-			wc_format_decimal($o['total']),
-			wc_format_decimal($o['total']*0.015+0.25),
-			wc_format_decimal($o['total']*(1-0.15)-0.25),
+	if (!$_SERVER["QUERY_STRING"]) {
+		// Affichage liste des commandes admin
+		$r = [
+			'Modification d\'une page :' .
+				"<br/> &nbsp; - aller sur la page" .
+				"<br/> &nbsp; - bandeau du haut : &#128393; Modifier la page",
+			'<a href="' . get_site_url() .
+				'/wp-admin/edit.php?post_type=product">Gestion des cours</a> (produits)',
+			'<a href="' . get_site_url() .
+				'/wp-admin/admin.php?page=wc-orders">Gestion des inscriptions</a> (commandes)' .
+				"<br/> &nbsp; - cliquer sur une commande pour voir le détail" .
+				"<br/> &nbsp; - &lt;CTRL&gt;+P pour imprimer" .
+				'<br/> &nbsp; - passer la commande dans l’état «Terminée» ' .
+					'pour générer et envoyer l\'attestation.',
+			'<a target="_blank" href="https://dashboard.stripe.com/balance/overview">' .
+				'Gestion des paiements</a> (Stripe)',
+			'<a href="' . get_site_url() .
+				'/accueil/mon-compte/?compta">Téléchargement du fichier compta.csv</a>',
 		];
+
+		return '<h1>Fonctions d\'administration GYM</h1>' .
+			'<ul class="doc-admin"><li>' .
+			implode("</li><li>", $r) .
+			"</li></ul>";
+	} else {
+		// Téléchargement du fichier de compta
+		$order_list = [[
+			"N° de commande",
+			"Date",
+			"Adhérent",
+			"Total",
+			"Commission",
+			"Solde",
+		]];
+
+		setlocale(LC_NUMERIC, "fr_FR");
+		foreach (wc_get_orders([]) as $order) {
+			$o = $order->get_data();
+
+			$order_list[] = [
+				$o["id"],
+				$o["date_created"]->date_i18n(),
+				$o["billing"]["first_name"] . " " . $o["billing"]["last_name"],
+				wc_format_decimal($o["total"]),
+				wc_format_decimal($o["total"] * 0.015 + 0.25),
+				wc_format_decimal($o["total"] * (1 - 0.15) - 0.25),
+			];
+		}
+
+		// Ecriture du fichier
+		header("Content-Description: File Transfer");
+		header("Content-Type: application/octet-stream");
+		header("Content-Disposition: attachment; filename=" . $_SERVER["QUERY_STRING"] . ".csv");
+		header("Content-Transfer-Encoding: binary");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Pragma: public");
+		echo "\xEF\xBB\xBF"; // UTF-8 BOM
+
+		ob_start();
+		$out = fopen("php://output", "w");
+		foreach ($order_list as $i) {
+			fputcsv($out, $i, ";");
+		}
+		fclose($out);
+		echo ob_get_clean();
+
+		exit();
 	}
-
-  	// Ecriture du fichier
-	header("Content-Description: File Transfer");
-	header("Content-Type: application/octet-stream");
-	header("Content-Disposition: attachment; filename=commandes 2024-2025.csv");
-	header("Content-Transfer-Encoding: binary");
-	header("Expires: 0");
-	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-	header("Pragma: public");
-	echo "\xEF\xBB\xBF"; // UTF-8 BOM
-
-  	ob_start();
-	$out = fopen("php://output", "w");
-	foreach ($order_list as $i) {
-		fputcsv($out, $i, ";");
-	}
-	fclose($out);
-	echo ob_get_clean();
-
-	exit;
 }
 
 ?>
