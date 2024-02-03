@@ -287,9 +287,10 @@ function admin_function() {
 			'<a href="' . get_site_url() .
 				'/wp-admin/admin.php?page=wc-orders">Gestion des inscriptions</a> (commandes)' .
 				"<br/> &nbsp; - cliquer sur une commande pour voir le détail" .
-				"<br/> &nbsp; - &lt;CTRL&gt;+P pour imprimer" .
 				'<br/> &nbsp; - passer la commande dans l’état «Terminée» ' .
-					'pour générer et envoyer l\'attestation.',
+					'pour générer et envoyer l\'attestation' .
+				'<br/> &nbsp; - imprimer la commande en cliquant sur le bouton ' .
+					'«PDF Bon de livraison» (en bas de la colonne de droite)',
 			'<a target="_blank" href="https://dashboard.stripe.com/balance/overview">' .
 				'Gestion des paiements</a> (Stripe)',
 			'<a href="' . get_site_url() .

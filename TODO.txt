@@ -1,5 +1,6 @@
 BUGS
 ====
+Calendrier prend jour 0 pour déterminer samedi dans actimarch
 
 TODO
 ====
@@ -10,7 +11,6 @@ Menu : Revoir les condition de décalage vers la gauche de la dernière (4em) co
 Le bandeau affiche le nom de l'adhérent quand connecté
 Rediriger la page boutique vers horaire
 Ne pas afficher le panier dans les horaries si le cours est déjà dans le panier
-Style print (titres)
 Editeur : Style blocs entouré en mode tablette ou mobile
 zIndex menu : Pb de canvas avec la carte
 
