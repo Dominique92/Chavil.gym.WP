@@ -209,17 +209,19 @@ function calendrier_function() {
 function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
 	global $annee;
 
-	$dateTime = new DateTime();
-	$dateTime->setDate($an, $mois, $jour);
-	$dt = explode(" ", $dateTime->format("Y N n j"));
-	$no_jour = $dt[1];
-	$no_mois = $dt[2] + ($dt[0] - $annee) * 12;
+	if ($jour) {
+		$dateTime = new DateTime();
+		$dateTime->setDate($an, $mois, $jour);
+		$dt = explode(" ", $dateTime->format("Y N n j"));
+		$no_jour = $dt[1];
+		$no_mois = $dt[2] + ($dt[0] - $annee) * 12;
 
-	if (!isset($calendrier[$no_jour]) && $set) { // On crée le jour si on y a une date
-		$calendrier[$no_jour] = [];
-	}
-	if (isset($calendrier[$no_jour])) { // On popule si le jour est crée
-		@$calendrier[$no_jour][$no_mois][$dt[3]] .= $set;
+		if (!isset($calendrier[$no_jour]) && $set) { // On crée le jour si on y a une date
+			$calendrier[$no_jour] = [];
+		}
+		if (isset($calendrier[$no_jour])) { // On popule si le jour est crée
+			@$calendrier[$no_jour][$no_mois][$dt[3]] .= $set;
+		}
 	}
 }
 
@@ -283,10 +285,14 @@ function admin_function() {
 				"<br/> &nbsp; - aller sur la page" .
 				"<br/> &nbsp; - bandeau du haut : &#128393; Modifier la page",
 			'<a href="' . get_site_url() .
-				'/wp-admin/edit.php?post_type=product">Gestion des cours</a> (produits)',
+				'/wp-admin/edit.php?post_type=product">Gestion des cours</a> (produits)' .
+				"<br/> &nbsp; - titre : nom_du_cours * jour * 0h00 à 0h00 * lieu * animateur" .
+				"<br/> &nbsp; - produit simple, virtuel" .
+				"<br/> &nbsp; - prix" .
+				"<br/> &nbsp; - cocher la catégorie",
 			'<a href="' . get_site_url() .
 				'/wp-admin/admin.php?page=wc-orders">Gestion des inscriptions</a> (commandes)' .
-				"<br/> &nbsp; - cliquer sur une commande pour voir le détail" .
+				"<br/> &nbsp; - inventaire : Vendre individuellement" .
 				'<br/> &nbsp; - passer la commande dans l’état «Terminée» ' .
 					'pour générer et envoyer l\'attestation' .
 				'<br/> &nbsp; - imprimer la commande en cliquant sur le bouton ' .

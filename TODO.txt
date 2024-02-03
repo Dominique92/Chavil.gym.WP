@@ -1,6 +1,5 @@
 BUGS
 ====
-Calendrier prend jour 0 pour déterminer samedi dans actimarch
 
 TODO
 ====
