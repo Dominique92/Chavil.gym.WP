@@ -136,6 +136,8 @@ TAGS DANS LES PAGES
 <meta http-equiv="refresh" content="0;https://chaville.gym.c92.fr/wp-content/uploads/2023/05/Fiche-inscription_2023_2024.pdf">
 [leaflet-map lng="2.19712" lat="48.81788"][leaflet-marker]
 
+print PDF &output=html
+
 MISE EN SERVICE
 ===============
 Changer url
