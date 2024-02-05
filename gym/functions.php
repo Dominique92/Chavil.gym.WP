@@ -271,44 +271,23 @@ function wbct_function($cart) {
 	}
 }
 
-add_shortcode("admin", "admin_function");
+add_shortcode("doc_admin", "admin_function");
 function admin_function() {
 	// Verification de droits d'accès
 	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
 		return;
 	}
 
-	if (!$_SERVER["QUERY_STRING"]) {
-		// Affichage liste des commandes admin
-		$r = [
-			'Modification d\'une page :' .
-				"<br/> &nbsp; - aller sur la page" .
-				"<br/> &nbsp; - bandeau du haut : &#128393; Modifier la page",
-			'<a href="' . get_site_url() .
-				'/wp-admin/edit.php?post_type=product">Gestion des cours</a> (produits)' .
-				"<br/> &nbsp; - titre : nom_du_cours * jour * 0h00 à 0h00 * lieu * animateur" .
-				"<br/> &nbsp; - produit simple, virtuel" .
-				"<br/> &nbsp; - prix" .
-				"<br/> &nbsp; - cocher la catégorie",
-			'<a href="' . get_site_url() .
-				'/wp-admin/admin.php?page=wc-orders">Gestion des inscriptions</a> (commandes)' .
-				"<br/> &nbsp; - inventaire : Vendre individuellement" .
-				'<br/> &nbsp; - passer la commande dans l’état «Terminée» ' .
-					'pour générer et envoyer l\'attestation' .
-				'<br/> &nbsp; - imprimer la commande en cliquant sur le bouton ' .
-					'«PDF Bon de livraison» (en bas de la colonne de droite)',
-			'<a target="_blank" href="https://dashboard.stripe.com/balance/overview">' .
-				'Gestion des paiements</a> (Stripe)',
-			'<a href="' . get_site_url() .
-				'/accueil/mon-compte/?compta">Téléchargement du fichier compta.csv</a>',
-		];
+	parse_str($_SERVER["QUERY_STRING"], $query);
+	$doc_admin = get_page_by_path("doc_admin");
 
-		return '<h1>Fonctions d\'administration GYM</h1>' .
-			'<ul class="doc-admin"><li>' .
-			implode("</li><li>", $r) .
-			"</li></ul>";
-	} else {
-		// Téléchargement du fichier de compta
+	// Affichage de la liste des commandes admin
+	if (!count($query) && $doc_admin) {
+		return "<h1>Fonctions d'administration GYM</h1>" . $doc_admin->post_content;
+	}
+
+	// Téléchargement du fichier de compta
+	if (isset ($query["extract"])) {
 		$order_list = [[
 			"N° de commande",
 			"Date",
@@ -335,7 +314,7 @@ function admin_function() {
 		// Ecriture du fichier
 		header("Content-Description: File Transfer");
 		header("Content-Type: application/octet-stream");
-		header("Content-Disposition: attachment; filename=" . $_SERVER["QUERY_STRING"] . ".csv");
+		header("Content-Disposition: attachment; filename=" . $query["extract"] . ".csv");
 		header("Content-Transfer-Encoding: binary");
 		header("Expires: 0");
 		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
