@@ -267,6 +267,8 @@ h3#order_review_heading,
 div:has(> .wc-block-components-totals-coupon),
 .woocommerce-form-coupon-toggle,
 .woocommerce-additional-fields,
+.woocommerce-column__title, /* Page commande reçue */
+.woocommerce-order-details__title, /* Page commande reçue */
 .woocommerce-terms-and-conditions-wrapper {
   display: none !important;
 }

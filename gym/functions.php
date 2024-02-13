@@ -279,9 +279,10 @@ function admin_function() {
 	}
 
 	parse_str($_SERVER["QUERY_STRING"], $query);
-	$doc_admin = get_page_by_path("doc_admin");
 
 	// Affichage de la liste des commandes admin
+	// Texte dans la page doc_admin
+	$doc_admin = get_page_by_path("doc_admin");
 	if (!count($query) && $doc_admin) {
 		return "<h1>Fonctions d'administration GYM</h1>" . $doc_admin->post_content;
 	}
