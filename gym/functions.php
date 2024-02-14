@@ -289,28 +289,46 @@ function admin_function() {
 
 	// Téléchargement du fichier de compta
 	if (isset ($query["extract"])) {
+		$order_db = [];
 		$order_list = [[
 			"N° de commande",
 			"Date",
 			"Adhérent",
-			"Total",
+			"Payé",
 			"Commission",
-			"Solde",
+			"Reçu",
+			"Statut",
 		]];
 
-		setlocale(LC_NUMERIC, "fr_FR");
 		foreach (wc_get_orders([]) as $order) {
 			$o = $order->get_data();
-
-			$order_list[] = [
-				$o["id"],
-				$o["date_created"]->date_i18n(),
-				$o["billing"]["first_name"] . " " . $o["billing"]["last_name"],
-				wc_format_decimal($o["total"]),
-				wc_format_decimal($o["total"] * 0.015 + 0.25),
-				wc_format_decimal($o["total"] * (1 - 0.15) - 0.25),
-			];
+			$order_db[$o["status"]][$o["id"]] = $o;
 		}
+
+		foreach ($order_db as $o_stat) {
+			ksort($o_stat);
+			foreach ($o_stat as $o) {
+				$total = floatval($o["total"]);
+				$com = round($total * 0.015 + 0.25, 2);
+
+				if (intval ($o["total"]))
+					$order_list[] = [
+						$o["id"],
+						$o["date_created"]->date_i18n(),
+						$o["billing"]["first_name"] . " " . $o["billing"]["last_name"],
+						number_format($total, 2, ',', ' '),
+						number_format($com, 2, ',', ' '),
+						number_format($total - $com, 2, ',', ' '),
+						$o["status"],
+					];
+			}
+		}
+		// Totaux
+		$order_list[] = ['', '', 'Total',
+			'=SOMME(D2:D'.count($order_list).')',
+			'=SOMME(E2:E'.count($order_list).')',
+			'=SOMME(F2:F'.count($order_list).')',
+		];
 
 		// Ecriture du fichier
 		header("Content-Description: File Transfer");
