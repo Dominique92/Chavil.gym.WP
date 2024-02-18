@@ -291,9 +291,10 @@ function admin_function() {
 	if (isset ($query["extract"])) {
 		$order_db = [];
 		$order_list = [[
-			"N° de commande",
+			"Commande",
 			"Date",
-			"Adhérent",
+			"Nom",
+			"Prénom",
 			"Payé",
 			"Commission",
 			"Reçu",
@@ -315,19 +316,20 @@ function admin_function() {
 					$order_list[] = [
 						$o["id"],
 						$o["date_created"]->date_i18n(),
-						$o["billing"]["first_name"] . " " . $o["billing"]["last_name"],
-						number_format($total, 2, ',', ' '),
-						number_format($com, 2, ',', ' '),
-						number_format($total - $com, 2, ',', ' '),
+						$o["billing"]["last_name"],
+						$o["billing"]["first_name"],
+						number_format($total, 2, ',', ''),
+						number_format($com, 2, ',', ''),
+						number_format($total - $com, 2, ',', ''),
 						$o["status"],
 					];
 			}
 		}
 		// Totaux
-		$order_list[] = ['', '', 'Total',
-			'=SOMME(D2:D'.count($order_list).')',
+		$order_list[] = ['', '', '', 'Total',
 			'=SOMME(E2:E'.count($order_list).')',
 			'=SOMME(F2:F'.count($order_list).')',
+			'=SOMME(G2:G'.count($order_list).')',
 		];
 
 		// Ecriture du fichier
