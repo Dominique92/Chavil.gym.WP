@@ -6,32 +6,27 @@ $nom_mois = explode(" ", " janvier fevrier mars avril mai juin juillet aout sept
 add_filter("auto_core_update_send_email", "__return_false"); // Disable core update emails
 add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
 add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
-
-// Load correctly syles.css files
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function", "", "1.5");
-function wp_enqueue_scripts_function() {
-	wp_register_style("style", get_stylesheet_uri());
-	wp_enqueue_style("style");
-}
-
-add_action("admin_head", "admin_head_function");
-function admin_head_function() {
-	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
-}
-
-add_action("wp_enqueue_scripts", "my_custom_scripts");
-function my_custom_scripts() {
-	wp_enqueue_script("custom-js", get_stylesheet_directory_uri() . "/parts/scripts.js");
-}
-
-// Désactiver les emails de mise à jour WordPress
-add_filter("auto_theme_update_send_email", "__return_false");
+add_filter("auto_theme_update_send_email", "__return_false"); // Disable update emails
 add_filter("auto_core_update_send_email", "send_email_function");
 function send_email_function($send, $type) {
 	if (!empty($type) && $type == "success") {
 		return false;
 	}
 	return true;
+}
+
+// Load correctly syles.css files
+add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
+function wp_enqueue_scripts_function() {
+	wp_register_style("style", get_stylesheet_uri());
+	wp_enqueue_style("style");
+	wp_enqueue_script("custom-js", get_stylesheet_directory_uri() . "/parts/scripts.js");
+
+	// Replace "Ben Oui" by "Oui"
+	global $wpdb;
+	$orders_ben_oui = $wpdb->get_results("SELECT * FROM wp3_wc_orders_meta WHERE meta_value = 'Ben Oui'");
+	foreach ($orders_ben_oui as $obo)
+		$wpdb->get_results("UPDATE wp3_wc_orders_meta SET meta_value = 'Oui' WHERE wp3_wc_orders_meta.id = ".$obo->id);
 }
 
 // Use global urls in block templates (as defined in wp-includes/general-template.php)
@@ -269,6 +264,11 @@ function wbct_function($cart) {
 			$cart->add_fee($c->post_title, $coupon->get_amount() - $total_cours);
 		}
 	}
+}
+
+add_action("admin_head", "admin_head_function");
+function admin_head_function() {
+	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
 }
 
 add_shortcode("doc_admin", "admin_function");
