@@ -28,13 +28,13 @@
 			<p><b>Mail</b>: <?=$this->billing_email()?></p>
 			<p><b>Personne à prévenir</b>: <?=$this->order->get_meta('_billing_wooccm13')?> / Tel:
 			<?=$this->order->get_meta('_billing_wooccm18')?></p>
-			<p><b>Questionnaire de santé</b>: <?=$this->order->get_meta('_billing_wooccm14')?'NON':'OUI'?></p>
+			<p><b>Questionnaire de santé</b>: <?=$this->order->get_meta('_billing_wooccm14')?></p>
 			<p><b>Certificat médical</b>: <?php
 				$cm_id = $this->order->get_meta('_billing_wooccm16');
 				if ($cm_id)
 					echo '<a target="_bliank" href="'.wp_get_attachment_url($cm_id).'">Télécharger</a>';
 			?></p>
-			<p><b>Publication de l'image</b>: <?=$this->order->get_meta('_billing_wooccm20')?'NON':'OUI'?>
+			<p><b>Publication de l'image</b>: <?=$this->order->get_meta('_billing_wooccm20')?>
 			<p><b>Payé</b>: <?=$this->get_woocommerce_totals()['order_total']['value']?>
 		</td>
 	</tr>
