@@ -242,12 +242,26 @@ function template_include_function($template) {
 add_action("woocommerce_before_calculate_totals", "wbct_function", 20, 1);
 function wbct_function($cart) {
 	// Calcul du total des cours
-	$total_cours = $nb_cours = 0;
+	$nb_cours = $total_cours = $nb_mn = $total_mn = 0;
 	foreach ($cart->get_cart() as $item) {
-		// Exclus "dons"
-		if ($item["data"]->get_price() > 10) {
-			$total_cours+= $item["data"]->get_price();
-			$nb_cours++;
+		$is_mn = str_contains(
+			wc_get_product_category_list(
+				$item["data"]->get_id()
+			),
+			"nordique"
+		);
+		if ($item["data"]->get_price() > 10) { // Exclus "dons"
+			if ($is_mn) {
+				if ($nb_mn++)
+					$total_mn += $item["data"]->get_price();
+				else {
+					$nb_cours++;
+					$total_cours += $item["data"]->get_price();
+				}
+			} else {
+				$nb_cours++;
+				$total_cours += $item["data"]->get_price();
+			}
 		}
 	}
 
@@ -260,9 +274,12 @@ function wbct_function($cart) {
 		$coupon = new WC_Coupon($c->post_title);
 		$min = $coupon->get_meta("_wjecf_min_matching_product_qty") ? : 0;
 		$max = $coupon->get_meta("_wjecf_max_matching_product_qty") ? : 1000;
-		if ($min <= $nb_cours && $nb_cours <= $max) {
+
+		if (str_contains($c->post_title, "nordique")) {
+			if ($total_mn)
+				$cart->add_fee($c->post_title, -$total_mn);
+		} elseif ($min <= $nb_cours && $nb_cours <= $max)
 			$cart->add_fee($c->post_title, $coupon->get_amount() - $total_cours);
-		}
 	}
 }
 

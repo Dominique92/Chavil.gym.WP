@@ -83,7 +83,7 @@
 	<p>Pour l’adhésion à la saison sportive : 2024-2025</p>
 </div>
 
-<p class="pour">Pour la présidente<br/>Geneviève daël</p>
+<p class="pour">Pour la présidente<br/>Geneviève Daël</p>
 <p class="date">Chaville, le <?=$this->date($this->get_type())?></p>
 
 <div class="signatures">

@@ -282,9 +282,6 @@ div:has(> .wc-block-components-totals-coupon),
 #order_review table {
   margin: 0;
 }
-.woocommerce-billing-fields .description {
-  display: initial !important;
-}
 
 /* Admin : Visualisation des blocs */
 .edit-post-visual-editor__post-title-wrapper h1,
