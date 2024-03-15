@@ -245,7 +245,7 @@ function wbct_function($cart) {
 	$total_cours = $nb_cours = 0;
 	foreach ($cart->get_cart() as $item) {
 		// Exclus "dons"
-		if ($item["data"]->get_price() > 1) {
+		if ($item["data"]->get_price() > 10) {
 			$total_cours+= $item["data"]->get_price();
 			$nb_cours++;
 		}
