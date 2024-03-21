@@ -46,7 +46,7 @@ Importer pages gym
 Réglages -> Général -> Adresse e-mail d’administration = celle voulue
 Réglages -> Lecture -> La page d’accueil affiche -> Une page statique -> Accueil
 
-Produits - Importer -> fichier.csv -> lancer l'importation
+Produits -> Importer -> fichier.csv -> lancer l'importation
   Modifier tous -> Inventaire : Vendre individuellement
 Ou
   Produit simple / Virtuel
