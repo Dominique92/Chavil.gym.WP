@@ -1,34 +1,23 @@
 <?php
-$annee = 2024;
-$nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi",
-	"samedi", "dimanche"];
-$nom_mois = ["janvier", "fevrier", "mars", "avril", "mai", "juin",
-	"juillet", "aout", "septembre", "octobre", "novembre", "décembre",
-	"janvier", "fevrier", "mars", "avril", "mai", "juin"];
+/**
+ * Theme Name: gym
+ * Theme URI: https://github.com/Dominique92/Chavil.gym
+ * Description: Theme WordPress pour la Gym Volontaire de Chaville
+ * Author: Dominique Cavailhez
+ * Version: 1.0.0
+ * License: GPL2
+ */
 
-add_filter("auto_core_update_send_email", "__return_false"); // Disable core update emails
-add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
-add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
-add_filter("auto_theme_update_send_email", "__return_false"); // Disable update emails
-add_filter("auto_core_update_send_email", "send_email_function");
-function send_email_function($send, $type) {
-	if (!empty($type) && $type == "success") {
-		return false;
-	}
-	return true;
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+  exit();
 }
 
 // Load correctly syles.css files
 add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
 function wp_enqueue_scripts_function() {
-	wp_register_style("style", get_stylesheet_uri());
-	wp_enqueue_style("style");
-
-	// Replace "Ben Oui" by "Oui"
-	global $wpdb;
-	$orders_ben_oui = $wpdb->get_results("SELECT * FROM wp3_wc_orders_meta WHERE meta_value = 'Ben Oui'");
-	foreach ($orders_ben_oui as $obo)
-		$wpdb->get_results("UPDATE wp3_wc_orders_meta SET meta_value = 'Oui' WHERE wp3_wc_orders_meta.id = ".$obo->id);
+	wp_register_style("gym-theme-style", get_stylesheet_uri());
+	wp_enqueue_style("gym-theme-style");
 }
 
 // Use global urls in block templates (as defined in wp-includes/general-template.php)
@@ -48,6 +37,67 @@ function menu_function($args) {
 		"menu_class" => @$args["class"],
 		"echo" => false,
 	]);
+}
+
+// Redirection d'une page produit
+add_filter('template_include', 'template_include_function');
+function template_include_function($template) {
+	global $post;
+
+	if ($post) {
+		$query = get_queried_object();
+		$cat = get_the_terms($post->ID, 'product_cat');
+
+		if (isset($query->post_type) &&
+			$query->post_type == 'product' &&
+			$cat)
+			header('Location: '.get_site_url().'/'.$cat[0]->slug);
+	}
+
+	return $template;
+}
+
+add_action("admin_head", "admin_head_function");
+function admin_head_function() {
+	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
+}
+
+/* POUR PLUGIN */
+
+$annee = 2024;
+$nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi",
+	"samedi", "dimanche"];
+$nom_mois = ["janvier", "fevrier", "mars", "avril", "mai", "juin",
+	"juillet", "aout", "septembre", "octobre", "novembre", "décembre",
+	"janvier", "fevrier", "mars", "avril", "mai", "juin"];
+
+add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
+add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
+add_filter("auto_theme_update_send_email", "__return_false"); // Disable update emails
+add_filter("auto_core_update_send_email", "send_email_function");
+function send_email_function($send, $type) {
+	if (!empty($type) && $type == "success") {
+		return false;
+	}
+	return true;
+}
+
+// Load correctly syles.css files
+add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function_2");
+function wp_enqueue_scripts_function_2() {
+
+	// Replace "Ben Oui" by "Oui"
+	global $wpdb;
+	$orders_ben_oui = $wpdb->get_results(
+		"SELECT * FROM wp3_wc_orders_meta " .
+		"WHERE meta_value = 'Ben Oui'"
+	);
+	foreach ($orders_ben_oui as $obo)
+		$wpdb->get_results(
+			"UPDATE wp3_wc_orders_meta " .
+			"SET meta_value = 'Oui' " .
+			"WHERE wp3_wc_orders_meta.id = ".$obo->id
+		);
 }
 
 // Horaires
@@ -75,7 +125,11 @@ function horaires_function() {
 
 		if (count($cours) == 5 &&
 			strstr(
-				" * " . str_replace (["<", "’", ">"], [" * ", "'", " * "], wc_get_product_category_list($id)) .
+				" * " . str_replace (
+					["<", "’", ">"],
+					[" * ", "'", " * "],
+					wc_get_product_category_list($id)
+				) .
 				" * " . wc_get_product($id)->get_data()["name"] . " * Horaires * ",
 				"* " . $wp_query->queried_object->post_title . " *"
 			)) {
@@ -90,23 +144,28 @@ function horaires_function() {
 	$cal = ["\n<div class=\"horaires\">"];
 	ksort($horaires);
 	foreach ($horaires as $no_jour => $jour) {
-		$rj = ["\t<table>", "\t\t<caption>{$nom_jour[$no_jour]}</caption>"];
+		$rj = ["\t<table class=\"has-background\">", "\t\t<caption>{$nom_jour[$no_jour]}</caption>"];
 		ksort($jour);
 		foreach ($jour as $heure) {
 			// Ligne sécable si trop longue et comporte des ()
 			if (strlen($heure[0]) > 30) $heure[0] = implode("<br/>(", explode("(", $heure[0]));
-			$panier = "<a href=\"" . get_bloginfo("url") . "/panier?add-to-cart=" . $heure[6] . '" title="S\'inscrire"">&#128722;</a>';
+			$panier = "<a href=\"" .
+				get_bloginfo("url") . "/panier?add-to-cart=" . $heure[6] .
+				'" title="S\'inscrire"">&#128722;</a>';
 			$edit = isset(wp_get_current_user()->allcaps["edit_others_pages"]) ?
-				"<a class=\"crayon\" title=\"Modification de la séance\" href=\"" . get_bloginfo("url") . "/wp-admin/post.php?&action=edit&post={$heure[6]}\">&#9998;</a>" :
+				"<a class=\"crayon\" title=\"Modification de la séance\" href=\"" .
+					get_bloginfo("url") .
+					"/wp-admin/post.php?&action=edit&post={$heure[6]}\">&#9998;</a>" :
 				"";
 			$ligne = [
 				$heure[2] . " &nbsp; " . $panier,
-				$edit . " &nbsp; " . lien_page($heure[0],
-				$heure[5]),
+				$edit . " &nbsp; " . lien_page($heure[0], $heure[5]),
 				lien_page($heure[4]),
 				lien_page($heure[3]),
 			];
-			$rj[] = "\t\t<tr>\n\t\t\t<td>" . implode("</td>\n\t\t\t<td>", $ligne) . "</td>\n\t\t</tr>";
+			$rj[] = "\t\t<tr>\n\t\t\t<td>" .
+				implode("</td>\n\t\t\t<td>", $ligne) .
+				"</td>\n\t\t</tr>";
 		}
 		$rj[] = "\t</table>";
 		$cal[] = implode(PHP_EOL, $rj);
@@ -131,7 +190,7 @@ function lien_page($titre, $slug = "") {
 	if (!$slug && isset($slugs_pages[$titre])) {
 		$slug = $slugs_pages[$titre];
 	}
-	if (isset($slug)) {
+	if ($slug) {
 		return '<a href="' . get_bloginfo("url") . "/$slug\">$titre</a>";
 	} else {
 		return $titre;
@@ -178,7 +237,7 @@ function calendrier_function() {
 	ksort($calendrier);
 	foreach ($calendrier as $k => $v) {
 		$edit = isset(wp_get_current_user()->allcaps["edit_others_pages"]) ?
-			"<a class=\"crayon\" title=\"Modification du calendrier\" href=\"" . get_bloginfo("url") . 
+			"<a class=\"crayon\" title=\"Modification du calendrier\" href=\"" . get_bloginfo("url") .
 			"/wp-admin/post.php?&action=edit&post={$wp_query->queried_object->ID}\">&#9998;</a>" :
 			"";
 		$cal[] = "<table class=\"calendrier\">";
@@ -220,24 +279,6 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
 			@$calendrier[$no_jour][$no_mois][$dt[3]] .= $set;
 		}
 	}
-}
-
-// Redirection d'une page produit
-add_filter('template_include', 'template_include_function');
-function template_include_function($template) {
-	global $post;
-
-	if ($post) {
-		$query = get_queried_object();
-		$cat = get_the_terms($post->ID, 'product_cat');
-
-		if (isset($query->post_type) &&
-			$query->post_type == 'product' &&
-			$cat)
-			header('Location: '.get_site_url().'/'.$cat[0]->slug);
-	}
-
-	return $template;
 }
 
 // Calcul des forfaits
@@ -285,13 +326,8 @@ function wbct_function($cart) {
 	}
 }
 
-add_action("admin_head", "admin_head_function");
-function admin_head_function() {
-	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
-}
-
-add_shortcode("doc_admin", "admin_function");
-function admin_function() {
+add_shortcode("doc_admin", "doc_admin_function");
+function doc_admin_function() {
 	// Verification de droits d'accès
 	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
 		return;
@@ -372,5 +408,3 @@ function admin_function() {
 		exit();
 	}
 }
-
-?>

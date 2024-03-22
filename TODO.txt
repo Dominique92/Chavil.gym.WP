@@ -141,8 +141,10 @@ MISE EN SERVICE
 ===============
 Changer url
 SQL : admin@2024.gym.c92.fr -> chavil.gym@c92.fr
+SQL : gym2024@c92.fr -> chavil.gym@c92.fr
 SQL : woocommerce@2024.gym.c92.fr -> chavil.gym@c92.fr
-SQL : 2024.gym.c92.fr -> test.gym.c92.fr
+SQL : 2024.gym.c92.fr -> test.gym.c92.fr -> p.gym.c92.fr
+SQL : public_html/gym2024 -> public_html/gym_plugin
 Config.php
   /public_html/gym2024/wp-content/plugins/wp-super-cache/ -> /public_html/t/gymchatest/wp-content/plugins/wp-super-cache/
   BDD, users, ...
