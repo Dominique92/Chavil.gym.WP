@@ -65,7 +65,7 @@
 </div>
 
 <div class="entete">
-	<p>CHAVIL’ GYMNASTIQUE VOLONTAIRE</p>
+	<p>CHAVIL’ GYMNASTIQUE VOLONTAIRE PLUGIN</p>
 	<p>2 rue Jean-Jaurès, 92370 Chaville</p>
 	<p>Association loi 1901, JO n° 1691 du 2 juin 2001</p>
 	<p>Siret 43 888 2003 000 17</p>

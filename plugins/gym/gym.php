@@ -27,16 +27,23 @@ $nom_mois = ["janvier", "fevrier", "mars", "avril", "mai", "juin",
 add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
 add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
 add_filter("auto_theme_update_send_email", "__return_false"); // Disable update emails
-add_filter("auto_core_update_send_email", "send_email_function");
-function send_email_function($send, $type) {
+add_filter("auto_core_update_send_email", "send_email_plugin_gym");
+function send_email_plugin_gym($send, $type) {
 	if (!empty($type) && $type == "success") {
 		return false;
 	}
 	return true;
 }
 
-add_action("wpo_wcpdf_init_documents", "wpo_wcpdf_init_documents_function");
-function wpo_wcpdf_init_documents_function($args) {
+// Load syles.css files
+add_action("wp_enqueue_scripts", "wp_enqueue_scripts_plugin_gym");
+function wp_enqueue_scripts_plugin_gym($args) {
+    wp_register_style("gym-plugin-style", plugins_url("style.css", __FILE__));
+    wp_enqueue_style("gym-plugin-style");
+}
+
+//add_action("wpo_wcpdf_init_documents", "wpo_wcpdf_init_documents_plugin_gym");
+function wpo_wcpdf_init_documents_plugin_gym($args) {
 
 
 /////////////////////////////////////////////////		
@@ -61,13 +68,11 @@ exit;
 }
 
 // Many init operations
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
-function wp_enqueue_scripts_function() {
-    wp_register_style("gym-plugin-style", plugins_url("style.css", __FILE__));
-    wp_enqueue_style("gym-plugin-style");
+add_action("wp_enqueue_scripts", "wp_enqueue_scripts_plugin_gym_2");
+function wp_enqueue_scripts_plugin_gym_2($args) {
 
 /////////////////////////////////////////////////		
-/*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'> = ".var_export($args,true).'</pre>'.PHP_EOL;
+//*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'> = ".var_export($args,true).'</pre>'.PHP_EOL;
 return;
 
 	$tlf = array_flip(
@@ -94,8 +99,8 @@ return;
 }
 
 // Horaires
-add_shortcode("horaires", "horaires_function");
-function horaires_function() {
+add_shortcode("horaires", "horaires_plugin_gym");
+function horaires_plugin_gym() {
 	global $nom_jour, $wp_query;
 
 	// Seulement pour les pages
@@ -191,8 +196,8 @@ function lien_page($titre, $slug = "") {
 }
 
 // Calendrier
-add_shortcode("calendrier", "calendrier_function");
-function calendrier_function() {
+add_shortcode("calendrier", "calendrier_plugin_gym");
+function calendrier_plugin_gym() {
 	global $annee, $nom_jour, $nom_mois, $wp_query;
 
 	// Seulement pour les pages
@@ -275,8 +280,8 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
 }
 
 // Calcul des forfaits
-add_action("woocommerce_before_calculate_totals", "wbct_function", 20, 1);
-function wbct_function($cart) {
+add_action("woocommerce_before_calculate_totals", "wbct_plugin_gym", 20, 1);
+function wbct_plugin_gym($cart) {
 	// Calcul du total des cours
 	$nb_cours = $total_cours = $nb_mn = $total_mn = 0;
 	foreach ($cart->get_cart() as $item) {
@@ -319,8 +324,8 @@ function wbct_function($cart) {
 	}
 }
 
-add_shortcode("doc_admin", "doc_admin_function");
-function doc_admin_function() {
+add_shortcode("doc_admin", "doc_admin_plugin_gym");
+function doc_admin_plugin_gym() {
 	// Verification de droits d'accès
 	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
 		return;

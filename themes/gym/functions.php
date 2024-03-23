@@ -13,16 +13,16 @@ if (!defined('ABSPATH')) {
   exit();
 }
 
-// Load correctly syles.css files
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
-function wp_enqueue_scripts_function() {
+// Load syles.css files
+add_action("wp_enqueue_scripts", "wp_enqueue_scripts_theme_gym");
+function wp_enqueue_scripts_theme_gym() {
 	wp_register_style("gym-theme-style", get_stylesheet_uri());
 	wp_enqueue_style("gym-theme-style");
 }
 
 // Use global urls in block templates (as defined in wp-includes/general-template.php)
-add_shortcode("get_info", "get_info_function");
-function get_info_function($args) {
+add_shortcode("get_info", "get_info_theme_gym");
+function get_info_theme_gym($args) {
 	if ($args[0] == "current_user_id") {
 		return get_current_user_id(); //TODO use is_user_logged_in()
    	} else {
@@ -31,8 +31,8 @@ function get_info_function($args) {
 }
 
 // Sous menu dans la page
-add_shortcode("menu", "menu_function");
-function menu_function($args) {
+add_shortcode("menu", "menu_theme_gym");
+function menu_theme_gym($args) {
 	return wp_nav_menu([
 		"menu_class" => @$args["class"],
 		"echo" => false,
@@ -40,8 +40,8 @@ function menu_function($args) {
 }
 
 // Redirection d'une page produit
-add_filter('template_include', 'template_include_function');
-function template_include_function($template) {
+add_filter('template_include', 'template_include_theme_gym');
+function template_include_theme_gym($template) {
 	global $post;
 
 	if ($post) {
@@ -57,7 +57,7 @@ function template_include_function($template) {
 	return $template;
 }
 
-add_action("admin_head", "admin_head_function");
-function admin_head_function() {
+add_action("admin_head", "admin_head_theme_gym");
+function admin_head_theme_gym() {
 	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
 }

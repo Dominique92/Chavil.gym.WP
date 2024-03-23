@@ -72,7 +72,7 @@
 	<p>https://chaville.gym.c92.fr/</p>
 </div>
 
-<h1 class="titre">ATTESTATION D’ADHESION</h1>
+<h1 class="titre">ATTESTATION D’ADHESION THEME</h1>
 
 <div class="corps">
 	<p>L'association Chavil’ Gymnastique Volontaire
