@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
   exit();
 }
 
-// Load correctly syles.css files
+// Load correctly syle.css files
 add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
 function wp_enqueue_scripts_function() {
 	wp_register_style("gym-theme-style", get_stylesheet_uri());
@@ -82,7 +82,7 @@ function send_email_function($send, $type) {
 	return true;
 }
 
-// Load correctly syles.css files
+// Load correctly syle.css files
 add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function_2");
 function wp_enqueue_scripts_function_2() {
 

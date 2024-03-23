@@ -17,6 +17,8 @@ if (!defined('ABSPATH')) {
 //TODO https://github.com/YahnisElsts/plugin-update-checker
 //TODO https://rudrastyh.com/wordpress/self-hosted-plugin-update.html
 
+//TODO calendrier à partir des dates
+
 $annee = 2024;
 $nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi",
 	"samedi", "dimanche"];
@@ -27,80 +29,48 @@ $nom_mois = ["janvier", "fevrier", "mars", "avril", "mai", "juin",
 add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
 add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
 add_filter("auto_theme_update_send_email", "__return_false"); // Disable update emails
-add_filter("auto_core_update_send_email", "send_email_plugin_gym");
-function send_email_plugin_gym($send, $type) {
+add_filter("auto_core_update_send_email", "send_email_gym_plugin");
+function send_email_gym_plugin($send, $type) {
 	if (!empty($type) && $type == "success") {
 		return false;
 	}
 	return true;
 }
 
-// Load syles.css files
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_plugin_gym");
-function wp_enqueue_scripts_plugin_gym($args) {
+// Load syle.css files
+add_action("wp_enqueue_scripts", "wp_enqueue_scripts_gym_plugin");
+function wp_enqueue_scripts_gym_plugin($args) {
     wp_register_style("gym-plugin-style", plugins_url("style.css", __FILE__));
     wp_enqueue_style("gym-plugin-style");
 }
 
-//add_action("wpo_wcpdf_init_documents", "wpo_wcpdf_init_documents_plugin_gym");
-function wpo_wcpdf_init_documents_plugin_gym($args) {
-
-
-/////////////////////////////////////////////////		
-	$tlf = array_flip(
-		get_option('wpo_wcpdf_installed_template_paths', array())
+// Search pdf templates in this plugin
+add_action("wpo_wcpdf_template_paths", "wpo_wcpdf_template_paths_gym_plugin");
+function wpo_wcpdf_template_paths_gym_plugin($installed_templates) {
+	$installed_templates['child-plugin'] = str_replace(
+		'woocommerce-pdf-invoices-packing-slips/templates',
+		'gym/woocommerce/pdf',
+		$installed_templates ['default']
 	);
-/*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'>tlf1 = ".var_export($tlf,true).'</pre>'.PHP_EOL;
-return;
-	$tlf['theme/Attestation'] = str_replace(
-		'woocommerce-pdf-invoices-packing-slips/templates/Simple',
-		'gym/woocommerce/pdf/Attestation',
-		$tlf['default/Simple']
-	);
-//*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'>tlf2 = ".var_export($tlf,true).'</pre>'.PHP_EOL;
-	update_option( 'wpo_wcpdf_installed_template_paths', array_flip($tlf) );
-		
-/*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'>wp_enqueue_scripts = ".var_export(get_option( 'wpo_wcpdf_installed_template_paths', array() ),true).'</pre>'.PHP_EOL;
-exit;
-//////////////////////////////
 
-
+	return $installed_templates;
 }
 
-// Many init operations
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_plugin_gym_2");
-function wp_enqueue_scripts_plugin_gym_2($args) {
-
-/////////////////////////////////////////////////		
-//*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'> = ".var_export($args,true).'</pre>'.PHP_EOL;
-return;
-
-	$tlf = array_flip(
-		get_option('wpo_wcpdf_installed_template_paths', array())
-	);
-//*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'>tlf1 = ".var_export($tlf,true).'</pre>'.PHP_EOL;
-	$tlf['theme/Attestation'] = str_replace(
-		'woocommerce-pdf-invoices-packing-slips/templates/Simple',
-		'gym/woocommerce/pdf/Attestation',
-		$tlf['default/Simple']
-	);
-//*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'>tlf2 = ".var_export($tlf,true).'</pre>'.PHP_EOL;
-	update_option( 'wpo_wcpdf_installed_template_paths', array_flip($tlf) );
-		
-//*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'>wp_enqueue_scripts = ".var_export(get_option( 'wpo_wcpdf_installed_template_paths', array() ),true).'</pre>'.PHP_EOL;
-//////////////////////////////
-
-
-	// Replace "Ben Oui" by "Oui"
+// Replace "Ben Oui" by "Oui"
+add_action("init", "init_gym_plugin");
+function init_gym_plugin() {
 	global $wpdb;
-	$orders_ben_oui = $wpdb->get_results("SELECT * FROM wp3_wc_orders_meta WHERE meta_value = 'Ben Oui'");
+	$orders_ben_oui = $wpdb->get_results(
+		"SELECT * FROM wp3_wc_orders_meta " .
+		"WHERE meta_value = 'Ben Oui'"
+	);
 	foreach ($orders_ben_oui as $obo)
 		$wpdb->get_results("UPDATE wp3_wc_orders_meta SET meta_value = 'Oui' WHERE wp3_wc_orders_meta.id = ".$obo->id);
 }
 
 // Horaires
-add_shortcode("horaires", "horaires_plugin_gym");
-function horaires_plugin_gym() {
+add_shortcode("horaires", "horaires_gym_plugin");
+function horaires_gym_plugin() {
 	global $nom_jour, $wp_query;
 
 	// Seulement pour les pages
@@ -196,8 +166,8 @@ function lien_page($titre, $slug = "") {
 }
 
 // Calendrier
-add_shortcode("calendrier", "calendrier_plugin_gym");
-function calendrier_plugin_gym() {
+add_shortcode("calendrier", "calendrier_gym_plugin");
+function calendrier_gym_plugin() {
 	global $annee, $nom_jour, $nom_mois, $wp_query;
 
 	// Seulement pour les pages
@@ -280,8 +250,8 @@ function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
 }
 
 // Calcul des forfaits
-add_action("woocommerce_before_calculate_totals", "wbct_plugin_gym", 20, 1);
-function wbct_plugin_gym($cart) {
+add_action("woocommerce_before_calculate_totals", "wbct_gym_plugin", 20, 1);
+function wbct_gym_plugin($cart) {
 	// Calcul du total des cours
 	$nb_cours = $total_cours = $nb_mn = $total_mn = 0;
 	foreach ($cart->get_cart() as $item) {
@@ -324,8 +294,8 @@ function wbct_plugin_gym($cart) {
 	}
 }
 
-add_shortcode("doc_admin", "doc_admin_plugin_gym");
-function doc_admin_plugin_gym() {
+add_shortcode("doc_admin", "doc_admin_gym_plugin");
+function doc_admin_gym_plugin() {
 	// Verification de droits d'accès
 	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
 		return;
