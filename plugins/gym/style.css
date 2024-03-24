@@ -90,10 +90,6 @@ table.calendrier {
   color: white !important;
   font-weight: bold;
 }
-.wp-block-group .wp-block-table {
-  /* Efface les tableaux de saisie de calendrier */
-  display: none;
-}
 
 /* WooCommerce */
 .wc-block-mini-cart__empty-cart-wrapper div,

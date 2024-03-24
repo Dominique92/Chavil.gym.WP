@@ -3,13 +3,17 @@ BUGS
 
 TODO
 ====
+//TODO délivrer plugin
+https://wordpress.stackexchange.com/questions/260969/update-my-custom-wordpress-plugin-through-my-own-server
+https://github.com/YahnisElsts/plugin-update-checker
+https://rudrastyh.com/wordpress/self-hosted-plugin-update.html
 
 BEST
 ====
 Menu : Revoir les condition de décalage vers la gauche de la dernière (4em) colonne à droite
 Le bandeau affiche le nom de l'adhérent quand connecté
 Rediriger la page boutique vers horaire
-Ne pas afficher le panier dans les horaries si le cours est déjà dans le panier
+Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
 Editeur : Style blocs entouré en mode tablette ou mobile
 zIndex menu : Pb de canvas avec la carte
 

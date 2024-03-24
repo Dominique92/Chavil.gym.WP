@@ -13,18 +13,7 @@ if (!defined('ABSPATH')) {
   exit();
 }
 
-//TODO https://wordpress.stackexchange.com/questions/260969/update-my-custom-wordpress-plugin-through-my-own-server
-//TODO https://github.com/YahnisElsts/plugin-update-checker
-//TODO https://rudrastyh.com/wordpress/self-hosted-plugin-update.html
-
-//TODO calendrier à partir des dates
-
-$annee = 2024;
-$nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi",
-	"samedi", "dimanche"];
-$nom_mois = ["janvier", "fevrier", "mars", "avril", "mai", "juin",
-	"juillet", "aout", "septembre", "octobre", "novembre", "décembre",
-	"janvier", "fevrier", "mars", "avril", "mai", "juin"];
+$nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
 add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
 add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
@@ -66,6 +55,24 @@ function init_gym_plugin() {
 	);
 	foreach ($orders_ben_oui as $obo)
 		$wpdb->get_results("UPDATE wp3_wc_orders_meta SET meta_value = 'Oui' WHERE wp3_wc_orders_meta.id = ".$obo->id);
+}
+
+// Redirection d'une page produit
+add_filter('template_include', 'template_include_gym_theme');
+function template_include_gym_theme($template) {
+	global $post;
+
+	if ($post) {
+		$query = get_queried_object();
+		$cat = get_the_terms($post->ID, 'product_cat');
+
+		if (isset($query->post_type) &&
+			$query->post_type == 'product' &&
+			$cat)
+			header('Location: '.get_site_url().'/'.$cat[0]->slug);
+	}
+
+	return $template;
 }
 
 // Horaires
@@ -165,88 +172,86 @@ function lien_page($titre, $slug = "") {
 	}
 }
 
-// Calendrier
+/** Calendrier
+* Code court
+[calendrier]
+2024-9-5
+...
+2025-4-17
+[/calendrier]
+*/
 add_shortcode("calendrier", "calendrier_gym_plugin");
-function calendrier_gym_plugin() {
-	global $annee, $nom_jour, $nom_mois, $wp_query;
+function calendrier_gym_plugin($args, $text) {
+	global $wp_query, $nom_jour;
 
-	// Seulement pour les pages
-	if (!isset ($wp_query->queried_object->post_title)) {
+	// Seulement pour les pages (bug en edit)
+	if (!isset ($wp_query->queried_object->ID)) {
 		return;
 	}
 
-	date_default_timezone_set("Europe/Paris");
+	setlocale(LC_TIME, "fr_FR");
 	$calendrier = [];
+	$annee_debut = 9999;
+	$dateTime = new DateTime();
 
-	// Remplir des cases actives
-	preg_match_all("|<tr>.*</tr>|U", $wp_query->queried_object->post_content, $lignes);
-	foreach ($lignes[0] as $l) {
-		preg_match_all("|<td>(.*)</td>|U", $l, $colonnes);
-		if (count($colonnes) == 2 && is_numeric($colonnes[1][0])) {
-			foreach (explode(",", $colonnes[1][1]) as $jour) {
-				remplir_calendrier(
-					$calendrier,
-					$annee + ($colonnes[1][0] < 8 ? 1 : 0),
-					$colonnes[1][0],
-					$jour,
-					"date_active"
-				);
-			}
-		}
+	// Déclarer les dates actives
+	preg_match_all("/[0-9\-]+/", $text, $dates);
+	foreach ($dates[0] as $d) {
+		$annee_debut = min ($annee_debut, strtok($d, '-'));
+
+		remplir_calendrier(
+			$calendrier,
+			strtotime($d),
+			"date_active"
+		);
 	}
 
-	// Déclarer les autres cases (uniquement si jour déjà existant)
-	for ($j = 1;$j < 310;$j++) {
-		remplir_calendrier($calendrier, $annee, 9, $j, "");
+	// Déclarer les autres cases pour les jours de la semaine ayant une date
+	for ($j = 1; $j < 310; $j++) {
+		$dateTime->setDate($annee_debut, 9, $j); // Normalise le jour/mois/année
+		remplir_calendrier($calendrier, $dateTime->getTimestamp());
 	}
 
 	// Afficher le calendrier
-	$cal = [];
+	$output = [];
 	ksort($calendrier);
 	foreach ($calendrier as $k => $v) {
+		// Si rôle = éditeur
 		$edit = isset(wp_get_current_user()->allcaps["edit_others_pages"]) ?
-			"<a class=\"crayon\" title=\"Modification du calendrier\" href=\"" . get_bloginfo("url") . 
+			"<a class=\"crayon\" title=\"Modification du calendrier\" href=\"" .
+			get_bloginfo("url") .
 			"/wp-admin/post.php?&action=edit&post={$wp_query->queried_object->ID}\">&#9998;</a>" :
 			"";
-		$cal[] = "<table class=\"calendrier\">";
-		$cal[] = "<tr><td colspan=\"6\">Les {$nom_jour[$k]}s $edit</td></tr>";
+		$output[] = "<table class=\"calendrier\">";
+		$output[] = "<tr><td colspan=\"6\">Les {$nom_jour[$k-1]}s $edit</td></tr>";
 
-		ksort($v);
-		foreach ($v as $kv => $vv) {
-			if ($kv < 19) {
-				// N'affiche pas juillet
-				$cal[] = "<tr><td>{$nom_mois[$kv]}</td>";
-				ksort($vv);
-				foreach ($vv as $kvv => $vvv) {
-					$cal[] = "<td class=\"$vvv\">$kvv</td>";
-				}
-				$cal[] = "</tr>";
+		for ($m = 9; $m <= 18; $m++) { // Par rapport à $annee_debut septembre à juin
+			$dateTime->setDate($annee_debut, $m, 1); // Normalise le jour/mois/année
+			$mf = utf8_encode(strftime("%B", $dateTime->getTimestamp()));
+			$vv = $v[$m + $annee_debut * 12];
+			ksort($vv);
+
+			$output[] = "<tr><td>{$mf}</td>";
+			foreach ($vv as $kvv => $vvv) {
+				$output[] = "<td class=\"$vvv\">$kvv</td>";
 			}
+			$output[] = "</tr>";
 		}
-		$cal[] = "</table>";
+		$output[] = "</table>";
 	}
-	$cal[] = "</div>";
+	$output[] = "</div>";
 
-	return implode(PHP_EOL, $cal);
+	return implode(PHP_EOL, $output);
 }
 
-function remplir_calendrier(&$calendrier, $an, $mois, $jour, $set) {
-	global $annee;
+function remplir_calendrier(&$calendrier, $time, $set = "") {
+	$js = date("N",$time); // n° jour dans la semaine
+	$ma = date("n",$time) + date("o",$time) * 12; // n° mois + année * 12
+	$jm = date("j",$time); // n° jour dans le mois
 
-	if ($jour) {
-		$dateTime = new DateTime();
-		$dateTime->setDate($an, $mois, $jour);
-		$dt = explode(" ", $dateTime->format("Y N n j"));
-		$no_jour = $dt[1];
-		$no_mois = $dt[2] + ($dt[0] - $annee) * 12;
-
-		if (!isset($calendrier[$no_jour]) && $set) { // On crée le jour si on y a une date
-			$calendrier[$no_jour] = [];
-		}
-		if (isset($calendrier[$no_jour])) { // On popule si le jour est crée
-			@$calendrier[$no_jour][$no_mois][$dt[3]] .= $set;
-		}
-	}
+	if ((isset($calendrier[$js]) || $set) &&
+		!isset($calendrier[$js][$ma][$jm]))
+		$calendrier[$js][$ma][$jm] = $set;
 }
 
 // Calcul des forfaits
