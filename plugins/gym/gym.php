@@ -299,6 +299,12 @@ function wbct_gym_plugin($cart) {
 	}
 }
 
+// Remplacement de [RC] par <br/> dans le questionnaire de santé
+add_filter('woocommerce_form_field_checkbox', 'woocommerce_form_field_checkbox_function');
+function woocommerce_form_field_checkbox_function($field) {
+	return str_replace('[RC]','<br/>',$field);
+}
+
 add_shortcode("doc_admin", "doc_admin_gym_plugin");
 function doc_admin_gym_plugin() {
 	// Verification de droits d'accès
