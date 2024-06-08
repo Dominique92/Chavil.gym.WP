@@ -3,6 +3,9 @@ BUGS
 
 TODO
 ====
+JUIN
+Supprimet toutes les commandes
+
 //TODO délivrer plugin
 https://wordpress.stackexchange.com/questions/260969/update-my-custom-wordpress-plugin-through-my-own-server
 https://github.com/YahnisElsts/plugin-update-checker
@@ -144,13 +147,13 @@ print PDF &output=html
 MISE EN SERVICE
 ===============
 Changer url
-SQL : 2024.gym.c92.fr -> test.gym.c92.fr
-SQL : admin@2024.gym.c92.fr -> chavil.gym@c92.fr
-SQL : gym2024@c92.fr -> chavil.gym@c92.fr
+SQL : admin@2024.gym.c92.fr -> chavil.gym@sc92.fr
 SQL : woocommerce@2024.gym.c92.fr -> chavil.gym@c92.fr
+SQL : gym2024@c92.fr -> chavil.gym@c92.fr
+SQL : 2024.gym.c92.fr -> test.gym.c92.fr
 
 SQL : chavil.gym@c92.fr -> wric@c92.fr
-SQL : public_html/gym2024 -> public_html/gym_plugin
+SQL : public_html/gym2024 -> public_html/gymp
 SQL : test.gym.c92.fr -> p.gym.c92.fr
 
 Config.php

@@ -1,12 +1,12 @@
 <?php
-/**
- * Plugin Name: gym
- * Plugin URI: https://github.com/Dominique92/Chavil.gym
- * Description: Plugin WordPress pour la Gym Volontaire de Chaville
- * Author: Dominique Cavailhez
- * Version: 1.0.0
- * License: GPL2
- */
+/*
+Theme Name: gym
+Template: storefront
+Theme URI: https://github.com/Dominique92/Chavil.gym
+Description: Theme WordPress pour la Gym Volontaire de Chaville
+Author: Dominique Cavailhez
+Version: 1.0.0
+*/
 
 // Exit if accessed directly
 if (!defined("ABSPATH")) {
@@ -15,21 +15,44 @@ if (!defined("ABSPATH")) {
 
 $nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
+add_filter("auto_core_update_send_email", "__return_false"); // Disable core update emails
+add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
+add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
+add_filter("auto_theme_update_send_email", "__return_false"); // Disable update emails
+add_filter("auto_core_update_send_email", "send_email_function");
+function send_email_function($send, $type) {
+	if (!empty($type) && $type == "success") {
+		return false;
+	}
+	return true;
+}
+
 // Load syle.css files
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_gym_theme");
-function wp_enqueue_scripts_gym_theme() {
-	wp_register_style("gym-theme-style", get_stylesheet_uri());
-	wp_enqueue_style("gym-theme-style");
+add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
+function wp_enqueue_scripts_function() {
+	wp_register_style("style", get_stylesheet_uri());
+	wp_enqueue_style("style");
 }
 
 // Use global urls in block templates (as defined in wp-includes/general-template.php)
 add_shortcode("get_info", "get_info_function");
 function get_info_function($args) {
-	if ($args[0] == "current_user_id") {
+	if ($args[0] == "current_user_id")
 		return get_current_user_id(); //TODO use is_user_logged_in()
-   	} else {
+	else
 		return get_bloginfo($args[0]);
-	}
+}
+
+// Entête
+add_shortcode("connexion", "connexion_function");
+function connexion_function() {
+	$user = _wp_get_current_user();
+	return $user->ID ? $user->display_name : 'Se connecter';
+}
+
+add_shortcode("cart_count", "cart_count_function");
+function cart_count_function() {
+	return WC()->cart->get_cart_contents_count();
 }
 
 // Sous menu dans la page
@@ -41,44 +64,14 @@ function menu_gym_theme($args) {
 	]);
 }
 
-add_action("admin_head", "admin_head_gym_theme");
-function admin_head_gym_theme() {
+add_action("admin_head", "admin_head_function");
+function admin_head_function() {
 	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
 }
 
-add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
-add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
-add_filter("auto_theme_update_send_email", "__return_false"); // Disable update emails
-add_filter("auto_core_update_send_email", "send_email_gym_plugin");
-function send_email_gym_plugin($send, $type) {
-	if (!empty($type) && $type == "success") {
-		return false;
-	}
-	return true;
-}
-
-// Load syle.css files
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_gym_plugin");
-function wp_enqueue_scripts_gym_plugin($args) {
-    wp_register_style("gym-plugin-style", plugins_url("style.css", __FILE__));
-    wp_enqueue_style("gym-plugin-style");
-}
-
-// Search pdf templates in this plugin
-add_action("wpo_wcpdf_template_paths", "wpo_wcpdf_template_paths_gym_plugin");
-function wpo_wcpdf_template_paths_gym_plugin($installed_templates) {
-	$installed_templates["child-plugin"] = str_replace(
-		"woocommerce-pdf-invoices-packing-slips/templates",
-		"gym/woocommerce/pdf",
-		$installed_templates ["default"]
-	);
-
-	return $installed_templates;
-}
-
 // Replace "Ben Oui" by "Oui"
-add_action("init", "init_gym_plugin");
-function init_gym_plugin() {
+add_action("init", "init_gym_function");
+function init_gym_function() {
 	global $wpdb;
 	$orders_ben_oui = $wpdb->get_results(
 		"SELECT * FROM wp3_wc_orders_meta " .
@@ -89,8 +82,8 @@ function init_gym_plugin() {
 }
 
 // Redirection d'une page produit
-add_filter("template_include", "template_include_gym_theme");
-function template_include_gym_theme($template) {
+add_filter("template_include", "template_include_function");
+function template_include_function($template) {
 	global $post;
 
 	if ($post) {
@@ -107,8 +100,8 @@ function template_include_gym_theme($template) {
 }
 
 // Horaires
-add_shortcode("horaires", "horaires_gym_plugin");
-function horaires_gym_plugin() {
+add_shortcode("horaires", "horaires_function");
+function horaires_function() {
 	global $nom_jour, $wp_query;
 
 	// Seulement pour les pages
@@ -211,8 +204,8 @@ function lien_page($titre, $slug = "") {
 2025-4-17
 [/calendrier]
 */
-add_shortcode("calendrier", "calendrier_gym_plugin");
-function calendrier_gym_plugin($args, $text) {
+add_shortcode("calendrier", "calendrier_function");
+function calendrier_function($args, $text) {
 	global $wp_query, $nom_jour;
 
 	// Seulement pour les pages (bug en edit)
@@ -286,8 +279,8 @@ function remplir_calendrier(&$calendrier, $time, $set = "") {
 }
 
 // Calcul des forfaits
-add_action("woocommerce_before_calculate_totals", "wbct_gym_plugin", 20, 1);
-function wbct_gym_plugin($cart) {
+add_action("woocommerce_before_calculate_totals", "wbct_function", 20, 1);
+function wbct_function($cart) {
 	// Calcul du total des cours
 	$nb_cours = $total_cours = $nb_mn = $total_mn = 0;
 	foreach ($cart->get_cart() as $item) {
@@ -336,8 +329,8 @@ function woocommerce_form_field_function($field) {
 	return str_replace("[RC]", "<br/>", $field);
 }
 
-add_shortcode("doc_admin", "doc_admin_gym_plugin");
-function doc_admin_gym_plugin() {
+add_shortcode("doc_admin", "doc_admin_function");
+function doc_admin_function() {
 	// Verification de droits d'accès
 	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
 		return;
