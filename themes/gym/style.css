@@ -7,6 +7,16 @@ Author: Dominique Cavailhez
 Version: 1.0.0
 */
 
+/* Cadrage de la page et des titres */
+.wp-block-group {
+  margin: 0px calc(max(1%, 10% - 50px)) !important;
+  padding: 0;
+}
+
+.copyright {
+  text-align: center;
+}
+
 /* Entête */
 .gym-entete {
   text-align: right;
@@ -46,57 +56,74 @@ Version: 1.0.0
   padding: 0;
 }
 
-/* Cadrage de la page et des titres */
-.wp-block-group {
-  margin: 0px calc(max(1%, 10% - 50px)) !important;
-  padding: 0;
-}
-
-.copyright {
-  text-align: center;
-}
-
-/* Banniere */
+/* Banniere / logo */
 .banniere {
-  height: 56px;
-  text-align: center;
   background: #5826f4;
 }
 
 .banniere img {
-  float: left;
-  height: 56px !important;
-}
-
-.banniere h1 {
-  margin: 0;
-  padding-top: 7px;
-  font-family: arial, sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  color: white;
-}
-
-.banniere a {
-  text-decoration: none;
-}
-
-.customer_account {
-  float: right;
-  margin: 18px 10px;
-  color: white;
-}
-
-@media (max-width: 350px) {
-  .banniere img {
-    display: none;
-  }
+  margin: 5px;
+  height: 59px;
 }
 
 /* Menu navigation */
-.wp-block-navigation {
-  width: 100%;
-  margin: 10px 0;
+.banniere nav {
+  float: right;
+  width: calc(100% - 70px);
+  margin: 16px 0;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .gym-entete {
+    background: #08BABF;
+  }
+
+  .gym-entete a {
+    color: white;
+  }
+
+  .banniere {
+    width: 24px;
+  }
+
+  .banniere img {
+    display: none;
+  }
+
+  .banniere button.wp-block-navigation__responsive-container-open {
+    position: relative;
+    top: -48px;
+    color: #08BABF;
+  }
+
+  .banniere button.wp-block-navigation__responsive-container-open:after {
+    font-family: Sans Serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    content: "MENU";
+  }
+
+  .gym-entete>a,
+  .gym-entete>a:hover {
+    padding: 3px;
+    border: none;
+  }
+
+  .wp-block-navigation__responsive-container-close {
+    left: 0;
+  }
+}
+
+@media (max-width: 350px) {
+  .banniere button.wp-block-navigation__responsive-container-open {
+    color: white;
+  }
+
+  .banniere button.wp-block-navigation__responsive-container-open:after {
+    display: none;
+  }
 }
 
 .wp-block-page-list {
@@ -118,13 +145,7 @@ ul.wp-block-page-list>li:not(:has(button)) {
   border-radius: 0.5em;
 }
 
-.wp-block-page-list li:nth-child(4) ul {
-  left: initial !important;
-  right: 0 !important;
-}
-
-.wp-block-page-list ul,
-.wp-block-page-list li li {
+.wp-block-page-list ul {
   background: inherit !important;
 }
 
@@ -142,14 +163,9 @@ ul.wp-block-page-list>li:not(:has(button)) {
   color: white !important;
 }
 
-.wp-block-page-list>li,
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li {
-  background: grey !important;
-}
-
 .wp-block-page-list>li:nth-child(1),
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li:nth-child(1) {
-  background: hsl(0, 50%, 40%) !important;
+  background: hsl(0, 40%, 40%) !important;
 }
 
 .wp-block-page-list>li:nth-child(2),
@@ -164,7 +180,7 @@ ul.wp-block-page-list>li:not(:has(button)) {
 
 .wp-block-page-list>li:nth-child(4),
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li:nth-child(5) {
-  background: hsl(270, 50%, 40%) !important;
+  background: hsl(270, 30%, 50%) !important;
 }
 
 /* Sous-menus dans la page */
