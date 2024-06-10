@@ -74,7 +74,7 @@ Version: 1.0.0
   color: white;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 580px) {
   .gym-entete {
     background: #08BABF;
   }
@@ -116,7 +116,19 @@ Version: 1.0.0
   }
 }
 
+@media (max-width: 450px) {
+  #gym-actualites {
+    display: none;
+  }
+}
+
 @media (max-width: 350px) {
+  #gym-horaires {
+    display: none;
+  }
+}
+
+@media (max-width: 280px) {
   .banniere button.wp-block-navigation__responsive-container-open {
     color: white;
   }

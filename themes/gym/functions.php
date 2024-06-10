@@ -47,7 +47,7 @@ function get_info_function($args) {
 add_shortcode("connexion", "connexion_function");
 function connexion_function() {
 	$user = _wp_get_current_user();
-	return $user->ID ? $user->display_name : 'Se connecter';
+	return $user->ID ? $user->display_name : 'Mon compte';
 }
 
 add_shortcode("cart_count", "cart_count_function");

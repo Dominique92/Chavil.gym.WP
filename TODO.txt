@@ -5,6 +5,9 @@ TODO
 ====
 JUIN
 Supprimet toutes les commandes
+Migration base
+Rapatrier rando
+Liens anciens sites 2022 2023
 
 //TODO délivrer plugin
 https://wordpress.stackexchange.com/questions/260969/update-my-custom-wordpress-plugin-through-my-own-server
