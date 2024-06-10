@@ -19,22 +19,23 @@ Version: 1.0.0
 
 /* Entête */
 .gym-entete {
-  text-align: right;
   padding: 11px;
+  text-align: right;
   font-family: Sans-serif;
 }
 
 .gym-entete>a {
-  padding: 3px 5px;
   border: white solid 2px;
+  padding: 3px 5px;
   color: #5826F4;
-  text-decoration: none;
   font-size: 18px;
   font-weight: 500;
+  text-decoration: none;
 }
 
 .gym-entete>a:hover {
   border: grey solid 2px;
+  border-radius: 0.5em;
 }
 
 .gym-entete .bouton-cyan {
@@ -62,8 +63,8 @@ Version: 1.0.0
 }
 
 .banniere img {
-  margin: 5px;
   height: 59px;
+  margin: 5px;
 }
 
 /* Menu navigation */
@@ -98,17 +99,17 @@ Version: 1.0.0
   }
 
   .banniere button.wp-block-navigation__responsive-container-open:after {
+    content: "MENU";
+    color: white;
     font-family: Sans Serif;
     font-size: 18px;
     font-weight: 500;
-    color: white;
-    content: "MENU";
   }
 
   .gym-entete>a,
   .gym-entete>a:hover {
-    padding: 3px;
     border: none;
+    padding: 3px;
   }
 
   .wp-block-navigation__responsive-container-close {
@@ -141,9 +142,9 @@ Version: 1.0.0
 .wp-block-page-list {
   margin: 0 2%;
   justify-content: space-around !important;
+  color: white !important;
   font-weight: bold;
   font-size: 20px;
-  color: white !important;
 }
 
 ul.wp-block-page-list>li:not(:has(button)) {
@@ -153,8 +154,8 @@ ul.wp-block-page-list>li:not(:has(button)) {
 
 .wp-block-page-list>li,
 .wp-block-page-list ul {
-  padding: 0.2em 0.3em !important;
   border-radius: 0.5em;
+  padding: 0.2em 0.3em !important;
 }
 
 .wp-block-page-list ul {
@@ -163,8 +164,8 @@ ul.wp-block-page-list>li:not(:has(button)) {
 
 .wp-block-page-list li li a {
   padding: 2px;
-  font-weight: normal;
   color: white !important;
+  font-weight: normal;
 }
 
 .wp-block-navigation__responsive-dialog {
@@ -213,10 +214,10 @@ h2.block-editor-rich-text__editable
 /* Edit */
   {
   margin: 0.5em;
-  padding: 0.1em;
   border-radius: 10px;
-  background: #08babe;
+  padding: 0.1em;
   color: white;
+  background: #08babe;
 }
 
 /* Texte page */
@@ -227,9 +228,9 @@ h2.block-editor-rich-text__editable
 
 /* Images */
 .wp-block-image img {
-  border-radius: 1em;
   width: 33vw;
   max-width: 33vh;
+  border-radius: 1em;
 }
 
 @media (max-width: 600px) {
@@ -320,8 +321,8 @@ table.calendrier {
 }
 
 .calendrier td:not(:first-child) {
-  padding: 0.25em;
   width: 1.5em;
+  padding: 0.25em;
   text-align: center;
   color: #999;
 }
