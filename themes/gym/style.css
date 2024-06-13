@@ -21,7 +21,7 @@ Version: 1.0.0
 .gym-entete {
   padding: 11px;
   text-align: right;
-  font-family: Sans-serif;
+  font-family: Arial;
 }
 
 .gym-entete>a {
@@ -50,10 +50,19 @@ Version: 1.0.0
   display: none;
 }
 
+.gym-entete svg {
+  color: #5826f4 !important;
+}
+
+.gym-entete .wc-block-mini-cart__badge {
+  color: white;
+  background: #5826f4;
+}
+
 .gym-entete button {
   position: relative;
   top: 10px;
-  margin: -10px 5px;
+  margin: -10px 5px 0 0;
   padding: 0;
 }
 
@@ -75,35 +84,44 @@ Version: 1.0.0
   color: white;
 }
 
-@media (max-width: 580px) {
-  .gym-entete {
-    background: #08BABF;
+@media (max-width: 600px) {
+
+  .gym-entete,
+  .gym-entete .bouton-cyan {
+    background: #5826f4;
   }
 
-  .gym-entete a {
-    color: white;
+  .gym-entete a,
+  .gym-entete svg {
+    color: white !important;
+  }
+
+  .gym-entete .wc-block-mini-cart__badge {
+    color: #5826f4;
+    background: white;
   }
 
   .banniere {
     width: 24px;
   }
 
-  .banniere img {
+  .banniere img,
+  #gym-horaires {
     display: none;
   }
 
   .banniere button.wp-block-navigation__responsive-container-open {
     position: relative;
     top: -48px;
-    color: #08BABF;
+    color: #5826f4;
   }
 
   .banniere button.wp-block-navigation__responsive-container-open:after {
     content: "MENU";
     color: white;
-    font-family: Sans Serif;
+    font-family: Arial;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .gym-entete>a,
@@ -114,28 +132,6 @@ Version: 1.0.0
 
   .wp-block-navigation__responsive-container-close {
     left: 0;
-  }
-}
-
-@media (max-width: 450px) {
-  #gym-actualites {
-    display: none;
-  }
-}
-
-@media (max-width: 350px) {
-  #gym-horaires {
-    display: none;
-  }
-}
-
-@media (max-width: 280px) {
-  .banniere button.wp-block-navigation__responsive-container-open {
-    color: white;
-  }
-
-  .banniere button.wp-block-navigation__responsive-container-open:after {
-    display: none;
   }
 }
 
@@ -192,7 +188,7 @@ ul.wp-block-page-list>li:not(:has(button)) {
 }
 
 .wp-block-page-list>li:nth-child(4),
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li:nth-child(5) {
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li:nth-child(4) {
   background: hsl(270, 30%, 50%) !important;
 }
 
@@ -308,7 +304,7 @@ table.calendrier {
   border: 2px solid grey !important;
   border-collapse: collapse !important;
   border-spacing: 0 !important;
-  font-family: arial, sans-serif;
+  font-family: Arial;
 }
 
 .calendrier tr:first-child td {
