@@ -219,17 +219,20 @@ ul.wp-block-page-list>li:not(:has(button)) {
 }
 
 .wp-block-group h1 {
-  wcolor: transparent;
   font-size: 0.1px;
   margin: 10px !important;
 }
 
+.wp-block-group h2 {
+  margin: 5px;
+}
+
 .wp-block-group h1:before {
   content: "Chavil'GYM";
-  wcolor: initial;
   font-size: 32px;
 }
 
+.wp-block-spacer,
 .wp-block-post-date {
   display: none;
 }
