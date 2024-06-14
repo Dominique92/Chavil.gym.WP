@@ -202,18 +202,48 @@ ul.wp-block-page-list>li:not(:has(button)) {
   display: none;
 }
 
-/* Titres à l'intérieur de la page */
-h2.wp-block-heading,
-/* Prod */
-h2.block-editor-rich-text__editable
+/* Articles de la première page */
+.wp-block-post-title a {
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+  background: #08BABF;
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+}
 
+.wp-block-post-excerpt__excerpt {
+  text-align: justify;
+  text-indent: 10px;
+}
+
+.wp-block-group h1 {
+  wcolor: transparent;
+  font-size: 0.1px;
+  margin: 10px !important;
+}
+
+.wp-block-group h1:before {
+  content: "Chavil'GYM";
+  wcolor: initial;
+  font-size: 32px;
+}
+
+.wp-block-post-date {
+  display: none;
+}
+
+/* Titres à l'intérieur de la page */
+/* Prod */
+h2.wp-block-heading,
 /* Edit */
-  {
+h2.block-editor-rich-text__editable {
   margin: 0.5em;
   border-radius: 10px;
   padding: 0.1em;
   color: white;
-  background: #08babe;
+  background: #08BABF;
 }
 
 /* Texte page */
@@ -328,7 +358,7 @@ table.calendrier {
 }
 
 .calendrier .date_active {
-  background: #08babe;
+  background: #08BABF;
   color: white !important;
   font-weight: bold;
 }

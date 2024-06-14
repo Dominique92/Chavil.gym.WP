@@ -1,0 +1,9 @@
+{
+  "name": "chavil.gym",
+  "scripts": {
+    "beautify": "js-beautify -s=2 package.json themes/gym/style.css"
+  },
+  "dependencies": {
+    "js-beautify": "latest"
+  }
+}
