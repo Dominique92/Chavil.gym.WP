@@ -1,7 +1,7 @@
 <?php
 /*
 Theme Name: gym
-Template: storefront
+Template: twentytwentythree
 Theme URI: https://github.com/Dominique92/Chavil.gym
 Description: Theme WordPress pour la Gym Volontaire de Chaville
 Author: Dominique Cavailhez

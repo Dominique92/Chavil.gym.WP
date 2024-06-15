@@ -1,11 +1,32 @@
 BUGS
 ====
+Pourquoi woocommerce@2024.gym.c92.fr
+admin@2024.gym.c92.fr
 
 TODO
 ====
+
 JUIN
-Supprimet toutes les commandes
+====
 Migration base
+	woocommerce@2024.gym.c92.fr
+	admin@2024.gym.c92.fr
+	gym2024@c92.fr
+	-> chavil.gym@c92.fr
+	2024.gym.c92.fr -> test.gym.c92.fr
+	public_html/gym2024 -> public_html/gymtest
+
+cp -r gym2024 gymtest
+wp-config.php
+	gym2024 -> gymtest
+	define( 'WP_DEBUG', true );
+	define( 'WP_DEBUG_DISPLAY', true);
+.htaccess
+	Header set Cache-Control "max-age=0, private, no-cache, no-store, must-revalidate"
+
+Réglages lecture décocher : Demander aux moteurs de recherche de ne pas indexer ce site
+Supprimer toutes les commandes
+Supprimer autres comptes ?
 Rapatrier rando
 Liens anciens sites 2022 2023
 
@@ -150,7 +171,7 @@ print PDF &output=html
 MISE EN SERVICE
 ===============
 Changer url
-SQL : admin@2024.gym.c92.fr -> chavil.gym@sc92.fr
+SQL : admin@2024.gym.c92.fr -> chavil.gym@c92.fr
 SQL : woocommerce@2024.gym.c92.fr -> chavil.gym@c92.fr
 SQL : gym2024@c92.fr -> chavil.gym@c92.fr
 SQL : 2024.gym.c92.fr -> test.gym.c92.fr

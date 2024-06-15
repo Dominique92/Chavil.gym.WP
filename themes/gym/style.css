@@ -1,10 +1,16 @@
 /*
 Theme Name: gym
-Template: storefront
+Template: twentytwentythree
 Theme URI: https://github.com/Dominique92/Chavil.gym
 Description: Theme WordPress pour la Gym Volontaire de Chaville
 Author: Dominique Cavailhez
 Version: 1.0.0
+*/
+
+/*
+Retirer les styles autres que twentytwentythree & gym
+Activer le thème twentytwentythree
+Puis le thème gym
 */
 
 /* Cadrage de la page et des titres */
@@ -18,6 +24,10 @@ Version: 1.0.0
 }
 
 /* Entête */
+.wp-site-blocks {
+  padding: 0;
+}
+
 .gym-entete {
   padding: 11px;
   text-align: right;
@@ -84,6 +94,10 @@ Version: 1.0.0
   color: white;
 }
 
+.wp-block-columns {
+  display: none !important;
+}
+
 @media (max-width: 600px) {
 
   .gym-entete,
@@ -140,7 +154,7 @@ Version: 1.0.0
   justify-content: space-around !important;
   color: white !important;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 ul.wp-block-page-list>li:not(:has(button)) {
@@ -213,27 +227,37 @@ ul.wp-block-page-list>li:not(:has(button)) {
   cursor: default;
 }
 
+.wp-block-query {
+  margin: 0;
+}
+
+.wp-block-group {
+  font-family: Times New Roman;
+}
+
+.wp-block-group h1 {
+  /* Hide wrong blog title */
+  font-size: 0.1px;
+  margin: 5px !important;
+}
+
+.wp-block-group h2 {
+  margin: 5px;
+  font-size: 24px;
+}
+
+.wp-block-post-excerpt {
+  margin: 0 !important;
+}
+
 .wp-block-post-excerpt__excerpt {
   text-align: justify;
   text-indent: 10px;
 }
 
-.wp-block-group h1 {
-  font-size: 0.1px;
-  margin: 10px !important;
-}
-
-.wp-block-group h2 {
-  margin: 5px;
-}
-
-.wp-block-group h1:before {
-  content: "Chavil'GYM";
-  font-size: 32px;
-}
-
 .wp-block-spacer,
-.wp-block-post-date {
+.wp-block-post-date,
+.wp-block-group .wp-block-template-part {
   display: none;
 }
 
