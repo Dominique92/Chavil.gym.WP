@@ -1,3 +1,6 @@
+NEXT
+post-template.php / function get_the_excerpt( $po
+
 BUGS
 ====
 Pourquoi woocommerce@2024.gym.c92.fr
@@ -5,6 +8,8 @@ admin@2024.gym.c92.fr
 
 TODO
 ====
+Lien modif page accueil
+Pourquoi ne recharge pas le style quelquefois ?
 
 JUIN
 ====
@@ -25,6 +30,7 @@ wp-config.php
 	Header set Cache-Control "max-age=0, private, no-cache, no-store, must-revalidate"
 
 Réglages lecture décocher : Demander aux moteurs de recherche de ne pas indexer ce site
+Enlever paiemant à la commande
 Supprimer toutes les commandes
 Supprimer autres comptes ?
 Rapatrier rando

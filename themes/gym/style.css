@@ -126,7 +126,7 @@ Puis le thème gym
 
   .banniere button.wp-block-navigation__responsive-container-open {
     position: relative;
-    top: -48px;
+    top: -52px;
     color: #5826f4;
   }
 
@@ -217,7 +217,7 @@ ul.wp-block-page-list>li:not(:has(button)) {
 }
 
 /* Articles de la première page */
-.wp-block-post-title a {
+.blog .wp-block-post-title a {
   padding: 5px;
   border-radius: 10px;
   color: white;
@@ -227,48 +227,52 @@ ul.wp-block-page-list>li:not(:has(button)) {
   cursor: default;
 }
 
-.wp-block-query {
+ .wp-block-query {
   margin: 0;
 }
 
-.wp-block-group {
+.blog .wp-block-group {
   font-family: Times New Roman;
 }
 
-.wp-block-group h1 {
+.blog .wp-block-group h1 {
   /* Hide wrong blog title */
   font-size: 0.1px;
   margin: 5px !important;
-}
+ }
 
-.wp-block-group h2 {
-  margin: 5px;
-  font-size: 24px;
-}
-
-.wp-block-post-excerpt {
+.blog  .wp-block-group h1:before {
+  content: "Chavil'GYM";
+  font-size: 32px;} 
+.blog .wp-block-post-excerpt {
   margin: 0 !important;
 }
 
-.wp-block-post-excerpt__excerpt {
+.blog .wp-block-post-excerpt__excerpt {
   text-align: justify;
   text-indent: 10px;
 }
 
-.wp-block-spacer,
-.wp-block-post-date,
-.wp-block-group .wp-block-template-part {
+.blog .wp-block-spacer,
+.blog .wp-block-post-date,
+.blog .wp-block-group .wp-block-template-part {
   display: none;
 }
 
 /* Titres à l'intérieur de la page */
+ .wp-block-group h1 {
+   margin: 5px 0 0 0!important;
+   font-size: 32px;
+}
 /* Prod */
+h2.wp-block-post-title,
 h2.wp-block-heading,
 /* Edit */
 h2.block-editor-rich-text__editable {
-  margin: 0.5em;
+   margin: 5px;
   border-radius: 10px;
   padding: 0.1em;
+  font-size: 24px;
   color: white;
   background: #08BABF;
 }
