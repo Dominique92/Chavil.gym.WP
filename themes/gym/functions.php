@@ -1,19 +1,8 @@
 <?php
-/*
-Theme Name: gym
-Template: twentytwentythree
-Theme URI: https://github.com/Dominique92/Chavil.gym
-Description: Theme WordPress pour la Gym Volontaire de Chaville
-Author: Dominique Cavailhez
-Version: 1.0.0
-*/
-
 // Exit if accessed directly
 if (!defined("ABSPATH")) {
   exit();
 }
-
-$nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
 add_filter("auto_core_update_send_email", "__return_false"); // Disable core update emails
 add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
@@ -28,14 +17,97 @@ function send_email_function($send, $type) {
 }
 
 // Load syle.css files
-add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
+//add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
 function wp_enqueue_scripts_function() {
 	wp_register_style("style", get_stylesheet_uri());
 	wp_enqueue_style("style");
 }
 
+//add_action("admin_head", "admin_head_function");
+function admin_head_function() {
+	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
+}
+
+///////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////
+		/**
+		 * Functions hooked into storefront_header action
+		 *
+		 */
+//function storefront_header_container                 () {} // 0
+//function storefront_skip_links                       () {} // 5
+//function storefront_social_icons                     () {} // 10
+function storefront_site_branding                    () {} // 20
+function storefront_secondary_navigation() { // 30
+	$user = _wp_get_current_user();
+//<div class="gym-entete cart-count-[cart_count]">
+?>
+	<a href="/nous-appeler/">Contact</a>
+	<a href="/horaires/" id="gym-horaires">Horaires</a>
+	<a class="bouton-cyan" title="Mon compte" href="/mon-compte/">
+		<?=$user->ID ? $user->display_name : 'Mon compte'?>
+	</a>
+<?php
+	if (!is_cart()) {
+?>
+	<ul id="site-header-cart" class="site-header-cart menu">
+		<li>
+			<?php storefront_cart_link(); ?>
+		</li>
+		<li>
+			<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
+		</li>
+	</ul>
+<?php
+	}
+}
+function storefront_product_search                   () {} // 40
+//function storefront_header_container_close           () {} // 41
+
+//function storefront_primary_navigation_wrapper       () {} // 42
+function storefront_primary_navigation() { // 50
+?>
+	<div class="banniere">
+		<a class="logo" title="Accueil" href="/">
+			<img src="<?=get_bloginfo('stylesheet_directory')?>/images/logo.png" />
+		</a>
+		<?=wp_nav_menu()?>
+	</div>
+<?php
+}
+function storefront_header_cart                      () {} // 60
+//function storefront_primary_navigation_wrapper_close () {} // 68
+
+////////////////////////////////////////////////////////
+/* Footer */
+function storefront_handheld_footer_bar() {}
+
+function storefront_credit() {return;
+?>
+	&copy; Chavil'GYM 2020 :
+	<a href="/nous-appeler/">Contact</a><br/>
+	Réalisé par <a href="https://github.com/Dominique92/Chavil.gym">Dominique</a>
+	avec <a href="https://fr.wordpress.org">WordPress</a>
+	et <a href="https://woocommerce.com">WooCommerce</a>
+<?php
+}
+
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//add_filter("storefront_customizer_css", "storefront_customizer_css_function");
+//add_filter("storefront_customizer_woocommerce_css", "storefront_customizer_css_function");
+function storefront_customizer_css_function($styles) {
+	//$allowed_blocks[] = 'core/image';
+	$styles = str_replace('min-width: 768px', 'min-width: 666px', $styles);
+//*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'> = ".var_export($styles,true).'</pre>'.PHP_EOL;
+	return $styles;
+}
+
+///////////////////////////////////////////////////////////////
+
 // Use global urls in block templates (as defined in wp-includes/general-template.php)
-add_shortcode("get_info", "get_info_function");
+//add_shortcode("get_info", "get_info_function");
 function get_info_function($args) {
 	if ($args[0] == "current_user_id")
 		return get_current_user_id(); //TODO use is_user_logged_in()
@@ -50,13 +122,13 @@ function connexion_function() {
 	return $user->ID ? $user->display_name : 'Mon compte';
 }
 
-add_shortcode("cart_count", "cart_count_function");
+//add_shortcode("cart_count", "cart_count_function");
 function cart_count_function() {
 	return WC()->cart->get_cart_contents_count();
 }
 
 // Sous menu dans la page
-add_shortcode("menu", "menu_gym_theme");
+//add_shortcode("menu", "menu_gym_theme");
 function menu_gym_theme($args) {
 	return wp_nav_menu([
 		"menu_class" => @$args["class"],
@@ -64,25 +136,15 @@ function menu_gym_theme($args) {
 	]);
 }
 
-add_action("admin_head", "admin_head_function");
-function admin_head_function() {
-	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
-}
-
-// Replace "Ben Oui" by "Oui"
-add_action("init", "init_gym_function");
-function init_gym_function() {
-	global $wpdb;
-	$orders_ben_oui = $wpdb->get_results(
-		"SELECT * FROM wp3_wc_orders_meta " .
-		"WHERE meta_value = 'Ben Oui'"
-	);
-	foreach ($orders_ben_oui as $obo)
-		$wpdb->get_results("UPDATE wp3_wc_orders_meta SET meta_value = 'Oui' WHERE wp3_wc_orders_meta.id = ".$obo->id);
+// Autorisation des images dans la page des articles
+//add_filter("excerpt_allowed_blocks", "excerpt_allowed_blocks_function");
+function excerpt_allowed_blocks_function($allowed_blocks) {
+	$allowed_blocks[] = 'core/image';
+	return $allowed_blocks;
 }
 
 // Redirection d'une page produit
-add_filter("template_include", "template_include_function");
+//add_filter("template_include", "template_include_function");
 function template_include_function($template) {
 	global $post;
 
@@ -99,7 +161,21 @@ function template_include_function($template) {
 	return $template;
 }
 
+// Replace "Ben Oui" by "Oui"
+add_action("init", "init_gym_function");
+function init_gym_function() {
+	global $wpdb;
+	$orders_ben_oui = $wpdb->get_results(
+		"SELECT * FROM wp3_wc_orders_meta " .
+		"WHERE meta_value = 'Ben Oui'"
+	);
+	foreach ($orders_ben_oui as $obo)
+		$wpdb->get_results("UPDATE wp3_wc_orders_meta SET meta_value = 'Oui' WHERE wp3_wc_orders_meta.id = ".$obo->id);
+}
+
 // Horaires
+$nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
+
 add_shortcode("horaires", "horaires_function");
 function horaires_function() {
 	global $nom_jour, $wp_query;

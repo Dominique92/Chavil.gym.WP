@@ -1,40 +1,25 @@
 /*
 Theme Name: gym
-Template: twentytwentythree
+Template: storefront
 Theme URI: https://github.com/Dominique92/Chavil.gym
 Description: Theme WordPress pour la Gym Volontaire de Chaville
 Author: Dominique Cavailhez
 Version: 1.0.0
 */
 
-/*
-Retirer les styles autres que twentytwentythree & gym
-Activer le thème twentytwentythree
-Puis le thème gym
-*/
-
-/* Cadrage de la page et des titres */
-.wp-block-group {
-  margin: 0px calc(max(1%, 10% - 50px)) !important;
-  padding: 0;
-}
-
-.copyright {
-  text-align: center;
-}
-
 /* Entête */
-.wp-site-blocks {
+.site-header {
   padding: 0;
 }
 
-.gym-entete {
-  padding: 11px;
+.site-header .col-full {
+  margin: 0;
+  padding: 0;
   text-align: right;
   font-family: Arial;
 }
 
-.gym-entete>a {
+.site-header .col-full>a {
   border: white solid 2px;
   padding: 3px 5px;
   color: #5826F4;
@@ -43,170 +28,128 @@ Puis le thème gym
   text-decoration: none;
 }
 
-.gym-entete>a:hover {
+.site-header .col-full>a:hover {
   border: grey solid 2px;
   border-radius: 0.5em;
 }
 
-.gym-entete .bouton-cyan {
+.site-header .col-full .bouton-cyan {
   border-radius: 0.5em;
   color: white;
   background: #08BABF;
 }
 
-.gym-entete.cart-count-0 .wc-block-mini-cart,
-.wc-block-mini-cart__items .wc-block-cart-item__prices,
-.wc-block-mini-cart__items .wc-block-cart-item__image {
-  display: none;
+/* Panier */
+.site-header-cart {
+  width: 25px !important;
 }
 
-.gym-entete svg {
-  color: #5826f4 !important;
+.site-header-cart>li:nth-child(2) {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 400px !important;
 }
 
-.gym-entete .wc-block-mini-cart__badge {
-  color: white;
-  background: #5826f4;
-}
-
-.gym-entete button {
-  position: relative;
-  top: 10px;
-  margin: -10px 5px 0 0;
+.site-header-cart .cart-contents {
+  display: initial !important;
   padding: 0;
+}
+
+.site-header-cart .amount,
+.site-header-cart .quantity,
+.site-header-cart .count,
+.site-header-cart .total,
+.site-header-cart img,
+.wp-block-woocommerce-cart .wc-block-cart-item__image img,
+.wp-block-woocommerce-cart .wp-block-separator,
+.wp-block-woocommerce-cart .wp-block-product-new,
+.wp-block-woocommerce-cart .wp-block-heading,
+.edit-link {
+  display: none !important;
 }
 
 /* Banniere / logo */
 .banniere {
   background: #5826f4;
+  height: 60px;
 }
 
 .banniere img {
-  height: 59px;
-  margin: 5px;
+  height: 50px;
+  margin-top: 5px;
 }
 
 /* Menu navigation */
-.banniere nav {
+.banniere>a {
+  display: inline-block;
+}
+
+.banniere .menu {
+  width: calc(100% - 55px);
   float: right;
-  width: calc(100% - 70px);
-  margin: 16px 0;
+  margin: 15px 0;
+}
+
+.banniere .menu>ul {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  justify-content: space-around;
+}
+
+.banniere .menu li {
+  list-style-type: none;
+}
+
+.banniere .menu a {
   color: white;
 }
 
-.wp-block-columns {
-  display: none !important;
-}
-
-@media (max-width: 600px) {
-
-  .gym-entete,
-  .gym-entete .bouton-cyan {
-    background: #5826f4;
-  }
-
-  .gym-entete a,
-  .gym-entete svg {
-    color: white !important;
-  }
-
-  .gym-entete .wc-block-mini-cart__badge {
-    color: #5826f4;
-    background: white;
-  }
-
-  .banniere {
-    width: 24px;
-  }
-
-  .banniere img,
-  #gym-horaires {
-    display: none;
-  }
-
-  .banniere button.wp-block-navigation__responsive-container-open {
-    position: relative;
-    top: -52px;
-    color: #5826f4;
-  }
-
-  .banniere button.wp-block-navigation__responsive-container-open:after {
-    content: "MENU";
-    color: white;
-    font-family: Arial;
-    font-size: 18px;
-    font-weight: 600;
-  }
-
-  .gym-entete>a,
-  .gym-entete>a:hover {
-    border: none;
-    padding: 3px;
-  }
-
-  .wp-block-navigation__responsive-container-close {
-    left: 0;
-  }
-}
-
-.wp-block-page-list {
-  margin: 0 2%;
-  justify-content: space-around !important;
-  color: white !important;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-ul.wp-block-page-list>li:not(:has(button)) {
-  /* Ne pas afficher les pages seules dans le menu */
-  display: none !important;
-}
-
-.wp-block-page-list>li,
-.wp-block-page-list ul {
-  border-radius: 0.5em;
+.banniere .menu>ul>li {
   padding: 0.2em 0.3em !important;
+  border-radius: 0.5em;
 }
 
-.wp-block-page-list ul {
+/* Ne pas afficher les pages seules dans le menu */
+.banniere .menu>ul>li:not(.page_item_has_children) {
+  display: none;
+}
+
+.banniere .menu li ul {
+  position: absolute;
+  display: none;
+  margin-left: -6px;
+  border-radius: 0.5em;
+  padding: 5px;
   background: inherit !important;
 }
 
-.wp-block-page-list li li a {
-  padding: 2px;
-  color: white !important;
-  font-weight: normal;
+.banniere .menu li:hover ul {
+  display: block;
 }
 
-.wp-block-navigation__responsive-dialog {
-  margin: 5px !important;
-}
-
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list li {
-  color: white !important;
-}
-
-.wp-block-page-list>li:nth-child(1),
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li:nth-child(1) {
+.banniere .menu>ul>li:nth-child(2) {
   background: hsl(0, 40%, 40%) !important;
 }
 
-.wp-block-page-list>li:nth-child(2),
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li:nth-child(2) {
+.banniere .menu>ul>li:nth-child(3) {
   background: hsl(90, 50%, 40%) !important;
 }
 
-.wp-block-page-list>li:nth-child(3),
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li:nth-child(3) {
+.banniere .menu>ul>li:nth-child(4) {
   background: hsl(180, 50%, 40%) !important;
 }
 
-.wp-block-page-list>li:nth-child(4),
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-page-list>li:nth-child(4) {
+.banniere .menu>ul>li:nth-child(5) {
   background: hsl(270, 30%, 50%) !important;
 }
 
-/* Sous-menus dans la page */
+.banniere .menu>ul>li:nth-child(5) ul {
+  right: 0;
+}
+
+/* Sous-menus dans la page
 .menu-equipe>ul>li>a,
 .menu-activite>ul>li>a,
 .menu-lieux>ul>li>a,
@@ -215,8 +158,8 @@ ul.wp-block-page-list>li:not(:has(button)) {
 .menu-lieux>ul>li:not(:nth-child(5)) {
   display: none;
 }
-
-/* Articles de la première page */
+ */
+/* Articles de la première page
 .blog .wp-block-post-title a {
   padding: 5px;
   border-radius: 10px;
@@ -236,7 +179,7 @@ ul.wp-block-page-list>li:not(:has(button)) {
 }
 
 .blog .wp-block-group h1 {
-  /* Hide wrong blog title */
+  /* Hide wrong blog title * /
   font-size: 0.1px;
   margin: 5px !important;
  }
@@ -258,16 +201,16 @@ ul.wp-block-page-list>li:not(:has(button)) {
 .blog .wp-block-group .wp-block-template-part {
   display: none;
 }
-
-/* Titres à l'intérieur de la page */
+ */
+/* Titres à l'intérieur de la page
  .wp-block-group h1 {
    margin: 5px 0 0 0!important;
    font-size: 32px;
 }
-/* Prod */
+/* Prod * /
 h2.wp-block-post-title,
 h2.wp-block-heading,
-/* Edit */
+/* Edit * /
 h2.block-editor-rich-text__editable {
    margin: 5px;
   border-radius: 10px;
@@ -276,14 +219,14 @@ h2.block-editor-rich-text__editable {
   color: white;
   background: #08BABF;
 }
-
-/* Texte page */
+ */
+/* Texte page
 .wp-block-post-content wp {
   text-align: justify;
   text-indent: 20px;
 }
-
-/* Images */
+ */
+/* Images
 .wp-block-image img {
   width: 33vw;
   max-width: 33vh;
@@ -295,7 +238,7 @@ h2.block-editor-rich-text__editable {
     display: none;
   }
 }
-
+ */
 /* Horaires */
 .horaires table {
   clear: both;
@@ -427,7 +370,7 @@ div:has(> .wc-block-components-totals-coupon),
   margin: 0;
 }
 
-/* Admin : Visualisation des blocs */
+/* Admin : Visualisation des blocs
 .edit-post-visual-editor__post-title-wrapper h1,
 .wp-block-post-content.block-editor-block-list__layout>* {
   border: 3px solid white;
@@ -442,3 +385,4 @@ div:has(> .wc-block-components-totals-coupon),
 .doc-admin li {
   margin: 3px 0;
 }
+ */

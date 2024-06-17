@@ -1,8 +1,10 @@
 NEXT
-post-template.php / function get_the_excerpt( $po
+Touch menus
 
 BUGS
 ====
+Panier menu non affiché en petit écran
+Menu colonne equipe ne reste pas collée en page large
 Pourquoi woocommerce@2024.gym.c92.fr
 admin@2024.gym.c92.fr
 
@@ -10,6 +12,9 @@ TODO
 ====
 Lien modif page accueil
 Pourquoi ne recharge pas le style quelquefois ?
+
+NOUVEAU THEME sur 2024
+Supprimer tous les widgets de la colonne de droite
 
 JUIN
 ====
