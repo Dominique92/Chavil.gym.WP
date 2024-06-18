@@ -39,11 +39,7 @@ function admin_head_function() {
 	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/admin.css");
 }
 
-////////////////////////////////////////////////////////
-		/**
-		 * Functions hooked into storefront_header action
-		 *
-		 */
+// Personnalisation entête
 //function storefront_header_container                 () {} // 0
 //function storefront_skip_links                       () {} // 5
 //function storefront_social_icons                     () {} // 10
@@ -88,7 +84,6 @@ function storefront_primary_navigation() { // 50
 function storefront_header_cart                      () {} // 60
 //function storefront_primary_navigation_wrapper_close () {} // 68
 
-////////////////////////////////////////////////////////
 /* Footer */
 function storefront_handheld_footer_bar() {}
 
@@ -102,17 +97,21 @@ function storefront_credit() {return;
 <?php
 }
 
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+/* Stylos édition */
+add_action("storefront_post_content_before", "spcb_function");
+function spcb_function() {
+	echo '<a title="Modification de l\'article" class="crayon" href="'.
+		get_admin_url().'post.php?action=edit&post='.get_post()->ID.
+		'">&#9998;</a>';
+}
+
 //add_filter("storefront_customizer_css", "storefront_customizer_css_function");
 //add_filter("storefront_customizer_woocommerce_css", "storefront_customizer_css_function");
 function storefront_customizer_css_function($styles) {
 	//$allowed_blocks[] = 'core/image';
 	$styles = str_replace('min-width: 768px', 'min-width: 666px', $styles);
-//*DCMM*/echo"<pre style='background:white;color:black;font-size:16px'> = ".var_export($styles,true).'</pre>'.PHP_EOL;
 	return $styles;
 }
-
-///////////////////////////////////////////////////////////////
 
 // Use global urls in block templates (as defined in wp-includes/general-template.php)
 //add_shortcode("get_info", "get_info_function");
@@ -170,8 +169,8 @@ function template_include_function($template) {
 }
 
 // Replace "Ben Oui" by "Oui"
-add_action("init", "init_gym_function");
-function init_gym_function() {
+add_action("init", "init_function");
+function init_function() {
 	global $wpdb;
 	$orders_ben_oui = $wpdb->get_results(
 		"SELECT * FROM wp3_wc_orders_meta " .

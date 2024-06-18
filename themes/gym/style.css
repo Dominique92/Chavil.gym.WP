@@ -220,6 +220,12 @@ Version: 1.0.0
   display: none
 }
 
+.crayon {
+  float: left;
+  color: black !important;
+  text-decoration: none !important;
+}
+
 .blog article {
   width: 30%;
   margin-bottom: 5px;
