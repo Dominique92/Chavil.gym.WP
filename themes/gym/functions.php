@@ -17,19 +17,27 @@ function send_email_function($send, $type) {
 }
 
 // Load syle.css files
+//TODO BUG charge une 2em fois sans la version !
+//add_action("wp_loaded", "wp_loaded_function");
+//BUG recharge une 2em fais !!!
+function wp_loaded_function() {
+	wp_register_style(
+		"style",
+		get_stylesheet_uri(),
+		[],
+		filemtime(get_stylesheet_directory().'/style.css')
+	);
+}
 //add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
 function wp_enqueue_scripts_function() {
-	wp_register_style("style", get_stylesheet_uri());
 	wp_enqueue_style("style");
 }
 
-//add_action("admin_head", "admin_head_function");
+// Style editeur, ...
+add_action("admin_head", "admin_head_function");
 function admin_head_function() {
-	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/style.css");
+	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/admin.css");
 }
-
-///////////////////////////////////////////////////////////////
-
 
 ////////////////////////////////////////////////////////
 		/**

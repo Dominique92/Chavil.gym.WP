@@ -3,17 +3,24 @@ Touch menus
 
 BUGS
 ====
+Liste des lieux sur la page de lieux
 Panier menu non affiché en petit écran
+Ne pas afficher le caddie si le prix est nul
+Ne pas afficher icône panier quand il est vide
 Menu colonne equipe ne reste pas collée en page large
+Sous menus activités, équipe leiux KO
 Pourquoi woocommerce@2024.gym.c92.fr
 admin@2024.gym.c92.fr
 
 TODO
 ====
-Lien modif page accueil
+Carte ChavilGym dans la facture
+Lien modif pages / Articles ...
 Pourquoi ne recharge pas le style quelquefois ?
+Doc : création page / Animateur / Lieu / Activité
 
-NOUVEAU THEME sur 2024
+INSTALLATION NOUVEAU THEME sur 2024
+Supprimer commandes
 Supprimer tous les widgets de la colonne de droite
 
 JUIN

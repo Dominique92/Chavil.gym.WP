@@ -22,9 +22,9 @@ Version: 1.0.0
 .site-header .col-full>a {
   border: white solid 2px;
   padding: 3px 5px;
-  color: #5826F4;
   font-size: 18px;
   font-weight: 500;
+  color: #5826F4;
   text-decoration: none;
 }
 
@@ -75,16 +75,16 @@ Version: 1.0.0
   height: 60px;
 }
 
+.banniere>a {
+  display: inline-block;
+}
+
 .banniere img {
   height: 50px;
   margin-top: 5px;
 }
 
 /* Menu navigation */
-.banniere>a {
-  display: inline-block;
-}
-
 .banniere .menu {
   width: calc(100% - 55px);
   float: right;
@@ -106,9 +106,13 @@ Version: 1.0.0
   color: white;
 }
 
-.banniere .menu>ul>li {
+.banniere .menu .page_item {
   padding: 0.2em 0.3em !important;
   border-radius: 0.5em;
+}
+
+.banniere .menu .children {
+  text-align: left;
 }
 
 /* Ne pas afficher les pages seules dans le menu */
@@ -129,6 +133,7 @@ Version: 1.0.0
   display: block;
 }
 
+/* On part à 2 car il y a une entrée Accueil qu'on ne peut pas enlever */
 .banniere .menu>ul>li:nth-child(2) {
   background: hsl(0, 40%, 40%) !important;
 }
@@ -149,6 +154,102 @@ Version: 1.0.0
   right: 0;
 }
 
+/* Fil d'ariane */
+.storefront-breadcrumb {
+  margin: 0;
+  padding: 0;
+}
+
+/* Intérieur de la page */
+.site-content {
+  text-indent: 10px;
+  font-family: sans-serif;
+  color: black;
+}
+
+.entry-title {
+  margin: 10px 0;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.wp-block-heading,
+.blog .entry-title {
+  margin: 10px 0;
+  padding: 0.1em;
+  font-size: 28px;
+  border-radius: 10px;
+  color: white;
+  background: #08BABF;
+}
+
+.blog .entry-title a {
+  color: white;
+  pointer-events: none;
+}
+
+.site-content p,
+.site-content ul,
+.site-content figure {
+  margin-bottom: 5px !important;
+}
+
+/* Page des articles */
+.blog .col-full {
+  margin: 10px 0 0 0;
+}
+
+.blog main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.blog .entry-title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.blog .entry-header {
+  margin: 0;
+}
+
+.blog .entry-header span,
+.blog .entry-taxonomy {
+  display: none
+}
+
+.blog article {
+  width: 30%;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 800px) {
+  .blog article {
+    width: 45%;
+  }
+}
+
+@media (max-width: 500px) {
+  .blog article {
+    width: 90%;
+  }
+}
+
+/*//TODO ???*/
+/* Prod
+h2.wp-block-post-title,
+h2.wp-block-heading, */
+/* Edit
+h2.block-editor-rich-text__editable {
+   margin: 5px;
+  border-radius: 10px;
+  padding: 0.1em;
+  font-size: 24px;
+  color: white;
+  background: #08BABF;
+} */
 /* Sous-menus dans la page
 .menu-equipe>ul>li>a,
 .menu-activite>ul>li>a,
@@ -158,87 +259,8 @@ Version: 1.0.0
 .menu-lieux>ul>li:not(:nth-child(5)) {
   display: none;
 }
- */
-/* Articles de la première page
-.blog .wp-block-post-title a {
-  padding: 5px;
-  border-radius: 10px;
-  color: white;
-  background: #08BABF;
-  text-decoration: none;
-  pointer-events: none;
-  cursor: default;
-}
+*/
 
- .wp-block-query {
-  margin: 0;
-}
-
-.blog .wp-block-group {
-  font-family: Times New Roman;
-}
-
-.blog .wp-block-group h1 {
-  /* Hide wrong blog title * /
-  font-size: 0.1px;
-  margin: 5px !important;
- }
-
-.blog  .wp-block-group h1:before {
-  content: "Chavil'GYM";
-  font-size: 32px;} 
-.blog .wp-block-post-excerpt {
-  margin: 0 !important;
-}
-
-.blog .wp-block-post-excerpt__excerpt {
-  text-align: justify;
-  text-indent: 10px;
-}
-
-.blog .wp-block-spacer,
-.blog .wp-block-post-date,
-.blog .wp-block-group .wp-block-template-part {
-  display: none;
-}
- */
-/* Titres à l'intérieur de la page
- .wp-block-group h1 {
-   margin: 5px 0 0 0!important;
-   font-size: 32px;
-}
-/* Prod * /
-h2.wp-block-post-title,
-h2.wp-block-heading,
-/* Edit * /
-h2.block-editor-rich-text__editable {
-   margin: 5px;
-  border-radius: 10px;
-  padding: 0.1em;
-  font-size: 24px;
-  color: white;
-  background: #08BABF;
-}
- */
-/* Texte page
-.wp-block-post-content wp {
-  text-align: justify;
-  text-indent: 20px;
-}
- */
-/* Images
-.wp-block-image img {
-  width: 33vw;
-  max-width: 33vh;
-  border-radius: 1em;
-}
-
-@media (max-width: 600px) {
-  .wp-block-image img {
-    display: none;
-  }
-}
- */
 /* Horaires */
 .horaires table {
   clear: both;
@@ -370,19 +392,8 @@ div:has(> .wc-block-components-totals-coupon),
   margin: 0;
 }
 
-/* Admin : Visualisation des blocs
-.edit-post-visual-editor__post-title-wrapper h1,
-.wp-block-post-content.block-editor-block-list__layout>* {
-  border: 3px solid white;
-  opacity: 1 !important;
-}
-
-.edit-post-visual-editor__post-title-wrapper h1:hover,
-.wp-block-post-content.block-editor-block-list__layout>*:hover {
-  border-color: grey;
-}
-
-.doc-admin li {
+/* Doc */
+.woocommerce-MyAccount-navigation-link a {
   margin: 3px 0;
+  padding: 0 !important;
 }
- */

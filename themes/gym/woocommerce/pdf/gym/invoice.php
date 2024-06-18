@@ -76,11 +76,12 @@
 
 <div class="corps">
 	<p>L'association Chavil’ Gymnastique Volontaire
-	certifie avoir fait une adhésion avec licence
-	pour la pratique de la gymnastique volontaire à :</p>
+	certifie que</p>
 	<div><?=$this->billing_address()?></div>
-	<p>Pour un montant de : <?=$this->get_woocommerce_totals()['order_total']['value']?></p>
-	<p>Pour l’adhésion à la saison sportive : 2024-2025</p>
+	<p>a versé la somme de
+	<?=$this->get_woocommerce_totals()['order_total']['value']?>
+	de cotisation pour son l'adhésion avec licence
+	à la saison sportive 2024-2025.</p>
 </div>
 
 <p class="pour">Pour la présidente<br/>Geneviève Daël</p>
