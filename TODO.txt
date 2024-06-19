@@ -1,20 +1,26 @@
 BUGS / TODO
 ===========
 Style horaires / calendrier
-Ajouter note dans le panier reduction / afficher prix ?
-Mettre en autre couleur : En cas de problème, signalez-le nous par le formulaire de contact ou par mail chaville.gym@c92.fr
 Touch menus
-Panier menu non affiché en petit écran
-Ne pas afficher icône panier quand il est vide
-Lien politique sécurité dans s'enregistrer
-Nous contacter 1 lien ko
 Erreur 404 contient des liens boutique
 Liste des lieux sur la page de lieux
-Menu colonne equipe ne reste pas collé en page large
 Sous menus activités, équipe lieux KO
-Style footer
-Carte ChavilGym dans la facture
+Menu colonne equipe ne reste pas collé en page large
+
+2024
+Mettre en autre couleur : En cas de problème, signalez-le nous par le formulaire de contact ou par mail chaville.gym@c92.fr
+Nous contacter 1 lien ko
+Lien politique sécurité dans s'enregistrer
 Doc : création page / Animateur / Lieu / Activité
+
+BEST
+====
+Panier développé en hover non affiché en petit écran
+Panier avec nombre de commandes ?
+
+?
+Carte ChavilGym dans la facture
+Ajouter note dans le panier reduction / afficher prix ?
 
 DATES A RETENIR
 •	Inscriptions Gymnase Halimi

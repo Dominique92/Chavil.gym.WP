@@ -69,6 +69,11 @@ Version: 1.0.0
   display: none !important;
 }
 
+/* Panier pour les fenetres < 768px */
+.site-header-cart .cart-contents::after {
+  content: "\1F6D2";
+}
+
 /* Banniere / logo */
 .banniere {
   background: #5826f4;
@@ -121,8 +126,8 @@ Version: 1.0.0
 }
 
 .banniere .menu li ul {
-  position: absolute;
   display: none;
+  position: absolute;
   margin-left: -6px;
   border-radius: 0.5em;
   padding: 5px;
@@ -161,6 +166,11 @@ Version: 1.0.0
 }
 
 /* Intérieur de la page */
+.site-content .content-area,
+.type-page {
+  margin: 0;
+}
+
 .site-content {
   text-indent: 10px;
   font-family: sans-serif;
@@ -241,6 +251,11 @@ Version: 1.0.0
   .blog article {
     width: 90%;
   }
+}
+
+/* Footer */
+.site-footer {
+  padding: 0;
 }
 
 /*//TODO ???*/
@@ -380,7 +395,7 @@ div:has(> .wc-block-components-totals-coupon),
   display: none !important;
 }
 
-/* Correction bug sur mot de passe */
+/* Correction bug sur mot de passe //TODO
 .woocommerce-page form .show-password-input {
   top: 0.2em !important;
 }
@@ -396,10 +411,10 @@ div:has(> .wc-block-components-totals-coupon),
 
 #order_review table {
   margin: 0;
-}
+} */
 
-/* Doc */
+/* Doc //TODO
 .woocommerce-MyAccount-navigation-link a {
   margin: 3px 0;
   padding: 0 !important;
-}
+} */

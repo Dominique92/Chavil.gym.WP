@@ -4,37 +4,32 @@ if (!defined("ABSPATH")) {
   exit();
 }
 
-add_filter("auto_core_update_send_email", "__return_false"); // Disable core update emails
-add_filter("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
-add_filter("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
-add_filter("auto_theme_update_send_email", "__return_false"); // Disable update emails
-add_filter("auto_core_update_send_email", "send_email_function");
-function send_email_function($send, $type) {
+add_filter ("auto_core_update_send_email", "__return_false"); // Disable core update emails
+add_filter ("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
+add_filter ("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
+add_filter ("auto_theme_update_send_email", "__return_false"); // Disable update emails
+add_filter ("auto_core_update_send_email", function($send, $type) {
 	if (!empty($type) && $type == "success") {
 		return false;
 	}
 	return true;
-}
+});
 
 // Load syle.css file with version number for debug
 if (WP_DEBUG) {
-	add_action("wp_head", "wp_loaded_function");
-	function wp_loaded_function() {
-		wp_register_style(
-			"style-test",
-			get_stylesheet_directory_uri().'/style.css',
-			[],
-			filemtime(get_stylesheet_directory().'/style.css')
-		);
-	}
-	add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
-	function wp_enqueue_scripts_function() {
-		wp_enqueue_style("style-test");
-	}
+	add_filter ("style_loader_src", function($href) {
+		$fileurl = get_stylesheet_directory_uri()."/style.css";
+		$filemtime = filemtime(get_stylesheet_directory()."/style.css");
+
+		if (str_contains ($href, $fileurl)) {
+			return "$fileurl?ver=$filemtime";
+		}
+		return $href;
+	});
 }
 
 // Style editeur, ...
-add_action("admin_head", "admin_head_function");
+add_action ("admin_head", "admin_head_function");
 function admin_head_function() {
 	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/admin.css");
 }
@@ -54,20 +49,20 @@ function storefront_secondary_navigation() { // 30
 		<?=$user->ID ? $user->display_name : 'Mon compte'?>
 	</a>
 <?php
-	if (!is_cart()) {
+	if (!is_cart() && WC()->cart->get_cart_contents_count()) {
 ?>
 	<ul id="site-header-cart" class="site-header-cart menu">
 		<li>
 			<?php storefront_cart_link(); ?>
 		</li>
 		<li>
-			<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
+			<?php the_widget ('WC_Widget_Cart', 'title='); ?>
 		</li>
 	</ul>
 <?php
 	}
 }
-function storefront_product_search                   () {} // 40
+function storefront_product_search() {} // 40
 //function storefront_header_container_close           () {} // 41
 
 //function storefront_primary_navigation_wrapper       () {} // 42
@@ -81,13 +76,13 @@ function storefront_primary_navigation() { // 50
 	</div>
 <?php
 }
-function storefront_header_cart                      () {} // 60
+function storefront_header_cart() {} // 60
 //function storefront_primary_navigation_wrapper_close () {} // 68
 
 /* Footer */
 function storefront_handheld_footer_bar() {}
 
-function storefront_credit() {return;
+function storefront_credit() {
 ?>
 	&copy; Chavil'GYM 2020 :
 	<a href="/nous-appeler/">Contact</a><br/>
@@ -99,7 +94,7 @@ function storefront_credit() {return;
 
 /* Stylos édition */
 if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
-	add_action("storefront_page", "storefront_page_function", 15);
+	add_action ("storefront_page", "storefront_page_function", 15);
 	function storefront_page_function() {
 ?>
 		<a title="Modifier ou supprimer la page" class="crayon"
@@ -108,17 +103,16 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 <?php
 	}
 
-	add_action("storefront_post_content_before", "spcb_function");
-	function spcb_function() {
+	add_action ("storefront_post_content_before", function() {
 ?>
 		<a title="Modifier ou supprimer l'article" class="crayon"
 		href="<?=get_admin_url()?>post.php?action=edit&post=<?=get_post()->ID?>"
 		>&#9998;</a>
 <?php
-	}
+	});
 
-	add_action("storefront_content_top", "sct_function");
-	function sct_function() {
+
+	add_action ("storefront_content_top", function() {
 		if (get_post()->post_type == 'post') {
 ?>
 			<a href="<?=get_admin_url()?>post-new.php" class="crayon"
@@ -128,11 +122,11 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 				title="Ordonner les articles">&#8693;</a>
 <?php
 		}
-	}
+	});
 }
 
-//add_filter("storefront_customizer_css", "storefront_customizer_css_function");
-//add_filter("storefront_customizer_woocommerce_css", "storefront_customizer_css_function");
+//add_filter ("storefront_customizer_css", "storefront_customizer_css_function");
+//add_filter ("storefront_customizer_woocommerce_css", "storefront_customizer_css_function");
 /*
 function storefront_customizer_css_function($styles) {
 	//$allowed_blocks[] = 'core/image';
@@ -171,14 +165,14 @@ function menu_gym_theme($args) {
 }
 
 // Autorisation des images dans la page des articles
-//add_filter("excerpt_allowed_blocks", "excerpt_allowed_blocks_function");
+//add_filter ("excerpt_allowed_blocks", "excerpt_allowed_blocks_function");
 function excerpt_allowed_blocks_function($allowed_blocks) {
 	$allowed_blocks[] = 'core/image';
 	return $allowed_blocks;
 }
 
 // Redirection d'une page produit
-//add_filter("template_include", "template_include_function");
+//add_filter ("template_include", "template_include_function");
 function template_include_function($template) {
 	global $post;
 
@@ -196,8 +190,7 @@ function template_include_function($template) {
 }
 
 // Replace "Ben Oui" by "Oui"
-add_action("init", "init_function");
-function init_function() {
+add_action ("init", function() {
 	global $wpdb;
 	$orders_ben_oui = $wpdb->get_results(
 		"SELECT * FROM wp3_wc_orders_meta " .
@@ -205,13 +198,13 @@ function init_function() {
 	);
 	foreach ($orders_ben_oui as $obo)
 		$wpdb->get_results("UPDATE wp3_wc_orders_meta SET meta_value = 'Oui' WHERE wp3_wc_orders_meta.id = ".$obo->id);
-}
+});
+
 
 // Horaires
 $nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
-add_shortcode("horaires", "horaires_function");
-function horaires_function() {
+add_shortcode("horaires", function() {
 	global $nom_jour, $wp_query;
 
 	// Seulement pour les pages
@@ -283,7 +276,7 @@ function horaires_function() {
 	$cal[] = "</div>";
 
 	return implode(PHP_EOL, $cal);
-}
+});
 
 function lien_page($titre, $slug = "") {
 	global $slugs_pages;
@@ -315,8 +308,7 @@ function lien_page($titre, $slug = "") {
 2025-4-17
 [/calendrier]
 */
-add_shortcode("calendrier", "calendrier_function");
-function calendrier_function($args, $text) {
+add_shortcode("calendrier", function($args, $text) {
 	global $wp_query, $nom_jour;
 
 	// Seulement pour les pages (bug en edit)
@@ -377,7 +369,7 @@ function calendrier_function($args, $text) {
 	$output[] = "</div>";
 
 	return implode(PHP_EOL, $output);
-}
+});
 
 function remplir_calendrier(&$calendrier, $time, $set = "") {
 	$js = date("N",$time); // n° jour dans la semaine
@@ -390,7 +382,7 @@ function remplir_calendrier(&$calendrier, $time, $set = "") {
 }
 
 // Calcul des forfaits
-add_action("woocommerce_before_calculate_totals", "wbct_function", 20, 1);
+add_action ("woocommerce_before_calculate_totals", "wbct_function", 20, 1);
 function wbct_function($cart) {
 	// Calcul du total des cours
 	$nb_cours = $total_cours = $nb_mn = $total_mn = 0;
@@ -435,13 +427,12 @@ function wbct_function($cart) {
 }
 
 // Remplacement de [RC] par <br/> dans le questionnaire de santé
-add_filter("woocommerce_form_field", "woocommerce_form_field_function");
-function woocommerce_form_field_function($field) {
+add_filter ("woocommerce_form_field", function($field) {
 	return str_replace("[RC]", "<br/>", $field);
-}
+});
 
-add_shortcode("doc_admin", "doc_admin_function");
-function doc_admin_function() {
+
+add_shortcode("doc_admin", function() {
 	// Verification de droits d'accès
 	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
 		return;
@@ -521,4 +512,4 @@ function doc_admin_function() {
 
 		exit();
 	}
-}
+});
