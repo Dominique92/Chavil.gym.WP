@@ -16,21 +16,21 @@ function send_email_function($send, $type) {
 	return true;
 }
 
-// Load syle.css files
-//TODO BUG charge une 2em fois sans la version !
-//add_action("wp_loaded", "wp_loaded_function");
-//BUG recharge une 2em fais !!!
-function wp_loaded_function() {
-	wp_register_style(
-		"style",
-		get_stylesheet_uri(),
-		[],
-		filemtime(get_stylesheet_directory().'/style.css')
-	);
-}
-//add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
-function wp_enqueue_scripts_function() {
-	wp_enqueue_style("style");
+// Load syle.css file with version number for debug
+if (WP_DEBUG) {
+	add_action("wp_head", "wp_loaded_function");
+	function wp_loaded_function() {
+		wp_register_style(
+			"style-test",
+			get_stylesheet_directory_uri().'/style.css',
+			[],
+			filemtime(get_stylesheet_directory().'/style.css')
+		);
+	}
+	add_action("wp_enqueue_scripts", "wp_enqueue_scripts_function");
+	function wp_enqueue_scripts_function() {
+		wp_enqueue_style("style-test");
+	}
 }
 
 // Style editeur, ...
@@ -98,20 +98,47 @@ function storefront_credit() {return;
 }
 
 /* Stylos édition */
-add_action("storefront_post_content_before", "spcb_function");
-function spcb_function() {
-	echo '<a title="Modification de l\'article" class="crayon" href="'.
-		get_admin_url().'post.php?action=edit&post='.get_post()->ID.
-		'">&#9998;</a>';
+if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
+	add_action("storefront_page", "storefront_page_function", 15);
+	function storefront_page_function() {
+?>
+		<a title="Modifier ou supprimer la page" class="crayon"
+		href="<?=get_admin_url()?>post.php?action=edit&post=<?=get_post()->ID?>"
+		>&#9998;</a>
+<?php
+	}
+
+	add_action("storefront_post_content_before", "spcb_function");
+	function spcb_function() {
+?>
+		<a title="Modifier ou supprimer l'article" class="crayon"
+		href="<?=get_admin_url()?>post.php?action=edit&post=<?=get_post()->ID?>"
+		>&#9998;</a>
+<?php
+	}
+
+	add_action("storefront_content_top", "sct_function");
+	function sct_function() {
+		if (get_post()->post_type == 'post') {
+?>
+			<a href="<?=get_admin_url()?>post-new.php" class="crayon"
+				style="margin: 0 0 10px 20px"
+				title="Ajouter un article">&#127381;</a>
+			<a href="<?=get_admin_url()?>edit.php" class="crayon"
+				title="Ordonner les articles">&#8693;</a>
+<?php
+		}
+	}
 }
 
 //add_filter("storefront_customizer_css", "storefront_customizer_css_function");
 //add_filter("storefront_customizer_woocommerce_css", "storefront_customizer_css_function");
+/*
 function storefront_customizer_css_function($styles) {
 	//$allowed_blocks[] = 'core/image';
 	$styles = str_replace('min-width: 768px', 'min-width: 666px', $styles);
 	return $styles;
-}
+}*/
 
 // Use global urls in block templates (as defined in wp-includes/general-template.php)
 //add_shortcode("get_info", "get_info_function");
@@ -219,6 +246,7 @@ function horaires_function() {
 			preg_match("/\/([^\/]*)\/\"/", wc_get_product_category_list($id), $category);
 			$cours[] = $category[1];
 			$cours[] = $id;
+			$cours[] = $p->get_price();
 			$horaires[$no_day][$cours[2].$id] = $cours;
 		}
 	}
@@ -235,12 +263,12 @@ function horaires_function() {
 				get_bloginfo("url") . "/panier?add-to-cart=" . $heure[6] .
 				'" title="S\'inscrire"">&#128722;</a>';
 			$edit = isset(wp_get_current_user()->allcaps["edit_others_pages"]) ?
-				"<a class=\"crayon\" title=\"Modification de la séance\" href=\"" .
+				"<a class=\"crayon\" title=\"Modifier la séance\" href=\"" .
 					get_bloginfo("url") .
 					"/wp-admin/post.php?&action=edit&post={$heure[6]}\">&#9998;</a>" :
 				"";
 			$ligne = [
-				$heure[2] . " &nbsp; " . $panier,
+				$heure[2] . ($heure[7] ? " &nbsp; " . $panier : ""),
 				$edit . " &nbsp; " . lien_page($heure[0], $heure[5]),
 				lien_page($heure[4]),
 				lien_page($heure[3]),

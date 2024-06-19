@@ -1,23 +1,36 @@
-BUGS
-====
+BUGS / TODO
+===========
+Style horaires / calendrier
+Ajouter note dans le panier reduction / afficher prix ?
+Mettre en autre couleur : En cas de problème, signalez-le nous par le formulaire de contact ou par mail chaville.gym@c92.fr
+Touch menus
+Panier menu non affiché en petit écran
+Ne pas afficher icône panier quand il est vide
+Lien politique sécurité dans s'enregistrer
+Nous contacter 1 lien ko
+Erreur 404 contient des liens boutique
 Liste des lieux sur la page de lieux
 Menu colonne equipe ne reste pas collé en page large
 Sous menus activités, équipe lieux KO
-Pourquoi woocommerce@2024.gym.c92.fr
-admin@2024.gym.c92.fr
-
-TODO
-====
-Touch menus
-Panier menu non affiché en petit écran
-Ne pas afficher le caddie si le prix est nul
-Ne pas afficher icône panier quand il est vide
+Style footer
 Carte ChavilGym dans la facture
-Lien modif pages / Articles ...
-Recharger le style à chaque fois ? (filetime)
 Doc : création page / Animateur / Lieu / Activité
 
+DATES A RETENIR
+•	Inscriptions Gymnase Halimi
+de 9 h 30 à 11 h 30 et de 16 h 30 à 19 h 30		vendredi 6 septembre
+•	Forum des Associations		samedi 7 septembre
+de 10 h à 18 h dans le Parc de la Mairie
+•	Reprise des cours		lundi 9 septembre
+•	Réunion de bureau + préparation de l’Assemblée Générale		lundi 23 septembre à 14 h 30
+•	Réunion  de rentrée avec les animateurs		samedi 28 septembre à 11 h 15
+Lieu : Club House du foot au stade
+•	Assemblée Générale		vendredi 4 octobre à 19 h 15
+Lieu : salle Mozaïk
+
 INSTALLATION NOUVEAU THEME sur 2024
+Pourquoi woocommerce@2024.gym.c92.fr
+Pourquoi admin@2024.gym.c92.fr
 Supprimer commandes
 Supprimer tous les widgets de la colonne de droite
 
