@@ -26,10 +26,20 @@ Lieu : Club House du foot au stade
 •	Assemblée Générale		vendredi 4 octobre à 19 h 15
 Lieu : salle Mozaïk
 
+2024 -> test2
+=============
+403 Forbidden : changer domaine reoertoire puis revenir en arrière
+Activer theme : storefront puis gym
+Delete theme/twentytwentythree
+SQL
+	2024.gym.c92.fr -> test.gym.c92.fr
+	public_html/gym2024 -> public_html/gymtest2
+Style storefront + gym
+
 INSTALLATION NOUVEAU THEME sur 2024
 Supprimer tous les widgets de la colonne de droite / style ?
 Supprimer commandes / users
-GG console / autoriser ref web
+GG console / autoriser les moteurs... ref web
 
 JUIN
 ====

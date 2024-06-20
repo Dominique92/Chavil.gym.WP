@@ -116,33 +116,15 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 		if (get_post() && (get_post()->post_type == 'post')) {
 ?>
 			<a href="<?=get_admin_url()?>post-new.php" class="crayon"
-				style="margin: 0 0 10px 20px"
 				title="Ajouter un article">&#127381;</a>
 			<a href="<?=get_admin_url()?>edit.php" class="crayon"
 				title="Ordonner les articles">&#8693;</a>
+			<br style="clear:both;">
 <?php
 		}
 	});
 }
-
-//add_filter ("storefront_customizer_css", "storefront_customizer_css_function");
-//add_filter ("storefront_customizer_woocommerce_css", "storefront_customizer_css_function");
-/*
-function storefront_customizer_css_function($styles) {
-	//$allowed_blocks[] = 'core/image';
-	$styles = str_replace('min-width: 768px', 'min-width: 666px', $styles);
-	return $styles;
-}*/
-
-// Use global urls in block templates (as defined in wp-includes/general-template.php)
-//add_shortcode("get_info", "get_info_function");
-function get_info_function($args) {
-	if ($args[0] == "current_user_id")
-		return get_current_user_id(); //TODO use is_user_logged_in()
-	else
-		return get_bloginfo($args[0]);
-}
-
+  
 // Entête
 add_shortcode("connexion", "connexion_function");
 function connexion_function() {
@@ -162,14 +144,7 @@ add_shortcode("menu", function ($args) {
 		"echo" => false,
 	]);
 });
-
-// Autorisation des images dans la page des articles
-//add_filter ("excerpt_allowed_blocks", "excerpt_allowed_blocks_function");
-function excerpt_allowed_blocks_function($allowed_blocks) {
-	$allowed_blocks[] = 'core/image';
-	return $allowed_blocks;
-}
-
+ 
 // Redirection d'une page produit
 //add_filter ("template_include", "template_include_function");
 function template_include_function($template) {

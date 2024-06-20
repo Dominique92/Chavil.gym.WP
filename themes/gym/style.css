@@ -45,6 +45,7 @@ Version: 1.0.0
 
 /* Panier */
 .site-header-cart {
+  display: inline-block;
   width: 25px !important;
 }
 
@@ -80,8 +81,8 @@ Version: 1.0.0
 
 /* Banniere / logo */
 .banniere {
-  background: #5826f4;
   height: 60px;
+  background: #5826f4;
 }
 
 .banniere>a {
@@ -95,8 +96,8 @@ Version: 1.0.0
 
 /* Menu navigation */
 .banniere .menu {
-  width: calc(100% - 55px);
   float: right;
+  width: calc(100% - 55px);
   margin: 15px 0;
 }
 
@@ -178,6 +179,7 @@ Version: 1.0.0
 
 .site-content .content-area,
 .type-page {
+  width: 100%;
   margin: 0;
 }
 
@@ -216,11 +218,12 @@ Version: 1.0.0
 
 /* Page des articles */
 .blog .col-full {
-  margin: 10px 0 0 0;
+  margin: 10px 0;
 }
 
 .blog main {
   display: flex;
+  margin: 10px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -233,6 +236,10 @@ Version: 1.0.0
 
 .blog .entry-header {
   margin: 0;
+}
+
+.blog img {
+  border-radius: 1em;
 }
 
 .blog .entry-header span,
@@ -268,7 +275,8 @@ Version: 1.0.0
   padding: 0;
 }
 
-/* 404 */
+/* Widget-area & 404 */
+.widget-area,
 .error-404 div>:not(header):not(p) {
   display: none !important;
 }
@@ -403,27 +411,3 @@ div:has(> .wc-block-components-totals-coupon),
 .woocommerce-terms-and-conditions-wrapper {
   display: none !important;
 }
-
-/* Correction bug sur mot de passe //TODO
-.woocommerce-page form .show-password-input {
-  top: 0.2em !important;
-}
-
-#order_review {
-  margin: 50px !important;
-}
-
-#order_review::before {
-  font-weight: bold;
-  content: "RECAPITULATIF";
-}
-
-#order_review table {
-  margin: 0;
-} */
-
-/* Doc //TODO
-.woocommerce-MyAccount-navigation-link a {
-  margin: 3px 0;
-  padding: 0 !important;
-} */
