@@ -268,20 +268,12 @@ Version: 1.0.0
   padding: 0;
 }
 
-/*//TODO ???*/
-/* Prod
-h2.wp-block-post-title,
-h2.wp-block-heading, */
-/* Edit
-h2.block-editor-rich-text__editable {
-   margin: 5px;
-  border-radius: 10px;
-  padding: 0.1em;
-  font-size: 24px;
-  color: white;
-  background: #08BABF;
-} */
-/* Sous-menus dans la page //TODO
+/* 404 */
+.error-404 div>:not(header):not(p) {
+  display: none !important;
+}
+
+/* Sous-menus dans la page */
 .menu-equipe>ul>li>a,
 .menu-activite>ul>li>a,
 .menu-lieux>ul>li>a,
@@ -290,7 +282,6 @@ h2.block-editor-rich-text__editable {
 .menu-lieux>ul>li:not(:nth-child(5)) {
   display: none;
 }
-*/
 
 /* Horaires */
 .horaires table {

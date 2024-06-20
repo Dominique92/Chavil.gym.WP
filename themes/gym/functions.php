@@ -113,7 +113,7 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 
 
 	add_action ("storefront_content_top", function() {
-		if (get_post()->post_type == 'post') {
+		if (get_post() && (get_post()->post_type == 'post')) {
 ?>
 			<a href="<?=get_admin_url()?>post-new.php" class="crayon"
 				style="margin: 0 0 10px 20px"
@@ -156,13 +156,12 @@ function cart_count_function() {
 }
 
 // Sous menu dans la page
-//add_shortcode("menu", "menu_gym_theme");
-function menu_gym_theme($args) {
+add_shortcode("menu", function ($args) {
 	return wp_nav_menu([
 		"menu_class" => @$args["class"],
 		"echo" => false,
 	]);
-}
+});
 
 // Autorisation des images dans la page des articles
 //add_filter ("excerpt_allowed_blocks", "excerpt_allowed_blocks_function");

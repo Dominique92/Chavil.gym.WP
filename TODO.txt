@@ -1,25 +1,18 @@
 BUGS / TODO
 ===========
 Touch menus
-Erreur 404 contient des liens boutique
-Liste des lieux sur la page de lieux
-Sous menus activités, équipe lieux KO
-Menu colonne equipe ne reste pas collé en page large
 Supprimer tous les widgets de la colonne de droite / style ?
-GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
-
-2024
-Mettre en autre couleur : En cas de problème, signalez-le nous par le formulaire de contact ou par mail chaville.gym@c92.fr
-Nous contacter 1 lien ko
 Lien politique sécurité dans s'enregistrer
 Doc : création page / Animateur / Lieu / Activité
 
 BEST
 ====
+Menu colonne equipe ne reste pas collé en page large
 Panier développé en hover non affiché en petit écran
-Icone panier avec nombre de commandes ?
-havilGym dans la facture
-Ajouter note dans le panier reduction / afficher prix ?
+Icone panier avec nombre de commandes
+Ajouter note dans le panier reduction / afficher prix
+Carte ChavilGym dans la facture
+GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
 
 DATES A RETENIR
 •	Inscriptions Gymnase Halimi
@@ -37,16 +30,10 @@ INSTALLATION NOUVEAU THEME sur 2024
 Supprimer tous les widgets de la colonne de droite / style ?
 Supprimer commandes / users
 GG console / autoriser ref web
-Pourquoi woocommerce@2024.gym.c92.fr
-Pourquoi admin@2024.gym.c92.fr
 
 JUIN
 ====
 Migration base
-	woocommerce@2024.gym.c92.fr
-	admin@2024.gym.c92.fr
-	gym2024@c92.fr
-	-> chavil.gym@c92.fr
 	2024.gym.c92.fr -> test.gym.c92.fr
 	public_html/gym2024 -> public_html/gymtest
 
