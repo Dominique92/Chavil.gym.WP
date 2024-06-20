@@ -13,10 +13,14 @@ Version: 1.0.0
 }
 
 .site-header .col-full {
-  margin: 0;
+  max-width: initial;
   padding: 0;
   text-align: right;
   font-family: Arial;
+}
+
+.site-header .storefront-primary-navigation .col-full {
+  margin: 0;
 }
 
 .site-header .col-full>a {
@@ -160,12 +164,18 @@ Version: 1.0.0
 }
 
 /* Fil d'ariane */
-.storefront-breadcrumb {
-  margin: 0;
+.storefront-breadcrumb,
+.storefront-breadcrumb .col-full {
+  margin: 0 5px !important;
   padding: 0;
 }
 
 /* Intérieur de la page */
+.page .col-full,
+.page main {
+  margin: 10px;
+}
+
 .site-content .content-area,
 .type-page {
   margin: 0;
@@ -271,7 +281,7 @@ h2.block-editor-rich-text__editable {
   color: white;
   background: #08BABF;
 } */
-/* Sous-menus dans la page
+/* Sous-menus dans la page //TODO
 .menu-equipe>ul>li>a,
 .menu-activite>ul>li>a,
 .menu-lieux>ul>li>a,
@@ -285,54 +295,60 @@ h2.block-editor-rich-text__editable {
 /* Horaires */
 .horaires table {
   clear: both;
-  margin-left: calc(max(0px, 10% - 60px));
-  border: 4px solid hsl(103, 20%, 60%);
+  margin: 10px 0;
+  border: 4px solid grey;
   border-collapse: collapse;
-  background: hsl(103, 50%, 85%);
+  width: initial;
 
   *:first-letter {
     text-transform: uppercase;
   }
 }
 
+.horaires table:first-child {
+  border-color: hsl(103, 20%, 60%);
+  background: hsl(103, 50%, 85%);
+}
+
 .horaires table:nth-child(2) {
-  margin-left: calc(max(0px, (10% - 60px) * 2));
+  margin-left: calc(max(0px, 10% - 50px));
   border-color: hsl(206, 20%, 60%);
   background: hsl(206, 50%, 85%);
 }
 
 .horaires table:nth-child(3) {
-  margin-left: calc(max(0px, (10% - 60px) * 3));
+  margin-left: calc(max(0px, 20% - 100px));
   border-color: hsl(309, 20%, 60%);
   background: hsl(309, 50%, 85%);
 }
 
 .horaires table:nth-child(4) {
-  margin-left: calc(max(0px, (10% - 60px) * 4));
+  margin-left: calc(max(0px, 30% - 150px));
   border-color: hsl(412, 20%, 60%);
   background: hsl(412, 50%, 85%);
 }
 
 .horaires table:nth-child(5) {
-  margin-left: calc(max(0px, (10% - 60px) * 5));
+  margin-left: calc(max(0px, 40% - 200px));
   border-color: hsl(55, 20%, 60%);
   background: hsl(515, 50%, 85%);
 }
 
 .horaires table:nth-child(6) {
-  margin-left: calc(max(0px, (10% - 60px) * 6));
+  margin-left: calc(max(0px, 50% - 250px));
   border-color: hsl(618, 20%, 60%);
   background: hsl(618, 50%, 85%);
 }
 
 .horaires table:nth-child(7) {
-  margin-left: calc(max(0px, (10% - 60px) * 7));
+  margin-left: calc(max(0px, 60% - 300px));
   border-color: hsl(721, 20%, 60%);
   background: hsl(721, 50%, 85%);
 }
 
 .horaires caption {
-  margin-top: 0.7em;
+  margin: 0;
+  padding: 0;
   text-align: left;
   font-size: 120%;
   font-weight: bold;
@@ -347,6 +363,7 @@ h2.block-editor-rich-text__editable {
 
 /* Calendrier */
 table.calendrier {
+  width: initial;
   margin: 1em auto;
   border: 2px solid grey !important;
   border-collapse: collapse !important;
@@ -361,6 +378,7 @@ table.calendrier {
 
 .calendrier td {
   border: 1px solid grey;
+  padding: 3px;
 }
 
 .calendrier td:not(:first-child) {

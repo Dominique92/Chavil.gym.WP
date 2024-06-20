@@ -86,7 +86,7 @@ function storefront_credit() {
 ?>
 	&copy; Chavil'GYM 2020 :
 	<a href="/nous-appeler/">Contact</a><br/>
-	Réalisé par <a href="https://github.com/Dominique92/Chavil.gym">Dominique</a>
+	Réalisé par <a href="https://github.com/Dominique92/">Dominique</a>
 	avec <a href="https://fr.wordpress.org">WordPress</a>
 	et <a href="https://woocommerce.com">WooCommerce</a>
 <?php
@@ -261,8 +261,8 @@ add_shortcode("horaires", function() {
 					"/wp-admin/post.php?&action=edit&post={$heure[6]}\">&#9998;</a>" :
 				"";
 			$ligne = [
-				$heure[2] . ($heure[7] ? " &nbsp; " . $panier : ""),
-				$edit . " &nbsp; " . lien_page($heure[0], $heure[5]),
+				$heure[2] . " " . ($heure[7] ? $panier : ""),
+				$edit . " " . lien_page($heure[0], $heure[5]),
 				lien_page($heure[4]),
 				lien_page($heure[3]),
 			];
@@ -349,7 +349,7 @@ add_shortcode("calendrier", function($args, $text) {
 			get_bloginfo("url") .
 			"/wp-admin/post.php?&action=edit&post={$wp_query->queried_object->ID}\">&#9998;</a>" :
 			"";
-		$output[] = "<table class=\"calendrier\">";
+		$output[] = "<table class=\"calendrier has-background\">";
 		$output[] = "<tr><td colspan=\"6\">Les {$nom_jour[$k-1]}s $edit</td></tr>";
 
 		for ($m = 9; $m <= 18; $m++) { // Par rapport à $annee_debut septembre à juin

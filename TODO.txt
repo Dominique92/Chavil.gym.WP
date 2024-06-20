@@ -1,11 +1,12 @@
 BUGS / TODO
 ===========
-Style horaires / calendrier
 Touch menus
 Erreur 404 contient des liens boutique
 Liste des lieux sur la page de lieux
 Sous menus activités, équipe lieux KO
 Menu colonne equipe ne reste pas collé en page large
+Supprimer tous les widgets de la colonne de droite / style ?
+GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
 
 2024
 Mettre en autre couleur : En cas de problème, signalez-le nous par le formulaire de contact ou par mail chaville.gym@c92.fr
@@ -16,10 +17,8 @@ Doc : création page / Animateur / Lieu / Activité
 BEST
 ====
 Panier développé en hover non affiché en petit écran
-Panier avec nombre de commandes ?
-
-?
-Carte ChavilGym dans la facture
+Icone panier avec nombre de commandes ?
+havilGym dans la facture
 Ajouter note dans le panier reduction / afficher prix ?
 
 DATES A RETENIR
@@ -35,10 +34,11 @@ Lieu : Club House du foot au stade
 Lieu : salle Mozaïk
 
 INSTALLATION NOUVEAU THEME sur 2024
+Supprimer tous les widgets de la colonne de droite / style ?
+Supprimer commandes / users
+GG console / autoriser ref web
 Pourquoi woocommerce@2024.gym.c92.fr
 Pourquoi admin@2024.gym.c92.fr
-Supprimer commandes
-Supprimer tous les widgets de la colonne de droite
 
 JUIN
 ====
