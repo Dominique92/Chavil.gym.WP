@@ -1,12 +1,8 @@
 BUGS / TODO
 ===========
 Touch menus
-Supprimer tous les widgets de la colonne de droite / style ?
 Lien politique sécurité dans s'enregistrer
 Doc : création page / Animateur / Lieu / Activité
-
-BEST
-====
 Menu colonne equipe ne reste pas collé en page large
 Panier développé en hover non affiché en petit écran
 Icone panier avec nombre de commandes
@@ -14,35 +10,22 @@ Ajouter note dans le panier reduction / afficher prix
 Carte ChavilGym dans la facture
 GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
 
-DATES A RETENIR
-•	Inscriptions Gymnase Halimi
-de 9 h 30 à 11 h 30 et de 16 h 30 à 19 h 30		vendredi 6 septembre
-•	Forum des Associations		samedi 7 septembre
-de 10 h à 18 h dans le Parc de la Mairie
-•	Reprise des cours		lundi 9 septembre
-•	Réunion de bureau + préparation de l’Assemblée Générale		lundi 23 septembre à 14 h 30
-•	Réunion  de rentrée avec les animateurs		samedi 28 septembre à 11 h 15
-Lieu : Club House du foot au stade
-•	Assemblée Générale		vendredi 4 octobre à 19 h 15
-Lieu : salle Mozaïk
-
 2024 -> test2
 =============
 403 Forbidden : changer domaine reoertoire puis revenir en arrière
-Activer theme : storefront puis gym
-Delete theme/twentytwentythree
 SQL
 	2024.gym.c92.fr -> test.gym.c92.fr
 	public_html/gym2024 -> public_html/gymtest2
-Style storefront + gym
 
-INSTALLATION NOUVEAU THEME sur 2024
-Supprimer tous les widgets de la colonne de droite / style ?
-Supprimer commandes / users
-GG console / autoriser les moteurs... ref web
+Corrections style
+[menu ...] => [pages-attachees]
 
 JUIN
 ====
+Cache / .htaccess / config.php debug
+Supprimer commandes / users
+GG console / autoriser les moteurs... ref web
+
 Migration base
 	2024.gym.c92.fr -> test.gym.c92.fr
 	public_html/gym2024 -> public_html/gymtest

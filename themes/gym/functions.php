@@ -132,21 +132,26 @@ function connexion_function() {
 	return $user->ID ? $user->display_name : 'Mon compte';
 }
 
-//add_shortcode("cart_count", "cart_count_function");
+//TODO shortcode("cart_count"
+/*add_shortcode("cart_count", "cart_count_function");
 function cart_count_function() {
 	return WC()->cart->get_cart_contents_count();
-}
+}*/
 
 // Sous menu dans la page
-add_shortcode("menu", function ($args) {
-	return wp_nav_menu([
-		"menu_class" => @$args["class"],
-		"echo" => false,
-	]);
+add_shortcode("pages-attachees", function () {
+	return "<ul class=\"pages-attachees\">" .
+		wp_list_pages([
+			"child_of" => get_queried_object_id(),
+			"title_li" => "",
+			"echo" => false,
+		]) .
+	"</ul>";
 });
  
 // Redirection d'une page produit
-//add_filter ("template_include", "template_include_function");
+//TODO add_filter ("template_include"
+/*add_filter ("template_include", "template_include_function");
 function template_include_function($template) {
 	global $post;
 
@@ -161,7 +166,7 @@ function template_include_function($template) {
 	}
 
 	return $template;
-}
+}*/
 
 // Replace "Ben Oui" by "Oui"
 add_action ("init", function() {

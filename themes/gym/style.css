@@ -270,25 +270,21 @@ Version: 1.0.0
   }
 }
 
-/* Footer */
-.site-footer {
-  padding: 0;
+/* Footer *& Mon compte */
+.site-footer,
+.woocommerce-MyAccount-navigation-link a {
+  padding: 0 !important;
+}
+
+.woocommerce-MyAccount-navigation,
+.woocommerce-MyAccount-content {
+  padding: 10px;
 }
 
 /* Widget-area & 404 */
 .widget-area,
 .error-404 div>:not(header):not(p) {
   display: none !important;
-}
-
-/* Sous-menus dans la page */
-.menu-equipe>ul>li>a,
-.menu-activite>ul>li>a,
-.menu-lieux>ul>li>a,
-.menu-activite>ul>li:not(:nth-child(3)),
-.menu-equipe>ul>li:not(:nth-child(4)),
-.menu-lieux>ul>li:not(:nth-child(5)) {
-  display: none;
 }
 
 /* Horaires */
