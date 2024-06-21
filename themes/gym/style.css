@@ -221,6 +221,10 @@ Version: 1.0.0
   margin: 10px 0;
 }
 
+.blog .site-content .col-full {
+  max-width: initial;
+}
+
 .blog main {
   display: flex;
   margin: 10px;
@@ -255,6 +259,7 @@ Version: 1.0.0
 
 .blog article {
   width: 30%;
+  max-width: 320px;
   margin-bottom: 5px;
 }
 

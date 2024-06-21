@@ -1,18 +1,21 @@
 BUGS / TODO
 ===========
+<br/><br/><br/><br/><br/>aprés le sous-menu lieux
 Touch menus
 Lien politique sécurité dans s'enregistrer
 Doc : création page / Animateur / Lieu / Activité
-Menu colonne equipe ne reste pas collé en page large
 Panier développé en hover non affiché en petit écran
 Icone panier avec nombre de commandes
 Ajouter note dans le panier reduction / afficher prix
 Carte ChavilGym dans la facture
+Rediriger la page boutique vers horaire
+Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
+Editeur : Style blocs entouré en mode tablette ou mobile
 GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
 
 2024 -> test2
 =============
-403 Forbidden : changer domaine reoertoire puis revenir en arrière
+403 Forbidden : changer repertoire du domaine puis revenir en arrière
 SQL
 	2024.gym.c92.fr -> test.gym.c92.fr
 	public_html/gym2024 -> public_html/gymtest2
@@ -49,15 +52,6 @@ Liens anciens sites 2022 2023
 https://wordpress.stackexchange.com/questions/260969/update-my-custom-wordpress-plugin-through-my-own-server
 https://github.com/YahnisElsts/plugin-update-checker
 https://rudrastyh.com/wordpress/self-hosted-plugin-update.html
-
-BEST
-====
-Menu : Revoir les condition de décalage vers la gauche de la dernière (4em) colonne à droite
-Le bandeau affiche le nom de l'adhérent quand connecté
-Rediriger la page boutique vers horaire
-Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
-Editeur : Style blocs entouré en mode tablette ou mobile
-zIndex menu : Pb de canvas avec la carte
 
 INSTALL CPanel O2switch new.gym.c92.fr
 INSTALL CPanel O2switch test.gym.c92.fr
