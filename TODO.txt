@@ -1,22 +1,15 @@
 BUGS / TODO
 ===========
-<br/><br/><br/><br/><br/>aprés le sous-menu lieux
 Espace nul entre les blocs vers 780px
-Touch menus
+<br/><br/><br/><br/><br/>aprés la carte des lieux
 Lien politique sécurité dans s'enregistrer
 Doc : création page / Animateur / Lieu / Activité
-Panier développé en hover non affiché en petit écran
 Icone panier avec nombre de commandes
+Panier développé en hover non affiché en petit écran
 Ajouter note dans le panier reduction / afficher prix
 Carte ChavilGym dans la facture
-Rediriger la page boutique vers horaire
 Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
-Editeur : Style blocs entouré en mode tablette ou mobile
 GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
-
-test2 -> 2024
-=============
-Apparence -> Widgets -> Supprimer
 
 2024 -> test2
 =============
@@ -25,13 +18,14 @@ SQL
 	2024.gym.c92.fr -> test.gym.c92.fr
 	public_html/gym2024 -> public_html/gymtest2
 
-Corrections style
-[menu ...] => [pages-attachees]
-
 JUIN
 ====
+Réglages lecture décocher : Demander aux moteurs de recherche de ne pas indexer ce site
+Enlever paiemant à la commande
+Supprimer toutes les commandes / autres comptes ?
+Rapatrier rando
+Liens anciens sites 2022 2023
 Cache / .htaccess / config.php debug
-Supprimer commandes / users
 GG console / autoriser les moteurs... ref web
 
 Migration base
@@ -45,13 +39,6 @@ wp-config.php
 	define( 'WP_DEBUG_DISPLAY', true);
 .htaccess
 	Header set Cache-Control "max-age=0, private, no-cache, no-store, must-revalidate"
-
-Réglages lecture décocher : Demander aux moteurs de recherche de ne pas indexer ce site
-Enlever paiemant à la commande
-Supprimer toutes les commandes
-Supprimer autres comptes ?
-Rapatrier rando
-Liens anciens sites 2022 2023
 
 //TODO délivrer plugin
 https://wordpress.stackexchange.com/questions/260969/update-my-custom-wordpress-plugin-through-my-own-server
