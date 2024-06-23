@@ -12,7 +12,7 @@ Version: 1.0.0
   padding: 0;
 }
 
-.site-header .col-full {
+.site-header>div:first-child {
   max-width: initial;
   padding: 0;
   text-align: right;
@@ -23,13 +23,19 @@ Version: 1.0.0
   margin: 0;
 }
 
-.site-header .col-full>a {
+.site-header>div:first-child>a {
   border: white solid 2px;
-  padding: 3px 5px;
+  padding: 3px;
   font-size: 18px;
   font-weight: 500;
   color: #5826F4;
   text-decoration: none;
+}
+
+@media (max-width: 450px) {
+  .site-header .min400 {
+    display: none;
+  }
 }
 
 .site-header .col-full>a:hover {
@@ -114,6 +120,10 @@ Version: 1.0.0
 
 .banniere .menu a {
   color: white;
+}
+
+.banniere .menu .page_item_has_children>a {
+  pointer-events: none;
 }
 
 .banniere .menu .page_item {
@@ -281,9 +291,14 @@ Version: 1.0.0
   padding: 0 !important;
 }
 
-.woocommerce-MyAccount-navigation,
-.woocommerce-MyAccount-content {
+.woocommerce-MyAccount-navigation {
+  width: 250px;
   padding: 10px;
+  clear: both;
+}
+
+.woocommerce-MyAccount-content {
+  padding: 10px 0 50px 0;
 }
 
 /* Widget-area & 404 */

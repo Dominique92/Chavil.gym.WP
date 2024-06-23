@@ -4,6 +4,8 @@ if (!defined("ABSPATH")) {
   exit();
 }
 
+// Inhibe mles mails admin inutiles
+define ("WP_DISABLE_FATAL_ERROR_HANDLER", true);
 add_filter ("auto_core_update_send_email", "__return_false"); // Disable core update emails
 add_filter ("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
 add_filter ("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
@@ -29,10 +31,9 @@ if (WP_DEBUG) {
 }
 
 // Style editeur, ...
-add_action ("admin_head", "admin_head_function");
-function admin_head_function() {
+add_action ("admin_head", function () {
 	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/admin.css");
-}
+});
 
 // Personnalisation entête
 //function storefront_header_container                 () {} // 0
@@ -43,6 +44,7 @@ function storefront_secondary_navigation() { // 30
 	$user = _wp_get_current_user();
 //<div class="gym-entete cart-count-[cart_count]">
 ?>
+	<a href="/" class="min400">Actualités</a>
 	<a href="/nous-appeler/">Contact</a>
 	<a href="/horaires/" id="gym-horaires">Horaires</a>
 	<a class="bouton-cyan" title="Mon compte" href="/mon-compte/">
@@ -53,10 +55,15 @@ function storefront_secondary_navigation() { // 30
 ?>
 	<ul id="site-header-cart" class="site-header-cart menu">
 		<li>
-			<?php storefront_cart_link(); ?>
+			<?=storefront_cart_link()?>
+			<?php /*
+			<a href="<?=wc_get_cart_url()?>" title="Afficher votre panier">
+				&#128722;<span> <?=WC()->cart->get_cart_contents_count()?></span>
+			</a>
+			*/ ?>
 		</li>
 		<li>
-			<?php the_widget ('WC_Widget_Cart', 'title='); ?>
+			<?=the_widget('WC_Widget_Cart', 'title=')?>
 		</li>
 	</ul>
 <?php
@@ -111,7 +118,6 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 <?php
 	});
 
-
 	add_action ("storefront_content_top", function() {
 		if (get_post() && (get_post()->post_type == 'post')) {
 ?>
@@ -124,49 +130,18 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 		}
 	});
 }
-  
-// Entête
-add_shortcode("connexion", "connexion_function");
-function connexion_function() {
-	$user = _wp_get_current_user();
-	return $user->ID ? $user->display_name : 'Mon compte';
-}
-
-//TODO shortcode("cart_count"
-/*add_shortcode("cart_count", "cart_count_function");
-function cart_count_function() {
-	return WC()->cart->get_cart_contents_count();
-}*/
 
 // Sous menu dans la page
-add_shortcode("pages-attachees", function () {
-	return "<ul class=\"pages-attachees\">" .
+add_shortcode ("sibling-pages", function () {	
+	return "<ul>" .
 		wp_list_pages([
-			"child_of" => get_queried_object_id(),
+			"child_of" => get_queried_object()->post_parent,
+			"exclude" => get_queried_object()->ID,
 			"title_li" => "",
 			"echo" => false,
 		]) .
 	"</ul>";
 });
- 
-// Redirection d'une page produit
-//TODO add_filter ("template_include"
-/*add_filter ("template_include", "template_include_function");
-function template_include_function($template) {
-	global $post;
-
-	if ($post) {
-		$query = get_queried_object();
-		$cat = get_the_terms($post->ID, "product_cat");
-
-		if (isset($query->post_type) &&
-			$query->post_type == "product" &&
-			$cat)
-			header("Location: ".get_site_url()."/".$cat[0]->slug);
-	}
-
-	return $template;
-}*/
 
 // Replace "Ben Oui" by "Oui"
 add_action ("init", function() {
@@ -183,7 +158,7 @@ add_action ("init", function() {
 // Horaires
 $nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
-add_shortcode("horaires", function() {
+add_shortcode ("horaires", function() {
 	global $nom_jour, $wp_query;
 
 	// Seulement pour les pages
@@ -287,7 +262,7 @@ function lien_page($titre, $slug = "") {
 2025-4-17
 [/calendrier]
 */
-add_shortcode("calendrier", function($args, $text) {
+add_shortcode ("calendrier", function($args, $text) {
 	global $wp_query, $nom_jour;
 
 	// Seulement pour les pages (bug en edit)
@@ -411,7 +386,7 @@ add_filter ("woocommerce_form_field", function($field) {
 });
 
 
-add_shortcode("doc_admin", function() {
+add_shortcode ("doc_admin", function() {
 	// Verification de droits d'accès
 	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
 		return;
