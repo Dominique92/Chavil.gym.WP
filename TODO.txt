@@ -1,5 +1,7 @@
 BUGS / TODO
 ===========
+Taille photos de l'équipe
+Lignes + dans la page tarifs, ... en édition
 Espace nul entre les blocs vers 780px
 <br/><br/><br/><br/><br/>aprés la carte des lieux
 Lien politique sécurité dans s'enregistrer

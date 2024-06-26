@@ -10,25 +10,28 @@ Version: 1.0.0
 /* Entête */
 .site-header {
   padding: 0;
+  font-family: Arial;
 }
 
 .site-header>div:first-child {
   max-width: initial;
   padding: 0;
   text-align: right;
-  font-family: Arial;
+}
+
+.site-header .col-full {
+  max-width: initial;
+  margin: 0.5em 0;
 }
 
 .site-header .storefront-primary-navigation .col-full {
   max-width: initial;
-  padding: 0;
+  margin: 0;
 }
 
 .site-header>div:first-child>a {
   border: white solid 2px;
   padding: 3px;
-  font-size: 18px;
-  font-weight: 500;
   color: #5826F4;
   text-decoration: none;
 }
@@ -182,57 +185,56 @@ Version: 1.0.0
   padding: 0;
 }
 
-/* Pages */
-.page .col-full,
-.page main {
-  margin: 10px;
-}
-
-.site-content .content-area,
-.type-page {
+/* Pages & page des articles */
+/* Colonne de gauche */
+.site-content .content-area {
   width: 100%;
   margin: 0;
 }
 
-.site-content {
-  text-indent: 10px;
-  font-family: sans-serif;
-  color: black;
+.page .content-area {
+  wwidth: 100%;
 }
 
-.entry-title {
-  margin: 10px 0;
-  font-size: 32px;
+.widget-area {
+  display: none !important;
+}
+
+/* Titres */
+.site-content h1,
+.site-content h2 {
+  font-family: Lato;
+  font-size: 1.6em;
   font-weight: 400;
 }
 
-.wp-block-heading,
+.page .wp-block-heading,
 .blog .entry-title {
   margin: 10px 0;
   padding: 0.1em;
-  font-size: 28px;
-  border-radius: 10px;
+  border-radius: 0.5em;
   color: white;
   background: #08BABF;
 }
 
-.blog .entry-title a {
-  color: white;
-  pointer-events: none;
+/* Pages */
+.site-main p {
+  text-indent: 1em;
 }
 
-.site-content p,
-.site-content ul,
-.site-content figure {
-  margin-bottom: 5px !important;
+.page .wp-block-image img {
+  float: right;
+  max-width: 50%;
+  border-radius: 0.5em;
 }
 
-/* Page des articles */
+/* Articles */
 .blog .col-full {
   margin: 10px 0;
 }
 
 .blog .site-content .col-full {
+  /* Très grandes fenêtres */
   max-width: initial;
 }
 
@@ -248,6 +250,11 @@ Version: 1.0.0
   width: 30%;
   max-width: 320px;
   margin-bottom: 5px;
+}
+
+.blog .entry-title a {
+  color: white;
+  pointer-events: none;
 }
 
 @media (max-width: 800px) {
@@ -268,7 +275,6 @@ Version: 1.0.0
 
 .blog .entry-title {
   margin: 0;
-  font-size: 20px;
 }
 
 .blog img {
@@ -280,10 +286,20 @@ Version: 1.0.0
   display: none
 }
 
+/* Edit */
 .crayon {
   float: left;
+  margin: 0 5px;
   color: black !important;
   text-decoration: none !important;
+}
+
+.col-full>.crayon:first-child {
+  margin-left: 2em;
+}
+
+.crayon img {
+  border-radius: 0;
 }
 
 /* Footer *& Mon compte */
@@ -302,8 +318,7 @@ Version: 1.0.0
   padding: 10px 0 50px 0;
 }
 
-/* Widget-area & 404 */
-.widget-area,
+/* 404 */
 .error-404 div>:not(header):not(p) {
   display: none !important;
 }
@@ -366,8 +381,6 @@ Version: 1.0.0
   margin: 0;
   padding: 0;
   text-align: left;
-  font-size: 120%;
-  font-weight: bold;
   text-transform: capitalize;
 }
 
@@ -384,12 +397,10 @@ table.calendrier {
   border: 2px solid grey !important;
   border-collapse: collapse !important;
   border-spacing: 0 !important;
-  font-family: Arial;
 }
 
 .calendrier tr:first-child td {
   text-align: center;
-  font-weight: bold;
 }
 
 .calendrier td {
@@ -411,7 +422,6 @@ table.calendrier {
 .calendrier .date_active {
   background: #08BABF;
   color: white !important;
-  font-weight: bold;
 }
 
 /* WooCommerce */
