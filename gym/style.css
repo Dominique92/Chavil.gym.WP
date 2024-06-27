@@ -6,6 +6,16 @@ Description: Theme WordPress pour la Gym Volontaire de Chaville
 Author: Dominique Cavailhez
 Version: 1.0.0
 */
+body {
+  background: grey
+}
+
+/* Général */
+.col-full {
+  max-width: initial;
+  margin: 0;
+  padding: 0;
+}
 
 /* Entête */
 .site-header {
@@ -14,19 +24,8 @@ Version: 1.0.0
 }
 
 .site-header>div:first-child {
-  max-width: initial;
-  padding: 0;
   text-align: right;
-}
-
-.site-header .col-full {
-  max-width: initial;
-  margin: 0.5em 0;
-}
-
-.site-header .storefront-primary-navigation .col-full {
-  max-width: initial;
-  margin: 0;
+  margin: 0.25em;
 }
 
 .site-header>div:first-child>a {
@@ -91,7 +90,7 @@ Version: 1.0.0
 
 /* Banniere / logo */
 .banniere {
-  height: 60px;
+  height: 54px;
   background: #5826f4;
 }
 
@@ -101,14 +100,14 @@ Version: 1.0.0
 
 .banniere img {
   height: 50px;
-  margin-top: 5px;
+  margin: 2px;
 }
 
 /* Menu navigation */
 .banniere .menu {
   float: right;
   width: calc(100% - 55px);
-  margin: 15px 0;
+  margin: 11px 0;
 }
 
 .banniere .menu>ul {
@@ -181,33 +180,18 @@ Version: 1.0.0
 /* Fil d'ariane */
 .storefront-breadcrumb,
 .storefront-breadcrumb .col-full {
-  margin: 0 5px !important;
+  margin: 0 0 0.2em 0.2em;
   padding: 0;
 }
 
 /* Pages & page des articles */
-/* Colonne de gauche */
-.site-content .content-area {
-  width: 100%;
-  margin: 0;
+.content-area {
+  max-width: 700px;
+  width: 100% !important;
+  padding: 0 3%;
 }
 
-.page .content-area {
-  wwidth: 100%;
-}
-
-.widget-area {
-  display: none !important;
-}
-
-/* Titres */
-.site-content h1,
-.site-content h2 {
-  font-family: Lato;
-  font-size: 1.6em;
-  font-weight: 400;
-}
-
+/*
 .page .wp-block-heading,
 .blog .entry-title {
   margin: 10px 0;
@@ -216,28 +200,36 @@ Version: 1.0.0
   color: white;
   background: #08BABF;
 }
+*/
 
-/* Pages */
-.site-main p {
-  text-indent: 1em;
+.site-content h1,
+.site-content h2 {
+  font-family: Lato;
+  font-size: 1.5em;
+  font-weight: 400;
 }
 
+.site-main p {
+  color: black;
+  text-indent: 1em;
+  text-align: justify;
+}
+
+/* Colonne de droite ou en dessous */
+.widget-area {
+  display: none !important;
+}
+
+/* Pages */
+/*
 .page .wp-block-image img {
   float: right;
   max-width: 50%;
   border-radius: 0.5em;
 }
+*/
 
 /* Articles */
-.blog .col-full {
-  margin: 10px 0;
-}
-
-.blog .site-content .col-full {
-  /* Très grandes fenêtres */
-  max-width: initial;
-}
-
 .blog main {
   display: flex;
   margin: 10px;
@@ -270,7 +262,8 @@ Version: 1.0.0
 }
 
 .blog .entry-header {
-  margin: 0;
+  wdisplay: none;
+  wmargin: 0;
 }
 
 .blog .entry-title {
@@ -281,7 +274,7 @@ Version: 1.0.0
   border-radius: 1em;
 }
 
-.blog .entry-header span,
+.blog .entry-header,
 .blog .entry-taxonomy {
   display: none
 }

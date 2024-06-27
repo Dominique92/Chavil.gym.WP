@@ -1,5 +1,9 @@
 BUGS / TODO
 ===========
+Marge sur petit écran
+N° tel sous forme de liens
+Pages lieu... redirection
+Page accueil + actualité (lien n dessous de GV)
 Taille photos de l'équipe
 Lignes + dans la page tarifs, ... en édition
 Espace nul entre les blocs vers 780px
