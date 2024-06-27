@@ -7,7 +7,7 @@ Author: Dominique Cavailhez
 Version: 1.0.0
 */
 body {
-  background: grey
+  wbackground: grey
 }
 
 /* Général */
@@ -191,17 +191,6 @@ body {
   padding: 0 3%;
 }
 
-/*
-.page .wp-block-heading,
-.blog .entry-title {
-  margin: 10px 0;
-  padding: 0.1em;
-  border-radius: 0.5em;
-  color: white;
-  background: #08BABF;
-}
-*/
-
 .site-content h1,
 .site-content h2 {
   font-family: Lato;
@@ -209,15 +198,18 @@ body {
   font-weight: 400;
 }
 
+.page .site-content h2 {
+  margin: 10px 0;
+  padding: 0.1em;
+  border-radius: 0.5em;
+  color: white;
+  background: #08BABF;
+}
+
 .site-main p {
   color: black;
   text-indent: 1em;
   text-align: justify;
-}
-
-/* Colonne de droite ou en dessous */
-.widget-area {
-  display: none !important;
 }
 
 /* Pages */
@@ -244,11 +236,6 @@ body {
   margin-bottom: 5px;
 }
 
-.blog .entry-title a {
-  color: white;
-  pointer-events: none;
-}
-
 @media (max-width: 800px) {
   .blog article {
     width: 45%;
@@ -261,13 +248,13 @@ body {
   }
 }
 
-.blog .entry-header {
-  wdisplay: none;
-  wmargin: 0;
-}
-
 .blog .entry-title {
   margin: 0;
+}
+
+.blog .entry-title a {
+  color: white;
+  pointer-events: none;
 }
 
 .blog img {
@@ -275,8 +262,10 @@ body {
 }
 
 .blog .entry-header,
-.blog .entry-taxonomy {
-  display: none
+.blog .entry-taxonomy,
+/* Colonne de droite ou en dessous */
+.widget-area {
+  display: none !important;
 }
 
 /* Edit */
