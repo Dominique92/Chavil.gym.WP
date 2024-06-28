@@ -45,8 +45,8 @@ function storefront_secondary_navigation() { // 30
 //<div class="gym-entete cart-count-[cart_count]">
 ?>
 	<a href="/" class="min400">Actualités</a>
-	<a href="/nous-appeler/">Contact</a>
 	<a href="/horaires/" id="gym-horaires">Horaires</a>
+	<a href="/nous-appeler/">Contact</a>
 	<a class="bouton-cyan" title="Mon compte" href="/mon-compte/">
 		<?=$user->ID ? $user->display_name : 'Mon compte'?>
 	</a>

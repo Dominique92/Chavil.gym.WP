@@ -188,17 +188,18 @@ body {
 .content-area {
   max-width: 700px;
   width: 100% !important;
+  margin: 0 !important;
   padding: 0 3%;
 }
 
-.site-content h1,
-.site-content h2 {
+.content-area h1,
+.content-area h2 {
   font-family: Lato;
   font-size: 1.5em;
   font-weight: 400;
 }
 
-.page .site-content h2 {
+.content-area h2 {
   margin: 10px 0;
   padding: 0.1em;
   border-radius: 0.5em;
@@ -206,10 +207,19 @@ body {
   background: #08BABF;
 }
 
-.site-main p {
+.content-area p {
   color: black;
   text-indent: 1em;
   text-align: justify;
+}
+
+.content-area img {
+  border-radius: 1em;
+}
+
+main,
+.page {
+  margin: 0 !important;
 }
 
 /* Pages */
@@ -222,29 +232,36 @@ body {
 */
 
 /* Articles */
+.blog .content-area {
+  max-width: 1000px;
+  padding: 0;
+}
+
 .blog main {
   display: flex;
-  margin: 10px;
-  flex-direction: row;
   flex-wrap: wrap;
+  margin: 0 3%;
   justify-content: space-around;
 }
 
+/* Media < 500px */
 .blog article {
-  width: 30%;
-  max-width: 320px;
   margin-bottom: 5px;
 }
 
-@media (max-width: 800px) {
+@media (min-width: 500px) {
+  .blog main {
+    margin: 0;
+  }
+
   .blog article {
     width: 45%;
   }
 }
 
-@media (max-width: 500px) {
+@media (min-width: 800px) {
   .blog article {
-    width: 90%;
+    width: 30%;
   }
 }
 
@@ -255,10 +272,6 @@ body {
 .blog .entry-title a {
   color: white;
   pointer-events: none;
-}
-
-.blog img {
-  border-radius: 1em;
 }
 
 .blog .entry-header,
