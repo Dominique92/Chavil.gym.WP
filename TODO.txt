@@ -1,5 +1,6 @@
 BUGS / TODO
 ===========
+Titres des articles en page accueil
 N° tel sous forme de liens
 Pages lieu... redirection
 Page accueil + actualité (lien n dessous de GV)

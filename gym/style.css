@@ -219,8 +219,8 @@ Version: 1.0.0
   border-radius: 1em;
 }
 
-.wp-element-caption {
-  display: none;
+.content-area figcaption {
+  display: none !important;
 }
 
 /* Pages */
