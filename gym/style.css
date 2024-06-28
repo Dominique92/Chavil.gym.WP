@@ -189,6 +189,11 @@ Version: 1.0.0
   padding: 0 3%;
 }
 
+.content-area main,
+.content-area article {
+  margin-bottom: 5px !important;
+}
+
 .content-area h1,
 .content-area h2 {
   font-family: Lato;
@@ -243,11 +248,6 @@ Version: 1.0.0
   flex-wrap: wrap;
   margin: 0 3%;
   justify-content: space-around;
-}
-
-/* Media < 500px */
-.blog article {
-  margin-bottom: 5px;
 }
 
 @media (min-width: 500px) {
