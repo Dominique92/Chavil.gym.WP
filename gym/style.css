@@ -6,9 +6,6 @@ Description: Theme WordPress pour la Gym Volontaire de Chaville
 Author: Dominique Cavailhez
 Version: 1.0.0
 */
-body {
-  wbackground: grey
-}
 
 /* Général */
 .col-full {
@@ -217,19 +214,23 @@ body {
   border-radius: 1em;
 }
 
-main,
-.page {
-  margin: 0 !important;
+.wp-element-caption {
+  display: none;
 }
 
 /* Pages */
-/*
-.page .wp-block-image img {
-  float: right;
+.page .content-area figure {
   max-width: 50%;
-  border-radius: 0.5em;
+  margin: 1em !important;
 }
-*/
+
+.page .content-area figure.alignright {
+  margin-right: 0 !important;
+}
+
+.page .content-area figure.alignleft {
+  margin-left: 0 !important;
+}
 
 /* Articles */
 .blog .content-area {
