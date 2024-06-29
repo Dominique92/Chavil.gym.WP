@@ -1,5 +1,6 @@
 BUGS / TODO
 ===========
+Style.css => supprimer lignes .menu
 Titres des articles en page accueil
 N° tel sous forme de liens
 Pages lieu... redirection
@@ -13,6 +14,12 @@ Ajouter note dans le panier reduction / afficher prix
 Carte ChavilGym dans la facture
 Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
 GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
+
+
+MENU
+====
+Apparence -> Menu -> Créer principal
+-> Remplir arbo
 
 2024 -> test2
 =============

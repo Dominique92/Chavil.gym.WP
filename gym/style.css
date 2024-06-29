@@ -6,6 +6,9 @@ Description: Theme WordPress pour la Gym Volontaire de Chaville
 Author: Dominique Cavailhez
 Version: 1.0.0
 */
+body {
+  wbackground: grey
+}
 
 /* Général */
 .col-full {
@@ -101,77 +104,77 @@ Version: 1.0.0
 }
 
 /* Menu navigation */
-.banniere .menu {
+.banniere>div {
   float: right;
   width: calc(100% - 55px);
   margin: 11px 0;
 }
 
-.banniere .menu>ul {
+.banniere>div>ul {
   display: flex;
   width: 100%;
   margin: 0;
   justify-content: space-around;
 }
 
-.banniere .menu li {
-  list-style-type: none;
-}
-
-.banniere .menu a {
-  color: white;
-}
-
-.banniere .menu .page_item_has_children>a {
-  pointer-events: none;
-}
-
-.banniere .menu .page_item {
+.banniere>div>ul>li {
   padding: 0.2em 0.3em !important;
   border-radius: 0.5em;
 }
 
-.banniere .menu .children {
-  text-align: left;
+.banniere>div>ul>li>a {
+  pointer-events: none;
 }
 
 /* Ne pas afficher les pages seules dans le menu */
-.banniere .menu>ul>li:not(.page_item_has_children) {
+/*//TODO DELETE */
+.banniere>.menu>ul>li:not(.page_item_has_children) {
   display: none;
 }
 
-.banniere .menu li ul {
+.banniere>div li ul {
   display: none;
   position: absolute;
   margin-left: -6px;
-  border-radius: 0.5em;
+  border-radius: inherit;
   padding: 5px;
-  background: inherit !important;
+  background: inherit;
 }
 
-.banniere .menu li:hover ul {
+.banniere>div li:hover ul {
   display: block;
 }
 
-/* On part à 2 car il y a une entrée Accueil qu'on ne peut pas enlever */
-.banniere .menu>ul>li:nth-child(2) {
-  background: hsl(0, 40%, 40%) !important;
+/*//TODO DELETE*/
+.banniere>.menu>ul>li:nth-child(5),
+.banniere>div>ul>li:first-child {
+  background: hsl(0, 50%, 40%);
 }
 
-.banniere .menu>ul>li:nth-child(3) {
-  background: hsl(90, 50%, 40%) !important;
+.banniere>div>ul>li:nth-child(2) {
+  background: hsl(90, 50%, 40%);
 }
 
-.banniere .menu>ul>li:nth-child(4) {
-  background: hsl(180, 50%, 40%) !important;
+.banniere>div>ul>li:nth-child(3) {
+  background: hsl(180, 50%, 40%);
 }
 
-.banniere .menu>ul>li:nth-child(5) {
-  background: hsl(270, 30%, 50%) !important;
+.banniere>div>ul>li:nth-child(4) {
+  background: hsl(270, 50%, 40%);
 }
 
-.banniere .menu>ul>li:nth-child(5) ul {
+/*//TODO DELETE*/
+.banniere>.menu>ul>li:nth-child(5) ul,
+.banniere>div>ul>li:last-child ul {
   right: 0;
+}
+
+.banniere li {
+  list-style-type: none;
+}
+
+.banniere a {
+  color: white !important;
 }
 
 /* Fil d'ariane */
@@ -217,10 +220,6 @@ Version: 1.0.0
 
 .content-area img {
   border-radius: 1em;
-}
-
-.content-area figcaption {
-  display: none !important;
 }
 
 /* Pages */
