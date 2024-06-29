@@ -1,13 +1,10 @@
 BUGS / TODO
 ===========
-Style.css => supprimer lignes .menu
-Titres des articles en page accueil
-N° tel sous forme de liens
-Pages lieu... redirection
-Page accueil + actualité (lien n dessous de GV)
+2024 : Supprimer pages inutiles
 Lignes + dans la page tarifs, ... en édition
 Lien politique sécurité dans s'enregistrer
 Doc : création page / Animateur / Lieu / Activité
+Doc : menu
 Icone panier avec nombre de commandes
 Panier développé en hover non affiché en petit écran
 Ajouter note dans le panier reduction / afficher prix
@@ -15,11 +12,6 @@ Carte ChavilGym dans la facture
 Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
 GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
 
-
-MENU
-====
-Apparence -> Menu -> Créer principal
--> Remplir arbo
 
 2024 -> test2
 =============

@@ -44,8 +44,8 @@ function storefront_secondary_navigation() { // 30
 	$user = _wp_get_current_user();
 //<div class="gym-entete cart-count-[cart_count]">
 ?>
-	<a href="/" class="min400">Actualités</a>
-	<a href="/horaires/" id="gym-horaires">Horaires</a>
+	<a href="/"><span>Actualités</span></a>
+	<a href="/horaires/">Horaires<span> &nbsp; Inscriptions<span></a>
 	<a href="/nous-appeler/">Contact</a>
 	<a class="bouton-cyan" title="Mon compte" href="/mon-compte/">
 		<?=$user->ID ? $user->display_name : 'Mon compte'?>
@@ -56,7 +56,7 @@ function storefront_secondary_navigation() { // 30
 	<ul id="site-header-cart" class="site-header-cart menu">
 		<li>
 			<?=storefront_cart_link()?>
-			<?php /*
+			<?php /*//TODO icone panier + nombre
 			<a href="<?=wc_get_cart_url()?>" title="Afficher votre panier">
 				&#128722;<span> <?=WC()->cart->get_cart_contents_count()?></span>
 			</a>
@@ -121,10 +121,16 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 	add_action ("storefront_content_top", function() {
 		if (get_post() && (get_post()->post_type == 'post')) {
 ?>
-			<a href="<?=get_admin_url()?>post-new.php" class="crayon"
-				title="Ajouter un article">&#127381;</a>
-			<a href="<?=get_admin_url()?>edit.php" class="crayon"
-				title="Ordonner les articles">&#8693;</a>
+			<a href="<?=get_admin_url()?>post-new.php"
+				class="crayon"
+				title="Ajouter un article">
+				&#127381;
+			</a>
+			<a href="<?=get_admin_url()?>edit.php"
+				class="crayon caractere-bleu"
+				title="Ordonner les articles">
+				&nbsp;&#8693;&nbsp;
+			</a>
 			<br style="clear:both;">
 <?php
 		}

@@ -6,9 +6,6 @@ Description: Theme WordPress pour la Gym Volontaire de Chaville
 Author: Dominique Cavailhez
 Version: 1.0.0
 */
-body {
-  wbackground: grey
-}
 
 /* Général */
 .col-full {
@@ -35,8 +32,8 @@ body {
   text-decoration: none;
 }
 
-@media (max-width: 450px) {
-  .site-header .min400 {
+@media (max-width: 500px) {
+  .site-header a span {
     display: none;
   }
 }
@@ -126,12 +123,6 @@ body {
   pointer-events: none;
 }
 
-/* Ne pas afficher les pages seules dans le menu */
-/*//TODO DELETE */
-.banniere>.menu>ul>li:not(.page_item_has_children) {
-  display: none;
-}
-
 .banniere>div li ul {
   display: none;
   position: absolute;
@@ -145,8 +136,6 @@ body {
   display: block;
 }
 
-/*//TODO DELETE*/
-.banniere>.menu>ul>li:nth-child(5),
 .banniere>div>ul>li:first-child {
   background: hsl(0, 50%, 40%);
 }
@@ -163,8 +152,6 @@ body {
   background: hsl(270, 50%, 40%);
 }
 
-/*//TODO DELETE*/
-.banniere>.menu>ul>li:nth-child(5) ul,
 .banniere>div>ul>li:last-child ul {
   right: 0;
 }
@@ -186,7 +173,7 @@ body {
 
 /* Pages & page des articles */
 .content-area {
-  max-width: 700px;
+  max-width: 1200px;
   width: 100% !important;
   margin: 0 !important;
   padding: 0 3%;
@@ -228,6 +215,10 @@ body {
   margin: 1em !important;
 }
 
+.page .content-area p {
+  max-width: 600px;
+}
+
 .page .content-area figure.alignright {
   margin-right: 0 !important;
 }
@@ -238,7 +229,7 @@ body {
 
 /* Articles */
 .blog .content-area {
-  max-width: 1000px;
+  max-width: 1200px;
   padding: 0;
 }
 
@@ -274,7 +265,12 @@ body {
   pointer-events: none;
 }
 
-.blog .entry-header,
+.blog header {
+  margin: 0 !important;
+  padding: 0;
+}
+
+.blog header>span,
 .blog .entry-taxonomy,
 /* Colonne de droite ou en dessous */
 .widget-area {
@@ -285,8 +281,15 @@ body {
 .crayon {
   float: left;
   margin: 0 5px;
-  color: black !important;
+  color: black;
   text-decoration: none !important;
+}
+
+.caractere-bleu {
+  margin: 5px 5px 10px 5px;
+  line-height: 1em;
+  color: white;
+  background: #3B88C3;
 }
 
 .col-full>.crayon:first-child {
