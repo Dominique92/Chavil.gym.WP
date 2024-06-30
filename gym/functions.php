@@ -138,11 +138,10 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 }
 
 // Sous menu dans la page
-add_shortcode ("sibling-pages", function () {	
+add_shortcode ("pages-attachees", function () {
 	return "<ul>" .
 		wp_list_pages([
-			"child_of" => get_queried_object()->post_parent,
-			"exclude" => get_queried_object()->ID,
+			"child_of" => get_queried_object()->ID,
 			"title_li" => "",
 			"echo" => false,
 		]) .
