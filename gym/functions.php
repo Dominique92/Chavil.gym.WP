@@ -18,17 +18,15 @@ add_filter ("auto_core_update_send_email", function($send, $type) {
 });
 
 // Load syle.css file with version number for debug
-if (WP_DEBUG) {
-	add_filter ("style_loader_src", function($href) {
-		$fileurl = get_stylesheet_directory_uri()."/style.css";
-		$filemtime = filemtime(get_stylesheet_directory()."/style.css");
+add_filter ("style_loader_src", function($href) {
+	$fileurl = get_stylesheet_directory_uri()."/style.css";
+	$filemtime = filemtime(get_stylesheet_directory()."/style.css");
 
-		if (str_contains ($href, $fileurl)) {
-			return "$fileurl?ver=$filemtime";
-		}
-		return $href;
-	});
-}
+	if (str_contains ($href, $fileurl)) {
+		return "$fileurl?ver=$filemtime";
+	}
+	return $href;
+});
 
 // Style editeur, ...
 add_action ("admin_head", function () {

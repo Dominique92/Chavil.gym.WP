@@ -52,18 +52,24 @@ Version: 1.0.0
 /* Panier */
 .site-header-cart {
   display: inline-block;
-  width: 34px !important;
+  width: 35px !important;
 }
 
 .site-header-cart .cart-quantity {
   position: absolute;
-  right: 18px;
+  right: 16px;
   padding: 0 0.5em;
   color: white;
   background: red;
   border-radius: 1em;
   font-size: 0.6em;
   font-weight: bold;
+}
+
+@media (max-width: 782px) {
+  .site-header-cart .cart-quantity {
+    right: 18px;
+  }
 }
 
 .site-header-cart>li:nth-child(2) {
@@ -91,7 +97,7 @@ Version: 1.0.0
   display: none !important;
 }
 
-/* Panier pour les fenetres < 768px */
+/* Panier pour les fenetres < 782px */
 .site-header-cart .cart-contents::after {
   content: "\1F6D2";
 }
