@@ -315,11 +315,8 @@ Version: 1.0.0
   text-decoration: none !important;
 }
 
-.caractere-bleu {
-  margin: 5px 5px 10px 5px;
-  line-height: 1em;
-  color: white;
-  background: #3B88C3;
+article .crayon {
+  float: right;
 }
 
 .col-full>.crayon:first-child {
@@ -328,6 +325,13 @@ Version: 1.0.0
 
 .crayon img {
   border-radius: 0;
+}
+
+.caractere-bleu {
+  margin: 5px 5px 10px 5px;
+  line-height: 1em;
+  color: white;
+  background: #3B88C3;
 }
 
 /* Footer *& Mon compte */
