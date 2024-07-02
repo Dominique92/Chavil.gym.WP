@@ -205,6 +205,10 @@ Version: 1.0.0
   text-align: justify;
 }
 
+.content-area li {
+  color: black;
+}
+
 .content-area img {
   border-radius: 1em;
 }

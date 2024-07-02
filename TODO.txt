@@ -20,6 +20,7 @@ SQL
 
 JUIN
 ====
+Effacer certificats médicaux
 Réglages lecture décocher : Demander aux moteurs de recherche de ne pas indexer ce site
 Enlever paiemant à la commande
 Supprimer toutes les commandes / autres comptes ?
