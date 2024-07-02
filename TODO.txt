@@ -155,7 +155,8 @@ Installer "WP Dark Mode"
 Installer "Site Kit by Google"
   Installer "Anti-Spam by CleanTalk" (Spam protection, AntiSpam, FireWall by CleanTalk)
   Clé d'accès
-Installer "WP Super Cache"
+Installer "WP-Optimize"
+NON Installer "WP Super Cache"
 NON Installer "LiteSpeed Cache"
 
 Toutes extensions : activer, activer les mises à jour

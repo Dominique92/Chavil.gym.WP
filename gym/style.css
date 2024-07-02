@@ -206,6 +206,7 @@ Version: 1.0.0
   font-family: Lato;
   font-size: 1.5em;
   font-weight: 400;
+  letter-spacing: initial;
 }
 
 .content-area h2 {
@@ -220,6 +221,10 @@ Version: 1.0.0
   color: black;
   text-indent: 1em;
   text-align: justify;
+}
+
+.content-area ul {
+  margin-left: 1em;
 }
 
 .content-area li {
@@ -259,6 +264,10 @@ Version: 1.0.0
   flex-wrap: wrap;
   margin: 0 3%;
   justify-content: space-around;
+}
+
+.blog article {
+  width: 100%;
 }
 
 @media (min-width: 500px) {
