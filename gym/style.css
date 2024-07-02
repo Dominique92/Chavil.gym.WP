@@ -52,7 +52,18 @@ Version: 1.0.0
 /* Panier */
 .site-header-cart {
   display: inline-block;
-  width: 25px !important;
+  width: 34px !important;
+}
+
+.site-header-cart .cart-quantity {
+  position: absolute;
+  right: 18px;
+  padding: 0 0.5em;
+  color: white;
+  background: red;
+  border-radius: 1em;
+  font-size: 0.6em;
+  font-weight: bold;
 }
 
 .site-header-cart>li:nth-child(2) {

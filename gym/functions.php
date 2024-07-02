@@ -45,7 +45,7 @@ function storefront_secondary_navigation() { // 30
 //<div class="gym-entete cart-count-[cart_count]">
 ?>
 	<a href="/"><span>Actualités</span></a>
-	<a href="/horaires/">Horaires<span> &nbsp; Inscriptions<span></a>
+	<a href="/horaires/">Horaires</a>
 	<a href="/nous-appeler/">Contact</a>
 	<a class="bouton-cyan" title="Mon compte" href="/mon-compte/">
 		<?=$user->ID ? $user->display_name : 'Mon compte'?>
@@ -56,11 +56,9 @@ function storefront_secondary_navigation() { // 30
 	<ul id="site-header-cart" class="site-header-cart menu">
 		<li>
 			<?=storefront_cart_link()?>
-			<?php /*//TODO icone panier + nombre
-			<a href="<?=wc_get_cart_url()?>" title="Afficher votre panier">
-				&#128722;<span> <?=WC()->cart->get_cart_contents_count()?></span>
-			</a>
-			*/ ?>
+			<span class="cart-quantity">
+				<?=WC()->cart->get_cart_contents_count()?>
+			</span>
 		</li>
 		<li>
 			<?=the_widget('WC_Widget_Cart', 'title=')?>

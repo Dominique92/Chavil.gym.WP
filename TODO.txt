@@ -2,13 +2,11 @@ BUGS / TODO
 ===========
 .htaccess sur les certificats médicaux
 Doc : menu / création page / Animateur / Lieu / Activité
-Icone panier avec nombre de commandes
 Panier développé en hover non affiché en petit écran
-Ajouter note dans le panier reduction / afficher prix
-Carte ChavilGym dans la facture
-Lignes + dans la page tarifs, ... en édition
 Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
-GET https://test.gym.c92.fr/wp-content/uploads/fbrfg/site.webmanifest 404 (Not Found) site.webmanifest:1 Manifest: Line: 1, column: 1, Syntax error.
+Ajouter note dans le panier reduction / afficher prix
+Lignes + dans la page tarifs, ... en édition
+Carte ChavilGym dans la facture
 
 
 2024 -> test2
@@ -20,6 +18,7 @@ SQL
 
 JUIN
 ====
+Test contact
 Effacer certificats médicaux
 Réglages lecture décocher : Demander aux moteurs de recherche de ne pas indexer ce site
 Enlever paiemant à la commande
