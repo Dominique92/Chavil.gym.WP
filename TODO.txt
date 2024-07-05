@@ -2,6 +2,8 @@ BUGS / TODO
 ===========
 .htaccess sur les certificats médicaux
 Doc : menu / création page / Animateur / Lieu / Activité
+Simplifier ben oui
+Crayon sur les titres
 Panier développé en hover non affiché en petit écran
 Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
 Ajouter note dans le panier reduction / afficher prix
@@ -11,6 +13,7 @@ Carte ChavilGym dans la facture
 
 2024 -> test2
 =============
+chaville.gym@c92.fr -> chavil.gym@c92.fr
 403 Forbidden : changer repertoire du domaine puis revenir en arrière
 SQL
 	2024.gym.c92.fr -> test.gym.c92.fr
@@ -21,7 +24,7 @@ JUIN
 Test contact
 Effacer certificats médicaux
 Réglages lecture décocher : Demander aux moteurs de recherche de ne pas indexer ce site
-Enlever paiemant à la commande
+Enlever paiement à la commande
 Supprimer toutes les commandes / autres comptes ?
 Rapatrier rando
 Liens anciens sites 2022 2023
