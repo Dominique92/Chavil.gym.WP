@@ -9,11 +9,21 @@
 	}
 </style>
 
-<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+<?php
+	// Exit if accessed directly
+	if (!defined( 'ABSPATH' ))
+		exit;
 
-<?php do_action( 'wpo_wcpdf_before_document', $this->get_type(), $this->order ); ?>
+	function get_meta_billing($t, $field) {
+		return str_replace('Ben Oui', 'Oui',
+			$t->order->get_meta('_billing_wooccm'.$field)
+		);
+	}
 
-<?php do_action( 'wpo_wcpdf_before_document_label', $this->get_type(), $this->order ); ?>
+	do_action( 'wpo_wcpdf_before_document', $this->get_type(), $this->order );
+	do_action( 'wpo_wcpdf_before_document_label', $this->get_type(), $this->order );
+?>
+
 <h1 class="document-type-label">FICHE D'INSCRIPTION</h1>
 <?php do_action( 'wpo_wcpdf_after_document_label', $this->get_type(), $this->order ); ?>
 
@@ -21,20 +31,20 @@
 	<tr>
 		<td class="address shipping-address">
 			<p><b>Commande n°</b>: <?=$this->order_number()?> du <?=$this->order_date()?></p>
-			<p><?=$this->order->get_meta('_billing_wooccm11')?> <?=$this->shipping_address()?></p>
-			<p><b>Né(e) le</b>: <?=$this->order->get_meta('_billing_wooccm12')?></p>
-			<p><b>Représentant légal</b>: <?=$this->order->get_meta('_billing_wooccm21')?></p>
+			<p><?=get_meta_billing($this, 11)?> <?=$this->shipping_address()?></p>
+			<p><b>Né(e) le</b>: <?=get_meta_billing($this, 12)?></p>
+			<p><b>Représentant légal</b>: <?=get_meta_billing($this, 21)?></p>
 			<p><b>Téléphone</b>: <?=$this->billing_phone()?></p>
 			<p><b>Mail</b>: <?=$this->billing_email()?></p>
-			<p><b>Personne à prévenir</b>: <?=$this->order->get_meta('_billing_wooccm13')?> / Tel:
-			<?=$this->order->get_meta('_billing_wooccm18')?></p>
-			<p><b>Questionnaire de santé</b>: <?=$this->order->get_meta('_billing_wooccm14')?></p>
+			<p><b>Personne à prévenir</b>: <?=get_meta_billing($this, 13)?> / Tel:
+			<?=get_meta_billing($this, 18)?></p>
+			<p><b>Questionnaire de santé</b>: <?=get_meta_billing($this, 14)?></p>
 			<p><b>Certificat médical</b>: <?php
-				$cm_id = $this->order->get_meta('_billing_wooccm16');
+				$cm_id = get_meta_billing($this, 16);
 				if ($cm_id)
 					echo '<a target="_bliank" href="'.wp_get_attachment_url($cm_id).'">Télécharger</a>';
 			?></p>
-			<p><b>Publication de l'image</b>: <?=$this->order->get_meta('_billing_wooccm20')?>
+			<p><b>Publication de l'image</b>: <?=get_meta_billing($this, 20)?>
 			<p><b>Payé</b>: <?=$this->get_woocommerce_totals()['order_total']['value']?>
 		</td>
 	</tr>

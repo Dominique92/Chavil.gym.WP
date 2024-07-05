@@ -2,7 +2,6 @@ BUGS / TODO
 ===========
 .htaccess sur les certificats médicaux
 Doc : menu / création page / Animateur / Lieu / Activité
-Simplifier ben oui
 Crayon sur les titres
 Panier développé en hover non affiché en petit écran
 Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
@@ -13,11 +12,13 @@ Carte ChavilGym dans la facture
 
 2024 -> test2
 =============
-chaville.gym@c92.fr -> chavil.gym@c92.fr
 403 Forbidden : changer repertoire du domaine puis revenir en arrière
 SQL
 	2024.gym.c92.fr -> test.gym.c92.fr
-	public_html/gym2024 -> public_html/gymtest2
+	public_html/gymtest3 -> public_html/gymtest3
+	chaville.gym@c92.fr -> chavil.gym@c92.fr
+.htaccess : decommenter Header Cache-Control
+wp-config.php : cado1118_gym2024 / cado1118_gymtest3
 
 JUIN
 ====
@@ -33,7 +34,7 @@ GG console / autoriser les moteurs... ref web
 
 Migration base
 	2024.gym.c92.fr -> test.gym.c92.fr
-	public_html/gym2024 -> public_html/gymtest2
+	public_html/gymtest3 -> public_html/gymtest2
 
 cp -r gym2024 gymtest
 wp-config.php
@@ -182,11 +183,11 @@ SQL : gym2024@c92.fr -> chavil.gym@c92.fr
 SQL : 2024.gym.c92.fr -> test.gym.c92.fr
 
 SQL : chavil.gym@c92.fr -> wric@c92.fr
-SQL : public_html/gym2024 -> public_html/gymp
+SQL : public_html/gymtest3 -> public_html/gymp
 SQL : test.gym.c92.fr -> p.gym.c92.fr
 
 Config.php
-  /public_html/gym2024/wp-content/plugins/wp-super-cache/ -> /public_html/t/gymchatest/wp-content/plugins/wp-super-cache/
+  /public_html/gymtest3/wp-content/plugins/wp-super-cache/ -> /public_html/t/gymchatest/wp-content/plugins/wp-super-cache/
   BDD, users, ...
 robots.txt
 User-agent: *

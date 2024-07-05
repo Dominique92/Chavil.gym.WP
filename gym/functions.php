@@ -144,18 +144,6 @@ add_shortcode ("pages-attachees", function () {
 	"</ul>";
 });
 
-// Replace "Ben Oui" by "Oui"
-add_action ("init", function() {
-	global $wpdb;
-	$orders_ben_oui = $wpdb->get_results(
-		"SELECT * FROM wp3_wc_orders_meta " .
-		"WHERE meta_value = 'Ben Oui'"
-	);
-	foreach ($orders_ben_oui as $obo)
-		$wpdb->get_results("UPDATE wp3_wc_orders_meta SET meta_value = 'Oui' WHERE wp3_wc_orders_meta.id = ".$obo->id);
-});
-
-
 // Horaires
 $nom_jour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
