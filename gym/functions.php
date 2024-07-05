@@ -97,14 +97,13 @@ function storefront_credit() {
 
 /* Stylos édition */
 if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
-	add_action ("storefront_page", "storefront_page_function", 15);
-	function storefront_page_function() {
+	add_action ("storefront_page", function () {
 ?>
 		<a title="Modifier ou supprimer la page" class="crayon"
 		href="<?=get_admin_url()?>post.php?action=edit&post=<?=get_post()->ID?>"
 		>&#9998;</a>
 <?php
-	}
+	}, 15);
 
 	add_action ("storefront_post_content_before", function() {
 ?>
@@ -325,8 +324,7 @@ function remplir_calendrier(&$calendrier, $time, $set = "") {
 }
 
 // Calcul des forfaits
-add_action ("woocommerce_before_calculate_totals", "wbct_function", 20, 1);
-function wbct_function($cart) {
+add_action ("woocommerce_before_calculate_totals", function ($cart) {
 	// Calcul du total des cours
 	$nb_cours = $total_cours = $nb_mn = $total_mn = 0;
 	foreach ($cart->get_cart() as $item) {
@@ -367,13 +365,12 @@ function wbct_function($cart) {
 		} elseif ($min <= $nb_cours && $nb_cours <= $max)
 			$cart->add_fee($c->post_title, $coupon->get_amount() - $total_cours);
 	}
-}
+}, 20, 1);
 
 // Remplacement de [RC] par <br/> dans le questionnaire de santé
 add_filter ("woocommerce_form_field", function($field) {
 	return str_replace("[RC]", "<br/>", $field);
 });
-
 
 add_shortcode ("doc_admin", function() {
 	// Verification de droits d'accès

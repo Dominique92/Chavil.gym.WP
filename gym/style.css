@@ -309,8 +309,7 @@ Version: 1.0.0
 
 /* Edit */
 .crayon {
-  float: left;
-  margin: 0 5px 0 -13px;
+  display: block;
   color: black;
   text-decoration: none !important;
 }
