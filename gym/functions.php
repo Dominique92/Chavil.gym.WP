@@ -132,6 +132,24 @@ if (isset (wp_get_current_user()->allcaps["edit_others_pages"])) {
 	});
 }
 
+// Split page in flex blocs
+add_filter ("the_content", function ($content) {
+	$entry_tag = "\n<div class=\"entry-content-flex\">";
+	$bloc_tag = "\n<div class=\"entry-content-bloc\">";
+	$tail = "\n</div>";
+	$blocs = explode ("§§", str_replace ("<h2", "§§<h2", $content));
+
+	if(!trim($blocs[0]))
+		unset ($blocs[0]);
+
+	if (count($blocs) > 2)
+		return $entry_tag.$bloc_tag.
+			implode ($tail.$bloc_tag, $blocs).
+			$tail.$tail;
+
+	return $content;
+});
+
 // Sous menu dans la page
 add_shortcode ("pages-attachees", function () {
 	return "<ul>" .

@@ -2,9 +2,9 @@ BUGS //TODO
 ===========
 .htaccess sur les certificats médicaux
 Doc : menu / création page / Animateur / Lieu / Activité
-Panier développé en hover non affiché en petit écran
 
 //BEST
+Panier développé en hover non affiché en petit écran
 Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
 Ajouter note dans le panier reduction / afficher prix
 Lignes + dans la page tarifs, ... en édition
