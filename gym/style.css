@@ -267,6 +267,12 @@ Version: 1.0.0
   width: 100%;
 }
 
+.entry-content-bloc figure:last-child,
+.entry-content-bloc figure:last-child img {
+  max-width: 100%;
+  margin: 0 auto !important;
+}
+
 @media (min-width: 580px) {
 
   .page .entry-content-flex,
