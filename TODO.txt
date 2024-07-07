@@ -10,6 +10,20 @@ Ajouter note dans le panier reduction / afficher prix
 Lignes + dans la page tarifs, ... en édition
 Carte ChavilGym dans la facture
 
+2023
+Site Kit by Google
+WP Statistics
+
+Web
+MonsterInsights
+SEOPress Free
+GA Google Analytics
+SEOPress
+
+Site Kit by Google
+=> Configurer avec google
+
+
 2024 -> test3
 =============
 403 Forbidden : changer repertoire du domaine puis revenir en arrière

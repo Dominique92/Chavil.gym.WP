@@ -326,7 +326,6 @@ add_shortcode ("calendrier", function($args, $text) {
 		}
 		$output[] = "</table>";
 	}
-	$output[] = "</div>";
 
 	return implode(PHP_EOL, $output);
 });
