@@ -44,6 +44,8 @@ function storefront_secondary_navigation() { // 30
 ?>
 	<a href="/"><span>Actualités</span></a>
 	<a href="/horaires/">Horaires</a>
+	<a href="/tarifs-inscriptions/">Tarifs</a>
+	<a href="/inscription-internet/">Inscriptions</a>
 	<a class="bouton-cyan" title="Mon compte" href="/mon-compte/">
 		<?=$user->ID ? $user->display_name : 'Mon compte'?>
 	</a>
@@ -142,12 +144,17 @@ add_filter ("the_content", function ($content) {
 		unset ($blocs[0]);
 
 	if (count($blocs) > 2)
-		return $entry_tag.$bloc_tag.
+		$content =  $entry_tag.$bloc_tag.
 			implode ($tail.$bloc_tag, $blocs).
 			$tail.$tail;
 
 	return $content;
 });
+
+// Remplacements dans le questionnaire de santé
+add_filter ("the_content", function ($content) {
+	return str_replace(["Ben Oui", "[RC]"], ["Oui", "<br/>"], $content);
+}, 99);
 
 // Sous menu dans la page
 add_shortcode ("pages-attachees", function () {
@@ -382,11 +389,6 @@ add_action ("woocommerce_before_calculate_totals", function ($cart) {
 			$cart->add_fee($c->post_title, $coupon->get_amount() - $total_cours);
 	}
 }, 20, 1);
-
-// Remplacement de [RC] par <br/> dans le questionnaire de santé
-add_filter ("woocommerce_form_field", function($field) {
-	return str_replace("[RC]", "<br/>", $field);
-});
 
 add_shortcode ("doc_admin", function() {
 	// Verification de droits d'accès
