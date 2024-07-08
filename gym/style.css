@@ -7,6 +7,11 @@ Author: Dominique Cavailhez
 Version: 1.0.0
 */
 
+/* Les fonts de Sport-Santé & FFEPGV */
+body {
+  font-family: VAGRounded-light, Gilroy, ui-sans-serif, Arial !important;
+}
+
 /* Général */
 .col-full {
   max-width: initial;
@@ -17,7 +22,6 @@ Version: 1.0.0
 /* Entête */
 .site-header {
   padding: 0;
-  font-family: Arial;
 }
 
 .site-header>div:first-child {
@@ -124,6 +128,16 @@ Version: 1.0.0
   margin: 11px 0;
 }
 
+@media (max-width: 400px) {
+  .banniere img {
+    display: none;
+  }
+
+  .banniere>div {
+    width: 100%;
+  }
+}
+
 .banniere>div>ul {
   display: flex;
   width: 100%;
@@ -134,10 +148,12 @@ Version: 1.0.0
 .banniere>div>ul>li {
   padding: 0.2em 0.3em !important;
   border-radius: 0.5em;
+  white-space: nowrap;
 }
 
 .banniere>div>ul>li>a {
   pointer-events: none;
+  white-space: nowrap;
 }
 
 .banniere>div li ul {
@@ -169,6 +185,14 @@ Version: 1.0.0
   background: hsl(270, 50%, 40%);
 }
 
+/*//TODO remove*/
+.banniere>div>ul>li:nth-child(5),
+.banniere>div>ul>li:nth-child(6) {
+  display: none;
+}
+
+/*//TODO remove*/
+.banniere>div>ul>li:nth-child(4) ul,
 .banniere>div>ul>li:last-child ul {
   right: 0;
 }
@@ -203,9 +227,7 @@ Version: 1.0.0
 
 .content-area h1,
 .content-area h2 {
-  font-family: Lato;
-  font-size: 1.5em;
-  font-weight: 400;
+  font-size: 1.25em;
   letter-spacing: initial;
 }
 

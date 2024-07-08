@@ -44,7 +44,6 @@ function storefront_secondary_navigation() { // 30
 ?>
 	<a href="/"><span>Actualités</span></a>
 	<a href="/horaires/">Horaires</a>
-	<a href="/nous-appeler/">Contact</a>
 	<a class="bouton-cyan" title="Mon compte" href="/mon-compte/">
 		<?=$user->ID ? $user->display_name : 'Mon compte'?>
 	</a>
