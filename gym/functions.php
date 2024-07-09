@@ -35,8 +35,8 @@ add_action ("admin_head", function () {
 
 // Personnalisation entête
 //function storefront_header_container                 () {} // 0
-//function storefront_skip_links                       () {} // 5
-//function storefront_social_icons                     () {} // 10
+function storefront_skip_links                       () {} // 5
+function storefront_social_icons                     () {} // 10
 function storefront_site_branding                    () {} // 20
 function storefront_secondary_navigation() { // 30
 	$user = _wp_get_current_user();
@@ -45,7 +45,6 @@ function storefront_secondary_navigation() { // 30
 	<a href="/"><span>Actualités</span></a>
 	<a href="/horaires/">Horaires</a>
 	<a href="/tarifs-inscriptions/">Tarifs</a>
-	<a href="/inscription-internet/">Inscriptions</a>
 	<a class="bouton-cyan" title="Mon compte" href="/mon-compte/">
 		<?=$user->ID ? $user->display_name : 'Mon compte'?>
 	</a>
