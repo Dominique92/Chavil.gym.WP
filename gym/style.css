@@ -260,6 +260,7 @@ body {
 
 .page .content-area p {
   max-width: 600px;
+  margin-bottom: 0.5em;
 }
 
 .page .content-area figure.alignright {
