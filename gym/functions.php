@@ -217,14 +217,17 @@ add_shortcode ("horaires", function() {
 		foreach ($jour as $heure) {
 			// Ligne sécable si trop longue et comporte des ()
 			if (strlen($heure[0]) > 30) $heure[0] = implode("<br/>(", explode("(", $heure[0]));
-			$panier = "<a href=\"" .
-				get_bloginfo("url") . "/panier?add-to-cart=" . $heure[6] .
-				'" title="S\'inscrire"">&#128722;</a>';
-			$edit = isset(wp_get_current_user()->allcaps["edit_others_pages"]) ?
-				"<a class=\"crayon\" title=\"Modifier la séance\" href=\"" .
-					get_bloginfo("url") .
-					"/wp-admin/post.php?&action=edit&post={$heure[6]}\">&#9998;</a>" :
-				"";
+			$panier = "<a class=\"horaires-panier\" " .
+				"href=\"" . get_bloginfo("url") . "/panier?add-to-cart={$heure[6]}\" " .
+				"title=\"S'inscrire\"" .
+				">&#128722;</a>";
+			$edit = "";
+			if (wp_get_current_user()->allcaps["edit_others_pages"])
+				$edit = "<a class=\"crayon\" " .
+					"title=\"Modifier la séance\" " .
+					"href=\"" . get_bloginfo("url") . "/wp-admin/post.php" .
+						"?&action=edit&post={$heure[6]}\"" .
+					">&#9998;</a>";
 			$ligne = [
 				$heure[2] . " " . ($heure[7] ? $panier : ""),
 				$edit . " " . lien_page($heure[0], $heure[5]),

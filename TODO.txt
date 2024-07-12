@@ -39,29 +39,32 @@ wp-config.php : cado1118_gym2024 / cado1118_gymtest3
 
 JUIN
 ====
+Migration base
+	Créer gymcha2024 / attribuer user
+	Export gym2024
+	2024.gym.c92.fr -> chaville.gym.c92.fr
+	public_html/gym2024 -> public_html/gymcha2024
+	Import gymcha2024
+
+cp -r gym2024 gymcha2024
+wp-config.php
+	gym2024 -> gymcha2024
+	//define( 'WP_DEBUG', true );
+	//define( 'WP_DEBUG_DISPLAY', true);
+.htaccess
+	# Header set Cache-Control "max-age=0, private, no-cache, no-store, must-revalidate"
+wp-config.php : cado1118_gym2024 / cado1118_gymcha2024
+
 Test contact
-Effacer certificats médicaux
-Réglages lecture décocher : Demander aux moteurs de recherche de ne pas indexer ce site
+Réglages lecture décocher : Demander aux moteurs de recherche d'indexer ce site
 Enlever paiement à la commande
 Supprimer toutes les commandes / autres comptes ?
+Effacer certificats médicaux
 Rapatrier rando
-Liens anciens sites 2022 2023 => migrer db 2023
 Cache / .htaccess / config.php debug
 GG console / autoriser les moteurs... ref web
+?? Liens anciens sites 2022 2023 => migrer db 2023
 
-Migration base
-	//2024.gym.c92.fr -> test.gym.c92.fr
-	//public_html/gymtest3 -> public_html/gymtest2
-
-cp -r gym2024 gymtest
-wp-config.php
-	gym2024 -> gymtest
-	define( 'WP_DEBUG', true );
-	define( 'WP_DEBUG_DISPLAY', true);
-.htaccess
-	Header set Cache-Control "max-age=0, private, no-cache, no-store, must-revalidate"
-//.htaccess : decommenter Header Cache-Control
-wp-config.php : cado1118_gym2024 / cado1118_gymtest3
 
 //TODO délivrer plugin
 https://wordpress.stackexchange.com/questions/260969/update-my-custom-wordpress-plugin-through-my-own-server

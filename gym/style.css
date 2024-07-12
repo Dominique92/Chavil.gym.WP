@@ -387,6 +387,22 @@ body {
   display: none !important;
 }
 
+@media print {
+
+  .site-header,
+  .storefront-breadcrumb,
+  .site-footer,
+  .crayon,
+  .horaires-panier {
+    display: none;
+  }
+
+  .entry-title a,
+  .entry-content-bloc h2 {
+    color: black !important;
+  }
+}
+
 /* Horaires */
 .horaires table {
   clear: both;
