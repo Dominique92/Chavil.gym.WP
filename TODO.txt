@@ -133,7 +133,8 @@ WooCommerce -> Comptes
 
 Installer "PDF Invoices & Packing Slips for WooCommerce" Par WP Overnight
   Extensions -> WooCommerce Commander directeur -> Réglages
-  Sélectionnez un modèle -> Attestation
+  Sélectionnez un modèle -> Gym (personnaliser)
+  Sélectionner logo
 
 Installer "Payment Plugins for Stripe WooCommerce"
   Connecter compte Stripe
@@ -174,6 +175,12 @@ Installer Checkout Field Manager (Checkout Manager) for WooCommerce par QuadLaye
 Page commander -> Modifier
   Remplacer par code court [woocommerce_checkout]
 Créer comptes
+
+Installer "Post Type Order"
+	Réglages -> Général -> Post Type Order (à la fin)
+
+Installer Bloc Editing Colors
+	Pas de configuration
 
 TBD
 Installer "WP Dark Mode"

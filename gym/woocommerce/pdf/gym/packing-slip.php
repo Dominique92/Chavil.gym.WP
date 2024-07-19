@@ -46,11 +46,13 @@
 			?></p>
 			<p><b>Publication de l'image</b>: <?=get_meta_billing($this, 20)?>
 			<p><b>Payé</b>: <?=$this->get_woocommerce_totals()['order_total']['value']?>
+			<p><b>Remarques</b>: <?=get_meta_billing($this, 17)?></p>
 		</td>
 	</tr>
 </table>
 
 <?php do_action( 'wpo_wcpdf_before_order_details', $this->get_type(), $this->order ); ?>
+
 
 <table class="order-details">
 	<tbody>

@@ -78,6 +78,11 @@ function storefront_primary_navigation() { // 50
 		<?=wp_nav_menu()?>
 	</div>
 <?php
+/*
+	<div style="background:pink">NOTE:
+		Les inscriptions en ligne sont temporairement désactivées
+	</div>
+*/
 }
 function storefront_header_cart() {} // 60
 //function storefront_primary_navigation_wrapper_close () {} // 68
@@ -221,6 +226,7 @@ add_shortcode ("horaires", function() {
 				"href=\"" . get_bloginfo("url") . "/panier?add-to-cart={$heure[6]}\" " .
 				"title=\"S'inscrire\"" .
 				">&#128722;</a>";
+//$panier = "";
 			$edit = "";
 			if (wp_get_current_user()->allcaps["edit_others_pages"])
 				$edit = "<a class=\"crayon\" " .
