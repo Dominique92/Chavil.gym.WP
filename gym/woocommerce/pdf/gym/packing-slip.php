@@ -53,7 +53,6 @@
 
 <?php do_action( 'wpo_wcpdf_before_order_details', $this->get_type(), $this->order ); ?>
 
-
 <table class="order-details">
 	<tbody>
 		<?php foreach ( $this->get_order_items() as $item_id => $item ) : ?>

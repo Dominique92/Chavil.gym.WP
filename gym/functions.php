@@ -33,6 +33,18 @@ add_action ("admin_head", function () {
 	wp_enqueue_style("admin_css", get_stylesheet_directory_uri() . "/admin.css");
 });
 
+// Allow/desallow robots index
+add_filter ("wp_robots", function () {
+	preg_match(
+		"/(^\/$|activite|equipe\/$|inscription|horaire)/",
+		$_SERVER['REQUEST_URI'],
+		$matches
+	);
+?>
+	<meta name="robots" content="<?=$matches?'':'no'?>index,nofollow,noarchive,nocache">
+<?php
+});
+
 // Personnalisation entête
 //function storefront_header_container                 () {} // 0
 function storefront_skip_links                       () {} // 5

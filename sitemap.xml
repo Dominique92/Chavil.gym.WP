@@ -7,22 +7,22 @@
 </url>
 <url>
 	<loc>https://chaville.gym.c92.fr/activites/</loc>
-	<changefreq>monthly</changefreq>
+	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://chaville.gym.c92.fr/equipe/</loc>
-	<changefreq>monthly</changefreq>
+	<changefreq>weekly</changefreq>
 	<priority>0.6</priority>
 </url>
 <url>
 	<loc>https://chaville.gym.c92.fr/accueil/tarifs-inscriptions/</loc>
-	<changefreq>monthly</changefreq>
+	<changefreq>weekly</changefreq>
 	<priority>0.4</priority>
 </url>
 <url>
 	<loc>https://chaville.gym.c92.fr/accueil/horaires/</loc>
-	<changefreq>monthly</changefreq>
+	<changefreq>weekly</changefreq>
 	<priority>0.2</priority>
 </url>
 </urlset>
