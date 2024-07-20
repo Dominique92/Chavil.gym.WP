@@ -1,10 +1,12 @@
 BUGS //TODO
 ===========
+Cron
 Sortie fichier compta
 .htaccess sur les certificats médicaux
 Doc : menu / création page / Animateur / Lieu / Activité
 
 //BEST
+SQL Changement automatique de répertoire base et url site
 [RC] et ben oui dans les pages admin
 Afficher le menu actif principal
 Sticker la ligne menu

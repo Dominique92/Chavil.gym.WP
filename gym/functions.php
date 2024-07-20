@@ -40,9 +40,11 @@ add_filter ("wp_robots", function () {
 		$_SERVER['REQUEST_URI'],
 		$matches
 	);
+	if (!$matches) {
 ?>
-	<meta name="robots" content="<?=$matches?'':'no'?>index,nofollow,noarchive,nocache">
+		<meta name="robots" content="noindex">
 <?php
+	}
 });
 
 // Personnalisation entête
