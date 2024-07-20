@@ -8,55 +8,15 @@
 <url>
 	<loc>https://chaville.gym.c92.fr/activites/</loc>
 	<changefreq>weekly</changefreq>
+	<priority>0.9</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/accueil/horaires/</loc>
+	<changefreq>weekly</changefreq>
 	<priority>0.8</priority>
 </url>
 <url>
-	<loc>https://chaville.gym.c92.fr/activites/actimarch/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/aisance/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/bungy-pump/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/gym/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/gym-enfant/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/marche-nordique/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/Pilates/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/piyolates/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/stretching/</loc>
-	<changefreq>weekly</changefreq>
-	<priority>0.7</priority>
-</url>
-<url>
-	<loc>https://chaville.gym.c92.fr/activites/yoga/</loc>
+	<loc>https://chaville.gym.c92.fr/accueil/tarifs-inscriptions/</loc>
 	<changefreq>weekly</changefreq>
 	<priority>0.7</priority>
 </url>
@@ -66,13 +26,53 @@
 	<priority>0.6</priority>
 </url>
 <url>
-	<loc>https://chaville.gym.c92.fr/accueil/tarifs-inscriptions/</loc>
+	<loc>https://chaville.gym.c92.fr/activites/actimarch/</loc>
 	<changefreq>weekly</changefreq>
-	<priority>0.4</priority>
+	<priority>0.5</priority>
 </url>
 <url>
-	<loc>https://chaville.gym.c92.fr/accueil/horaires/</loc>
+	<loc>https://chaville.gym.c92.fr/activites/aisance/</loc>
 	<changefreq>weekly</changefreq>
-	<priority>0.2</priority>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/activites/bungy-pump/</loc>
+	<changefreq>weekly</changefreq>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/activites/gym/</loc>
+	<changefreq>weekly</changefreq>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/activites/gym-enfant/</loc>
+	<changefreq>weekly</changefreq>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/activites/marche-nordique/</loc>
+	<changefreq>weekly</changefreq>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/activites/Pilates/</loc>
+	<changefreq>weekly</changefreq>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/activites/piyolates/</loc>
+	<changefreq>weekly</changefreq>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/activites/stretching/</loc>
+	<changefreq>weekly</changefreq>
+	<priority>0.5</priority>
+</url>
+<url>
+	<loc>https://chaville.gym.c92.fr/activites/yoga/</loc>
+	<changefreq>weekly</changefreq>
+	<priority>0.5</priority>
 </url>
 </urlset>
