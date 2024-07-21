@@ -34,18 +34,21 @@ add_action ("admin_head", function () {
 });
 
 // Allow/desallow robots index
-add_filter ("wp_robots", function () {
+add_filter ("wp_robots", function ($robots) {
 	preg_match(
-		"/(^\/$|activite|equipe\/$|inscription|horaire)/",
+		"/(^\/$|activite|equipe\/$|tarif|horaire)/",
 		$_SERVER['REQUEST_URI'],
 		$matches
 	);
 	if (!$matches) {
-?>
-		<meta name="robots" content="noindex">
-<?php
+		$robots['index'] =
+		$robots['follow'] = !!$matches;
+		$robots['noindex'] =
+		$robots['nofollow'] = !$matches;
 	}
-});
+
+	return $robots;
+}, 99);
 
 // Personnalisation entête
 //function storefront_header_container                 () {} // 0
@@ -92,11 +95,6 @@ function storefront_primary_navigation() { // 50
 		<?=wp_nav_menu()?>
 	</div>
 <?php
-/*
-	<div style="background:pink">NOTE:
-		Les inscriptions en ligne sont temporairement désactivées
-	</div>
-*/
 }
 function storefront_header_cart() {} // 60
 //function storefront_primary_navigation_wrapper_close () {} // 68
@@ -240,7 +238,6 @@ add_shortcode ("horaires", function() {
 				"href=\"" . get_bloginfo("url") . "/panier?add-to-cart={$heure[6]}\" " .
 				"title=\"S'inscrire\"" .
 				">&#128722;</a>";
-//$panier = "";
 			$edit = "";
 			if (wp_get_current_user()->allcaps["edit_others_pages"])
 				$edit = "<a class=\"crayon\" " .
@@ -412,23 +409,29 @@ add_action ("woocommerce_before_calculate_totals", function ($cart) {
 	}
 }, 20, 1);
 
+// Affichage de la liste des commandes admin
 add_shortcode ("doc_admin", function() {
-	// Verification de droits d'accès
-	if (!count(array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))) {
-		return;
-	}
-
-	parse_str($_SERVER["QUERY_STRING"], $query);
-
-	// Affichage de la liste des commandes admin
-	// Texte dans la page doc_admin
 	$doc_admin = get_page_by_path("doc_admin");
-	if (!count($query) && $doc_admin) {
-		return "<h1>Fonctions d'administration GYM</h1>" . $doc_admin->post_content;
-	}
 
-	// Téléchargement du fichier de compta
-	if (isset ($query["extract"])) {
+	// Verification de droits d'accès
+	if (array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles) &&
+		!$_GET && // Si pas de sous cmmandes
+		$doc_admin) // Si la page existe bien
+	{
+		return '<h1>' . $doc_admin->post_title .
+			' <a title="Modifier le texte ci dessous" class="crayon" href="' .
+			get_admin_url() . 'post.php?action=edit&post=' . $doc_admin->ID .
+			'">&#9998;</a></h1>' .
+			$doc_admin->post_content;
+	}
+});
+
+// Téléchargement du fichier de compta
+add_action ("init", function() {
+	// Verification de droits d'accès
+	if (array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles) &&
+		$_GET) // Si sous commande d'extraction
+	{
 		$order_db = [];
 		$order_list = [[
 			"Commande",
@@ -448,6 +451,7 @@ add_shortcode ("doc_admin", function() {
 
 		foreach ($order_db as $o_stat) {
 			ksort($o_stat);
+
 			foreach ($o_stat as $o) {
 				$total = floatval($o["total"]);
 				$com = round($total * 0.015 + 0.25, 2);

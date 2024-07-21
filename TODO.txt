@@ -1,7 +1,6 @@
 BUGS //TODO
 ===========
 Cron
-Sortie fichier compta
 .htaccess sur les certificats médicaux
 Doc : menu / création page / Animateur / Lieu / Activité
 
