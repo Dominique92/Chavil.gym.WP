@@ -477,9 +477,10 @@ add_action ("init", function() {
 		];
 
 		// Ecriture du fichier
+		date_default_timezone_set('Europe/Paris');
 		header("Content-Description: File Transfer");
 		header("Content-Type: application/octet-stream");
-		header("Content-Disposition: attachment; filename=" . $query["extract"] . ".csv");
+		header("Content-Disposition: attachment; filename=inscriptions-" . date("ymdHi") . ".csv");
 		header("Content-Transfer-Encoding: binary");
 		header("Expires: 0");
 		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
