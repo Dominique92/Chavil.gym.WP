@@ -475,6 +475,10 @@ add_action ("init", function() {
 			"=SOMME(F2:F".count($order_list).")",
 			"=SOMME(G2:G".count($order_list).")",
 		];
+		$order_list[] = ["", "", "", "Commission", "",
+			'=INDIRECT(CONCATENER("F";LIGNE()-1))/INDIRECT(CONCATENER("E";LIGNE()-1))*100',
+			"%",
+		];
 
 		// Ecriture du fichier
 		date_default_timezone_set('Europe/Paris');
