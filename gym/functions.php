@@ -415,7 +415,6 @@ add_shortcode ("doc_admin", function() {
 
 	// Verification de droits d'accès
 	if (array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles) &&
-		!$_GET && // Si pas de sous cmmandes
 		$doc_admin) // Si la page existe bien
 	{
 		return '<h1>' . $doc_admin->post_title .
@@ -430,7 +429,7 @@ add_shortcode ("doc_admin", function() {
 add_action ("init", function() {
 	// Verification de droits d'accès
 	if (array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles) &&
-		$_GET) // Si sous commande d'extraction
+		$_GET["extract"] == "compta")
 	{
 		$order_db = [];
 		$order_list = [[
