@@ -411,6 +411,18 @@ add_action ("woocommerce_before_calculate_totals", function ($cart) {
 
 // Affichage de la liste des commandes admin
 add_shortcode ("doc_admin", function() {
+	global $dernieres_cmd_bordereaux;
+
+	$documents = ["<h1>Documents comptables</h1>"];
+	for ($l = 0; $l <= count ($dernieres_cmd_bordereaux) + 1; $l++) {
+		$nom_doc = "Résultat en date";
+		if ($l)
+			$nom_doc = "Bordereau numéro $l";
+		if ($l == count ($dernieres_cmd_bordereaux) + 1)
+			$nom_doc = "Reste à transferer";
+		$documents[] = "<p><a href=\"?compta=$l\">$nom_doc</a></p>";
+	}
+
 	$doc_admin = get_page_by_path("doc_admin");
 
 	// Verification de droits d'accès
@@ -421,69 +433,83 @@ add_shortcode ("doc_admin", function() {
 			' <a title="Modifier le texte ci dessous" class="crayon" href="' .
 			get_admin_url() . 'post.php?action=edit&post=' . $doc_admin->ID .
 			'">&#9998;</a></h1>' .
-			$doc_admin->post_content;
+			$doc_admin->post_content .
+			implode (PHP_EOL, $documents);
 	}
 });
 
 // Téléchargement du fichier de compta
 add_action ("init", function() {
+	global $dernieres_cmd_bordereaux;
+
+	preg_match('/^\/mon-compte\/\?compta\=?([0-9]*)$/', $_SERVER['REQUEST_URI'], $matches);
+
 	// Verification de droits d'accès
 	if (array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles) &&
-		$_GET["extract"] == "compta")
+		count ($matches))
 	{
+		// Filtrage d'un bordereau
+		$no_bord = intval('0'.$matches[1]);
+		$premiere_cmd = @$dernieres_cmd_bordereaux[$no_bord - 2] ?: 0;
+		$dernière_cmd = @$dernieres_cmd_bordereaux[$no_bord - 1] ?: 9999;
+		$nom_bordereau = "RESULTAT EN DATE " . date("y-m-d H\hi");
+		if ($no_bord)
+			$nom_bordereau = "BORDEREAU NUMERO $no_bord";
+		if ($no_bord == count ($dernieres_cmd_bordereaux) + 1)
+			$nom_bordereau = "RESTE A TRANSFERER " . date("y-m-d H\hi");
+		$nom_fichier = str_replace (' ', '_', strtolower($nom_bordereau));
+
 		$order_db = [];
-		$order_list = [[
-			"Commande",
-			"Date",
-			"Nom",
-			"Prénom",
-			"Payé",
-			"Commission",
-			"Reçu",
-			"Statut",
-		]];
+		$order_list = [
+			["ChavilGYM Stripe -> Crédit Mutuel : $nom_bordereau"],
+			[], [
+				"Commande",
+				"Date",
+				"Statut",
+				"Prénom",
+				"Nom",
+				"Payé",
+				"Commission",
+				"Transfert",
+			]];
 
 		foreach (wc_get_orders([]) as $order) {
 			$o = $order->get_data();
-			$order_db[$o["status"]][$o["id"]] = $o;
+			if (!$no_bord || ($premiere_cmd < $o['id'] && $o['id'] <= $dernière_cmd))
+				$order_db[$o["id"]] = $o;
+		}
+		ksort($order_db);
+
+		foreach ($order_db as $o) {
+			$ligne = count($order_list) + 1;
+			$total = floatval($o["total"]);
+			$com = $o["payment_method_title"] == "Link by Stripe" ? "1,2" : "1,5";
+
+			if (intval ($o["total"]))
+				$order_list[] = [
+					$o["id"],
+					$o["date_created"]->date_i18n(),
+					$o["status"],
+					$o["billing"]["first_name"],
+					$o["billing"]["last_name"],
+					number_format($total, 2, ",", ""),
+					"=ARRONDI.SUP(F$ligne*$com%+0,25;2)",
+					"=F$ligne-G$ligne",
+				];
 		}
 
-		foreach ($order_db as $o_stat) {
-			ksort($o_stat);
-
-			foreach ($o_stat as $o) {
-				$total = floatval($o["total"]);
-				$com = round($total * 0.015 + 0.25, 2);
-
-				if (intval ($o["total"]))
-					$order_list[] = [
-						$o["id"],
-						$o["date_created"]->date_i18n(),
-						$o["billing"]["last_name"],
-						$o["billing"]["first_name"],
-						number_format($total, 2, ",", ""),
-						number_format($com, 2, ",", ""),
-						number_format($total - $com, 2, ",", ""),
-						$o["status"],
-					];
-			}
-		}
 		// Totaux
-		$order_list[] = ["", "", "", "Total",
-			"=SOMME(E2:E".count($order_list).")",
-			"=SOMME(F2:F".count($order_list).")",
-			"=SOMME(G2:G".count($order_list).")",
-		];
-		$order_list[] = ["", "", "", "Commission", "",
-			'=INDIRECT(CONCATENER("F";LIGNE()-1))/INDIRECT(CONCATENER("E";LIGNE()-1))*100',
-			"%",
+		$order_list[] = ["", "", "", "", "Total",
+			"=SOMME(F4:F".count($order_list).")",
+			"=SOMME(G4:G".count($order_list).")",
+			"=SOMME(H4:H".count($order_list).")",
 		];
 
 		// Ecriture du fichier
 		date_default_timezone_set('Europe/Paris');
 		header("Content-Description: File Transfer");
 		header("Content-Type: application/octet-stream");
-		header("Content-Disposition: attachment; filename=inscriptions-" . date("ymdHi") . ".csv");
+		header("Content-Disposition: attachment; filename=$nom_fichier.csv");
 		header("Content-Transfer-Encoding: binary");
 		header("Expires: 0");
 		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
