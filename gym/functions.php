@@ -471,6 +471,7 @@ add_action ("init", function() {
 				"Payé",
 				"Commission",
 				"Transfert",
+				"Bordereau",
 			]];
 
 		foreach (wc_get_orders([]) as $order) {
@@ -485,6 +486,13 @@ add_action ("init", function() {
 			$total = floatval($o["total"]);
 			$com = $o["payment_method_title"] == "Link by Stripe" ? "1,2" : "1,5";
 
+			$numero_bordereau = '';
+			rsort ($dernieres_cmd_bordereaux);
+			foreach ($dernieres_cmd_bordereaux as $i => $b) {
+				if ($o["id"] <= $b)
+					$numero_bordereau = count ($dernieres_cmd_bordereaux)- $i;
+			}
+
 			if (intval ($o["total"]))
 				$order_list[] = [
 					$o["id"],
@@ -495,6 +503,7 @@ add_action ("init", function() {
 					number_format($total, 2, ",", ""),
 					"=ARRONDI.SUP(F$ligne*$com%+0,25;2)",
 					"=F$ligne-G$ligne",
+					$numero_bordereau,
 				];
 		}
 
