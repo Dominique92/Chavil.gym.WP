@@ -52,6 +52,20 @@
 }
 </style>
 
+<?php
+	// On soustrait les dons
+	preg_match('/([0-9,]+)/', $this->get_woocommerce_totals()['order_total']['value'], $total_fécture);
+	$total_cotisations = floatval ($total_fécture[0]);
+
+	foreach ( $this->get_order_items() as $item_id => $item ) {
+		preg_match('/([0-9,]+)/', $item['single_price'], $sps);
+		preg_match('/([0-9,]+)/', $item['price'], $tps);
+
+		if (floatval ($sps[0]) == 10)
+			$total_cotisations -= floatval ($tps[0]);
+	}
+?>
+
 <div class="logo">
 	<?php
 	if ($this->has_header_logo()) {
@@ -78,8 +92,7 @@
 	<p>L'association Chavil’ Gymnastique Volontaire
 	certifie que</p>
 	<div><?=$this->billing_address()?></div>
-	<p>a versé la somme de
-	<?=$this->get_woocommerce_totals()['order_total']['value']?>
+	<p>a versé la somme de <?=$total_cotisations?> €
 	de cotisation pour son l'adhésion avec licence
 	à la saison sportive 2024-2025.</p>
 </div>
