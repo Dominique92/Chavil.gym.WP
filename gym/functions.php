@@ -411,16 +411,25 @@ add_action ("woocommerce_before_calculate_totals", function ($cart) {
 
 // Affichage de la liste des commandes admin
 add_shortcode ("doc_admin", function() {
-	global $dernieres_cmd_bordereaux;
+	global $bordereaux;
 
-	$documents = ["<h1>Documents comptables</h1>"];
-	for ($l = 0; $l <= count ($dernieres_cmd_bordereaux) + 1; $l++) {
-		$nom_doc = "Résultat en date";
-		if ($l)
-			$nom_doc = "Bordereau numéro $l";
-		if ($l == count ($dernieres_cmd_bordereaux) + 1)
+	$no_bordereaux = array_keys ($bordereaux);
+	$documents = [
+		"<h1>Documents comptables</h1>",
+		"<p>Cliquez pour charger les fichiers excel :</p>",
+	];
+	for ($nob = 0; $nob <= count ($no_bordereaux) + 1; $nob++) {
+		$nom_doc = "Journal des inscriptions en date";
+		if ($nob == count ($no_bordereaux) + 1)
 			$nom_doc = "Reste à transferer";
-		$documents[] = "<p><a href=\"?compta=$l\">$nom_doc</a></p>";
+		elseif ($nob) {
+			$date_bordereau = array_values ($bordereaux)[$nob - 1];
+			$nom_doc = "Bordereau No$nob du " .
+				substr($date_bordereau, 4, 2) . '-' .
+				substr($date_bordereau, 2, 2) . '-' .
+				substr($date_bordereau, 0, 2);
+		}
+		$documents[] = "<p><a href=\"?compta=$nob\">$nom_doc</a></p>";
 	}
 
 	$doc_admin = get_page_by_path("doc_admin");
@@ -440,8 +449,9 @@ add_shortcode ("doc_admin", function() {
 
 // Téléchargement du fichier de compta
 add_action ("init", function() {
-	global $dernieres_cmd_bordereaux;
+	global $bordereaux;
 
+	date_default_timezone_set('Europe/Paris');
 	preg_match('/^\/mon-compte\/\?compta\=?([0-9]*)$/', $_SERVER['REQUEST_URI'], $matches);
 
 	// Verification de droits d'accès
@@ -450,29 +460,39 @@ add_action ("init", function() {
 	{
 		// Filtrage d'un bordereau
 		$no_bord = intval('0'.$matches[1]);
-		$premiere_cmd = @$dernieres_cmd_bordereaux[$no_bord - 2] ?: 0;
-		$dernière_cmd = @$dernieres_cmd_bordereaux[$no_bord - 1] ?: 9999;
-		$nom_bordereau = "RESULTAT EN DATE " . date("y-m-d H\hi");
-		if ($no_bord)
-			$nom_bordereau = "BORDEREAU NUMERO $no_bord";
-		if ($no_bord == count ($dernieres_cmd_bordereaux) + 1)
+		$no_bordereaux = array_keys ($bordereaux);
+		$premiere_cmd = @$no_bordereaux[$no_bord - 2] ?: 0;
+		$dernière_cmd = @$no_bordereaux[$no_bord - 1] ?: 9999;
+
+		$nom_bordereau = "JOURNAL DES INSCRIPTIONS " . date("y-m-d H\hi");
+		if ($no_bord == count ($no_bordereaux) + 1)
 			$nom_bordereau = "RESTE A TRANSFERER " . date("y-m-d H\hi");
+		elseif ($no_bord) {
+			$date_bordereau = array_values ($bordereaux)[$no_bord - 1];
+			$nom_bordereau = "BORDEREAU No$no_bord du " .
+				substr($date_bordereau, 4, 2) . '-' .
+				substr($date_bordereau, 2, 2) . '-' .
+				substr($date_bordereau, 0, 2);
+		}
 		$nom_fichier = str_replace (' ', '_', strtolower($nom_bordereau));
 
 		$order_db = [];
+		$titres = [
+			"Commande",
+			"Date",
+			"Statut",
+			"Prénom",
+			"Nom",
+			"Payé",
+			"Commission",
+			"Transfert",
+		];
+		if (!$no_bord)
+			$titres[] = "Bordereau";
 		$order_list = [
-			["ChavilGYM Stripe -> Crédit Mutuel : $nom_bordereau"],
-			[], [
-				"Commande",
-				"Date",
-				"Statut",
-				"Prénom",
-				"Nom",
-				"Payé",
-				"Commission",
-				"Transfert",
-				"Bordereau",
-			]];
+			["Chavil'GYM Stripe => Crédit Mutuel : $nom_bordereau"],
+			[],
+			$titres];
 
 		foreach (wc_get_orders([]) as $order) {
 			$o = $order->get_data();
@@ -487,14 +507,14 @@ add_action ("init", function() {
 			$com = $o["payment_method_title"] == "Link by Stripe" ? "1,2" : "1,5";
 
 			$numero_bordereau = '';
-			rsort ($dernieres_cmd_bordereaux);
-			foreach ($dernieres_cmd_bordereaux as $i => $b) {
+			rsort ($no_bordereaux);
+			foreach ($no_bordereaux as $i => $b) {
 				if ($o["id"] <= $b)
-					$numero_bordereau = count ($dernieres_cmd_bordereaux)- $i;
+					$numero_bordereau = count ($no_bordereaux)- $i;
 			}
 
-			if (intval ($o["total"]))
-				$order_list[] = [
+			if (intval ($o["total"])) {
+				$items = [
 					$o["id"],
 					$o["date_created"]->date_i18n(),
 					$o["status"],
@@ -503,8 +523,11 @@ add_action ("init", function() {
 					number_format($total, 2, ",", ""),
 					"=ARRONDI.SUP(F$ligne*$com%+0,25;2)",
 					"=F$ligne-G$ligne",
-					$numero_bordereau,
 				];
+				if (!$no_bord)
+					$items[] = $numero_bordereau;
+				$order_list[] = $items;
+			}
 		}
 
 		// Totaux
@@ -515,7 +538,6 @@ add_action ("init", function() {
 		];
 
 		// Ecriture du fichier
-		date_default_timezone_set('Europe/Paris');
 		header("Content-Description: File Transfer");
 		header("Content-Type: application/octet-stream");
 		header("Content-Disposition: attachment; filename=$nom_fichier.csv");
