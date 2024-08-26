@@ -28,6 +28,14 @@ SEOPress
 Site Kit by Google
 => Configurer avec google
 
+PROBLEMES
+=========
+Fontes PDF mal installées
+	Extensions
+	PDF Invoices
+	Avancé
+	Outils
+	Réinstaller les polices	
 
 2024 -> test3
 =============
