@@ -17,13 +17,33 @@ add_filter ("auto_core_update_send_email", function($send, $type) {
 	return true;
 });
 
-// Blocage de tous les non français
+// Blocage de tous les non français ou bots
 add_action ("template_redirect", function (){
-	$langs = $_SERVER['HTTP_ACCEPT_LANGUAGE'].$_SERVER['HTTP_X_COUNTRY_CODE'];
-    if (is_404() && strpos ($langs, 'FR') === false) {
-		file_put_contents("/home3/cado1118/.xamp/xamp.log",print_r($_SERVER,true),FILE_APPEND);
-		file_put_contents("/home3/cado1118/.htaccess",PHP_EOL."Deny from ".$_SERVER['REMOTE_ADDR'],FILE_APPEND);
+	$langs = $_SERVER['HTTP_ACCEPT_LANGUAGE']." ".$_SERVER['HTTP_X_COUNTRY_CODE'];
+	$agent = $_SERVER['HTTP_USER_AGENT'];
+	$rquri = $_SERVER['REQUEST_URI'];
+	$trace_file = ABSPATH."../.xamp/".date("ymd").".log";
+
+	$_SERVER['DATE_TIME'] = date('r');
+
+    if (is_404() && !strpos ($langs, 'FR') && !strpos ($agent, 'bot')) {
+		file_put_contents (
+			"/home3/cado1118/.htaccess",
+			PHP_EOL."Deny from ".$_SERVER['REMOTE_ADDR'],
+			FILE_APPEND
+		);
+		file_put_contents (
+			$trace_file,
+			print_r ($_SERVER, true),
+			FILE_APPEND
+		);
 	}
+	else
+		file_put_contents (
+			$trace_file,
+			print_r (PHP_EOL."$rquri $langs $agent", true),
+			FILE_APPEND
+		);
 });
 
 // Load syle.css file with version number for debug
