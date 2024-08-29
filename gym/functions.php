@@ -17,6 +17,15 @@ add_filter ("auto_core_update_send_email", function($send, $type) {
 	return true;
 });
 
+// Blocage de tous les non français
+add_action ("template_redirect", function (){
+	$langs = $_SERVER['HTTP_ACCEPT_LANGUAGE'].$_SERVER['HTTP_X_COUNTRY_CODE'];
+    if (is_404() && strpos ($langs, 'FR') === false) {
+		file_put_contents("/home3/cado1118/.xamp/xamp.log",print_r($_SERVER,true),FILE_APPEND);
+		file_put_contents("/home3/cado1118/.htaccess",PHP_EOL."Deny from ".$_SERVER['REMOTE_ADDR'],FILE_APPEND);
+	}
+});
+
 // Load syle.css file with version number for debug
 add_filter ("style_loader_src", function($href) {
 	$fileurl = get_stylesheet_directory_uri()."/style.css";

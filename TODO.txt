@@ -9,7 +9,6 @@ SQL Changement automatique de répertoire base et url site
 [RC] et ben oui dans les pages admin
 Afficher le menu actif principal
 Sticker la ligne menu
-Panier développé en hover non affiché en petit écran
 Ne pas afficher le panier dans les horaires si le cours est déjà dans le panier
 Ajouter note dans le panier reduction / afficher prix
 Lignes + dans la page tarifs, ... en édition
@@ -74,12 +73,6 @@ Rapatrier rando
 Cache / .htaccess / config.php debug
 GG console / autoriser les moteurs... ref web
 ?? Liens anciens sites 2022 2023 => migrer db 2023
-
-
-//TODO délivrer plugin
-https://wordpress.stackexchange.com/questions/260969/update-my-custom-wordpress-plugin-through-my-own-server
-https://github.com/YahnisElsts/plugin-update-checker
-https://rudrastyh.com/wordpress/self-hosted-plugin-update.html
 
 INSTALL CPanel O2switch new.gym.c92.fr
 INSTALL CPanel O2switch test.gym.c92.fr
