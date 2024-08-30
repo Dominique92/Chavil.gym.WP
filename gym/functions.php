@@ -26,7 +26,10 @@ add_action ("template_redirect", function (){
 
 	$_SERVER['DATE_TIME'] = date('r');
 
-    if (is_404() && !strpos ($langs, 'FR') && !strpos ($agent, 'bot')) {
+    if (is_404() &&
+		!strpos ($langs, 'FR') &&
+		(!strpos ($agent, 'bot') || !strpos ($agent, 'facebook'))
+		) {
 		file_put_contents (
 			"/home3/cado1118/.htaccess",
 			PHP_EOL."Deny from ".$_SERVER['REMOTE_ADDR'],
@@ -441,3 +444,5 @@ add_action ("woocommerce_before_calculate_totals", function ($cart) {
 // Commandes spécifiques pour les gestionnaires
 if (array_intersect(["administrator", "shop_manager"], wp_get_current_user()->roles))
 	include ('manager.php');
+else
+	add_shortcode ("doc_admin", function(){});
