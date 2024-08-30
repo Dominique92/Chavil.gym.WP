@@ -28,7 +28,9 @@ add_action ("template_redirect", function (){
 
     if (is_404() &&
 		!strpos ($langs, 'FR') &&
-		(!strpos ($agent, 'bot') || !strpos ($agent, 'facebook'))
+		!strpos ($agent, 'bot') &&
+		!strpos ($agent, 'Google') &&
+		!strpos ($agent, 'facebook')
 		) {
 		file_put_contents (
 			"/home3/cado1118/.htaccess",
