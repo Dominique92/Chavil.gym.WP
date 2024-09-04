@@ -101,7 +101,7 @@ if (count ($args))
 					$numero_bordereau = count ($no_bordereaux)- $i;
 			}
 			if (!$numero_bordereau)
-				$numero_bordereau = $days_old < 6 ? "Attente" : "Dispo";
+				$numero_bordereau = $days_old < 5 ? "Attente" : "Dispo";
 
 			if (intval ($o["total"])) {
 				$items = [

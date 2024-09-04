@@ -6,6 +6,7 @@ if (!defined("ABSPATH")) {
 
 // Inhibe les mails admin inutiles
 define ("WP_DISABLE_FATAL_ERROR_HANDLER", true);
+/*
 add_filter ("auto_core_update_send_email", "__return_false"); // Disable core update emails
 add_filter ("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
 add_filter ("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
@@ -16,8 +17,9 @@ add_filter ("auto_core_update_send_email", function($send, $type) {
 	}
 	return true;
 });
+*/
 
-// Blocage de tous les non français ou bots
+// Blocage de tous les non français et non bots
 add_action ("template_redirect", function (){
 	$langs = $_SERVER['HTTP_ACCEPT_LANGUAGE']." ".$_SERVER['HTTP_X_COUNTRY_CODE'];
 	$agent = $_SERVER['HTTP_USER_AGENT'];
@@ -27,10 +29,10 @@ add_action ("template_redirect", function (){
 	$_SERVER['DATE_TIME'] = date('r');
 
     if (is_404() &&
-		!strpos ($langs, 'FR') &&
-		!strpos ($agent, 'bot') &&
-		!strpos ($agent, 'Google') &&
-		!strpos ($agent, 'facebook')
+		!stripos ($langs, 'FR') &&
+		!stripos ($agent, 'bot') &&
+		!stripos ($agent, 'google') &&
+		(!stripos ($agent, 'facebook') || stripos ($_SERVER['REQUEST_URI'], 'sid='))
 		) {
 		file_put_contents (
 			"/home3/cado1118/.htaccess",
