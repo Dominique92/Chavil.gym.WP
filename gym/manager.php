@@ -75,8 +75,10 @@ if (count ($args))
 			"Commission",
 			"Transfert",
 		];
-		if (!$no_bord)
+		if (!$no_bord) {
 			$titres[] = "Bordereau";
+			$titres[] = "Disponible";
+		}
 		$order_list = [
 			["Chavil'GYM Stripe => Crédit Mutuel : $nom_bordereau"],
 			[],
@@ -100,8 +102,9 @@ if (count ($args))
 				if ($o["id"] <= $b)
 					$numero_bordereau = count ($no_bordereaux)- $i;
 			}
-			if (!$numero_bordereau)
+			if (!$numero_bordereau) {
 				$numero_bordereau = $days_old < 5 ? "Attente" : "Dispo";
+			}
 
 			if (intval ($o["total"])) {
 				$items = [
@@ -116,12 +119,16 @@ if (count ($args))
 						: "=ARRONDI.SUP(F$ligne*$com%+0,25;2)",
 					"=F$ligne-G$ligne",
 				];
-				if (!$no_bord)
+				if (!$no_bord) {
 					$items[] = $numero_bordereau;
+					if ($numero_bordereau == "Dispo")
+						$items[] = "=H$ligne+J".($ligne - 1);
+				}
 
-			if ((!$no_bord || ($premiere_cmd < $o['id'] && $o['id'] <= $dernière_cmd)) &&
-				$o["status"] != 'cancelled' && $o["status"] != 'pending')
-				$order_list[] = $items;
+				if ((!$no_bord || ($premiere_cmd < $o['id'] && $o['id'] <= $dernière_cmd)) &&
+					$o["status"] != 'cancelled' && $o["status"] != 'pending') {
+					$order_list[] = $items;
+				}
 			}
 		}
 
