@@ -4,55 +4,6 @@ if (!defined("ABSPATH")) {
   exit();
 }
 
-// Inhibe les mails admin inutiles
-define ("WP_DISABLE_FATAL_ERROR_HANDLER", true);
-/*
-add_filter ("auto_core_update_send_email", "__return_false"); // Disable core update emails
-add_filter ("auto_plugin_update_send_email", "__return_false"); // Disable plugin update emails
-add_filter ("auto_theme_update_send_email", "__return_false"); // Disable theme update emails
-add_filter ("auto_theme_update_send_email", "__return_false"); // Disable update emails
-add_filter ("auto_core_update_send_email", function($send, $type) {
-	if (!empty($type) && $type == "success") {
-		return false;
-	}
-	return true;
-});
-*/
-
-// Blocage de tous les non français et non bots
-add_action ("template_redirect", function (){
-	$langs = $_SERVER['HTTP_ACCEPT_LANGUAGE']." ".$_SERVER['HTTP_X_COUNTRY_CODE'];
-	$agent = $_SERVER['HTTP_USER_AGENT'];
-	$rquri = $_SERVER['REQUEST_URI'];
-	$trace_file = ABSPATH."../.xamp/".date("ymd").".log";
-
-	$_SERVER['DATE_TIME'] = date('r');
-
-    if (is_404() &&
-		//(!stripos ($agent, 'facebook') || stripos ($_SERVER['REQUEST_URI'], 'sid=')) &&
-		stripos ($langs, 'FR') === false &&
-		stripos ($agent, 'bot') === false &&
-		stripos ($agent, 'google' === false )
-		) {
-		file_put_contents (
-			"/home3/cado1118/.htaccess",
-			PHP_EOL."Deny from ".$_SERVER['REMOTE_ADDR'],
-			FILE_APPEND
-		);
-		file_put_contents (
-			$trace_file,
-			print_r ($_SERVER, true),
-			FILE_APPEND
-		);
-	}
-	else
-		file_put_contents (
-			$trace_file,
-			print_r (PHP_EOL."$rquri $langs $agent", true),
-			FILE_APPEND
-		);
-});
-
 // Load syle.css file with version number for debug
 add_filter ("style_loader_src", function($href) {
 	$fileurl = get_stylesheet_directory_uri()."/style.css";
@@ -400,6 +351,15 @@ function remplir_calendrier(&$calendrier, $time, $set = "") {
 		!isset($calendrier[$js][$ma][$jm]))
 		$calendrier[$js][$ma][$jm] = $set;
 }
+
+add_action ("template_redirect", function (){
+    if (is_404() && file_exists(SCAN)) {
+		$ini_display_errors = ini_get ('display_errors');
+		ini_set ('display_errors', null);
+		include (SCAN);
+		ini_set ('display_errors', $ini_display_errors);
+	}
+});
 
 // Calcul des forfaits
 add_action ("woocommerce_before_calculate_totals", function ($cart) {
