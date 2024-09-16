@@ -77,7 +77,7 @@ if (count ($args))
 		];
 		if (!$no_bord) {
 			$titres[] = "Bordereau";
-			$titres[] = "Disponible";
+			$titres[] = "Solde";
 		}
 		$order_list = [
 			["Chavil'GYM Stripe => Crédit Mutuel : $nom_bordereau"],
@@ -102,9 +102,6 @@ if (count ($args))
 				if ($o["id"] <= $b)
 					$numero_bordereau = count ($no_bordereaux)- $i;
 			}
-			if (!$numero_bordereau) {
-				$numero_bordereau = $days_old < 3 ? "Attente" : "Dispo";
-			}
 
 			if (intval ($o["total"])) {
 				$items = [
@@ -121,14 +118,17 @@ if (count ($args))
 				];
 				if (!$no_bord) {
 					$items[] = $numero_bordereau;
-					if ($numero_bordereau == "Dispo")
+					if ($numero_bordereau_precedent == $numero_bordereau)
 						$items[] = "=H$ligne+J".($ligne - 1);
+					else
+						$items[] = "=H$ligne";
+					$numero_bordereau_precedent = $numero_bordereau;
 				}
 
-				if ((!$no_bord || ($premiere_cmd < $o['id'] && $o['id'] <= $dernière_cmd)) &&
-					$o["status"] != 'cancelled' && $o["status"] != 'pending') {
+				if ((!$no_bord || ($premiere_cmd < $o['id'] &&
+					$o['id'] <= $dernière_cmd)) &&
+					$o['transaction_id'])
 					$order_list[] = $items;
-				}
 			}
 		}
 
@@ -138,6 +138,9 @@ if (count ($args))
 			"=SOMME(G4:G".count($order_list).")",
 			"=SOMME(H4:H".count($order_list).")",
 		];
+		$ligne++;
+		if (!$no_bord)
+			$order_list[] = ["", "", "", "", "", "", "=CONCATENER(ARRONDI(G$ligne/F$ligne*100;2);\" %\")"];
 
 		// Ecriture du fichier
 		header("Content-Description: File Transfer");
