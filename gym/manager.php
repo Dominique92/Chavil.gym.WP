@@ -1,4 +1,10 @@
 <?php
+if(1) {
+	error_reporting(E_ALL);
+	ini_set('display_errors','on');
+	ini_set('display_startup_errors', 'on');
+}
+
 // Affichage supplémentaire sur la page "mon compte"
 add_shortcode ("doc_admin", function() {
 	$page = [];
@@ -21,17 +27,20 @@ add_shortcode ("doc_admin", function() {
 		"<p>Cliquez pour charger les fichiers excel :</p>",
 	];
 
+	// Affichage des documents à charger
 	global $bordereaux;
-	$no_bordereaux = array_keys ($bordereaux);
-	for ($nob = 0; $nob <= count ($no_bordereaux); $nob++) {
-		$nom_doc = "Journal des inscriptions en date";
+	$nos_bordereaux = array_keys ($bordereaux);
+	foreach ($nos_bordereaux as $nob => $b) {
 		if ($nob) {
-			$date_bordereau = array_values ($bordereaux)[$nob - 1];
+			$date_bordereau = array_values ($bordereaux)[$nob];
 			$nom_doc = "Bordereau No$nob du " .
 				substr($date_bordereau, 4, 2) . '-' .
-				substr($date_bordereau, 2, 2) . '-' .
+				substr($date_bordereau, 2, 2) . '-20' .
 				substr($date_bordereau, 0, 2);
 		}
+		else
+			$nom_doc = "Journal des inscriptions en date";
+
 		$page[] = "<p><a href=\"?compta=$nob\">$nom_doc</a></p>";
 	}
 
@@ -46,25 +55,21 @@ if (count ($args))
 		date_default_timezone_set('Europe/Paris');
 
 		// Filtrage d'un bordereau
-		$no_bord = intval('0'.$args[1]);
-		$no_bordereaux = array_keys ($bordereaux);
-		$premiere_cmd = @$no_bordereaux[$no_bord - 2] ?: 0;
-		$dernière_cmd = @$no_bordereaux[$no_bord - 1] ?: 9999;
+		$no_bord_arg = intval('0'.$args[1]);
+		$nos_bordereaux = array_keys ($bordereaux); //TODO foreach
 
-		$nom_bordereau = "JOURNAL DES INSCRIPTIONS " . date("y-m-d H\hi");
-		if ($no_bord == count ($no_bordereaux) + 1)
-			$nom_bordereau = "RESTE A TRANSFERER " . date("y-m-d H\hi");
-		elseif ($no_bord) {
-			$date_bordereau = array_values ($bordereaux)[$no_bord - 1];
-			$nom_bordereau = "BORDEREAU No$no_bord du " .
+		if ($no_bord_arg) {
+			$date_bordereau = array_values ($bordereaux)[$no_bord_arg];
+			$nom_bordereau = "BORDEREAU No$no_bord_arg du " .
 				substr($date_bordereau, 4, 2) . '-' .
-				substr($date_bordereau, 2, 2) . '-' .
+				substr($date_bordereau, 2, 2) . '-20' .
 				substr($date_bordereau, 0, 2);
 		}
-		$nom_fichier = str_replace (' ', '_', strtolower($nom_bordereau));
+		else
+			$nom_bordereau = "JOURNAL DES INSCRIPTIONS " . date("d/m/Y H\hi");
 
+		$nom_fichier = str_replace ([' ','/'], ['_','-'], strtolower($nom_bordereau));
 		$order_db = [];
-
 		$titres = [
 			"Commande",
 			"Date",
@@ -75,7 +80,7 @@ if (count ($args))
 			"Commission",
 			"Transfert",
 		];
-		if (!$no_bord) {
+		if (!$no_bord_arg) {
 			$titres[] = "Bordereau";
 			$titres[] = "Solde";
 		}
@@ -84,26 +89,30 @@ if (count ($args))
 			[],
 			$titres];
 
+		// Get orders
 		$orders = wc_get_orders([
-		    'orderby' => 'ids',
+		    'orderby' => 'date_modified',
+		    'order' => 'ASC',
 			'limit' => null,
 		]);
+
+		// Ajouter le numéro de bordereau
+		$no_bord_ligne = [];
+		foreach (array_keys($bordereaux) as $nl => $nb)
+			while (count($no_bord_ligne) <= $nb)
+				$no_bord_ligne[] = $nl;
+
+		$ligne_journal = count($order_list);
 		foreach ($orders as $odb) {
 			$o = $odb->get_data();
-			$ligne = count($order_list) + 1;
-			$total = floatval($o["total"]);
-			$com = $o["payment_method_title"] == "Link by Stripe" ? "1,2" : "1,5";
-			$days_old = intval(time () / 24 / 3600) - intval(strtotime ($o["date_created"]) / 24 / 3600);
-			$fees = floatval($odb->get_meta("_stripe_fee"));
 
-			$numero_bordereau = '';
-			rsort ($no_bordereaux);
-			foreach ($no_bordereaux as $i => $b) {
-				if ($o["id"] <= $b)
-					$numero_bordereau = count ($no_bordereaux)- $i;
-			}
-
-			if (intval ($o["total"])) {
+			if (intval ($o["total"]) && $o['transaction_id']) {
+				$ligne_excel = count($order_list) + 1;
+				$ligne_journal++;
+				$total = floatval($o["total"]);
+				$com = $o["payment_method_title"] == "Link by Stripe" ? "1,2" : "1,5";
+				$fees = floatval($odb->get_meta("_stripe_fee"));
+				$no_bord = @$no_bord_ligne[$ligne_journal];
 				$items = [
 					$o["id"],
 					$o["date_created"]->date_i18n(),
@@ -113,21 +122,24 @@ if (count ($args))
 					number_format(floatval($o["total"]), 2, ",", ""),
 					$fees
 						? number_format($fees, 2, ",", "")
-						: "=ARRONDI.SUP(F$ligne*$com%+0,25;2)",
-					"=F$ligne-G$ligne",
+						: "=ARRONDI.SUP(F$ligne_excel*$com%+0,25;2)", // Pour les 2 premières
+					"=F$ligne_excel-G$ligne_excel",
 				];
-				if (!$no_bord) {
-					$items[] = $numero_bordereau;
-					if ($numero_bordereau_precedent == $numero_bordereau)
-						$items[] = "=H$ligne+J".($ligne - 1);
+
+				// Toutes les lignes pour journal
+				if (!$no_bord_arg) {
+					$items[] = $no_bord;
+
+					if ($no_bord == @$numero_bordereau_precedent)
+						$items[] = "=H$ligne_excel+J".($ligne_excel - 1);
 					else
-						$items[] = "=H$ligne";
-					$numero_bordereau_precedent = $numero_bordereau;
+						$items[] = "=H$ligne_excel";
+
+					$numero_bordereau_precedent = $no_bord;
 				}
 
-				if ((!$no_bord || ($premiere_cmd < $o['id'] &&
-					$o['id'] <= $dernière_cmd)) &&
-					$o['transaction_id'])
+				// Add the line to the list
+				if (!$no_bord_arg || $no_bord_arg === $no_bord)
 					$order_list[] = $items;
 			}
 		}
@@ -138,11 +150,11 @@ if (count ($args))
 			"=SOMME(G4:G".count($order_list).")",
 			"=SOMME(H4:H".count($order_list).")",
 		];
-		$ligne++;
-		if (!$no_bord)
+
+		if (!$no_bord_arg)
 			$order_list[] = [
 				"", "", "", "", "", "Commission",
-				"=CONCATENER(ARRONDI(G".($ligne-1)."/F".($ligne-1)."*100;2);\" %\")",
+				"=CONCATENER(ARRONDI(G".count($order_list)."/F".count($order_list)."*100;2);\" %\")",
 				"=NB.SI(F:F;\">10\")-1", "Inscriptions",
 		];
 
