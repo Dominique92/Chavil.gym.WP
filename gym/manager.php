@@ -140,7 +140,11 @@ if (count ($args))
 		];
 		$ligne++;
 		if (!$no_bord)
-			$order_list[] = ["", "", "", "", "", "", "=CONCATENER(ARRONDI(G$ligne/F$ligne*100;2);\" %\")"];
+			$order_list[] = [
+				"", "", "", "", "", "Commission",
+				"=CONCATENER(ARRONDI(G".($ligne-1)."/F".($ligne-1)."*100;2);\" %\")",
+				"=NB.SI(F:F;\">10\")-1", "Inscriptions",
+		];
 
 		// Ecriture du fichier
 		header("Content-Description: File Transfer");
